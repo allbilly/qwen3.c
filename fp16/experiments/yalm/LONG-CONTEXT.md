@@ -25,7 +25,17 @@ routes](long-context/long-context-short-parity.json). The [independent short
 audit](long-context/long-context-short-audit.json) retains all phase/request
 measurements and checks actual execution; all four requests per route pass.
 
-Long measurements are pending at this milestone. The first 51°C attempt
+The three fresh NPU reference rows have completed with all sampled clocks
+held and restored. Other placements and the independent full sweep audit
+are pending. Preliminary NPU medians:
+
+| Input tokens | Prefill ms | Prefill tokens/s | Decode tokens/s | Request ms |
+|---|---:|---:|---:|---:|
+| 1024 | 3780.94 | 270.83 | 14.478 | 5922.19 |
+| 2048 | 10867.50 | 188.45 | 9.868 | 14009.13 |
+| 4096 | 37473.03 | 109.31 | 5.490 | 43120.18 |
+
+ The first 51°C attempt
 completed 1K/2K requests but aborted normally before the second 4K warmup
 when bounded cooling failed. Its raw evidence is retained under
 `evidence/long-context-rejected51`; the GPU also briefly throttled. The second one-time fan-setting attempt was also rejected: the kernel

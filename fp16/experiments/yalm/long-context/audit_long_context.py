@@ -26,6 +26,8 @@ for directory in args.directories:
                          'temperature_max_c':max(c['temperature_millidegrees'] for c in clocks)/1000,'fan_pwm_counts':{str(v):sum(c.get('fan_pwm')==v for c in clocks) for v in set(c.get('fan_pwm') for c in clocks)}}
  for expected in summary['records']:
   label=expected['label'];prompt=expected['prompt'];route=expected['route'];steps=31
+  row_clocks=[c for c in clocks if c['phase'] in [label,'cooling-before-'+label]];assert row_clocks
+  row_held=all(c[k]==v for c in row_clocks for k,v in targets.items())
   config=json.loads((folder/(label+'.config.json')).read_text());env=config['environment']
   assert config['binary_sha256']==meta['binary_sha256'] and config['route']==route
   assert env['BENCH_CONTEXT']=='4128' and env['WARMUP_RUNS']=='2' and env['OMP_NUM_THREADS']=='4'
@@ -86,7 +88,10 @@ for directory in args.directories:
   ttft=statistics.median(r['first_token_ms'] for r in measured);decode=statistics.median(r['decode_tps'] for r in measured);wall=statistics.median(r['request_ms'] for r in timed)
   assert all(abs(x-y)<1e-8 for x,y in [(ttft,expected['ttft_ms']),(decode,expected['decode_tps']),(wall,expected['request_ms'])])
   records.append({'directory':directory,'label':label,'prompt':prompt,'route':route,'reference':reference,'quality_passed':quality,
-                  'relative_rmse':relative,'all_predictions_match':predictions,'clocks_held':held,'device_counts_checked':True,
+                  'relative_rmse':relative,'all_predictions_match':predictions,'clocks_held':row_held,'controller_clocks_held':held,'row_clock_samples':len(row_clocks),
+                  'row_clock_drops':sum(any(c[k]!=v for k,v in targets.items()) for c in row_clocks),
+                  'row_temperature_range_c':[min(c['temperature_millidegrees'] for c in row_clocks)/1000,max(c['temperature_millidegrees'] for c in row_clocks)/1000],
+                  'device_counts_checked':True,
                   'prefill_ms':ttft,'prefill_tps':prompt*1000/ttft,'decode_tps':decode,'request_ms':wall,
                   'prefill_range':[min(r['first_token_ms'] for r in measured),max(r['first_token_ms'] for r in measured)],
                   'decode_range':[min(r['decode_tps'] for r in measured),max(r['decode_tps'] for r in measured)],
@@ -97,4 +102,4 @@ out={'cooldown_target_c':args.cool_c,'model_sha256':sha(model),'binary_sha256':m
      'scope':'Independent audit. Long reference is this checked native NPU path, not an independent HF full-model oracle. Exact FP16 primitive checks and short-prompt parity are separate. Failed rows remain diagnostics at the unchanged0.001 gate.'}
 (root/args.output).write_text(json.dumps(out,indent=2)+'\n')
 print(json.dumps({'jobs':len(records),'quality_failed':[r['label'] for r in records if not r['quality_passed']],
-                  'clock_failed':[k for k,v in clock_audits.items() if not v['targets_held']]},indent=2))
+                  'clock_failed':[r['label'] for r in records if not r['clocks_held']],'controller_clock_failed':[k for k,v in clock_audits.items() if not v['targets_held']]},indent=2))
