@@ -212,14 +212,17 @@ AnePlan *ane_plan_create(AneDevice *d, const QuantizedTensor *w,
     __fp16 *packed = p->weights.map;
     // The dynamic graph transposes the input activations into the convolution
     // coefficient stream. The model matrix stays resident in [K,N] order.
+    int valid=1;
+    #pragma omp parallel for reduction(&:valid)
     for (int k=0;k<inputs;k++) {
         for (int n=0;n<outputs;n++) {
             size_t index=(size_t)n*inputs+k;
             float value=w->q[index]*w->s[index/gs];
-            if (!isfinite(value) || fabsf(value)>65504) { ane_plan_free(p); return NULL; }
+            valid &= isfinite(value) && fabsf(value)<=65504;
             packed[(size_t)k*p->n+n]=(__fp16)value;
         }
     }
+    if (!valid) { ane_plan_free(p); return NULL; }
     return p;
 }
 
