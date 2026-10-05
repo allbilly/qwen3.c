@@ -1,0 +1,693 @@
+{
+  "records": [
+    {
+      "label": "p128-1-npu",
+      "prompt": 128,
+      "route": "npu",
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "teacher_forced_identical_decode_inputs": true,
+      "prefill_logit_relative_rmse": 0.0,
+      "max_logit_error": 0.0,
+      "unchanged_limit": 0.001,
+      "all_predictions_match": true,
+      "quality_passed": true,
+      "ttft_ms": 243.6395,
+      "effective_prefill_tps": 525.3663712164899,
+      "decode_tps": 21.265,
+      "measured_runs": 2,
+      "ttft_range": [
+        240.124,
+        247.155
+      ],
+      "decode_range": [
+        21.256,
+        21.274
+      ],
+      "request_ms": 1701.4513735,
+      "output_tps": 18.807472548671107,
+      "request_range": [
+        1697.303056,
+        1705.599691
+      ],
+      "handoff_ms": 0.033978499999999995
+    },
+    {
+      "label": "p128-2-cpu_npu_pre",
+      "prompt": 128,
+      "route": "cpu_npu_pre",
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "teacher_forced_identical_decode_inputs": true,
+      "prefill_logit_relative_rmse": 0.0008053284612160471,
+      "max_logit_error": 0.014447450637817383,
+      "unchanged_limit": 0.001,
+      "all_predictions_match": true,
+      "quality_passed": true,
+      "ttft_ms": 262.5395,
+      "effective_prefill_tps": 487.54568360189614,
+      "decode_tps": 21.125,
+      "measured_runs": 2,
+      "ttft_range": [
+        260.727,
+        264.352
+      ],
+      "decode_range": [
+        20.965,
+        21.285
+      ],
+      "request_ms": 1730.129536,
+      "output_tps": 18.495724935129946,
+      "request_range": [
+        1720.811937,
+        1739.447135
+      ],
+      "handoff_ms": 0.055124
+    },
+    {
+      "label": "p128-3-gpu_npu_pre",
+      "prompt": 128,
+      "route": "gpu_npu_pre",
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "teacher_forced_identical_decode_inputs": true,
+      "prefill_logit_relative_rmse": 0.0005691034343608976,
+      "max_logit_error": 0.011791706085205078,
+      "unchanged_limit": 0.001,
+      "all_predictions_match": true,
+      "quality_passed": true,
+      "ttft_ms": 467.0075,
+      "effective_prefill_tps": 274.08553395823407,
+      "decode_tps": 21.177,
+      "measured_runs": 2,
+      "ttft_range": [
+        460.128,
+        473.887
+      ],
+      "decode_range": [
+        21.025,
+        21.329
+      ],
+      "request_ms": 1930.989253,
+      "output_tps": 16.571816725693605,
+      "request_range": [
+        1913.564163,
+        1948.414343
+      ],
+      "handoff_ms": 0.054979
+    },
+    {
+      "label": "p128-4-all_pre",
+      "prompt": 128,
+      "route": "all_pre",
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "teacher_forced_identical_decode_inputs": true,
+      "prefill_logit_relative_rmse": 0.0005916411960043984,
+      "max_logit_error": 0.012845993041992188,
+      "unchanged_limit": 0.001,
+      "all_predictions_match": true,
+      "quality_passed": true,
+      "ttft_ms": 458.0485,
+      "effective_prefill_tps": 279.4463905023158,
+      "decode_tps": 21.3415,
+      "measured_runs": 2,
+      "ttft_range": [
+        456.945,
+        459.152
+      ],
+      "decode_range": [
+        21.318,
+        21.365
+      ],
+      "request_ms": 1910.6508915,
+      "output_tps": 16.748219228515197,
+      "request_range": [
+        1907.968033,
+        1913.33375
+      ],
+      "handoff_ms": 0.0565825
+    },
+    {
+      "label": "p128-5-cpu_npu_dec",
+      "prompt": 128,
+      "route": "cpu_npu_dec",
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "teacher_forced_identical_decode_inputs": true,
+      "prefill_logit_relative_rmse": 0.0,
+      "max_logit_error": 0.0,
+      "unchanged_limit": 0.001,
+      "all_predictions_match": true,
+      "quality_passed": true,
+      "ttft_ms": 244.181,
+      "effective_prefill_tps": 524.2013096842096,
+      "decode_tps": 20.8205,
+      "measured_runs": 2,
+      "ttft_range": [
+        243.967,
+        244.395
+      ],
+      "decode_range": [
+        20.741,
+        20.9
+      ],
+      "request_ms": 1733.1584520000001,
+      "output_tps": 18.463401290905164,
+      "request_range": [
+        1727.27168,
+        1739.045224
+      ],
+      "handoff_ms": 0.0456445
+    },
+    {
+      "label": "p128-6-gpu_npu_dec",
+      "prompt": 128,
+      "route": "gpu_npu_dec",
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "teacher_forced_identical_decode_inputs": true,
+      "prefill_logit_relative_rmse": 0.0,
+      "max_logit_error": 0.0,
+      "unchanged_limit": 0.001,
+      "all_predictions_match": true,
+      "quality_passed": true,
+      "ttft_ms": 243.5905,
+      "effective_prefill_tps": 525.4720524815212,
+      "decode_tps": 20.808500000000002,
+      "measured_runs": 2,
+      "ttft_range": [
+        240.445,
+        246.736
+      ],
+      "decode_range": [
+        20.785,
+        20.832
+      ],
+      "request_ms": 1733.4015530000001,
+      "output_tps": 18.460811890134494,
+      "request_range": [
+        1728.584454,
+        1738.218652
+      ],
+      "handoff_ms": 0.052499500000000004
+    },
+    {
+      "label": "p128-7-all_dec",
+      "prompt": 128,
+      "route": "all_dec",
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "teacher_forced_identical_decode_inputs": true,
+      "prefill_logit_relative_rmse": 0.0,
+      "max_logit_error": 0.0,
+      "unchanged_limit": 0.001,
+      "all_predictions_match": true,
+      "quality_passed": true,
+      "ttft_ms": 235.5555,
+      "effective_prefill_tps": 543.3963545746119,
+      "decode_tps": 20.698,
+      "measured_runs": 2,
+      "ttft_range": [
+        234.599,
+        236.512
+      ],
+      "decode_range": [
+        20.521,
+        20.875
+      ],
+      "request_ms": 1733.450259,
+      "output_tps": 18.460293183411153,
+      "request_range": [
+        1719.697945,
+        1747.202573
+      ],
+      "handoff_ms": 0.03777
+    },
+    {
+      "label": "p128-8-cpu_npu_both",
+      "prompt": 128,
+      "route": "cpu_npu_both",
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "teacher_forced_identical_decode_inputs": true,
+      "prefill_logit_relative_rmse": 0.0008053284612160471,
+      "max_logit_error": 0.014447450637817383,
+      "unchanged_limit": 0.001,
+      "all_predictions_match": true,
+      "quality_passed": true,
+      "ttft_ms": 277.2155,
+      "effective_prefill_tps": 461.73464326489676,
+      "decode_tps": 20.606499999999997,
+      "measured_runs": 2,
+      "ttft_range": [
+        276.045,
+        278.386
+      ],
+      "decode_range": [
+        20.438,
+        20.775
+      ],
+      "request_ms": 1781.7723299999998,
+      "output_tps": 17.95964583196777,
+      "request_range": [
+        1768.29588,
+        1795.24878
+      ],
+      "handoff_ms": 0.0554155
+    },
+    {
+      "label": "p128-9-gpu_npu_both",
+      "prompt": 128,
+      "route": "gpu_npu_both",
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "teacher_forced_identical_decode_inputs": true,
+      "prefill_logit_relative_rmse": 0.0005691034343608976,
+      "max_logit_error": 0.011791706085205078,
+      "unchanged_limit": 0.001,
+      "all_predictions_match": true,
+      "quality_passed": true,
+      "ttft_ms": 469.75,
+      "effective_prefill_tps": 272.4853645556147,
+      "decode_tps": 20.4705,
+      "measured_runs": 2,
+      "ttft_range": [
+        469.0,
+        470.5
+      ],
+      "decode_range": [
+        20.354,
+        20.587
+      ],
+      "request_ms": 1984.224538,
+      "output_tps": 16.127207071158598,
+      "request_range": [
+        1976.383238,
+        1992.065838
+      ],
+      "handoff_ms": 0.043457499999999996
+    },
+    {
+      "label": "p128-10-all_both",
+      "prompt": 128,
+      "route": "all_both",
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "teacher_forced_identical_decode_inputs": true,
+      "prefill_logit_relative_rmse": 0.0005916411960043984,
+      "max_logit_error": 0.012845993041992188,
+      "unchanged_limit": 0.001,
+      "all_predictions_match": true,
+      "quality_passed": true,
+      "ttft_ms": 475.554,
+      "effective_prefill_tps": 269.1597589337909,
+      "decode_tps": 20.4525,
+      "measured_runs": 2,
+      "ttft_range": [
+        471.445,
+        479.663
+      ],
+      "decode_range": [
+        20.224,
+        20.681
+      ],
+      "request_ms": 1991.491013,
+      "output_tps": 16.068362744853623,
+      "request_range": [
+        1970.421096,
+        2012.56093
+      ],
+      "handoff_ms": 0.0472495
+    },
+    {
+      "label": "p256-1-all_both",
+      "prompt": 256,
+      "route": "all_both",
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "teacher_forced_identical_decode_inputs": true,
+      "prefill_logit_relative_rmse": 0.0005757857429929989,
+      "max_logit_error": 0.01558375358581543,
+      "unchanged_limit": 0.001,
+      "all_predictions_match": true,
+      "quality_passed": true,
+      "ttft_ms": 1069.7735,
+      "effective_prefill_tps": 239.30299264283514,
+      "decode_tps": 19.3615,
+      "measured_runs": 2,
+      "ttft_range": [
+        1064.626,
+        1074.921
+      ],
+      "decode_range": [
+        19.308,
+        19.415
+      ],
+      "request_ms": 2670.952504,
+      "output_tps": 11.9807446789402,
+      "request_range": [
+        2670.205556,
+        2671.699452
+      ],
+      "handoff_ms": 0.0463745
+    },
+    {
+      "label": "p256-2-gpu_npu_both",
+      "prompt": 256,
+      "route": "gpu_npu_both",
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "teacher_forced_identical_decode_inputs": true,
+      "prefill_logit_relative_rmse": 0.0005344644107788363,
+      "max_logit_error": 0.013852119445800781,
+      "unchanged_limit": 0.001,
+      "all_predictions_match": true,
+      "quality_passed": true,
+      "ttft_ms": 1027.3944999999999,
+      "effective_prefill_tps": 249.17400278082084,
+      "decode_tps": 19.776,
+      "measured_runs": 2,
+      "ttft_range": [
+        1023.279,
+        1031.51
+      ],
+      "decode_range": [
+        19.753,
+        19.799
+      ],
+      "request_ms": 2594.991508,
+      "output_tps": 12.331446905066326,
+      "request_range": [
+        2589.061865,
+        2600.921151
+      ],
+      "handoff_ms": 0.0454995
+    },
+    {
+      "label": "p256-3-cpu_npu_both",
+      "prompt": 256,
+      "route": "cpu_npu_both",
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "teacher_forced_identical_decode_inputs": true,
+      "prefill_logit_relative_rmse": 0.0005708448141561974,
+      "max_logit_error": 0.014348983764648438,
+      "unchanged_limit": 0.001,
+      "all_predictions_match": true,
+      "quality_passed": true,
+      "ttft_ms": 571.875,
+      "effective_prefill_tps": 447.6502732240437,
+      "decode_tps": 19.835,
+      "measured_runs": 2,
+      "ttft_range": [
+        569.574,
+        574.176
+      ],
+      "decode_range": [
+        19.586,
+        20.084
+      ],
+      "request_ms": 2135.062924,
+      "output_tps": 14.987848667264855,
+      "request_range": [
+        2113.114015,
+        2157.011833
+      ],
+      "handoff_ms": 0.055853
+    },
+    {
+      "label": "p256-4-all_dec",
+      "prompt": 256,
+      "route": "all_dec",
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "teacher_forced_identical_decode_inputs": true,
+      "prefill_logit_relative_rmse": 0.0,
+      "max_logit_error": 0.0,
+      "unchanged_limit": 0.001,
+      "all_predictions_match": true,
+      "quality_passed": true,
+      "ttft_ms": 533.1855,
+      "effective_prefill_tps": 480.1330868900223,
+      "decode_tps": 19.4165,
+      "measured_runs": 2,
+      "ttft_range": [
+        529.706,
+        536.665
+      ],
+      "decode_range": [
+        19.254,
+        19.579
+      ],
+      "request_ms": 2129.9188745,
+      "output_tps": 15.024046400599188,
+      "request_range": [
+        2120.000748,
+        2139.837001
+      ],
+      "handoff_ms": 0.0401035
+    },
+    {
+      "label": "p256-5-gpu_npu_dec",
+      "prompt": 256,
+      "route": "gpu_npu_dec",
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "teacher_forced_identical_decode_inputs": true,
+      "prefill_logit_relative_rmse": 0.0,
+      "max_logit_error": 0.0,
+      "unchanged_limit": 0.001,
+      "all_predictions_match": true,
+      "quality_passed": true,
+      "ttft_ms": 530.364,
+      "effective_prefill_tps": 482.68736188730753,
+      "decode_tps": 19.552,
+      "measured_runs": 2,
+      "ttft_range": [
+        521.395,
+        539.333
+      ],
+      "decode_range": [
+        19.44,
+        19.664
+      ],
+      "request_ms": 2115.9944729999997,
+      "output_tps": 15.122912847041261,
+      "request_range": [
+        2097.936778,
+        2134.052168
+      ],
+      "handoff_ms": 0.0421455
+    },
+    {
+      "label": "p256-6-cpu_npu_dec",
+      "prompt": 256,
+      "route": "cpu_npu_dec",
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "teacher_forced_identical_decode_inputs": true,
+      "prefill_logit_relative_rmse": 0.0,
+      "max_logit_error": 0.0,
+      "unchanged_limit": 0.001,
+      "all_predictions_match": true,
+      "quality_passed": true,
+      "ttft_ms": 538.3085000000001,
+      "effective_prefill_tps": 475.5637334353813,
+      "decode_tps": 19.7655,
+      "measured_runs": 2,
+      "ttft_range": [
+        533.792,
+        542.825
+      ],
+      "decode_range": [
+        19.741,
+        19.79
+      ],
+      "request_ms": 2106.7495040000003,
+      "output_tps": 15.189276152310889,
+      "request_range": [
+        2100.303327,
+        2113.195681
+      ],
+      "handoff_ms": 0.051041500000000004
+    },
+    {
+      "label": "p256-7-all_pre",
+      "prompt": 256,
+      "route": "all_pre",
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "teacher_forced_identical_decode_inputs": true,
+      "prefill_logit_relative_rmse": 0.0005757857429929989,
+      "max_logit_error": 0.01558375358581543,
+      "unchanged_limit": 0.001,
+      "all_predictions_match": true,
+      "quality_passed": true,
+      "ttft_ms": 1058.4635,
+      "effective_prefill_tps": 241.8600169018582,
+      "decode_tps": 20.105,
+      "measured_runs": 2,
+      "ttft_range": [
+        1057.122,
+        1059.805
+      ],
+      "decode_range": [
+        20.084,
+        20.126
+      ],
+      "request_ms": 2600.3935330000004,
+      "output_tps": 12.305829711506206,
+      "request_range": [
+        2597.436951,
+        2603.350115
+      ],
+      "handoff_ms": 0.0463745
+    },
+    {
+      "label": "p256-8-gpu_npu_pre",
+      "prompt": 256,
+      "route": "gpu_npu_pre",
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "teacher_forced_identical_decode_inputs": true,
+      "prefill_logit_relative_rmse": 0.0005344644107788363,
+      "max_logit_error": 0.013852119445800781,
+      "unchanged_limit": 0.001,
+      "all_predictions_match": true,
+      "quality_passed": true,
+      "ttft_ms": 1043.386,
+      "effective_prefill_tps": 245.35502680695353,
+      "decode_tps": 20.0275,
+      "measured_runs": 2,
+      "ttft_range": [
+        1040.856,
+        1045.916
+      ],
+      "decode_range": [
+        19.841,
+        20.214
+      ],
+      "request_ms": 2591.4192695,
+      "output_tps": 12.348445647768228,
+      "request_range": [
+        2579.517007,
+        2603.321532
+      ],
+      "handoff_ms": 0.041707999999999995
+    },
+    {
+      "label": "p256-9-cpu_npu_pre",
+      "prompt": 256,
+      "route": "cpu_npu_pre",
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "teacher_forced_identical_decode_inputs": true,
+      "prefill_logit_relative_rmse": 0.0005708448141561974,
+      "max_logit_error": 0.014348983764648438,
+      "unchanged_limit": 0.001,
+      "all_predictions_match": true,
+      "quality_passed": true,
+      "ttft_ms": 592.2135,
+      "effective_prefill_tps": 432.2765354048836,
+      "decode_tps": 19.700000000000003,
+      "measured_runs": 2,
+      "ttft_range": [
+        587.502,
+        596.925
+      ],
+      "decode_range": [
+        19.638,
+        19.762
+      ],
+      "request_ms": 2165.8671315,
+      "output_tps": 14.774682867013164,
+      "request_range": [
+        2165.626947,
+        2166.107316
+      ],
+      "handoff_ms": 0.058333
+    },
+    {
+      "label": "p256-10-npu",
+      "prompt": 256,
+      "route": "npu",
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "teacher_forced_identical_decode_inputs": true,
+      "prefill_logit_relative_rmse": 0.0,
+      "max_logit_error": 0.0,
+      "unchanged_limit": 0.001,
+      "all_predictions_match": true,
+      "quality_passed": true,
+      "ttft_ms": 530.1045,
+      "effective_prefill_tps": 482.92364995958343,
+      "decode_tps": 20.1115,
+      "measured_runs": 2,
+      "ttft_range": [
+        526.644,
+        533.565
+      ],
+      "decode_range": [
+        20.034,
+        20.189
+      ],
+      "request_ms": 2071.5942059999998,
+      "output_tps": 15.447040693258245,
+      "request_range": [
+        2069.12572,
+        2074.062692
+      ],
+      "handoff_ms": 0.038790500000000006
+    }
+  ],
+  "clocks_held": true,
+  "clocks_restored": true,
+  "samples": 1865,
+  "temperature_range_c": [
+    49.923,
+    58.23
+  ],
+  "binary_sha256": "2922f25167fa8b7a769c15fba9b7c7b5b34a2371153e655c51dfb03a84efbe93",
+  "interpretation": "Phase-placement experiment. Non-linear host operations stay CPU. Failed quality rows are diagnostic timings, not qualified inference speed claims."
+}

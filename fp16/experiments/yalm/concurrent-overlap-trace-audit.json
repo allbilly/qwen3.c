@@ -1,0 +1,37 @@
+{
+  "records": [
+    {
+      "run": -1,
+      "warmup": true,
+      "jobs": 112,
+      "valid_clock_maps": 112,
+      "gpu_contains_submit": 84,
+      "all_three_contains_submit": 84,
+      "max_clock_offset_interval_ms": 0.04216599881647198,
+      "max_submit_ms": 0.5506580024957657
+    },
+    {
+      "run": 0,
+      "warmup": true,
+      "jobs": 112,
+      "valid_clock_maps": 112,
+      "gpu_contains_submit": 84,
+      "all_three_contains_submit": 84,
+      "max_clock_offset_interval_ms": 0.040124003291111876,
+      "max_submit_ms": 0.5547419935464859
+    },
+    {
+      "run": 1,
+      "warmup": false,
+      "jobs": 112,
+      "valid_clock_maps": 112,
+      "gpu_contains_submit": 84,
+      "all_three_contains_submit": 84,
+      "max_clock_offset_interval_ms": 0.036332998871785094,
+      "max_submit_ms": 0.5386999994516373
+    }
+  ],
+  "raw_log_sha256": "7b24ee11f3ebcd2156232cdc3f169693a50c93933ef19ceef20d5d1da1ddb512",
+  "binary_sha256": "d3544011cb8a50b9fd474ff7858972a1d3b5d5be3d9a734327915adf9abfec86",
+  "scope": "Each marker END is bounded by host timestamps before enqueue and after wait. Intersect before/after offset intervals, widened 10us per endpoint. Conservative GPU interval must contain the complete blocking NPU submit interval, and CPU worker interval must also contain it. GPU timestamps use the OpenCL nanosecond scale; clock-map consistency checked for every job. Diagnostic instrumentation changes scheduling; this is overlap evidence, not unprofiled throughput. NPU submit includes driver work and memory stalls, not isolated MAC time."
+}

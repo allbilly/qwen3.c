@@ -1,0 +1,14 @@
+#define npu_init_fp16 hw_init_fp16
+#define npu_matmul_batch hw_matmul_batch
+#define npu_matmul_run hw_matmul_run
+#define npu_matmul_fused hw_matmul_fused
+#define npu_matmul_fused_to hw_matmul_fused_to
+#define npu_matmul_shutdown hw_shutdown
+#define npu_skip_classifier hw_skip_classifier
+#define npu_core_count hw_core_count
+#define npu_uses_fused hw_uses_fused
+#define npu_stream_ffn_enabled hw_stream_ffn_enabled
+#define npu_stream_ffn_prefill hw_stream_ffn_prefill
+#define npu_attention_enabled hw_attention_enabled
+#define npu_attention_prefill hw_attention_prefill
+#include "source/fp16/fp16_backend.c"

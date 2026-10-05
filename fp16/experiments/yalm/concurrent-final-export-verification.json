@@ -1,0 +1,35 @@
+{
+  "new_evidence_files_losslessly_verified": 267,
+  "new_evidence_exports": [
+    "concurrent-original-requests51",
+    "concurrent-native-requests51",
+    "concurrent-cpu-decode-abba-1",
+    "concurrent-cpu-decode-abba-2",
+    "concurrent-cpu-decode-abba-3",
+    "concurrent-cpu-decode-abba-4",
+    "concurrent-overlap-proof-51",
+    "concurrent-calibrated-proof-51",
+    "concurrent-traced-proof-51"
+  ],
+  "source_variants_exported": 3,
+  "compiled_source_files_verified": 63,
+  "artifacts_sha256": {
+    "concurrent-request40-audit.json": "02f4170a36ee51d5100d7381b77d23f3d06308f257699fd7d7fd995a75866d74",
+    "concurrent-request-plan.json": "b66080ae2cfa1482fe7a1021726025e1dd0d45b1c4d90fdafa0b1bdbfe8c881a",
+    "concurrent-cpu-decode-abba-audit.json": "6d9799965ce304714814d47226293d875e59f77e723ef4d5b1ed8864fd7ea815",
+    "concurrent-cpu-decode-abba-report.json": "36deb6106e464e5e16c652f1a875f890c57ad93fe76773ae1bf293a5c943d41e",
+    "iteration-concurrent-cpu-decode-e2e51-abba-plan.json": "495bc7532de64ae8a157240307b75405c702e492953a86c850176e1e48db5938",
+    "concurrent-overlap-device-clock-audit.json": "0e475f39feeb8e76365358c0f2b2dd5ddfe9e4b36632ad24d3c0f775f33a3c95",
+    "concurrent-overlap-trace-audit.json": "ca6713420557155ca83829a3e843fc74693d0add0a36e43edef87e4354e51e7f",
+    "concurrent-original-requests.png": "34412482a3dcfd88aba7717e9c861318444b03493de202d96a6b7a534f8f1c72",
+    "concurrent-original-requests.jpg": "299aef9d979cc8e03aacebc6ac846fab9203e8de836f99e8817869f298300ba3",
+    "concurrent-original-requests.svg": "f514cf465fd240d2c51a8472f20c6db2950a81f1e2466dff3ad2fccab1239f6b",
+    "concurrent-original-requests-provenance.json": "36feb212c8ef30c2d66ed94c829f5fcdd3e1f132e9e04869378109cb30298b05",
+    "concurrent-native-requests.png": "50afd49830a3a276c21ee56f17bf5acce2dd9d7146623ce48d458204a61501c6",
+    "concurrent-native-requests.jpg": "960963807b74e1a3e1d33cfe19e888191cea66e91d2af01bdb381d0fbdfb62eb",
+    "concurrent-native-requests.svg": "11ba6f50d55bd702f3f8b79bace5b1c33ce09b421090aa08507163c5b8491cbf",
+    "concurrent-native-requests-provenance.json": "16e178f17646a4d6cf3b4885eae79c4b70267c6d8f79c9f435ca089f65d1ceec"
+  },
+  "selected_binary_sha256": "100716de3aca7c4efc7a5b0a5a87178c41adc3bc4049a5f1c009a83fe051ff58",
+  "scope": "Offline immutable export/table verification after all hardware jobs exited normally and all clock restoration audits passed."
+}

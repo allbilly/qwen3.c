@@ -95,6 +95,13 @@ and direct NPU backend. GPU decode attention matches tested tokens but is
 11.7–15.1% slower; GPU prefill fails the unchanged numerical gate. The selected
 CPU+NPU runner is retained. PNG/JPG/SVG comparisons and GPU event costs are included.
 
+The [device-placement and measured-iteration reports](experiments/yalm/README.md)
+include all nine CPU/GPU/NPU prefill/decode projection pairs and independently
+timed complete requests. The [concurrent FFN report](experiments/yalm/CONCURRENT-REQUESTS.md)
+adds CPU+NPU, GPU+NPU and CPU+GPU+NPU slices in each phase, with forty request
+rows, an ABBA decode check and calibrated overlap traces. No concurrent split
+is promoted; known short-prefill quality failures are retained.
+
 See the comparison workspace's README for the current final results and
 reproduction command. Earlier CPU Q8_0 versus stock W8A8 numbers were withdrawn
 as an unmatched comparison.

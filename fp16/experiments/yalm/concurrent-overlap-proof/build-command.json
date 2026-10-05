@@ -1,0 +1,20 @@
+[
+  "gcc",
+  "-Ofast",
+  "-fopenmp",
+  "-march=native",
+  "-D_FILE_OFFSET_BITS=64",
+  "-I/home/orangepi/qwen3-bench/matched/roofline/full-profile/source/npu-include",
+  "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/concurrent-overlap-proof/source/fp16/run.c",
+  "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/concurrent-overlap-proof/concurrent_ffn.c",
+  "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/concurrent-overlap-proof/source/fp16/gpu_attention.c",
+  "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/concurrent-overlap-proof/router.c",
+  "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/concurrent-overlap-proof/linear_gpu.c",
+  "-pthread",
+  "-lm",
+  "-ldrm",
+  "-ldl",
+  "-l:libOpenCL.so.1",
+  "-o",
+  "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/concurrent-overlap-proof/runq-routes"
+]

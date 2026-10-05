@@ -1,0 +1,440 @@
+{
+  "shared_fp16_model_sha256": "c92807935bfbb81f6628e9c2723267da367577a3f2b1bb2530b87bf5e5bba879",
+  "selected_binary_unchanged": true,
+  "records": [
+    {
+      "directory": "e2e/concurrent-overlap-proof/kernel-overlap51",
+      "label": "p256-1-all_both",
+      "route": "all_both",
+      "prompt": 256,
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "quality_passed": true,
+      "relative_rmse": 0.0005757857429929989,
+      "all_predictions_match": true,
+      "ttft_ms": 1054.127,
+      "effective_prefill_tps": 242.85498806121086,
+      "decode_tps": 19.295,
+      "measured_runs": 1,
+      "ttft_range": [
+        1054.127,
+        1054.127
+      ],
+      "decode_range": [
+        19.295,
+        19.295
+      ],
+      "root_profiles": [],
+      "gpu_attention_profiles": [],
+      "gpu_projection_profiles": [],
+      "cpu_projection_profiles": [
+        {
+          "event": "linear_cpu_profile",
+          "phase": "prefill",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "decode",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        }
+      ],
+      "ffn_split_profiles": [
+        {
+          "event": "ffn_split_profile",
+          "phase": "prefill",
+          "run": 1,
+          "warmup": false,
+          "calls": 112,
+          "cpu_calls": 112,
+          "gpu_calls": 112,
+          "npu_calls": 112,
+          "rows": 7168,
+          "gpu_completed_during_npu": 0,
+          "wall_ms": 575.817006052,
+          "round_ms": 3.360838011,
+          "dispatch_ms": 7.877793983,
+          "npu_branch_ms": 72.860207066,
+          "cpu_branch_ms": 116.2727101,
+          "cpu_npu_overlap_ms": 72.196091071,
+          "join_wait_ms": 491.705923036,
+          "merge_ms": 0.012243956,
+          "gpu_upload_ms": 1.528628,
+          "gpu_kernel_ms": 536.44143,
+          "gpu_download_ms": 0.449462,
+          "activation_pack_ms": 24.978265047,
+          "down_wall_ms": 50.285237968,
+          "logical_cpu_ops": 28,
+          "gpu_running_across_submit": 0,
+          "cpu_spans_submit": 111,
+          "all_three_spans_submit": 0,
+          "event_profiling": true
+        },
+        {
+          "event": "ffn_split_profile",
+          "phase": "decode",
+          "run": 1,
+          "warmup": false,
+          "calls": 868,
+          "cpu_calls": 868,
+          "gpu_calls": 868,
+          "npu_calls": 868,
+          "rows": 868,
+          "gpu_completed_during_npu": 837,
+          "wall_ms": 437.762076989,
+          "round_ms": 0.557354763,
+          "dispatch_ms": 36.874339923,
+          "npu_branch_ms": 389.949531361,
+          "cpu_branch_ms": 47.270028144,
+          "cpu_npu_overlap_ms": 14.829564318,
+          "join_wait_ms": 8.476004913,
+          "merge_ms": 1.904846027,
+          "gpu_upload_ms": 0.579824,
+          "gpu_kernel_ms": 109.567601,
+          "gpu_download_ms": 0.855443,
+          "activation_pack_ms": 0.0,
+          "down_wall_ms": 0.0,
+          "logical_cpu_ops": 868,
+          "gpu_running_across_submit": 0,
+          "cpu_spans_submit": 0,
+          "all_three_spans_submit": 0,
+          "event_profiling": true
+        }
+      ],
+      "cpu_projection_details": [],
+      "request_ms": 2660.813578,
+      "output_tps": 12.026396837636703,
+      "handoff_ms": 0.094498,
+      "request_range": [
+        2660.813578,
+        2660.813578
+      ]
+    },
+    {
+      "directory": "e2e/concurrent-calibrated-proof/kernel-overlap51",
+      "label": "p256-1-all_both",
+      "route": "all_both",
+      "prompt": 256,
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "quality_passed": true,
+      "relative_rmse": 0.0005757857429929989,
+      "all_predictions_match": true,
+      "ttft_ms": 1050.863,
+      "effective_prefill_tps": 243.60930016567335,
+      "decode_tps": 19.543,
+      "measured_runs": 1,
+      "ttft_range": [
+        1050.863,
+        1050.863
+      ],
+      "decode_range": [
+        19.543,
+        19.543
+      ],
+      "root_profiles": [],
+      "gpu_attention_profiles": [],
+      "gpu_projection_profiles": [],
+      "cpu_projection_profiles": [
+        {
+          "event": "linear_cpu_profile",
+          "phase": "prefill",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "decode",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        }
+      ],
+      "ffn_split_profiles": [
+        {
+          "event": "ffn_split_profile",
+          "phase": "prefill",
+          "run": 1,
+          "warmup": false,
+          "calls": 112,
+          "cpu_calls": 112,
+          "gpu_calls": 112,
+          "npu_calls": 112,
+          "rows": 7168,
+          "gpu_completed_during_npu": 0,
+          "wall_ms": 579.377001852,
+          "round_ms": 3.368703991,
+          "dispatch_ms": 9.336700931,
+          "npu_branch_ms": 71.06589295,
+          "cpu_branch_ms": 114.470525056,
+          "cpu_npu_overlap_ms": 70.602732942,
+          "join_wait_ms": 495.598413005,
+          "merge_ms": 0.007290974,
+          "gpu_upload_ms": 1.540878,
+          "gpu_kernel_ms": 536.32715,
+          "gpu_download_ms": 0.464332,
+          "activation_pack_ms": 25.675336957,
+          "down_wall_ms": 50.679269031,
+          "logical_cpu_ops": 28,
+          "gpu_running_across_submit": 0,
+          "cpu_spans_submit": 111,
+          "all_three_spans_submit": 0,
+          "valid_clock_maps": 112,
+          "gpu_calibrated_contains_submit": 84,
+          "all_three_calibrated_contains_submit": 84,
+          "event_profiling": true
+        },
+        {
+          "event": "ffn_split_profile",
+          "phase": "decode",
+          "run": 1,
+          "warmup": false,
+          "calls": 868,
+          "cpu_calls": 868,
+          "gpu_calls": 868,
+          "npu_calls": 868,
+          "rows": 868,
+          "gpu_completed_during_npu": 837,
+          "wall_ms": 433.952928945,
+          "round_ms": 0.577493116,
+          "dispatch_ms": 40.96487996,
+          "npu_branch_ms": 382.353163004,
+          "cpu_branch_ms": 45.867727235,
+          "cpu_npu_overlap_ms": 9.053785071,
+          "join_wait_ms": 8.01138705,
+          "merge_ms": 2.046005815,
+          "gpu_upload_ms": 0.59326,
+          "gpu_kernel_ms": 106.941497,
+          "gpu_download_ms": 0.777602,
+          "activation_pack_ms": 0.0,
+          "down_wall_ms": 0.0,
+          "logical_cpu_ops": 868,
+          "gpu_running_across_submit": 0,
+          "cpu_spans_submit": 0,
+          "all_three_spans_submit": 0,
+          "valid_clock_maps": 0,
+          "gpu_calibrated_contains_submit": 0,
+          "all_three_calibrated_contains_submit": 0,
+          "event_profiling": true
+        }
+      ],
+      "cpu_projection_details": [],
+      "request_ms": 2637.191649,
+      "output_tps": 12.134120025798701,
+      "handoff_ms": 0.090124,
+      "request_range": [
+        2637.191649,
+        2637.191649
+      ]
+    },
+    {
+      "directory": "e2e/concurrent-traced-proof/kernel-overlap51",
+      "label": "p256-1-all_both",
+      "route": "all_both",
+      "prompt": 256,
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "quality_passed": true,
+      "relative_rmse": 0.0005757857429929989,
+      "all_predictions_match": true,
+      "ttft_ms": 1058.848,
+      "effective_prefill_tps": 241.77219015382758,
+      "decode_tps": 19.781,
+      "measured_runs": 1,
+      "ttft_range": [
+        1058.848,
+        1058.848
+      ],
+      "decode_range": [
+        19.781,
+        19.781
+      ],
+      "root_profiles": [],
+      "gpu_attention_profiles": [],
+      "gpu_projection_profiles": [],
+      "cpu_projection_profiles": [
+        {
+          "event": "linear_cpu_profile",
+          "phase": "prefill",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "decode",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        }
+      ],
+      "ffn_split_profiles": [
+        {
+          "event": "ffn_split_profile",
+          "phase": "prefill",
+          "run": 1,
+          "warmup": false,
+          "calls": 112,
+          "cpu_calls": 112,
+          "gpu_calls": 112,
+          "npu_calls": 112,
+          "rows": 7168,
+          "gpu_completed_during_npu": 0,
+          "wall_ms": 582.298037991,
+          "round_ms": 3.371028051,
+          "dispatch_ms": 9.362941936,
+          "npu_branch_ms": 70.688710913,
+          "cpu_branch_ms": 113.657836974,
+          "cpu_npu_overlap_ms": 70.245966926,
+          "join_wait_ms": 498.868068054,
+          "merge_ms": 0.007289037,
+          "gpu_upload_ms": 1.605916,
+          "gpu_kernel_ms": 536.557315,
+          "gpu_download_ms": 0.452372,
+          "activation_pack_ms": 24.848458081,
+          "down_wall_ms": 50.56343095,
+          "logical_cpu_ops": 28,
+          "gpu_running_across_submit": 0,
+          "cpu_spans_submit": 111,
+          "all_three_spans_submit": 0,
+          "valid_clock_maps": 112,
+          "gpu_calibrated_contains_submit": 84,
+          "all_three_calibrated_contains_submit": 84,
+          "event_profiling": true
+        },
+        {
+          "event": "ffn_split_profile",
+          "phase": "decode",
+          "run": 1,
+          "warmup": false,
+          "calls": 868,
+          "cpu_calls": 868,
+          "gpu_calls": 868,
+          "npu_calls": 868,
+          "rows": 868,
+          "gpu_completed_during_npu": 837,
+          "wall_ms": 427.014769003,
+          "round_ms": 0.532608166,
+          "dispatch_ms": 38.454173788,
+          "npu_branch_ms": 378.084923193,
+          "cpu_branch_ms": 46.120845094,
+          "cpu_npu_overlap_ms": 11.778791279,
+          "join_wait_ms": 7.966167018,
+          "merge_ms": 1.976896837,
+          "gpu_upload_ms": 0.608994,
+          "gpu_kernel_ms": 107.547354,
+          "gpu_download_ms": 0.746951,
+          "activation_pack_ms": 0.0,
+          "down_wall_ms": 0.0,
+          "logical_cpu_ops": 868,
+          "gpu_running_across_submit": 0,
+          "cpu_spans_submit": 0,
+          "all_three_spans_submit": 0,
+          "valid_clock_maps": 0,
+          "gpu_calibrated_contains_submit": 0,
+          "all_three_calibrated_contains_submit": 0,
+          "event_profiling": true
+        }
+      ],
+      "cpu_projection_details": [],
+      "request_ms": 2626.073075,
+      "output_tps": 12.185494876223123,
+      "handoff_ms": 0.072333,
+      "request_range": [
+        2626.073075,
+        2626.073075
+      ]
+    }
+  ],
+  "audits": {
+    "e2e/concurrent-overlap-proof/kernel-overlap51": {
+      "clock_samples": 53,
+      "clocks_held_and_restored": true,
+      "checked_jobs": [
+        {
+          "label": "p256-1-all_both",
+          "device_counts_checked_all_runs": true,
+          "same_teacher_ids": true,
+          "independent_request_span": true
+        }
+      ]
+    },
+    "e2e/concurrent-calibrated-proof/kernel-overlap51": {
+      "clock_samples": 54,
+      "clocks_held_and_restored": true,
+      "checked_jobs": [
+        {
+          "label": "p256-1-all_both",
+          "device_counts_checked_all_runs": true,
+          "same_teacher_ids": true,
+          "independent_request_span": true
+        }
+      ]
+    },
+    "e2e/concurrent-traced-proof/kernel-overlap51": {
+      "clock_samples": 53,
+      "clocks_held_and_restored": true,
+      "checked_jobs": [
+        {
+          "label": "p256-1-all_both",
+          "device_counts_checked_all_runs": true,
+          "same_teacher_ids": true,
+          "independent_request_span": true
+        }
+      ]
+    }
+  },
+  "raw_log_sha256": {
+    "e2e/concurrent-overlap-proof/kernel-overlap51/p256-1-all_both.jsonl": "dbb1235a5790643a3694e77d379710c45a75623048036bf537e47ea55b1c0fdf",
+    "e2e/concurrent-calibrated-proof/kernel-overlap51/p256-1-all_both.jsonl": "ba5d940c79f19a383f66f977247e35bf4d2df1adb3ed2f500f08f3b77705afc7",
+    "e2e/concurrent-traced-proof/kernel-overlap51/p256-1-all_both.jsonl": "7b24ee11f3ebcd2156232cdc3f169693a50c93933ef19ceef20d5d1da1ddb512"
+  },
+  "scope": "All nine dense-projection prefill/decode backend pairs plus an explicit three-device placement. CPU host non-linear operations remain in every route. Teacher-forced timing uses identical decode inputs; matching every prediction proves the same greedy sequence on the finite tested cases."
+}

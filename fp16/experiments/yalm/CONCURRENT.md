@@ -69,8 +69,9 @@ with bit-identical selected first-token logits and matching predictions.
 Eight fixed-clock, 256-token branch-profile jobs are independently audited:
 two full warmups, one measurement, 32 outputs, <=51C request starts, fixed
 and restored CPU/GPU/NPU/DDR clocks. Every tested prediction matches. These
-event-enabled timings diagnose costs; final throughput comes from the
-unprofiled request sweeps, which are running at this milestone.
+event-enabled timings diagnose costs. The [completed unprofiled request
+sweeps](CONCURRENT-REQUESTS.md) report forty phase/request rows and a separate
+eight-job ABBA decode check. No concurrent split is promoted.
 
 | Layout | Split | Prefill ms | Prefill tokens/s | Decode tokens/s |
 |---|---|---:|---:|---:|
@@ -113,6 +114,25 @@ selected path. It therefore adds 330–341 MB of native FP16 weight payload,
 plus 22 MB of CPU FP32 slices and/or 11 MB of GPU FP16 slices, outside request
 timing. This is a correctness-first placement experiment with resident
 weights, not a minimum-memory implementation or fully resident GPU model.
+
+## Complete-request result and overlap verification
+
+Both layouts now have twenty independently timed request rows, with prefill
+milliseconds and tokens/s, decode tokens/s, request milliseconds and individual
+ranges. All long-prompt jobs pass the quality/device/clock audits; short-prefill
+failures still exclude prefill splits from selection. The CPU decode screen's
+small apparent gain does not repeat in ABBA: decode changes by -2.01% / -1.49%
+at 128/256 tokens, with overlapping ranges. The selected runner is retained.
+
+A separate raw-timestamp diagnostic independently confirms overlapping CPU
+worker, GPU kernel event and blocking NPU-submit intervals in 84/112 blocks per
+request, in two warmups and one measurement. Clock-offset bounds are calibrated
+with bracketing GPU markers; all 336 maps pass the independent auditor.
+Instrumentation affects scheduling, so this establishes diagnostic overlap,
+not an unprofiled throughput gain or isolated simultaneous MAC timing.
+
+See [CONCURRENT-REQUESTS.md](CONCURRENT-REQUESTS.md) for the complete tables,
+PNG/JPG/SVG charts, raw overlap audit, source exports and all numerical limits.
 
 ## Reproduce
 

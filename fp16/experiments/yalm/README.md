@@ -12,7 +12,8 @@ decode, plus an explicit placement with CPU classifier, GPU prefill projections
 and decode attention, and NPU decode projections. Device labels describe
 projections/attention; **embedding, norms, RoPE, SwiGLU, residuals and sampling
 remain CPU operations**. A fully GPU-resident transformer is not implemented.
-There is no concurrent partition of the same projection across devices.
+This original routing runner does not partition a projection concurrently;
+the separate [FFN experiment](CONCURRENT.md) now does.
 
 CPU keeps FP16 model storage and rounds projection inputs to FP16, with FP32
 accumulation. Prefill uses temporary FP32 expansions and the installed ILP64
@@ -77,7 +78,12 @@ The `source/` copy preserves the code used in the experiment independently of
 future selected-engine edits. This is a WIP checkpoint, not a claim that every
 route or optimization is complete or faster.
 
-The new [concurrent FFN experiment](CONCURRENT.md) now overlaps disjoint
-CPU/Mali/NPU output channels. Nine primitive cases and thirty full-model
-cases are independently checked. Decode-only splitting passes all five
-prompt lengths; six prefill logit failures remain retained.
+The [concurrent FFN experiment](CONCURRENT.md) overlaps disjoint CPU/Mali/NPU
+output channels. Two layouts have 24 primitive cases and sixty full-model
+checks; twelve short-prefill logit failures remain retained. All thirty
+decode-only checks pass. The [forty completed request rows and paired decode
+check](CONCURRENT-REQUESTS.md) include prefill ms/tokens/s, decode tokens/s,
+independent request time and rendered charts. Raw calibrated traces reproduce
+84/112 overlapping CPU/GPU/NPU intervals in each diagnostic request. No split
+establishes a reliable overall gain. The [task coverage audit](COMPLETION.md)
+links each requested measurement to evidence and states remaining limitations.

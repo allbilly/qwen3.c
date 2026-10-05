@@ -1,0 +1,61 @@
+{
+  "workspace_directory": "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/concurrent-traced-proof/kernel-overlap51",
+  "files": {
+    "clock-samples.jsonl": {
+      "original_sha256": "b7fa5da2b1163076e06f00805a8d8d8812696dca1c06da8560b49ad56b7a1dc2",
+      "export": "clock-samples.jsonl.gz",
+      "export_sha256": "68298c042866dff4b9505037982c127a3dc6895f4aa9de990ea683d2c709660d"
+    },
+    "clock-state-before.json": {
+      "original_sha256": "41926b8ee4e0b41ac8c7a20c218e884de60c6d0a6c928849bec7b00b278bfce6",
+      "export": "clock-state-before.json",
+      "export_sha256": "41926b8ee4e0b41ac8c7a20c218e884de60c6d0a6c928849bec7b00b278bfce6"
+    },
+    "clock-state-restored.json": {
+      "original_sha256": "41926b8ee4e0b41ac8c7a20c218e884de60c6d0a6c928849bec7b00b278bfce6",
+      "export": "clock-state-restored.json",
+      "export_sha256": "41926b8ee4e0b41ac8c7a20c218e884de60c6d0a6c928849bec7b00b278bfce6"
+    },
+    "gpu-clock-state-before.json": {
+      "original_sha256": "173bf1112031cdfa91fd19df773ccbda2dd4fb75837e6024a6dd82e3b772e182",
+      "export": "gpu-clock-state-before.json",
+      "export_sha256": "173bf1112031cdfa91fd19df773ccbda2dd4fb75837e6024a6dd82e3b772e182"
+    },
+    "gpu-clock-state-restored.json": {
+      "original_sha256": "173bf1112031cdfa91fd19df773ccbda2dd4fb75837e6024a6dd82e3b772e182",
+      "export": "gpu-clock-state-restored.json",
+      "export_sha256": "173bf1112031cdfa91fd19df773ccbda2dd4fb75837e6024a6dd82e3b772e182"
+    },
+    "p256-1-all_both.config.json": {
+      "original_sha256": "1a93c9bbbdd8ae9552c4c5d61538aa15149eb6db0a3275c032bd57881d6b3d59",
+      "export": "p256-1-all_both.config.json",
+      "export_sha256": "1a93c9bbbdd8ae9552c4c5d61538aa15149eb6db0a3275c032bd57881d6b3d59"
+    },
+    "p256-1-all_both.jsonl": {
+      "original_sha256": "7b24ee11f3ebcd2156232cdc3f169693a50c93933ef19ceef20d5d1da1ddb512",
+      "export": "p256-1-all_both.jsonl",
+      "export_sha256": "7b24ee11f3ebcd2156232cdc3f169693a50c93933ef19ceef20d5d1da1ddb512"
+    },
+    "p256-1-all_both.teacher.tokens": {
+      "original_sha256": "b918dd6f9735d37d462b1abb6d5811e633417a6a98da3882d1bfcb776d2bde9c",
+      "export": "p256-1-all_both.teacher.tokens",
+      "export_sha256": "b918dd6f9735d37d462b1abb6d5811e633417a6a98da3882d1bfcb776d2bde9c"
+    },
+    "p256-1-all_both.tokens": {
+      "original_sha256": "899f36a0548cde0e1a51c6bae9454b21d9be66f13402551f81e037e95ff0d929",
+      "export": "p256-1-all_both.tokens",
+      "export_sha256": "899f36a0548cde0e1a51c6bae9454b21d9be66f13402551f81e037e95ff0d929"
+    },
+    "source-provenance.json": {
+      "original_sha256": "b6f8be6ce56afa48f5f90f56a599a991f6df73a51c508ca337fc8930bceabd30",
+      "export": "source-provenance.json",
+      "export_sha256": "b6f8be6ce56afa48f5f90f56a599a991f6df73a51c508ca337fc8930bceabd30"
+    },
+    "summary.json": {
+      "original_sha256": "55a53520759b49ccb53689092d0eade9629deb6a3323efc5cbd0777e05ed938b",
+      "export": "summary.json",
+      "export_sha256": "55a53520759b49ccb53689092d0eade9629deb6a3323efc5cbd0777e05ed938b"
+    }
+  },
+  "external_artifacts": "Shared FP16 model, full per-vocabulary logits and compiled binary remain in the comparison workspace; source/binary/input hashes are retained here."
+}

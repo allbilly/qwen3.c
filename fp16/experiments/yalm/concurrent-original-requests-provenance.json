@@ -1,0 +1,11 @@
+{
+  "audit": "concurrent-request40-audit.json",
+  "variant": "concurrent-ffn",
+  "audit_sha256": "02f4170a36ee51d5100d7381b77d23f3d06308f257699fd7d7fd995a75866d74",
+  "plot_source_sha256": "bd08f41dca6c74cbb8859328b56d585ec80759aeab057668582712d7a10b0ebc",
+  "output_sha256": {
+    "png": "34412482a3dcfd88aba7717e9c861318444b03493de202d96a6b7a534f8f1c72",
+    "jpg": "299aef9d979cc8e03aacebc6ac846fab9203e8de836f99e8817869f298300ba3",
+    "svg": "f514cf465fd240d2c51a8472f20c6db2950a81f1e2466dff3ad2fccab1239f6b"
+  }
+}

@@ -1,5 +1,10 @@
 # Independent phase and complete-request comparisons
 
+The later [concurrent FFN iterations](CONCURRENT-REQUESTS.md) implement and
+profile disjoint CPU/GPU/NPU slices, compare both packing layouts in forty
+request jobs, and check CPU-assisted decode in ABBA. They retain all quality
+failures and the selected runner.
+
 Both experiments pass independent model/source/binary, numerical, device-count,
 clock and restoration audits. Each uses the shared Qwen3-0.6B FP16 checkpoint,
 identical teacher-forced inputs, 32 outputs and every actual predicted ID.

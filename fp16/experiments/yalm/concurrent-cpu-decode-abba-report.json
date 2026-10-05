@@ -1,0 +1,292 @@
+{
+  "plan": "iteration-concurrent-cpu-decode-e2e51-abba-plan.json",
+  "plan_sha256": "495bc7532de64ae8a157240307b75405c702e492953a86c850176e1e48db5938",
+  "audit": "concurrent-cpu-decode-abba-audit.json",
+  "cool_c": 51,
+  "audit_sha256": "6d9799965ce304714814d47226293d875e59f77e723ef4d5b1ed8864fd7ea815",
+  "results": [
+    {
+      "prompt": 128,
+      "baseline": {
+        "engine": "concurrent-ffn",
+        "route": "npu",
+        "measurements": 4,
+        "median": {
+          "ttft_ms": 233.398,
+          "decode_tps": 21.2325,
+          "request_ms": 1698.9902805000002,
+          "handoff_ms": 0.0335415,
+          "effective_prefill_tps": 548.419438041457,
+          "output_tps": 18.834716341392276
+        },
+        "ranges": {
+          "ttft_ms": [
+            231.555,
+            245.735
+          ],
+          "decode_tps": [
+            21.044,
+            21.34
+          ],
+          "request_ms": [
+            1684.272207,
+            1707.795779
+          ]
+        },
+        "requests": [
+          {
+            "ttft_ms": 233.679,
+            "decode_tps": 21.044,
+            "request_ms": 1706.808362,
+            "handoff_ms": 0.037916,
+            "directory": "e2e/concurrent-ffn/iteration-concurrent-cpu-decode-e2e51-abba-1",
+            "label": "p128-1-npu",
+            "run": 1
+          },
+          {
+            "ttft_ms": 231.555,
+            "decode_tps": 21.34,
+            "request_ms": 1684.272207,
+            "handoff_ms": 0.027125,
+            "directory": "e2e/concurrent-ffn/iteration-concurrent-cpu-decode-e2e51-abba-1",
+            "label": "p128-1-npu",
+            "run": 2
+          },
+          {
+            "ttft_ms": 245.735,
+            "decode_tps": 21.203,
+            "request_ms": 1707.795779,
+            "handoff_ms": 0.03325,
+            "directory": "e2e/concurrent-ffn/iteration-concurrent-cpu-decode-e2e51-abba-4",
+            "label": "p128-1-npu",
+            "run": 1
+          },
+          {
+            "ttft_ms": 233.117,
+            "decode_tps": 21.262,
+            "request_ms": 1691.172199,
+            "handoff_ms": 0.033833,
+            "directory": "e2e/concurrent-ffn/iteration-concurrent-cpu-decode-e2e51-abba-4",
+            "label": "p128-1-npu",
+            "run": 2
+          }
+        ]
+      },
+      "candidate": {
+        "engine": "concurrent-ffn",
+        "route": "cpu_npu_dec",
+        "measurements": 4,
+        "median": {
+          "ttft_ms": 240.6585,
+          "decode_tps": 20.8065,
+          "request_ms": 1732.0776945,
+          "handoff_ms": 0.0472495,
+          "effective_prefill_tps": 531.874004034763,
+          "output_tps": 18.474921824587934
+        },
+        "ranges": {
+          "ttft_ms": [
+            234.168,
+            251.568
+          ],
+          "decode_tps": [
+            20.408,
+            21.196
+          ],
+          "request_ms": [
+            1696.762349,
+            1768.640162
+          ]
+        },
+        "requests": [
+          {
+            "ttft_ms": 238.092,
+            "decode_tps": 21.178,
+            "request_ms": 1701.908729,
+            "handoff_ms": 0.043458,
+            "directory": "e2e/concurrent-ffn/iteration-concurrent-cpu-decode-e2e51-abba-2",
+            "label": "p128-1-cpu_npu_dec",
+            "run": 1
+          },
+          {
+            "ttft_ms": 234.168,
+            "decode_tps": 21.196,
+            "request_ms": 1696.762349,
+            "handoff_ms": 0.051041,
+            "directory": "e2e/concurrent-ffn/iteration-concurrent-cpu-decode-e2e51-abba-2",
+            "label": "p128-1-cpu_npu_dec",
+            "run": 2
+          },
+          {
+            "ttft_ms": 243.225,
+            "decode_tps": 20.408,
+            "request_ms": 1762.24666,
+            "handoff_ms": 0.037624,
+            "directory": "e2e/concurrent-ffn/iteration-concurrent-cpu-decode-e2e51-abba-3",
+            "label": "p128-1-cpu_npu_dec",
+            "run": 1
+          },
+          {
+            "ttft_ms": 251.568,
+            "decode_tps": 20.435,
+            "request_ms": 1768.640162,
+            "handoff_ms": 0.058041,
+            "directory": "e2e/concurrent-ffn/iteration-concurrent-cpu-decode-e2e51-abba-3",
+            "label": "p128-1-cpu_npu_dec",
+            "run": 2
+          }
+        ]
+      },
+      "prefill_gain_percent": -3.0169306299175025,
+      "decode_gain_percent": -2.006358177322509,
+      "request_gain_percent": -1.9102730844617888,
+      "observed_ranges_overlap": {
+        "ttft_ms": true,
+        "decode_tps": true,
+        "request_ms": true
+      }
+    },
+    {
+      "prompt": 256,
+      "baseline": {
+        "engine": "concurrent-ffn",
+        "route": "npu",
+        "measurements": 4,
+        "median": {
+          "ttft_ms": 519.0585,
+          "decode_tps": 20.238500000000002,
+          "request_ms": 2054.193952,
+          "handoff_ms": 0.0331035,
+          "effective_prefill_tps": 493.20067005934783,
+          "output_tps": 15.577886386455488
+        },
+        "ranges": {
+          "ttft_ms": [
+            513.908,
+            525.664
+          ],
+          "decode_tps": [
+            19.99,
+            20.349
+          ],
+          "request_ms": [
+            2042.434051,
+            2064.682256
+          ]
+        },
+        "requests": [
+          {
+            "ttft_ms": 519.131,
+            "decode_tps": 20.209,
+            "request_ms": 2053.14935,
+            "handoff_ms": 0.034416,
+            "directory": "e2e/concurrent-ffn/iteration-concurrent-cpu-decode-e2e51-abba-1",
+            "label": "p256-1-npu",
+            "run": 1
+          },
+          {
+            "ttft_ms": 513.908,
+            "decode_tps": 19.99,
+            "request_ms": 2064.682256,
+            "handoff_ms": 0.024791,
+            "directory": "e2e/concurrent-ffn/iteration-concurrent-cpu-decode-e2e51-abba-1",
+            "label": "p256-1-npu",
+            "run": 2
+          },
+          {
+            "ttft_ms": 525.664,
+            "decode_tps": 20.268,
+            "request_ms": 2055.238554,
+            "handoff_ms": 0.034999,
+            "directory": "e2e/concurrent-ffn/iteration-concurrent-cpu-decode-e2e51-abba-4",
+            "label": "p256-1-npu",
+            "run": 1
+          },
+          {
+            "ttft_ms": 518.986,
+            "decode_tps": 20.349,
+            "request_ms": 2042.434051,
+            "handoff_ms": 0.031791,
+            "directory": "e2e/concurrent-ffn/iteration-concurrent-cpu-decode-e2e51-abba-4",
+            "label": "p256-1-npu",
+            "run": 2
+          }
+        ]
+      },
+      "candidate": {
+        "engine": "concurrent-ffn",
+        "route": "cpu_npu_dec",
+        "measurements": 4,
+        "median": {
+          "ttft_ms": 523.238,
+          "decode_tps": 19.936,
+          "request_ms": 2078.4306635000003,
+          "handoff_ms": 0.049291,
+          "effective_prefill_tps": 489.26110106681847,
+          "output_tps": 15.396231667460672
+        },
+        "ranges": {
+          "ttft_ms": [
+            510.275,
+            536.897
+          ],
+          "decode_tps": [
+            19.64,
+            20.18
+          ],
+          "request_ms": [
+            2046.476118,
+            2115.384895
+          ]
+        },
+        "requests": [
+          {
+            "ttft_ms": 510.275,
+            "decode_tps": 20.18,
+            "request_ms": 2046.476118,
+            "handoff_ms": 0.041416,
+            "directory": "e2e/concurrent-ffn/iteration-concurrent-cpu-decode-e2e51-abba-2",
+            "label": "p256-1-cpu_npu_dec",
+            "run": 1
+          },
+          {
+            "ttft_ms": 521.35,
+            "decode_tps": 20.143,
+            "request_ms": 2060.367318,
+            "handoff_ms": 0.058041,
+            "directory": "e2e/concurrent-ffn/iteration-concurrent-cpu-decode-e2e51-abba-2",
+            "label": "p256-1-cpu_npu_dec",
+            "run": 2
+          },
+          {
+            "ttft_ms": 525.126,
+            "decode_tps": 19.729,
+            "request_ms": 2096.494009,
+            "handoff_ms": 0.040832,
+            "directory": "e2e/concurrent-ffn/iteration-concurrent-cpu-decode-e2e51-abba-3",
+            "label": "p256-1-cpu_npu_dec",
+            "run": 1
+          },
+          {
+            "ttft_ms": 536.897,
+            "decode_tps": 19.64,
+            "request_ms": 2115.384895,
+            "handoff_ms": 0.057166,
+            "directory": "e2e/concurrent-ffn/iteration-concurrent-cpu-decode-e2e51-abba-3",
+            "label": "p256-1-cpu_npu_dec",
+            "run": 2
+          }
+        ]
+      },
+      "prefill_gain_percent": -0.7987760827768753,
+      "decode_gain_percent": -1.4946759888331718,
+      "request_gain_percent": -1.1661063284731599,
+      "observed_ranges_overlap": {
+        "ttft_ms": true,
+        "decode_tps": true,
+        "request_ms": true
+      }
+    }
+  ],
+  "scope": "Four independently measured requests per engine/prompt in ABBA or BAAB blocks. Phase and request medians recomputed from all four raw measurements. Full min/max ranges retained; overlapping ranges do not establish a statistically significant small gain."
+}

@@ -1,0 +1,22 @@
+{
+  "cpu4": {
+    "scaling_governor": "ondemand",
+    "scaling_min_freq": "408000",
+    "scaling_max_freq": "2256000"
+  },
+  "cpu6": {
+    "scaling_governor": "ondemand",
+    "scaling_min_freq": "408000",
+    "scaling_max_freq": "2256000"
+  },
+  "npu": {
+    "governor": "rknpu_ondemand",
+    "min_freq": "300000000",
+    "max_freq": "1000000000"
+  },
+  "ddr": {
+    "governor": "dmc_ondemand",
+    "min_freq": "528000000",
+    "max_freq": "2112000000"
+  }
+}

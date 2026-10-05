@@ -1,0 +1,108 @@
+{
+  "name": "concurrent-cpu-decode-e2e51-abba",
+  "baseline": "concurrent-ffn",
+  "candidate": "concurrent-ffn",
+  "baseline_route": "npu",
+  "candidate_route": "cpu_npu_dec",
+  "order": "ABBA",
+  "jobs": [
+    {
+      "block": 1,
+      "letter": "A",
+      "engine": "concurrent-ffn",
+      "route": "npu",
+      "directory": "e2e/concurrent-ffn/iteration-concurrent-cpu-decode-e2e51-abba-1",
+      "command": [
+        "python3",
+        "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/concurrent-ffn/run_matrix.py",
+        "--output",
+        "iteration-concurrent-cpu-decode-e2e51-abba-1",
+        "--routes",
+        "npu",
+        "--prompts",
+        "128",
+        "256",
+        "--runs",
+        "2",
+        "--new-tokens",
+        "32",
+        "--cool-c",
+        "51"
+      ]
+    },
+    {
+      "block": 2,
+      "letter": "B",
+      "engine": "concurrent-ffn",
+      "route": "cpu_npu_dec",
+      "directory": "e2e/concurrent-ffn/iteration-concurrent-cpu-decode-e2e51-abba-2",
+      "command": [
+        "python3",
+        "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/concurrent-ffn/run_matrix.py",
+        "--output",
+        "iteration-concurrent-cpu-decode-e2e51-abba-2",
+        "--routes",
+        "cpu_npu_dec",
+        "--prompts",
+        "128",
+        "256",
+        "--runs",
+        "2",
+        "--new-tokens",
+        "32",
+        "--cool-c",
+        "51"
+      ]
+    },
+    {
+      "block": 3,
+      "letter": "B",
+      "engine": "concurrent-ffn",
+      "route": "cpu_npu_dec",
+      "directory": "e2e/concurrent-ffn/iteration-concurrent-cpu-decode-e2e51-abba-3",
+      "command": [
+        "python3",
+        "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/concurrent-ffn/run_matrix.py",
+        "--output",
+        "iteration-concurrent-cpu-decode-e2e51-abba-3",
+        "--routes",
+        "cpu_npu_dec",
+        "--prompts",
+        "256",
+        "128",
+        "--runs",
+        "2",
+        "--new-tokens",
+        "32",
+        "--cool-c",
+        "51"
+      ]
+    },
+    {
+      "block": 4,
+      "letter": "A",
+      "engine": "concurrent-ffn",
+      "route": "npu",
+      "directory": "e2e/concurrent-ffn/iteration-concurrent-cpu-decode-e2e51-abba-4",
+      "command": [
+        "python3",
+        "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/concurrent-ffn/run_matrix.py",
+        "--output",
+        "iteration-concurrent-cpu-decode-e2e51-abba-4",
+        "--routes",
+        "npu",
+        "--prompts",
+        "256",
+        "128",
+        "--runs",
+        "2",
+        "--new-tokens",
+        "32",
+        "--cool-c",
+        "51"
+      ]
+    }
+  ],
+  "cool_c": 51,
+  "protocol": "Same shared FP16 weights and teacher-forced decode inputs; all actual predictions checked. Two complete warmups and two measured requests per prompt per block; four measurements per engine/prompt. Start every request at <=51C; cooldown excluded. Hardware processes serial. Independently measured resident request spans."
+}

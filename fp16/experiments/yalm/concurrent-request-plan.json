@@ -1,0 +1,62 @@
+{
+  "jobs": [
+    {
+      "variant": "concurrent-ffn",
+      "binary_sha256": "a2480d20ef816c2d9c6fa48b0dcf05b1b6b3614483c49d8dd07981f8715952d6",
+      "command": [
+        "python3",
+        "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/concurrent-ffn/run_matrix.py",
+        "--output",
+        "request-matrix51",
+        "--routes",
+        "npu",
+        "cpu_npu_pre",
+        "gpu_npu_pre",
+        "all_pre",
+        "cpu_npu_dec",
+        "gpu_npu_dec",
+        "all_dec",
+        "cpu_npu_both",
+        "gpu_npu_both",
+        "all_both",
+        "--prompts",
+        "128",
+        "256",
+        "--runs",
+        "2",
+        "--cool-c",
+        "51"
+      ]
+    },
+    {
+      "variant": "concurrent-native",
+      "binary_sha256": "2922f25167fa8b7a769c15fba9b7c7b5b34a2371153e655c51dfb03a84efbe93",
+      "command": [
+        "python3",
+        "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/concurrent-native/run_matrix.py",
+        "--output",
+        "request-matrix51",
+        "--routes",
+        "npu",
+        "cpu_npu_pre",
+        "gpu_npu_pre",
+        "all_pre",
+        "cpu_npu_dec",
+        "gpu_npu_dec",
+        "all_dec",
+        "cpu_npu_both",
+        "gpu_npu_both",
+        "all_both",
+        "--prompts",
+        "128",
+        "256",
+        "--runs",
+        "2",
+        "--cool-c",
+        "51"
+      ]
+    }
+  ],
+  "protocol": "Same pinned FP16 model/operands, two full warmups, two measured requests per placement/prompt, 32 greedy predictions/31 decode steps, original numerical gate, actual CPU/GPU/NPU counters, fixed/sampled/restored clocks and common <=51C request start. Routes reverse at prompt256. One independent monotonic request span includes movement, waits and interphase work. Model load, tokenization, cooling excluded. Branch event profiling disabled. Small differences remain screening observations, not a statistical reliability claim.",
+  "known_prefill_failures": "Both layouts fail 24/73-token first-logit gates on all three splits; prefill split rows are diagnostics despite qualified 128/256 local cases."
+}

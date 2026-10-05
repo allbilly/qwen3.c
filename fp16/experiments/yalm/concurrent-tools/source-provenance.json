@@ -1,0 +1,19 @@
+{
+  "workspace": "/home/orangepi/qwen3-bench/matched/roofline/yalm",
+  "source_sha256": {
+    "plot_concurrent.py": "bd08f41dca6c74cbb8859328b56d585ec80759aeab057668582712d7a10b0ebc",
+    "audit_overlap_traces.py": "d5a729807810cb9e0b97b1ceb18a8834a2fc65d173fcc61b2caa2d279914f289",
+    "audit_concurrent_matrix.py": "d43c87bc8993a3ca65886ef416a3c65694a94e96c5f838598fbdbd1c461fc394",
+    "concurrent_audit.py": "6af0a2460f368870f5c08356496f01d4f604afba5cb730819f6aead1f86a2c46",
+    "attention_rows.py": "a08ee6345cc59d09b5399246f377a6288c67746f536ebeafb970f2f73290f7f5",
+    "analyse_iterations.py": "f9d51a81b5714127a1f45d97622002bfd51e072e1c692771a505a272f798c5bd",
+    "export_evidence.py": "0b54a6343d43c803563431d89e9d99d9d127536fea78c02449f000dc38e33832",
+    "prepare_overlap_proof.py": "959311885650f0eacaa3da46bc079d4c5a785e657925abf3218529f22388475f",
+    "prepare_calibrated_overlap.py": "0f3a05c1ffbdcaf24aa92728131b580922b2b934a4eb6459c9ac464166250557",
+    "prepare_traced_overlap.py": "863559d476a4f250c9d999601dcd641112846518c7f6145b9429711aba61e0b5",
+    "run_concurrent_matrix.py": "6831806abfd905b689fe0f4899671e9d57b1ffb3745efbb0ee09f2d9bde65df3",
+    "run_iterations.py": "cb2ce88319cc6bce7483325354de1294c9e0b7dac9c073ac02c8d30cc5a43ccd",
+    "finalize_concurrent.py": "a1770316b18178b743302801dbcb96d2f8182e56676184a4b340642592a574c7"
+  },
+  "scope": "Snapshots of comparison-workspace tools. Hardware harness paths refer to that workspace; source variant build.py uses the repository export directly."
+}

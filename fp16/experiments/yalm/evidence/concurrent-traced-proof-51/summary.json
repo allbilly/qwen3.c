@@ -1,0 +1,47 @@
+{
+  "records": [
+    {
+      "label": "p256-1-all_both",
+      "prompt": 256,
+      "route": "all_both",
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "teacher_forced_identical_decode_inputs": true,
+      "prefill_logit_relative_rmse": 0.0005757857429929989,
+      "max_logit_error": 0.01558375358581543,
+      "unchanged_limit": 0.001,
+      "all_predictions_match": true,
+      "quality_passed": true,
+      "ttft_ms": 1058.848,
+      "effective_prefill_tps": 241.77219015382758,
+      "decode_tps": 19.781,
+      "measured_runs": 1,
+      "ttft_range": [
+        1058.848,
+        1058.848
+      ],
+      "decode_range": [
+        19.781,
+        19.781
+      ],
+      "request_ms": 2626.073075,
+      "output_tps": 12.185494876223123,
+      "request_range": [
+        2626.073075,
+        2626.073075
+      ],
+      "handoff_ms": 0.072333
+    }
+  ],
+  "clocks_held": true,
+  "clocks_restored": true,
+  "samples": 53,
+  "temperature_range_c": [
+    41.615,
+    53.615
+  ],
+  "binary_sha256": "d3544011cb8a50b9fd474ff7858972a1d3b5d5be3d9a734327915adf9abfec86",
+  "interpretation": "Phase-placement experiment. Non-linear host operations stay CPU. Failed quality rows are diagnostic timings, not qualified inference speed claims."
+}
