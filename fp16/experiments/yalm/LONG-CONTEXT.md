@@ -28,9 +28,11 @@ measurements and checks actual execution; all four requests per route pass.
 Long measurements are pending at this milestone. The first 51°C attempt
 completed 1K/2K requests but aborted normally before the second 4K warmup
 when bounded cooling failed. Its raw evidence is retained under
-`evidence/long-context-rejected51`; the GPU also briefly throttled. The fresh
-sweep uses a common 55°C start limit and fan PWM255 for all placements,
-with the original fan setting restored afterward. The sweep will measure
+`evidence/long-context-rejected51`; the GPU also briefly throttled. The second one-time fan-setting attempt was also rejected: the kernel
+notifier changed PWM during the run. The final fresh sweep uses a common
+55°C start limit and a PWM255 feedback setpoint on the little cores for all
+placements. The kernel notifier and thermal protection stay active; the
+original PWM setting is restored afterward. The sweep will measure
 CPU-only, Mali OpenCL, NPU and CPU+NPU/GPU+NPU/CPU+GPU+NPU FFN decode splits
 at 1024/2048/4096 input tokens. Mixed rows retain NPU prefill. All use the same
 weights, runtime context, clocks, four host threads, 32 outputs, two complete

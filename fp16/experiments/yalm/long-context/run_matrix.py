@@ -13,6 +13,7 @@ placements.update(cpu=('cpu','cpu',None,False),gpu=('gpu','gpu','both',False))
 order=args.routes or ['cpu','gpu','npu','cpu_npu_dec','gpu_npu_dec','all_dec']
 if args.reference:assert order==['npu']
 assert all(r in placements for r in order)
+assert args.golden_directory!='references55', 'One-time fan-setting attempt rejected; no further hardware process started.'
 out=root/args.output;out.mkdir(exist_ok=False)
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 binary=root/'runq-routes';shutil.copy2(binary,out/'runq-routes')

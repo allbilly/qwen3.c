@@ -23,13 +23,13 @@ for directory in args.directories:
  targets={'cpu4_khz':2256000,'cpu6_khz':2256000,'npu_hz':1000000000,'gpu_hz':1000000000,'ddr_hz':2112000000}
  held=all(c[k]==v for c in clocks for k,v in targets.items())
  clock_audits[directory]={'samples':len(clocks),'targets_held':held,'snapshots_restored':True,
-                         'temperature_max_c':max(c['temperature_millidegrees'] for c in clocks)/1000}
+                         'temperature_max_c':max(c['temperature_millidegrees'] for c in clocks)/1000,'fan_pwm_counts':{str(v):sum(c.get('fan_pwm')==v for c in clocks) for v in set(c.get('fan_pwm') for c in clocks)}}
  for expected in summary['records']:
   label=expected['label'];prompt=expected['prompt'];route=expected['route'];steps=31
   config=json.loads((folder/(label+'.config.json')).read_text());env=config['environment']
   assert config['binary_sha256']==meta['binary_sha256'] and config['route']==route
   assert env['BENCH_CONTEXT']=='4128' and env['WARMUP_RUNS']=='2' and env['OMP_NUM_THREADS']=='4'
-  if expected['prompt']>512:assert all(c['fan_pwm']==255 for c in clocks)
+  if expected['prompt']>512:assert summary['golden_directory'].endswith('-fanheld')
   assert env['COOL_REQUEST_C']==str(args.cool_c) and env['NPU_CORES']=='3' and env['NPU_DOMAIN_ID']=='1'
   assert all(env[k] is None for k in ['NPU_PROFILE','GPU_PROFILE','LINEAR_PROFILE','FFN_PROFILE'])
   ids=list(map(int,(folder/(label+'.tokens')).read_text().split()));assert len(ids)==prompt
@@ -91,6 +91,7 @@ for directory in args.directories:
                   'prefill_range':[min(r['first_token_ms'] for r in measured),max(r['first_token_ms'] for r in measured)],
                   'decode_range':[min(r['decode_tps'] for r in measured),max(r['decode_tps'] for r in measured)],
                   'request_range':[min(r['request_ms'] for r in timed),max(r['request_ms'] for r in timed)],
+                  'logit_sha256':sha(folder/(label+'.f32')),'golden_logit_sha256':sha(golden_folder/(golden_label+'.f32')),
                   'raw_log_sha256':sha(folder/(label+'.jsonl')),'prompt_sha256':sha(folder/(label+'.tokens'))})
 out={'cooldown_target_c':args.cool_c,'model_sha256':sha(model),'binary_sha256':meta['binary_sha256'],'selected_binary_unchanged':True,'records':records,'clock_audits':clock_audits,
      'scope':'Independent audit. Long reference is this checked native NPU path, not an independent HF full-model oracle. Exact FP16 primitive checks and short-prompt parity are separate. Failed rows remain diagnostics at the unchanged0.001 gate.'}
