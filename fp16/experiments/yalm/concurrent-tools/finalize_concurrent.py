@@ -4,6 +4,7 @@ Run only after all hardware jobs and independent audits have finished.
 """
 from pathlib import Path
 import gzip, hashlib, json, shutil, subprocess
+from decimal import Decimal, ROUND_HALF_UP
 
 root = Path(__file__).resolve().parent
 target = Path('/home/orangepi/qwen3.c/fp16/experiments/yalm')
@@ -93,6 +94,27 @@ baseline_audit = read('request-matrix51-audit.json')
 assert baseline_audit['shared_fp16_model_sha256'] == audit['shared_fp16_model_sha256']
 baseline_rows = [r for r in baseline_audit['records'] if r['route'] in ['cpu','gpu','npu']]
 assert len(baseline_rows)==6 and all(r['quality_passed'] and r['all_predictions_match'] for r in baseline_rows)
+lines += ['## CPU / Mali OpenCL / NPU screening comparison', '',
+    'Mixed rows partition FFN decoding; their prefill uses the selected NPU path. CPU/GPU-only rows come from the earlier placement sweep; the other rows come from the original concurrent sweep. The checkpoint and clocks match, but these are separate measurement sessions, with two measurements per row. No new hardware run was performed for this presentation update.', '',
+    '| Input tokens | Placement | Prefill ms ↓ | Prefill tokens/s ↑ | Decode tokens/s ↑ | Request ms ↓ |',
+    '|---|---|---:|---:|---:|---:|']
+metrics = [('ttft_ms',min),('effective_prefill_tps',max),('decode_tps',max),('request_ms',min)]
+for prompt in [128,256]:
+    screen=[]
+    for route,label in [('cpu','CPU only'),('gpu','GPU OpenCL')]:
+        screen.append((label,next(r for r in baseline_rows if r['prompt']==prompt and r['route']==route)))
+    for route,label in [('npu','NPU'),('cpu_npu_dec','CPU+NPU'),('gpu_npu_dec','GPU+NPU'),('all_dec','CPU+GPU+NPU')]:
+        screen.append((label,next(r for r in audit['records'] if r['directory'].split('/')[1]=='concurrent-ffn' and r['prompt']==prompt and r['route']==route)))
+    best={key:choose(r[key] for _,r in screen) for key,choose in metrics}
+    for label,r in screen:
+        cells=[]
+        for key,_ in metrics:
+            value=str(Decimal(str(r[key])).quantize(Decimal("0.01"), rounding=ROUND_HALF_UP))
+            if r[key]==best[key]:value='**'+value+'**'+chr(92)+'*'
+            cells.append(value)
+        lines.append('| '+str(prompt)+' | '+label+' | '+' | '.join(cells)+' |')
+lines += ['',
+    chr(92)+'* Best observed value within each prompt length: lower latency, higher throughput. This denotes the numerical best in these screening rows, not statistical significance or promotion. Prefill timing differences between mixed decode rows occur on the unchanged NPU prefill path. The apparent CPU+NPU gain at 128 tokens did not repeat in the ABBA check below.', '']
 lines += ['## CPU-only and Mali OpenCL baselines', '',
     'These baseline rows come from the earlier independently audited placement sweep, with the same pinned FP16 checkpoint, input IDs, clocks, <=51°C start limit, 32 outputs and two warmups/two measurements. They are a separate measurement session from the concurrent FFN sweep and from the four-measurement ABBA check. Keep those sessions distinct when interpreting small differences. No new hardware run was performed for this table update.', '',
     'CPU-only executes projections and attention on CPU, with no NPU/GPU execution. The GPU route executes projections and attention using custom Mali OpenCL kernels; norms, RoPE, embedding, SwiGLU, residuals and sampling remain on CPU. The NPU route uses native NPU matrices with CPU host work and decode attention.', '',

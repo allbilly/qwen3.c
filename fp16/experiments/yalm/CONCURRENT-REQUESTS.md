@@ -12,6 +12,27 @@ Device labels describe auxiliary **FFN gate/up slices**. QKV, output, down and v
 
 [Independent forty-job audit](concurrent-request40-audit.json) · [written execution plan](concurrent-request-plan.json) · [architecture, precision and branch costs](CONCURRENT.md)
 
+## CPU / Mali OpenCL / NPU screening comparison
+
+Mixed rows partition FFN decoding; their prefill uses the selected NPU path. CPU/GPU-only rows come from the earlier placement sweep; the other rows come from the original concurrent sweep. The checkpoint and clocks match, but these are separate measurement sessions, with two measurements per row. No new hardware run was performed for this presentation update.
+
+| Input tokens | Placement | Prefill ms ↓ | Prefill tokens/s ↑ | Decode tokens/s ↑ | Request ms ↓ |
+|---|---|---:|---:|---:|---:|
+| 128 | CPU only | 2016.06 | 63.49 | 18.61 | 3681.67 |
+| 128 | GPU OpenCL | 2437.92 | 52.50 | 13.17 | 4791.72 |
+| 128 | NPU | 241.25 | 530.58 | 20.73 | 1736.81 |
+| 128 | CPU+NPU | **234.25**\* | **546.43**\* | **21.02**\* | **1709.38**\* |
+| 128 | GPU+NPU | 248.88 | 514.31 | 20.55 | 1757.30 |
+| 128 | CPU+GPU+NPU | 244.64 | 523.23 | 20.78 | 1736.91 |
+| 256 | CPU only | 4755.32 | 53.83 | 17.90 | 6487.56 |
+| 256 | GPU OpenCL | 4965.54 | 51.56 | 12.05 | 7538.77 |
+| 256 | NPU | 530.05 | 482.97 | **20.17**\* | **2067.36**\* |
+| 256 | CPU+NPU | 527.62 | 485.20 | 19.91 | 2085.02 |
+| 256 | GPU+NPU | **518.34**\* | **493.88**\* | 19.57 | 2102.60 |
+| 256 | CPU+GPU+NPU | 531.28 | 481.86 | 19.42 | 2127.86 |
+
+\* Best observed value within each prompt length: lower latency, higher throughput. This denotes the numerical best in these screening rows, not statistical significance or promotion. Prefill timing differences between mixed decode rows occur on the unchanged NPU prefill path. The apparent CPU+NPU gain at 128 tokens did not repeat in the ABBA check below.
+
 ## CPU-only and Mali OpenCL baselines
 
 These baseline rows come from the earlier independently audited placement sweep, with the same pinned FP16 checkpoint, input IDs, clocks, <=51°C start limit, 32 outputs and two warmups/two measurements. They are a separate measurement session from the concurrent FFN sweep and from the four-measurement ABBA check. Keep those sessions distinct when interpreting small differences. No new hardware run was performed for this table update.
