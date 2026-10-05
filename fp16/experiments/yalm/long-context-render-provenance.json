@@ -1,9 +1,10 @@
 {
   "audit_sha256": "e4f2bb570db17ceadc125fa61a86426edf1f24b672ec1069bf261143fc88d8dd",
-  "render_source_sha256": "fe0da446117221ac7e884d728de56242028fb7be98dd50baf5cb54c8c391ca04",
+  "render_source_sha256": "f7e494bfb227c92f7371d6772e5119a89c050b26c5d7633f4edf61ddf6669cd2",
   "model_sha256": "c92807935bfbb81f6628e9c2723267da367577a3f2b1bb2530b87bf5e5bba879",
   "binary_sha256": "f8b4f9ebf81f28efdca38b3389f80cf96347b2728f655e6d577f70fdfbe9ec9b",
   "partial": true,
+  "thermal_observations": false,
   "measured_rows": 12,
   "missing_placements": [
     {
@@ -41,10 +42,10 @@
     "pillow": "12.3.0"
   },
   "outputs": {
-    "LONG-CONTEXT.md": "88a182160fdcd08ba387f5e5de93251ae8025eda69c399d7189710925c1adb8a",
-    "long-context-comparison.png": "7327b84020838fc97427973ab4b6f921cc579576e5634d4ac69e794034c9b16f",
-    "long-context-comparison.jpg": "5fa97261dc434c345e85dff50c9f0720be8fd2ce2418779caabb3ef6401d2977",
-    "long-context-comparison.svg": "607635c2bd5d0627548932f4e7c6f699f8d08f3632b928efadb7ed08df604b13"
+    "LONG-CONTEXT.md": "bae38d2b3175d400d67d7be48ba9714f1f11ce9c944891c8ca6d5e71bb467136",
+    "long-context-comparison.png": "5ae15cc716a5be5dc261c5058b8f82c8951df3406c1c300283aab447478c9f76",
+    "long-context-comparison.jpg": "a446c5446d8d425756bc2ce42432b7d2f750bb2949a422353cbd9029795a6e62",
+    "long-context-comparison.svg": "33a2b9b5830722080ac26a4d8f34bdc9ab0bbf98651ff0df42d4a00c2515798b"
   },
   "scope": "Observed medians only; missing measurements remain gaps. Stars require all six placements measured at that prompt length."
 }

@@ -26,8 +26,10 @@ It includes prefill time and tokens/s, decode tokens/s and independent request
 time, plus PNG/JPG/SVG charts. The bare Orange Pi 5 reached about 86°C and
 stopped on its cooling guard during CPU 2K; six rows remain unmeasured.
 CPU 1K clock drops and the CPU 2K warmup logit failure remain diagnostics.
-All started controllers restored their settings. A fresh cooled session is
-needed to finish this comparison under the same protocol.
+All started controllers restored their settings. The user permits continuing
+with documented clock drops, so the missing rows resume without forced
+cooldown, with unchanged numerical checks and recorded clocks/temperatures.
+Their starting conditions are labeled separately from the original session.
 
 The engine uses persistent direct-register NPU tasks, three-core matrix
 projections, batched prefill, fused Q/K/V and gate/up projections, prompt

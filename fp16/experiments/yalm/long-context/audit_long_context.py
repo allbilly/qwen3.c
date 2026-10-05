@@ -31,9 +31,14 @@ for directory in args.directories:
   config=json.loads((folder/(label+'.config.json')).read_text());env=config['environment']
   assert config['binary_sha256']==meta['binary_sha256'] and config['route']==route
   assert config.get('cpu_target_khz',2256000)==summary.get('cpu_target_khz',2256000)==args.cpu_khz
+  assert summary['cooldown_target_c']==args.cool_c
   assert env['BENCH_CONTEXT']=='4128' and env['WARMUP_RUNS']=='2' and env['OMP_NUM_THREADS']=='4'
   if expected['prompt']>512:assert summary['golden_directory'].endswith('-fanheld')
-  assert env['COOL_REQUEST_C']==str(args.cool_c) and env['NPU_CORES']=='3' and env['NPU_DOMAIN_ID']=='1'
+  assert env['COOL_REQUEST_C']==(str(args.cool_c) if args.cool_c>0 else None)
+  assert env['NPU_CORES']=='3' and env['NPU_DOMAIN_ID']=='1'
+  if args.cool_c==0:
+   assert config['allow_clock_drops'] and summary['allow_clock_drops']
+   assert not config['cooldown_enforced'] and not summary['cooldown_enforced']
   assert all(env[k] is None for k in ['NPU_PROFILE','GPU_PROFILE','LINEAR_PROFILE','FFN_PROFILE'])
   ids=list(map(int,(folder/(label+'.tokens')).read_text().split()));assert len(ids)==prompt
   rows=[json.loads(s) for s in (folder/(label+'.jsonl')).read_text().splitlines() if s.startswith('{')]
@@ -58,8 +63,10 @@ for directory in args.directories:
    assert abs(request['prefill_ms']-run['first_token_ms'])<=.000501
    assert abs(request['decode_ms']-run['decode_ms'])<=.000501
    assert abs(steps*1000/run['decode_ms']-run['decode_tps'])<.000501
-   cooldown=next(r for r in rows if r.get('event')=='cooldown' and r['run']==index)
-   assert cooldown['after_millidegrees']<=args.cool_c*1000
+   if args.cool_c>0:
+    cooldown=next(r for r in rows if r.get('event')=='cooldown' and r['run']==index)
+    assert cooldown['after_millidegrees']<=args.cool_c*1000
+   else:assert not any(r.get('event') in ['cooldown','cooldown_abort'] for r in rows)
    for phase in ['prefill','decode']:
     actual=next(r for r in rows if r.get('event')=='device_phase' and r['run']==index and r['phase']==phase)
     n=1 if phase=='prefill' else steps
@@ -89,9 +96,11 @@ for directory in args.directories:
   ttft=statistics.median(r['first_token_ms'] for r in measured);decode=statistics.median(r['decode_tps'] for r in measured);wall=statistics.median(r['request_ms'] for r in timed)
   assert all(abs(x-y)<1e-8 for x,y in [(ttft,expected['ttft_ms']),(decode,expected['decode_tps']),(wall,expected['request_ms'])])
   records.append({'directory':directory,'label':label,'prompt':prompt,'route':route,'reference':reference,'quality_passed':quality,
+                  'cooldown_target_c':args.cool_c,'cooldown_enforced':args.cool_c>0,'allow_clock_drops':config.get('allow_clock_drops',False),
                   'relative_rmse':relative,'all_predictions_match':predictions,'clocks_held':row_held,'controller_clocks_held':held,'row_clock_samples':len(row_clocks),
                   'row_clock_drops':sum(any(c[k]!=v for k,v in targets.items()) for c in row_clocks),
                   'row_temperature_range_c':[min(c['temperature_millidegrees'] for c in row_clocks)/1000,max(c['temperature_millidegrees'] for c in row_clocks)/1000],
+                  'clock_frequency_ranges':{key:[min(c[key] for c in row_clocks),max(c[key] for c in row_clocks)] for key in targets},
                   'device_counts_checked':True,
                   'prefill_ms':ttft,'prefill_tps':prompt*1000/ttft,'decode_tps':decode,'request_ms':wall,
                   'prefill_range':[min(r['first_token_ms'] for r in measured),max(r['first_token_ms'] for r in measured)],

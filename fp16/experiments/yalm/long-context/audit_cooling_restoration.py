@@ -10,8 +10,8 @@ p.add_argument('--partial', action='store_true', help='Audit started controllers
 args = p.parse_args()
 root = args.workspace
 plan = json.loads((root / args.plan).read_text())
-assert plan['cpu_target_khz'] == 1800000 and plan['cooldown_target_c'] == 55
-suffix = 'screen55-cpu1800-fanheld'
+assert plan['cpu_target_khz'] == 1800000 and plan['cooldown_target_c'] >= 0
+suffix = plan.get('fan_suffix', 'screen55-cpu1800-fanheld')
 stem = 'long-context-fan-' + suffix
 before = root / (stem + '.json')
 restored = root / (stem + '-restored.json')

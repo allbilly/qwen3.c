@@ -99,5 +99,7 @@ context extension and the same pinned FP16 weights. Twelve of eighteen rows
 were measured; eleven pass both quality and strict sampled-clock checks.
 The bare-board sweep stopped on its cooling guard during CPU 2K. Its single
 warmup also fails the unchanged logit gate; no warmup timing enters the table.
-Missing rows are explicit, all started controllers restored their settings,
-and future measurements after fitting cooling must use a fresh session.
+Missing rows are explicit and all started controllers restored their settings.
+The user permits documented clock drops; the continuation runs missing rows
+without forced cooldown. Both starting protocols are labeled, numerical
+failures remain diagnostics, and any later cooled comparison is separate.

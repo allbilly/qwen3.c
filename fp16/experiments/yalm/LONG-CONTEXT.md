@@ -1,35 +1,35 @@
 # 1K / 2K / 4K prompt benchmark
 
-12/18 placements were measured. 11/12 measured rows pass both the unchanged numerical gate and the exact sampled-clock check.
+12/18 placements were measured. 12/12 pass the unchanged numerical gate; 11/12 also pass the exact sampled-clock check.
 
-The bare-board sweep stopped normally at the cooling guard during CPU 2K: after the first warmup and 180 seconds of cooling, the board was still 55.461°C, above the common 55°C start limit. No CPU 2K measured request or subsequent non-NPU 4K job ran. The CPU 1K row also failed the strict clock check: its active CPU stayed at 1.8GHz, but the idle NPU/GPU clocks dropped. All clock governors/limits and the original fan command were restored. The full comparison remains incomplete; use a fresh session after fitting cooling.
+The bare-board sweep stopped normally at the cooling guard during CPU 2K: after the first warmup and 180 seconds of cooling, the board was still 55.461°C, above the common 55°C start limit. No CPU 2K measured request or subsequent non-NPU 4K job ran. The CPU 1K row also failed the strict clock check: its active CPU stayed at 1.8GHz, but the idle NPU/GPU clocks dropped. All clock governors/limits and the original fan command were restored. The full comparison remains incomplete. The user permits continuing with documented clock drops; the six missing rows resume in fresh directories without forced cooldown. Numerical checks remain unchanged, and the two starting protocols will be labeled separately.
 
 The aborted CPU 2K warmup matched all generated IDs but had first-logit relative RMSE 0.00111339, above the unchanged 0.001 gate. It is retained as a failed diagnostic, with zero measured requests. Installing cooling does not establish numerical correctness; investigate this difference before accepting a future CPU 2K row.
 
 ## Same-model screening comparison
 
-| Input tokens | Placement | Prefill ms ↓ | Prefill tokens/s ↑ | Decode tokens/s ↑ | Request ms ↓ | Audit |
-|---|---|---:|---:|---:|---:|---|
-| 1024 | CPU only | 63751.00 | 16.06 | 12.43 | 66245.42 | clock fail |
-| 1024 | GPU OpenCL | 23820.43 | 42.99 | 7.35 | 28037.46 | pass |
-| 1024 | NPU | 4246.48 | 241.14 | 13.19 | 6597.71 | pass |
-| 1024 | CPU+NPU | 4229.70 | 242.10 | **13.24**\* | **6572.43**\* | pass |
-| 1024 | GPU+NPU | 4256.27 | 240.59 | 13.20 | 6604.64 | pass |
-| 1024 | CPU+GPU+NPU | **4225.21**\* | **242.35**\* | 13.05 | 6600.76 | pass |
-| 2048 | CPU only | — | — | — | — | not measured: cooldown abort |
-| 2048 | GPU OpenCL | 62036.77 | 33.01 | 5.22 | 67978.29 | pass |
-| 2048 | NPU | 12501.28 | 163.82 | 9.35 | 15816.94 | pass |
-| 2048 | CPU+NPU | 12096.94 | 169.30 | 9.22 | 15457.58 | pass |
-| 2048 | GPU+NPU | 12139.49 | 168.71 | 9.21 | 15505.91 | pass |
-| 2048 | CPU+GPU+NPU | 12082.94 | 169.50 | 9.26 | 15430.26 | pass |
-| 4096 | CPU only | — | — | — | — | not run |
-| 4096 | GPU OpenCL | — | — | — | — | not run |
-| 4096 | NPU | 45443.88 | 90.13 | 5.28 | 51320.79 | pass |
-| 4096 | CPU+NPU | — | — | — | — | not run |
-| 4096 | GPU+NPU | — | — | — | — | not run |
-| 4096 | CPU+GPU+NPU | — | — | — | — | not run |
+| Input tokens | Placement | Prefill ms ↓ | Prefill tokens/s ↑ | Decode tokens/s ↑ | Request ms ↓ | Audit | Start condition |
+|---|---|---:|---:|---:|---:|---|---|
+| 1024 | CPU only | 63751.00 | 16.06 | 12.43 | 66245.42 | pass; clock drop | <=55°C |
+| 1024 | GPU OpenCL | 23820.43 | 42.99 | 7.35 | 28037.46 | pass | <=55°C |
+| 1024 | NPU | 4246.48 | 241.14 | 13.19 | 6597.71 | pass | <=55°C |
+| 1024 | CPU+NPU | 4229.70 | 242.10 | **13.24**\* | **6572.43**\* | pass | <=55°C |
+| 1024 | GPU+NPU | 4256.27 | 240.59 | 13.20 | 6604.64 | pass | <=55°C |
+| 1024 | CPU+GPU+NPU | **4225.21**\* | **242.35**\* | 13.05 | 6600.76 | pass | <=55°C |
+| 2048 | CPU only | — | — | — | — | not measured: cooldown abort | — |
+| 2048 | GPU OpenCL | 62036.77 | 33.01 | 5.22 | 67978.29 | pass | <=55°C |
+| 2048 | NPU | 12501.28 | 163.82 | 9.35 | 15816.94 | pass | <=55°C |
+| 2048 | CPU+NPU | 12096.94 | 169.30 | 9.22 | 15457.58 | pass | <=55°C |
+| 2048 | GPU+NPU | 12139.49 | 168.71 | 9.21 | 15505.91 | pass | <=55°C |
+| 2048 | CPU+GPU+NPU | 12082.94 | 169.50 | 9.26 | 15430.26 | pass | <=55°C |
+| 4096 | CPU only | — | — | — | — | not run | — |
+| 4096 | GPU OpenCL | — | — | — | — | not run | — |
+| 4096 | NPU | 45443.88 | 90.13 | 5.28 | 51320.79 | pass | <=55°C |
+| 4096 | CPU+NPU | — | — | — | — | not run | — |
+| 4096 | GPU+NPU | — | — | — | — | not run | — |
+| 4096 | CPU+GPU+NPU | — | — | — | — | not run | — |
 
-\* Best observed **qualified** value where all six placements were measured (1K only in this partial sweep). Two measured requests per row constitute a screen; asterisks do not denote statistical significance. Failed rows are diagnostics and cannot win. Missing cells have no extrapolated timing.
+\* Best observed **qualified** value where all six placements were measured. Two measured requests per row constitute a screen; asterisks do not denote statistical significance. Failed rows are diagnostics and cannot win. Missing cells have no extrapolated timing.
 
 Mixed rows split FFN gate/up channels during decoding only (CPU 96 and/or GPU 96 channels, with the remaining channels on NPU). Their prefill follows the same NPU path. Small prefill differences among these rows are run variation. CPU host operations remain present in every accelerated placement.
 
@@ -84,12 +84,12 @@ After installing cooling, create a fresh output namespace and rerun all six plac
 
 ## Reproducibility
 
-[Independent 12-row audit](long-context/long-context-audit.json) · [execution plan](long-context/long-context-execution-plan-screen55-cpu1800-fanheld.json) · [cooling-control audit](long-context/long-context-cooling-restoration.json) · [aborted warmup audit](long-context/long-context-cpu2048-abort-audit.json) · [source/checklist](long-context/long-context-plan.md)
+[Independent 12-row audit](long-context/long-context-audit.json) · [original execution plan](long-context/long-context-execution-plan-screen55-cpu1800-fanheld.json) · [original cooling-control audit](long-context/long-context-cooling-restoration.json) · [aborted warmup audit](long-context/long-context-cpu2048-abort-audit.json) · [source/checklist](long-context/long-context-plan.md)
 
 The first 51°C attempt stopped normally at the bounded cooldown guard before the second 4K warmup; GPU clock drops were also observed. A subsequent 55°C attempt showed that a one-time fan setting is overridden by the kernel. These attempts are retained as rejected diagnostics and excluded from this table. The later 2.256GHz CPU 1K row also thermally dropped to 2.208GHz; this partial comparison uses a common 1.800GHz CPU target for all measured rows. The max-clock NPU/GPU timings remain separate diagnostics. The [board kernel source](https://github.com/orangepi-xunlong/linux-orangepi/blob/orange-pi-6.1-rk35xx/drivers/hwmon/pwm-fan.c) implements that temperature notifier.
 
 The exported `long-context/build.py` reproduces isolated runner `f8b4f9eb...`. Full source, model, binary, input, raw-log and logit hashes are recorded in provenance/audits. Small raw evidence is exported losslessly; checkpoint, executables and binary logits remain in `/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/long-context`. All NPU initialization/sync/submits ran serially. No push was requested.
 
-INTENT: the benchmark runner and attention scratch are limited to 512 tokens; the user requests 1024/2048/4096-token prompts with CPU/OpenCL/NPU combinations; fp16/README.md specifies pinned shared FP16 weights, measured phase/request spans and numerical checks.
+INTENT: the long-context harness aborts on cooldown timeout and marks clock drops as failed screens; the user permits continuing with documented clock drops; fp16/experiments/yalm/LONG-CONTEXT.md currently requires <=55°C starts and strict clock checks.
 
 AUTH: user said "wip commit per milestone".
