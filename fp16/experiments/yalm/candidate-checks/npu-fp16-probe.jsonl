@@ -1,0 +1,9 @@
+{"event":"routing","dense_prefill":"npu","dense_decode":"npu","cpu_classifier":false,"npu_initialized":true,"gpu_projections_initialized":false,"host_non_linear_ops":"CPU"}
+{"event":"fpcr","value":16777216}
+{"event":"fp16_probe","scene":"value_weight","feature":0,"source_half_bits":1,"ieee_reference":5.96046447754e-08,"actual":5.96046447754e-08}
+{"event":"fp16_probe","scene":"value_weight","feature":1,"source_half_bits":128,"ieee_reference":7.62939453125e-06,"actual":7.62939453125e-06}
+{"event":"fp16_probe","scene":"value_weight","feature":2,"source_half_bits":1023,"ieee_reference":6.09755516052e-05,"actual":6.09755516052e-05}
+{"event":"fp16_probe","scene":"value_weight","feature":3,"source_half_bits":1024,"ieee_reference":6.103515625e-05,"actual":6.103515625e-05}
+{"event":"fp16_probe","scene":"score_weight","q_half_bits":31743,"k_half_bits":128,"first_operand_vector_half_bits":31743,"ieee_reference":0.51123046875,"actual":0.51123046875}
+{"event":"fp16_probe","scene":"score_input","q_half_bits":128,"k_half_bits":31743,"first_operand_vector_half_bits":128,"ieee_reference":0.51123046875,"actual":0.51123046875}
+{"event":"fp16_probe","scene":"probability_input","q_half_bits":31743,"k_half_bits":6144,"first_operand_vector_half_bits":206,"ieee_reference":1.22785568237e-05,"actual":1.22785568237e-05}

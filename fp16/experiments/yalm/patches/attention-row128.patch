@@ -1,0 +1,35 @@
+--- a/source/fp16/fp16_backend.c
++++ b/source/fp16/fp16_backend.c
+@@ -145,7 +145,9 @@
+     p->K = K; p->N = N; p->offset = offset; p->current_rows = -1;
+     // Wide shapes require extra CBUF partitioning beyond four data banks.
+     // Use the verified 64/32/16 row limits for K=1024/2048/3072.
+-    p->max_rows = K > 2048 ? 16 : (K > 1024 ? 32 : 64);
++    // Experiment: attention K<=512 can use 128 rows within four data banks.
++    // Dense projection row limits and submission metadata remain unchanged.
++    p->max_rows = K <= 512 ? 128 : (K > 2048 ? 16 : (K > 1024 ? 32 : 64));
+     p->packed_input=malloc((size_t)p->max_rows*K*2);
+     p->native_output=malloc((size_t)p->max_rows*N*4);
+     if(!p->packed_input || !p->native_output) { free(p->packed_input);free(p->native_output);free(p);return NULL; }
+--- a/source/fp16/attention_backend.h
++++ b/source/fp16/attention_backend.h
+@@ -34,7 +34,7 @@
+     for(int i=0;i<3;i++) {
+         attention_score[i]=prepare(zero,128,512,0);
+         attention_value[i]=prepare(zero,512,128,0);
+-        attention_prob[i]=malloc(64*512*4);
++        attention_prob[i]=malloc(128*512*4);
+         if(!attention_score[i]||!attention_value[i]||!attention_prob[i]){free(zero);return 0;}
+         if(i){attention_score[i-1]->next=attention_score[i];attention_value[i-1]->next=attention_value[i];}
+     }
+@@ -109,8 +109,8 @@
+             mem_sync(device_fd,attention_score[i]->mem.weights_obj,REGCMD_RESERVED,attention_score[i]->N*128*2,RKNPU_MEM_SYNC_TO_DEVICE);
+             mem_sync(device_fd,attention_value[i]->mem.weights_obj,REGCMD_RESERVED,attention_value[i]->K*128*2,RKNPU_MEM_SYNC_TO_DEVICE);
+         }
+-        for(int start=0;start<rows;start+=64) {
+-            int m=rows-start<64?rows-start:64;
++        for(int start=0;start<rows;start+=128) {
++            int m=rows-start<128?rows-start:128;
+             for(int i=0;i<count;i++) {
+                 configure_rows(attention_score[i],m,1);configure_rows(attention_value[i],m,1);
+                 attention_pack(attention_score[i],queries+(size_t)start*qdim+(head+i)*128,qdim,m);

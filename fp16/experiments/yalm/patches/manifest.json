@@ -70,5 +70,24 @@
       "router.c"
     ],
     "baseline_binary_sha256": "11d2f9b753cf887a11bd3cdb34d1784127184a099d7fa2382601d46b77ef091a"
+  },
+  "attention-row128": {
+    "patch_sha256": "e3d1196f17a69a138e0cbab23f5b68db27faaa51d699a00d275393b148c2447b",
+    "source_provenance": "/home/orangepi/qwen3-bench/matched/roofline/yalm/variants/attention-row128/source-provenance.json",
+    "compiled_binary_sha256": "9e0ec16f5eba2f0653b2577a152e7f98c728c05e6399bfc949624a8cad879a64",
+    "paths": [
+      "source/fp16/fp16_backend.c",
+      "source/fp16/attention_backend.h"
+    ],
+    "baseline_binary_sha256": "11d2f9b753cf887a11bd3cdb34d1784127184a099d7fa2382601d46b77ef091a"
+  },
+  "bounded-request-timer": {
+    "patch_sha256": "d8e2e435cb4cc66209dd7ffeff737c5674bbd80bd12b226482c0cd6a63d1a194",
+    "source_provenance": "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/baseline-guarded/source-provenance.json",
+    "compiled_binary_sha256": "5854860c2f53b8b286f00280d595139cb6da154a5e2148aefe233878d45f700e",
+    "paths": [
+      "source/fp16/run.c"
+    ],
+    "baseline_binary_sha256": "11d2f9b753cf887a11bd3cdb34d1784127184a099d7fa2382601d46b77ef091a"
   }
 }

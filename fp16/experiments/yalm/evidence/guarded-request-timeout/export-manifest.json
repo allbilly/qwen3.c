@@ -1,0 +1,31 @@
+{
+  "workspace_directory": "/home/orangepi/qwen3-bench/matched/roofline/yalm/guard-timeout-check",
+  "files": {
+    "clock-settings-after.json": {
+      "original_sha256": "f9cf858c464c397326e53f16f0fbd31c72ad2c0987de55df13be9d8a172158b0",
+      "export": "clock-settings-after.json",
+      "export_sha256": "f9cf858c464c397326e53f16f0fbd31c72ad2c0987de55df13be9d8a172158b0"
+    },
+    "clock-settings-before.json": {
+      "original_sha256": "f9cf858c464c397326e53f16f0fbd31c72ad2c0987de55df13be9d8a172158b0",
+      "export": "clock-settings-before.json",
+      "export_sha256": "f9cf858c464c397326e53f16f0fbd31c72ad2c0987de55df13be9d8a172158b0"
+    },
+    "config.json": {
+      "original_sha256": "d5722ef6f03adbb7615626a3265b331b9486941dff45726f2a55fdafb72ceadc",
+      "export": "config.json",
+      "export_sha256": "d5722ef6f03adbb7615626a3265b331b9486941dff45726f2a55fdafb72ceadc"
+    },
+    "output.jsonl": {
+      "original_sha256": "70a414ec62f0aecd206ba0c4f1eb2f77b897e77c4d1882a2163c052d703cbc1f",
+      "export": "output.jsonl",
+      "export_sha256": "70a414ec62f0aecd206ba0c4f1eb2f77b897e77c4d1882a2163c052d703cbc1f"
+    },
+    "summary.json": {
+      "original_sha256": "471d9d7cd943da026b0e0d0b1972ac0a37c59edab07475fec30cc1e4b6f1a37b",
+      "export": "summary.json",
+      "export_sha256": "471d9d7cd943da026b0e0d0b1972ac0a37c59edab07475fec30cc1e4b6f1a37b"
+    }
+  },
+  "external_artifacts": "Shared FP16 model, full per-vocabulary logits and compiled binary remain in the comparison workspace; source/binary/input hashes are retained here."
+}

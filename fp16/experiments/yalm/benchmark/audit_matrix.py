@@ -2,6 +2,7 @@
 from pathlib import Path
 import argparse,hashlib,json,math,statistics
 import numpy as np
+from attention_rows import checked_rows
 root=Path(__file__).resolve().parent;roofline=root.parent
 parser=argparse.ArgumentParser();parser.add_argument('directories',nargs='+');parser.add_argument('--output',default='matrix-audit.json');args=parser.parse_args()
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
@@ -18,6 +19,7 @@ for directory in args.directories:
     # exact source tree in their immutable parent build directory.
     source_base=out if (out/'source').exists() else out.parent
     for name,digest in metadata['source_sha256'].items():assert sha(source_base/name)==digest,(directory,name)
+    attention_rows=checked_rows(metadata,source_base)
     for stem in ['clock','gpu-clock']:
         assert (out/f'{stem}-state-before.json').read_bytes()==(out/f'{stem}-state-restored.json').read_bytes()
     clocks=[json.loads(s) for s in (out/'clock-samples.jsonl').read_text().splitlines()]
@@ -73,7 +75,7 @@ for directory in args.directories:
                 expected_npu=0
                 if device=='npu':
                     expected_npu=112*n+(0 if head else n)
-                    if phase=='prefill' and prompt>1 and not gpu_pre:expected_npu+=28*12*math.ceil(prompt/64)
+                    if phase=='prefill' and prompt>1 and not gpu_pre:expected_npu+=28*12*math.ceil(prompt/attention_rows)
                 assert d['npu_ops']==expected_npu,(label,phase,d['npu_ops'],expected_npu)
                 g=[r for r in rows if r.get('event')=='linear_gpu_profile' and r['run']==index and r['phase']==phase]
                 assert len(g)==int('gpu' in [pre,decode])

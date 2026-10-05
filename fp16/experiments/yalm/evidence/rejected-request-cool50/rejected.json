@@ -1,0 +1,9 @@
+{
+  "qualified_performance": false,
+  "reason": "Interrupted protocol: common 50C target stalled in the GPU+NPU-resident idle state. GPU governor restored during idle cooldown to allow normal device-process completion; partial sweep excluded from final speed claims. NPU process is not killed. Fresh fixed-clock comparisons will use a bounded cooldown and common 51C target.",
+  "last_completed_run": -1,
+  "recovery": "GPU governor restoration alone did not make 50C reachable. Restore all original clock governors during the thermal wait, allowing the existing device process to complete normally. Every timing in this partial sweep is excluded from the final qualified comparison.",
+  "original_settings_verified_live": true,
+  "device_process_exited_normally": true,
+  "controller_restore_error": "Manual recovery consumed the saved-state files; repeated restore in controller finally failed. Original settings were already restored and are independently verified against live sysfs and immutable pre-run snapshots."
+}

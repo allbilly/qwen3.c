@@ -1,0 +1,6 @@
+{"event":"routing","dense_prefill":"npu","dense_decode":"npu","cpu_classifier":false,"npu_initialized":true,"gpu_projections_initialized":false,"host_non_linear_ops":"CPU"}
+{"event":"attention_check","phase":"prefill","context":1,"checked":2048,"relative_rmse":0,"max_absolute_error":0,"limit":0.0001,"tile_rows":64,"npu_ops":12,"expected_npu_ops":12,"passed":true}
+{"event":"attention_check","phase":"prefill","context":24,"checked":49152,"relative_rmse":0,"max_absolute_error":0,"limit":0.0001,"tile_rows":64,"npu_ops":12,"expected_npu_ops":12,"passed":true}
+{"event":"attention_check","phase":"prefill","context":73,"checked":149504,"relative_rmse":1.97567930182e-08,"max_absolute_error":2.98023223877e-08,"limit":0.0001,"tile_rows":64,"npu_ops":24,"expected_npu_ops":24,"passed":true}
+{"event":"attention_check","phase":"prefill","context":128,"checked":262144,"relative_rmse":3.90501287224e-07,"max_absolute_error":5.04404306412e-06,"limit":0.0001,"tile_rows":64,"npu_ops":24,"expected_npu_ops":24,"passed":true}
+{"event":"attention_check","phase":"prefill","context":256,"checked":524288,"relative_rmse":6.99521059651e-07,"max_absolute_error":5.04404306412e-06,"limit":0.0001,"tile_rows":64,"npu_ops":48,"expected_npu_ops":48,"passed":true}

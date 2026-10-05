@@ -59,8 +59,11 @@ comparison will use one common successful thermal target.
 binary hash `11d2f9b7...`. The [independent candidate patches](patches/README.md)
 reproduce every compiled source hash in isolated application checks. GPU primitive
 checks pass. The [candidate numerical checks](CANDIDATES.md) now cover five
-prompt lengths, including retained failures. Independent complete-request
-measurements and candidate performance remain pending. The [complete cost
+prompt lengths, including retained failures, with 42 independently audited
+cases. The attention-only 128-row NPU candidate passes primitive and full-model
+checks. Independent complete-request measurements and candidate performance
+remain pending; the earlier 50°C request sweep is rejected and a bounded
+cooldown runner now passes its timeout cleanup check. The [complete cost
 profiles](COSTS.md) now cover all 14 stages and identify actual packing, device,
 synchronization and host wait costs. Additional short-prompt CPU/GPU prefill
 logit checks fail the unchanged gate; those routes remain WIP diagnostics. The selected `runq-fp16`

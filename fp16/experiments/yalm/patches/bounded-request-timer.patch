@@ -1,0 +1,51 @@
+--- a/source/fp16/run.c
++++ b/source/fp16/run.c
+@@ -114,13 +114,21 @@
+ #endif
+     printf("{\"event\":\"initialization\",\"mode\":\"%s\",\"init_ms\":%.3f,\"weights\":\"shared_FP16\",\"npu_cores\":%d}\n", mode, now_ms() - begin,npu_core_count());
+     fflush(stdout);
++    int request_status=0;
+     for (int run = 1-warmups; run <= runs; run++) {
+         // Run 0 is a full warmup. Each measured run starts from an empty logical KV cache.
+         const char *cool=getenv("COOL_REQUEST_C");
+         if(cool){int target=atoi(cool)*1000,temp=0,initial=0;double cool_start=now_ms();
+             do{FILE *f=fopen("/sys/class/thermal/thermal_zone0/temp","r");
+-                if(!f||fscanf(f,"%d",&temp)!=1)exit(1);fclose(f);
+-                if(!initial)initial=temp;if(temp>target)usleep(500000);
++                if(!f||fscanf(f,"%d",&temp)!=1){if(f)fclose(f);request_status=1;goto request_cleanup;}fclose(f);
++                if(!initial)initial=temp;
++                if(temp>target){
++                    if(now_ms()-cool_start>=180000){
++                        fprintf(stderr,"{\"event\":\"cooldown_abort\",\"run\":%d,\"target_millidegrees\":%d,\"temperature_millidegrees\":%d,\"wait_ms\":%.3f}\n",run,target,temp,now_ms()-cool_start);
++                        request_status=1;goto request_cleanup;
++                    }
++                    usleep(500000);
++                }
+             }while(temp>target);
+             fprintf(stderr,"{\"event\":\"cooldown\",\"run\":%d,\"before_millidegrees\":%d,\"after_millidegrees\":%d,\"wait_ms\":%.3f}\n",run,initial,temp,now_ms()-cool_start);}
+         npu_matmul_reset_stats(&g_npu);
+@@ -158,7 +166,11 @@
+             else logits=forward_batch_atpos(&t,&prefill,teacher_path?teacher+step-1:generated+step-1,1,count+step-1);
+             generated[step] = argmax(logits, t.config.vocab_size);
+         }
+-        double decode_ms = now_ms() - decode_start;
++        double request_end=now_ms();
++        double decode_ms = request_end - decode_start;
++        double request_ms = request_end - begin;
++        double handoff_ms = decode_start - (begin + first_ms);
++        fprintf(stderr,"{\"event\":\"request_wall\",\"run\":%d,\"warmup\":%s,\"prompt_tokens\":%d,\"output_tokens\":%d,\"request_ms\":%.6f,\"prefill_ms\":%.6f,\"decode_ms\":%.6f,\"handoff_ms\":%.6f,\"output_tps\":%.6f,\"weights_resident\":true}\n",run,run<=0?"true":"false",count,new_tokens,request_ms,first_ms,decode_ms,handoff_ms,new_tokens*1000.0/request_ms);
+         gpu_profile_dump("decode",run);route_dump("decode",run);
+         fprintf(stderr,"{\"event\":\"device_phase\",\"phase\":\"decode\",\"run\":%d,\"npu_ops\":%llu,\"cpu_ops\":%llu}\n",run,g_npu.npu_ops-pre_npu_ops,g_npu.cpu_ops-pre_cpu_ops);
+         npu_profile_dump(run<=0?"warmup-decode":"measured-decode");
+@@ -175,9 +187,10 @@
+         // Explicit CPU projection routes are authorized by this experiment.
+ #endif
+     }
++request_cleanup:
+     gpu_attention_shutdown();
+     npu_matmul_shutdown(&g_npu);
+     free_prefill(&prefill);
+     free_transformer(&t);
+-    return 0;
++    return request_status;
+ }

@@ -1,0 +1,7 @@
+{"event":"linear_gpu_init","device":"Mali-LODX r0p0","weight_bytes":1191968768,"projection_count":197,"fp16_weights":true,"event_profiling":false}
+{"event":"linear_cpu_init","storage":"FP16","accumulation":"FP32","blas":"OpenBLAS 0.3.23.dev  USE64BITINT DYNAMIC_ARCH NO_AFFINITY armv8 MAX_THREADS=64"}
+{"event":"routing","dense_prefill":"gpu","dense_decode":"npu","cpu_classifier":true,"npu_initialized":true,"gpu_projections_initialized":true,"host_non_linear_ops":"CPU"}
+{"event":"gpu_initialization","device":"Mali-LODX r0p0","driver":"2.1","prefill":false,"decode":true,"event_profiling":false}
+arm_release_ver of this libmali is 'g6p0-01eac0', rk_so_ver is '7'.
+{"event":"initialization","mode":"npu_fp16","init_ms":5028.699,"weights":"shared_FP16","npu_cores":3}
+{"event":"cooldown_abort","run":-1,"target_millidegrees":0,"temperature_millidegrees":41615,"wait_ms":180126.917}

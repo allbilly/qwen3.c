@@ -1,0 +1,15 @@
+{
+  "normal_exit_status": 1,
+  "no_signal_sent": true,
+  "no_inference_started": true,
+  "all_devices_initialized": true,
+  "settings_unchanged": true,
+  "observed_abort": {
+    "event": "cooldown_abort",
+    "run": -1,
+    "target_millidegrees": 0,
+    "temperature_millidegrees": 41615,
+    "wait_ms": 180126.917
+  },
+  "output_sha256": "70a414ec62f0aecd206ba0c4f1eb2f77b897e77c4d1882a2163c052d703cbc1f"
+}

@@ -1,6 +1,6 @@
 # Candidate numerical coverage — WIP checkpoint
 
-All five candidates completed full-model checks at 1, 24, 73, 128 and 256
+All six candidates completed full-model checks at 1, 24, 73, 128 and 256
 input tokens using the shared Qwen3-0.6B FP16 checkpoint. Each case has one
 complete warmup and one measured request, with all 16 predictions compared
 against the reference under identical teacher-forced inputs. Every prediction
@@ -12,6 +12,7 @@ all 151,936 vocabulary entries, with finite-value and shape checks.
 | Cooperative GPU decode softmax | 0 | 0 | 0 | 0 | 0 |
 | Fused GPU decode softmax/P×V | 0 | 0 | 0 | 0 | 0 |
 | Shared NPU prefill KV packing | 0 | 0 | 0 | 0 | 0 |
+| NPU attention batch 128 | 0 | 0 | 0 | 0 | 0 |
 | GPU prefill tile 16 | 0.000128526 | **0.001487014 FAIL** | **0.001926848 FAIL** | 0.000610766 | 0.000577791 |
 | CPU prefill BLAS attention | 0.000136200 | **0.001312401 FAIL** | **0.001496000 FAIL** | 0.000822982 | 0.000558366 |
 
@@ -32,29 +33,68 @@ inputs, teacher IDs, environment and numerical summaries:
 - [NPU shared KV packing](evidence/candidate-kv-pack-reuse-quality/quality-summary.json)
 - [GPU tile 16, including failures](evidence/candidate-gpu-tile16-quality/quality-summary.json)
 - [CPU BLAS attention, including failures](evidence/candidate-cpu-blas-attention-quality/quality-summary.json)
+- [NPU attention batch 128](evidence/candidate-attention-row128-quality/quality-summary.json)
 
 These additional checks did **not** fix frequencies. Their timing fields are
 numerical-check logs, not qualified performance measurements. Full vocabulary
-logit binaries remain in the external comparison workspace; their inclusion in
-the next independent audit is pending. The new `benchmark/audit_quality.py`
-recomputes the gates and checks device counters, source hashes and inputs; it
-has been written but has not yet been run while the hardware sweep is active.
+logit binaries remain in the external comparison workspace. The independent
+[42-case audit](candidate-checks/quality-audit42.json) recomputed every gate and
+checked source/binary/model hashes, exact inputs and teacher IDs, actual device
+counts, and all predictions in both the warmup and measured request. All IDs
+match; 12 first-logit gates fail and remain marked as failures. The audit includes
+the earlier short-prompt baseline CPU/GPU cases as well as these candidates.
+
+## NPU attention register candidate
+
+`attention-row128.patch` batches 128 attention rows when K <= 512, within the
+existing four-data-bank guard. Dense projection row limits stay at 64/32/16;
+NPU submission flags, core masks, domain and task metadata are unchanged.
+For the 128- and 256-token cases, attention submissions per layer decrease
+from 24 to 12 and 48 to 24 respectively. This does not establish a speed gain.
+
+The original 64-row and candidate 128-row primitive checks each compare all
+987,136 outputs over five prompt lengths against the same double-accumulation
+reference. Both pass the unchanged `1e-4` limit; the maximum relative RMSE is
+`6.99521059651e-7`. The complete-model checks have bit-identical first logits
+and matching 16-token predictions. [Raw checks and source provenance](candidate-checks/npu-attention-row128-provenance.json)
+are retained alongside the original checker and checker sources.
+`build_attention_check.py` regenerates the model helper header from the recorded
+entrypoint prefix; the generated header hash is retained in checker provenance.
+
+## FP16 arithmetic observation
+
+The [native attention probe](candidate-checks/npu-fp16-probe.jsonl) preserves
+the tested positive FP16 subnormal values, including the smallest value,
+subnormal Q/K operands and a subnormal probability. All seven printed outputs
+equal the IEEE FP16 operand reference. This finite probe gives no evidence for
+flushing those values to zero; it does not explain the full-model CPU/GPU logit
+differences or establish exhaustive floating-point equivalence. Its source,
+compiled binary and backend hashes are [recorded](candidate-checks/npu-fp16-probe-provenance.json).
 
 ## Pending complete-request experiments
 
-The independent request-timer build is running all ten CPU/GPU/NPU placements
-at both 128 and 256 input tokens, two full warmups plus two measurements per
-row, 32 outputs, common 50°C request-start target and fixed/sampled/restored
-clocks. The partial sweep is not a completed or audited result. Several
-cooldowns have taken minutes; they are outside measured spans. No device
-process has been killed.
+The original independent request-timer sweep completed only the ten 128-token
+placements. The common 50°C target stalled while GPU/NPU buffers were resident
+at fixed clocks. Recovery restored the original governors during an idle wait;
+the native process then completed normally. The Python controller was stopped
+only after that native process exited. All original settings were independently
+verified against live sysfs and immutable before-run snapshots. The entire
+[partial sweep is rejected](evidence/rejected-request-cool50/rejected.json),
+including earlier rows; none of its timings qualify as final speed evidence.
 
-The next timer builds add a 180-second bound to the idle cooldown, followed
-by normal CPU/GPU/NPU buffer cleanup on failure. The bounded builds have been
-prepared but are **not yet compiled or tested**. The proposed counterbalanced
-iteration protocol uses the same 51°C target for both engines within each
-comparison; it has not run. Its results must be audited separately from the
-50°C placement sweep, without mixing measurements between protocols.
+Four bounded timer builds now compile: baseline, cooperative GPU softmax,
+fused GPU attention and shared NPU KV packing. A deliberately impossible
+cooldown target exercised the baseline timeout after 180.127 seconds with
+CPU/GPU/NPU buffers initialized. It exited normally with status 1, before
+inference, without a signal; clock settings were unchanged. The
+[timeout evidence](evidence/guarded-request-timeout/summary.json) and compiled
+source/binary provenance are retained. A successful complete-request sweep of
+the bounded builds remains pending.
+
+The next complete placement sweep and counterbalanced candidate comparisons
+will use a common 51°C target and the 180-second idle-wait bound. They have not
+run. Their measurements must be audited without mixing the rejected 50°C
+partial sweep into the new protocol.
 
 The exported tools prepare frozen timer builds, run serial ABBA/BAAB
 comparisons, aggregate all four individual measurements per engine/prompt,

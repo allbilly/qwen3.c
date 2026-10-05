@@ -6,6 +6,7 @@ used as qualified performance data. Run this offline audit between device jobs.
 from pathlib import Path
 import argparse, hashlib, json, math
 import numpy as np
+from attention_rows import checked_rows
 
 root = Path(__file__).resolve().parent
 roofline = root.parent
@@ -35,6 +36,7 @@ for directory in args.directories:
     assert metadata['selected_binary_sha256'] == selected
     for name, digest in metadata['source_sha256'].items():
         assert sha(out.parent / name) == digest, (directory, name)
+    attention_rows=checked_rows(metadata,out.parent)
     configs = sorted(out.glob('*.config.json'))
     assert len(configs) == len(saved['records'])
     for path in configs:
@@ -97,7 +99,7 @@ for directory in args.directories:
                 gpu_pre = attention in ['prefill', 'both'] and prompt > 1
                 expected_npu = (112 + int(not head)) * steps if device == 'npu' else 0
                 if device == 'npu' and phase == 'prefill' and prompt > 1 and not gpu_pre:
-                    expected_npu += 28 * 12 * math.ceil(prompt / 64)
+                    expected_npu += 28 * 12 * math.ceil(prompt / attention_rows)
                 assert counts['npu_ops'] == expected_npu
                 gpu = [r for r in rows if r.get('event') == 'linear_gpu_profile' and r['run'] == index and r['phase'] == phase]
                 assert len(gpu) == int(route['gpu_projections_initialized'])
