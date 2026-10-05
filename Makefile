@@ -10,11 +10,13 @@ NPU_LIBS = -ldrm
 # Native Asahi Linux M1 backend. Uses the ~/ane KMD ABI without libdrm or RKNN.
 ANE_FLAGS ?= -O3 -fopenmp -march=native
 ANE_SRCS = ane/ane_matmul.c
-ANE_HEADERS = ane/ane_matmul.h ane/linear_template.h npu_matmul.h qwen3.h
+ANE_HEADERS = ane/ane_matmul.h ane/linear_template.h ane/prefill.h npu_matmul.h qwen3.h
 .PHONY: ane cpu ane-test
 ane: runq-ane
 runq-ane: runq.c $(ANE_SRCS) $(ANE_HEADERS)
 	$(CC) $(ANE_FLAGS) -D_FILE_OFFSET_BITS=64 -DQWEN3_USE_ANE -I. runq.c $(ANE_SRCS) -lm -o $@
+runq-ane-bench: ane/bench.c runq.c $(ANE_SRCS) $(ANE_HEADERS)
+	$(CC) $(ANE_FLAGS) -D_FILE_OFFSET_BITS=64 -DQWEN3_USE_ANE -I. ane/bench.c $(ANE_SRCS) -lm -o $@
 cpu: runq-cpu
 runq-cpu: runq.c npu_matmul.c npu_matmul.h qwen3.h
 	$(CC) $(ANE_FLAGS) -D_FILE_OFFSET_BITS=64 -DQWEN3_DISABLE_NPU runq.c npu_matmul.c -lm -o $@

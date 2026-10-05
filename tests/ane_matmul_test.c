@@ -50,6 +50,40 @@ int main(void) {
         }
         ane_plan_free(plan); free(w.q); free(w.s); free(x); free(y);
     }
+    // Multiple spatial positions, a partial batch, and an in-place projection.
+    for (int rows=1;rows<=32;rows=rows==1?7:32) {
+        const int k=1024,n=640;
+        QuantizedTensor w={.q=malloc(k*n),.s=malloc(k*n/GS*sizeof(float))};
+        float *x=malloc((size_t)rows*k*sizeof(float));
+        float *y=malloc((size_t)rows*n*sizeof(float));
+        if (!w.q || !w.s || !x || !y) return 1;
+        for (int i=0;i<k*n;i++) w.q[i]=(int)(next_random()%255)-127;
+        for (int i=0;i<k*n/GS;i++) w.s[i]=0.001f+(next_random()%100)*0.00001f;
+        for (int i=0;i<rows*k;i++) x[i]=((int)(next_random()%2001)-1000)*0.001f;
+        AnePlan *p=ane_plan_create(device,&w,k,n,GS);
+        if (!p || !ane_plan_run_batch(p,x,y,rows)) return 1;
+        float worst=0;
+        for (int row=0;row<rows;row++) {
+            for (int col=0;col<n;col++) {
+                double ref=0;
+                for (int j=0;j<k;j++) {
+                    int i=col*k+j;
+                    ref+=(float)(__fp16)(w.q[i]*w.s[i/GS])*(float)(__fp16)x[row*k+j];
+                }
+                float diff=fabsf(y[row*n+col]-ref);
+                if (!isfinite(y[row*n+col]) || diff>0.008f+fabs(ref)*0.002f) {
+                    fprintf(stderr,"BATCH FAIL rows=%d row=%d col=%d got=%g expected=%g\n",rows,row,col,y[row*n+col],ref);
+                    return 1;
+                }
+                if (diff>worst) worst=diff;
+            }
+        }
+        if (!ane_plan_run_batch(p,x,x,rows)) return 1;
+        for (int i=0;i<rows*n;i++) if (fabsf(x[i]-y[i])>1e-5f) return 1;
+        printf("PASS batch rows=%d K=%d N=%d max_error=%g (including in-place)\n",rows,k,n,worst);
+        ane_plan_free(p);free(w.q);free(w.s);free(x);free(y);
+        if (rows==32) break;
+    }
     printf("ANE submissions: %llu\n", ane_device_submissions(device));
     ane_device_close(device);
     return 0;

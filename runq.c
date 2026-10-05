@@ -24,6 +24,7 @@
 int GS = 0; // group size global for quantization of the weights
 static NpuMatmulContext g_npu;
 static int g_matmul_verbose;
+static int g_skip_classifier;
 
 // Maximum input prompt buffer size
 #define PROMPT_BUFFER_SIZE 32768
@@ -450,6 +451,7 @@ float *forward(Transformer *transformer, int token, int pos) {
     // final rmsnorm
     rmsnorm(s->x, s->x, w->rms_final_weight, p->dim);
 
+    if (g_skip_classifier) return s->logits;
 
     // classifier into logits
     int used_wcls = npu_matmul_run(&g_npu, NPU_MATMUL_WCLS, 0, s->x, s->logits);
@@ -460,6 +462,35 @@ float *forward(Transformer *transformer, int token, int pos) {
         g_npu.cpu_ops++;
     }
     return s->logits;
+}
+
+static float *forward_serial_prompt(Transformer *t, const int *ids, int count, int start) {
+    if (count<1 || start<0 || count>t->config.seq_len-start) {
+        fprintf(stderr,"Prompt exceeds the context window.\n"); exit(1);
+    }
+    float *logits=NULL;
+    for (int row=0;row<count;row++) {
+        if (ids[row]<0 || ids[row]>=t->config.vocab_size) {
+            fprintf(stderr,"Invalid prompt token.\n"); exit(1);
+        }
+        g_skip_classifier=row!=count-1;
+        logits=forward(t,ids[row],start+row);
+    }
+    g_skip_classifier=0;
+    return logits;
+}
+
+#if defined(QWEN3_USE_ANE)
+#include "ane/prefill.h"
+#endif
+
+static float *forward_prompt(Transformer *t, const int *ids, int count, int start) {
+#if defined(QWEN3_USE_ANE)
+    if (g_npu.enabled && count>1 && (count>=16 || ane_decode_enabled(&g_npu)) &&
+        !getenv("ANE_SERIAL_PREFILL"))
+        return forward_ane_prompt(t,ids,count,start);
+#endif
+    return forward_serial_prompt(t,ids,count,start);
 }
 
 // ----------------------------------------------------------------------------
@@ -812,7 +843,12 @@ void generate(Transformer *transformer, Tokenizer *tokenizer, Sampler *sampler, 
 
     while (pos < transformer->config.seq_len) {
         // forward the transformer to get logits for the next token
-        float *logits = forward(transformer, token, pos);
+        float *logits;
+        if (pos==0 && num_prompt_tokens>1) {
+            logits=forward_prompt(transformer,prompt_tokens,num_prompt_tokens,0);
+            pos=num_prompt_tokens-1;
+            token=prompt_tokens[pos];
+        } else logits=forward(transformer,token,pos);
 
         // advance the state state machine
         if (pos < num_prompt_tokens - 1) {
@@ -916,6 +952,12 @@ void chat(Transformer *transformer, Tokenizer *tokenizer, Sampler *sampler, char
             user_turn = 0;
         }
 
+        float *logits=NULL;
+        if (pos==0 && num_prompt_tokens>1) {
+            logits=forward_prompt(transformer,prompt_tokens,num_prompt_tokens,0);
+            pos=num_prompt_tokens-1;
+        }
+
         // determine the token to pass into the transformer next
         if (pos < num_prompt_tokens) {
             // if we are still processing the input prompt, force the next prompt token
@@ -926,7 +968,8 @@ void chat(Transformer *transformer, Tokenizer *tokenizer, Sampler *sampler, char
         }
 
         // forward the transformer to get logits for the next token
-        float *logits = forward(transformer, token, pos++);
+        if (!logits) logits=forward(transformer,token,pos);
+        pos++;
         next = sample(sampler, logits);
 
         // assistant is responding
@@ -964,7 +1007,8 @@ void error_usage() {
     fprintf(stderr, "  -r <int>    reasoning mode, 0 (default) = no thinking, 1 = thinking\n");
     fprintf(stderr, "  -n <int>    max output tokens (0 = unlimited)\n");
 #if defined(QWEN3_USE_ANE)
-    fprintf(stderr, "  env ANE=1 enables native M1 ANE projections with a CPU Q8 vocabulary head\n");
+    fprintf(stderr, "  env ANE=1 enables M1 ANE batched prefill with CPU Q8 decode\n");
+    fprintf(stderr, "  env ANE_DECODE=1 also offloads decode projections to ANE\n");
 #else
     fprintf(stderr, "  env NPU=1 enables NPU matmul for supported shapes\n");
 #endif

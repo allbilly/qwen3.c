@@ -16,4 +16,5 @@ int npu_matmul_run_batch(NpuMatmulContext *ctx, NpuMatmulKind kind, int layer,
                          const float *input, float *output, int rows);
 void ane_plan_free(AnePlan *plan);
 unsigned long long ane_device_submissions(const AneDevice *device);
+int ane_decode_enabled(const NpuMatmulContext *ctx);
 #endif

@@ -39,9 +39,7 @@ make openmp
 
 (To build without OpenMP, just run `make` without the `openmp` argument.)
 
-## Step 2: download and convert a model
-
-### Apple M1 ANE on Asahi Linux
+## Apple M1 ANE on Asahi Linux
 
 The native C ANE backend uses the driver ABI and verified linear primitives
 from `~/ane`. It supports **base M1 (T8103)** with the `ane` driver exposed at
@@ -53,10 +51,14 @@ make ane cpu
 OMP_NUM_THREADS=4 ANE=1 ./runq-ane Qwen3-0.6B.bin -c 512 -i 'Explain gravity.' -n 32 -t 0
 ```
 
-The existing version-1 Q8 checkpoints work unchanged. Model projections use
-resident FP16 weights on ANE; attention, normalization, sampling, and the Q8
-vocabulary head run on CPU. FP16 activations can produce different logits from
-the integer CPU path. `ANE=0 ./runq-ane ...` and `./runq-cpu ...` select CPU.
+The existing version-1 Q8 checkpoints work unchanged. Prompts use batches of
+up to 32 tokens with resident FP16 projection weights on ANE. Batches shorter
+than 16 tokens and single-token decode use CPU Q8, which is faster on this M1.
+Attention, normalization, sampling, and the vocabulary head also run on CPU.
+`ANE_DECODE=1` additionally offloads decode projections, using the same plans
+and weights. `ANE_SERIAL_PREFILL=1` disables prompt batching for comparisons.
+FP16 activations can change logits and greedy choices near ties.
+`ANE=0 ./runq-ane ...` and `./runq-cpu ...` select CPU.
 An explicitly requested ANE backend fails if the device or plans cannot be
 prepared. `QWEN3_MATMUL_VERBOSE=1` enables per-operation diagnostics.
 
@@ -79,6 +81,8 @@ The queue waits on `~/ane.lock` and `~/gpu.lock`, then checks for live
 benchmark processes and processes holding ANE devices. Use the same wrapper
 in other Codex sessions. Performance measurements should keep model, prompt,
 thread count, CPU affinity, warmups, and generated-token count fixed.
+
+## Step 2: download and convert a model
 
 Install any needed Python dependencies for the HuggingFace export utility:
 

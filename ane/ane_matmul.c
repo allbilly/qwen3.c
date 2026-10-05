@@ -34,6 +34,8 @@ typedef struct { uint32_t handle; size_t size; void *map; } Buffer;
 struct AneDevice {
     int fd;
     Buffer input, output, bootstrap, scratch, bias, constants;
+    __fp16 *host_input, *host_output;
+    size_t host_input_size, host_output_size;
     unsigned long long submissions;
 };
 struct AnePlan {
@@ -129,6 +131,8 @@ void ane_device_close(AneDevice *d) {
     buffer_free(d, &d->bootstrap);
     buffer_free(d, &d->output);
     buffer_free(d, &d->input);
+    free(d->host_output);
+    free(d->host_input);
     close(d->fd);
     free(d);
 }
@@ -146,6 +150,36 @@ static int ensure_buffer(AneDevice *d, Buffer *b, size_t bytes) {
     return buffer_alloc(d, b, bytes);
 }
 
+static int ensure_output(AneDevice *d, size_t bytes) {
+    if (!ensure_buffer(d,&d->output,bytes)) return 0;
+    if (d->host_output_size>=bytes) return 1;
+    void *p=realloc(d->host_output,bytes);
+    if (!p) return 0;
+    d->host_output=p; d->host_output_size=bytes;
+    return 1;
+}
+
+static int ensure_input(AneDevice *d, size_t bytes) {
+    if (!ensure_buffer(d,&d->input,bytes)) return 0;
+    if (d->host_input_size>=bytes) return 1;
+    void *p=realloc(d->host_input,bytes);
+    if (!p) return 0;
+    d->host_input=p; d->host_input_size=bytes;
+    return 1;
+}
+
+// Read whole cache lines from the driver's uncached output mappings.
+static void read_output(void *dst, const void *src, size_t bytes) {
+    uint8_t *out=dst;
+    const uint8_t *in=src;
+    for (size_t i=0;i<bytes;i+=64) {
+        // Keep the compiler from splitting this into individual load pairs.
+        asm volatile("ld1 {v0.16b, v1.16b, v2.16b, v3.16b}, [%0]\n\t"
+                     "st1 {v0.16b, v1.16b, v2.16b, v3.16b}, [%1]"
+                     : : "r"(in+i), "r"(out+i) : "v0","v1","v2","v3","memory");
+    }
+}
+
 AnePlan *ane_plan_create(AneDevice *d, const QuantizedTensor *w,
                          int inputs, int outputs, int gs) {
     if (!d || !w || !w->q || !w->s || inputs <= 0 || outputs <= 0 ||
@@ -155,9 +189,9 @@ AnePlan *ane_plan_create(AneDevice *d, const QuantizedTensor *w,
     if (!p) return NULL;
     p->device = d; p->inputs = inputs; p->outputs = outputs;
     p->k = (inputs + 31) & ~31; p->n = (outputs + 31) & ~31;
-    if (!ensure_buffer(d, &d->input, (size_t)p->k * BATCH * 2) ||
+    if (!ensure_input(d, (size_t)p->k * BATCH * 2) ||
         !ensure_buffer(d, &d->scratch, (size_t)p->k * BATCH * 2) ||
-        !ensure_buffer(d, &d->output, (size_t)p->n * BATCH * 2) ||
+        !ensure_output(d, (size_t)p->n * BATCH * 2) ||
         !ensure_buffer(d, &d->bias, (size_t)p->n * 2) ||
         !buffer_alloc(d, &p->command, CMD_SIZE + 1) ||
         !buffer_alloc(d, &p->weights, (size_t)p->k * p->n * 2)) {
@@ -192,7 +226,7 @@ AnePlan *ane_plan_create(AneDevice *d, const QuantizedTensor *w,
 int ane_plan_run_batch(AnePlan *p, const float *input, float *output, int rows) {
     if (!p || !input || !output || rows<1 || rows>BATCH) return 0;
     AneDevice *d=p->device;
-    __fp16 *source=d->input.map, *result=d->output.map;
+    __fp16 *source=d->host_input, *result=d->host_output;
     memset(source,0,(size_t)p->k*BATCH*2);
     for (int row=0;row<rows;row++) {
         for (int k=0;k<p->inputs;k++) {
@@ -201,9 +235,11 @@ int ane_plan_run_batch(AnePlan *p, const float *input, float *output, int rows) 
             source[(size_t)row*p->k+k]=(__fp16)x;
         }
     }
+    memcpy(d->input.map,source,(size_t)p->k*BATCH*2);
     // Detect a successful ioctl that did not write its advertised output.
-    uint16_t *bits=d->output.map;
+    uint16_t *bits=(uint16_t *)result;
     for (int i=0;i<rows*p->n;i++) bits[i]=0x7e00;
+    memcpy(d->output.map,result,(size_t)rows*p->n*2);
     memcpy(d->bootstrap.map,p->command.map,TD_SIZE);
     uint32_t *header=d->bootstrap.map;
     header[0]=(header[0]&~(0xffu<<16))|(0x40u<<16);
@@ -221,6 +257,7 @@ int ane_plan_run_batch(AnePlan *p, const float *input, float *output, int rows) 
         return 0;
     }
     d->submissions++;
+    read_output(result,d->output.map,(size_t)rows*p->n*2);
     // All input rows are in the device buffer before writing output: alias safe.
     for (int row=0;row<rows;row++) {
         for (int n=0;n<p->outputs;n++) {
@@ -244,6 +281,7 @@ typedef struct {
     AneDevice *device;
     int layers;
     AnePlan **plans;
+    int decode;
 } ModelPlans;
 
 void npu_matmul_shutdown(NpuMatmulContext *ctx) {
@@ -251,7 +289,7 @@ void npu_matmul_shutdown(NpuMatmulContext *ctx) {
     ModelPlans *m = ctx->impl;
     if (m) {
         if (m->plans)
-            for (int i = 0; i < 7 * m->layers + 1; i++) ane_plan_free(m->plans[i]);
+            for (int i = 0; i < 7 * m->layers; i++) ane_plan_free(m->plans[i]);
         free(m->plans);
         ane_device_close(m->device);
         free(m);
@@ -269,9 +307,11 @@ int npu_matmul_init(NpuMatmulContext *ctx, const Config *c,
     ModelPlans *m = calloc(1, sizeof(*m));
     if (!m) return 0;
     ctx->impl = m; m->layers = c->n_layers;
+    const char *decode=getenv("ANE_DECODE");
+    m->decode=decode && strcmp(decode,"0");
     m->device = ane_device_open();
     if (!m->device) { npu_matmul_shutdown(ctx); return 0; }
-    m->plans = calloc((size_t)7 * c->n_layers + 1, sizeof(AnePlan *));
+    m->plans = calloc((size_t)7 * c->n_layers, sizeof(AnePlan *));
     if (!m->plans) { npu_matmul_shutdown(ctx); return 0; }
     int heads = c->n_heads * c->head_dim, kv = c->n_kv_heads * c->head_dim;
     const QuantizedTensor *weights[] = {w->wq, w->wk, w->wv, w->wo, w->w1, w->w2, w->w3};
@@ -288,8 +328,8 @@ int npu_matmul_init(NpuMatmulContext *ctx, const Config *c,
         }
     }
     ctx->enabled = 1;
-    fprintf(stderr, "ANE: resident FP16 projection plans ready (%d layers); vocabulary head %s.\n",
-            m->layers, "CPU Q8");
+    fprintf(stderr,"ANE: 32-token prefill ready (%d layers); decode %s; vocabulary head CPU Q8.\n",
+            m->layers,m->decode?"ANE":"CPU Q8");
     return 1;
 }
 
@@ -297,8 +337,9 @@ int npu_matmul_run(NpuMatmulContext *ctx, NpuMatmulKind kind, int layer,
                    const float *in, float *out) {
     if (!ctx || !ctx->enabled || kind < 0 || kind > NPU_MATMUL_WCLS) return 0;
     ModelPlans *m = ctx->impl;
+    if (!m->decode || kind==NPU_MATMUL_WCLS) return 0;
     if (layer < 0 || layer >= m->layers) return 0;
-    AnePlan *p = m->plans[kind == NPU_MATMUL_WCLS ? 7 * m->layers : kind * m->layers + layer];
+    AnePlan *p=m->plans[kind*m->layers+layer];
     if (!p) return 0;
     if (!ane_plan_run(p, in, out)) {
         fprintf(stderr, "ANE: projection failed; refusing an invalid inference result.\n");
@@ -324,4 +365,8 @@ int npu_matmul_run_batch(NpuMatmulContext *ctx, NpuMatmulKind kind, int layer,
 
 void npu_matmul_reset_stats(NpuMatmulContext *ctx) {
     if (ctx) ctx->npu_ops = ctx->cpu_ops = 0;
+}
+
+int ane_decode_enabled(const NpuMatmulContext *ctx) {
+    return ctx && ctx->enabled && ((const ModelPlans *)ctx->impl)->decode;
 }
