@@ -127,6 +127,43 @@ top-1 choices on identical decode inputs. The 32-token prompt's first choice
 changed near a tie. `ANE_DECODE=1` measured about 25 tokens/s; see
 [the ANE decode comparison](ane/benchmarks/m1-qwen3-0.6b-ane-decode.json).
 
+### Other M1 GPU measurements: GPT-2 124M
+
+The sibling `~/applegpu` project now has verified full GPT-2 inference through
+omarchy-mlx Vulkan and tinygrad OpenCL. Its 2026-10-05 prefill/decode results
+are retained here as GPU context. These use **GPT-2 124M FP32**, batch 1,
+context capacity 1024, stock Mesa 26.2.3 and 64 cached decode calls. The Qwen3
+tables above use Qwen3-0.6B Q8 with different prompts and output lengths;
+these workloads do not establish a GPU-versus-ANE speedup for Qwen3.
+
+Each entry is the median of three fresh workers with backend order rotated
+between rounds. Prefill consumes the entire prompt and returns the first
+next-token choice. Both phases include completed GPU execution, GPU argmax
+and a blocking selected-token read. Loading, compilation, BEAM tuning and
+full-logit comparison are excluded.
+
+| GPT-2 FP32 backend | Prompt tokens | Prefill ms | Prefill tokens/s | Decode tokens/s |
+| --- | ---: | ---: | ---: | ---: |
+| omarchy-mlx Vulkan | 32 | 63.55 | 503.53 | 23.05 |
+| omarchy-mlx Vulkan | 128 | 175.95 | 727.46 | 22.85 |
+| omarchy-mlx Vulkan | 256 | 329.01 | 778.09 | 21.19 |
+| tinygrad OpenCL, BEAM=0 | 32 | 47.09 | 679.50 | 24.21 |
+| tinygrad OpenCL, BEAM=0 | 128 | 113.95 | 1123.31 | 22.58 |
+| tinygrad OpenCL, BEAM=0 | 256 | 190.09 | 1346.70 | 22.62 |
+| tinygrad OpenCL, BEAM=2 | 32 | 585.86 | 54.62 | 16.71 |
+| tinygrad OpenCL, BEAM=2 | 128 | 1920.51 | 66.65 | 16.68 |
+| tinygrad OpenCL, BEAM=2 | 256 | 2147.73 | 119.20 | 16.29 |
+
+All 1,755 full-logit checks and 1,755 timed token checks passed. The import
+recomputed the medians and checked the original report's audit hash.
+[Imported results, runtime versions, source hashes and validation](ane/benchmarks/applegpu-gpt2-m1.json)
+are retained. The original receipts are in
+`~/applegpu/gpt2/results/prefill-decode-float32.json` and its validation file;
+that project's GPT-2 feature is still uncommitted. Clocks were not fixed and
+background CPU activity was present. Untuned tinygrad improved longer-prompt
+prefill in these runs; BEAM=2 regressed with this build's default estimate
+setting. A matched Qwen3 GPU benchmark is still needed for a Qwen3 comparison.
+
 ## Step 2: download and convert a model
 
 Install any needed Python dependencies for the HuggingFace export utility:

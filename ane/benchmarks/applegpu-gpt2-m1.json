@@ -1,0 +1,429 @@
+{
+  "status": "PASS",
+  "started_at_utc": "2026-10-05T10:49:54.634975+00:00",
+  "finished_at_utc": "2026-10-05T10:58:51.301327+00:00",
+  "model": "GPT-2 124M",
+  "checkpoint_sha256": "248dfc3911869ec493c76e65bf2fcf7f615828b0254c12b473182f0f81d3a707",
+  "dtype": "float32",
+  "batch_size": 1,
+  "context_capacity": 1024,
+  "decode_steps": 64,
+  "trials_per_mode": 3,
+  "run_order": [
+    {
+      "trial": 1,
+      "mode": "mlx-beam0",
+      "reused": false
+    },
+    {
+      "trial": 1,
+      "mode": "tinygrad-beam0",
+      "reused": false
+    },
+    {
+      "trial": 1,
+      "mode": "tinygrad-beam2",
+      "reused": false
+    },
+    {
+      "trial": 2,
+      "mode": "tinygrad-beam0",
+      "reused": false
+    },
+    {
+      "trial": 2,
+      "mode": "tinygrad-beam2",
+      "reused": false
+    },
+    {
+      "trial": 2,
+      "mode": "mlx-beam0",
+      "reused": false
+    },
+    {
+      "trial": 3,
+      "mode": "tinygrad-beam2",
+      "reused": false
+    },
+    {
+      "trial": 3,
+      "mode": "mlx-beam0",
+      "reused": false
+    },
+    {
+      "trial": 3,
+      "mode": "tinygrad-beam0",
+      "reused": false
+    }
+  ],
+  "summaries": {
+    "mlx-beam0": {
+      "runtime": {
+        "backend": "MLX Vulkan",
+        "device": "Apple M1 (G13G B1)",
+        "dtype": "float32",
+        "beam": null,
+        "mlx_omarchy_version": "0.32.4.dev202610041653+6edd258",
+        "mlx_lm_version": "0.31.3",
+        "vulkan": {
+          "tool": "mlx-omarchy-info",
+          "device_name": "Apple M1 (G13G B1)",
+          "driver_name": "Honeykrisp",
+          "driver_info": "Mesa 26.2.3",
+          "driver_sha": "",
+          "icd_path": "/usr/share/vulkan/icd.d/asahi_icd.aarch64.json",
+          "icd_source": "override",
+          "expected_sha": "",
+          "expected_sha_source": "",
+          "api_version": "1.4.354",
+          "driver_version_raw": "109060099",
+          "vendor_id": 65541,
+          "device_id": 0,
+          "queue_family_index": 0,
+          "queue_count": 1,
+          "total_memory_bytes": 3932160000,
+          "max_allocation_bytes": 0,
+          "max_buffer_bytes": 0,
+          "max_storage_buffer_range_bytes": 2147483647,
+          "max_compute_shared_memory_bytes": 32768,
+          "max_compute_work_group_invocations": 1024,
+          "max_compute_work_group_size_x": 1024,
+          "unified_memory": 1,
+          "host_visible_coherent": 1,
+          "timeline_semaphore": 1,
+          "shader_float16": 1,
+          "shader_int16": 1,
+          "storage_buffer_16bit_access": 1,
+          "max_per_stage_descriptor_storage_buffers": 1048576,
+          "max_descriptor_set_storage_buffers": 1048576,
+          "non_apple_dev_override": 0
+        },
+        "libmlx_sha256": {
+          "libmlx.so": "1e82df97df9f3fd1cbc5830d8408317892522305c0e8d4ba772df8e42227600f"
+        },
+        "gpt2_model_source_sha256": "ca20a95bf371428b78c5f8a959a41b8fe85acfbf2e5424acbc88590a9f2053ec"
+      },
+      "cases": [
+        {
+          "prompt_tokens": 32,
+          "median_prefill_ms": 63.551851,
+          "median_prefill_tokens_per_second": 503.5258532438339,
+          "trial_prefill_ms": [
+            63.551851,
+            60.468607,
+            63.81796
+          ],
+          "trial_prefill_tokens_per_second": [
+            503.5258532438339,
+            529.2002178915748,
+            501.4262442735556
+          ],
+          "median_decode_steps_per_second": 23.053804696635282,
+          "median_decode_ms_per_token": 43.376788046875,
+          "combined_decode_steps_per_second": 23.466398494489834,
+          "trial_decode_steps_per_second": [
+            23.053804696635282,
+            24.70302318870934,
+            22.735174879846163
+          ],
+          "verified_predictions": 195
+        },
+        {
+          "prompt_tokens": 128,
+          "median_prefill_ms": 175.954573,
+          "median_prefill_tokens_per_second": 727.4604906119717,
+          "trial_prefill_ms": [
+            174.441501,
+            176.865781,
+            175.954573
+          ],
+          "trial_prefill_tokens_per_second": [
+            733.770342872709,
+            723.7126326884,
+            727.4604906119717
+          ],
+          "median_decode_steps_per_second": 22.849532502081694,
+          "median_decode_ms_per_token": 43.764571546875,
+          "combined_decode_steps_per_second": 22.825841734177622,
+          "trial_decode_steps_per_second": [
+            22.849532502081694,
+            22.67549333487107,
+            22.95423900942267
+          ],
+          "verified_predictions": 195
+        },
+        {
+          "prompt_tokens": 256,
+          "median_prefill_ms": 329.010652,
+          "median_prefill_tokens_per_second": 778.090309367856,
+          "trial_prefill_ms": [
+            333.515825,
+            328.617405,
+            329.010652
+          ],
+          "trial_prefill_tokens_per_second": [
+            767.5797692658211,
+            779.0214276690548,
+            778.090309367856
+          ],
+          "median_decode_steps_per_second": 21.192881074416658,
+          "median_decode_ms_per_token": 47.1856561875,
+          "combined_decode_steps_per_second": 21.53219772310958,
+          "trial_decode_steps_per_second": [
+            22.421915908199843,
+            21.034318354116436,
+            21.192881074416658
+          ],
+          "verified_predictions": 195
+        }
+      ]
+    },
+    "tinygrad-beam0": {
+      "runtime": {
+        "backend": "tinygrad OpenCL",
+        "device": "Apple M1 (G13G B1)",
+        "driver": "26.2.3",
+        "dtype": "float32",
+        "beam": 0,
+        "beam_estimate": 1,
+        "prefill_jit": true,
+        "tinygrad_version": "0.14.0",
+        "tinygrad_commit": "ccae837c70301e3dab3ba8ea4db454249ad8f7e8",
+        "runtime_source_sha256": {
+          "tensor.py": "98bce1624d2d3fbd59e72e0f0f723ef1f9f7967b52b2b5ad3743df5a887b49b0",
+          "runtime/ops_cl.py": "6ed7a8a1fc57b3b355282b7bc7e54df67330f45454381d0fa1b8b68ab4ad6753",
+          "engine/realize.py": "79af7c3ae0bad192d26f351f773b2554d46b20e8908217f857325d7518f9992d",
+          "codegen/opt/search.py": "16a0632972ebeb16bd890814f0a558b28dcc24933befa064dd34f3c1372afd18"
+        },
+        "parameter_devices": [
+          "CL"
+        ]
+      },
+      "cases": [
+        {
+          "prompt_tokens": 32,
+          "median_prefill_ms": 47.093582,
+          "median_prefill_tokens_per_second": 679.4981108041432,
+          "trial_prefill_ms": [
+            62.840883,
+            47.093582,
+            43.492551
+          ],
+          "trial_prefill_tokens_per_second": [
+            509.222634570555,
+            679.4981108041432,
+            735.7581761529693
+          ],
+          "median_decode_steps_per_second": 24.213761596525167,
+          "median_decode_ms_per_token": 41.298829015625,
+          "combined_decode_steps_per_second": 24.058557835079725,
+          "trial_decode_steps_per_second": [
+            21.60442455806374,
+            24.213761596525167,
+            26.946834907759563
+          ],
+          "verified_predictions": 195
+        },
+        {
+          "prompt_tokens": 128,
+          "median_prefill_ms": 113.949218,
+          "median_prefill_tokens_per_second": 1123.307401723459,
+          "trial_prefill_ms": [
+            120.997527,
+            113.949218,
+            112.751496
+          ],
+          "trial_prefill_tokens_per_second": [
+            1057.8728604924297,
+            1123.307401723459,
+            1135.239926217919
+          ],
+          "median_decode_steps_per_second": 22.579285101921645,
+          "median_decode_ms_per_token": 44.288381828125,
+          "combined_decode_steps_per_second": 22.85880874181308,
+          "trial_decode_steps_per_second": [
+            24.13849501949414,
+            21.96621835666325,
+            22.579285101921645
+          ],
+          "verified_predictions": 195
+        },
+        {
+          "prompt_tokens": 256,
+          "median_prefill_ms": 190.094877,
+          "median_prefill_tokens_per_second": 1346.6959448886148,
+          "trial_prefill_ms": [
+            181.917639,
+            190.094877,
+            199.394758
+          ],
+          "trial_prefill_tokens_per_second": [
+            1407.2302246622714,
+            1346.6959448886148,
+            1283.8853065535454
+          ],
+          "median_decode_steps_per_second": 22.61819114312227,
+          "median_decode_ms_per_token": 44.212200421875,
+          "combined_decode_steps_per_second": 22.73184912638733,
+          "trial_decode_steps_per_second": [
+            23.08887385305347,
+            22.497025307980113,
+            22.61819114312227
+          ],
+          "verified_predictions": 195
+        }
+      ]
+    },
+    "tinygrad-beam2": {
+      "runtime": {
+        "backend": "tinygrad OpenCL",
+        "device": "Apple M1 (G13G B1)",
+        "driver": "26.2.3",
+        "dtype": "float32",
+        "beam": 2,
+        "beam_estimate": 1,
+        "prefill_jit": true,
+        "tinygrad_version": "0.14.0",
+        "tinygrad_commit": "ccae837c70301e3dab3ba8ea4db454249ad8f7e8",
+        "runtime_source_sha256": {
+          "tensor.py": "98bce1624d2d3fbd59e72e0f0f723ef1f9f7967b52b2b5ad3743df5a887b49b0",
+          "runtime/ops_cl.py": "6ed7a8a1fc57b3b355282b7bc7e54df67330f45454381d0fa1b8b68ab4ad6753",
+          "engine/realize.py": "79af7c3ae0bad192d26f351f773b2554d46b20e8908217f857325d7518f9992d",
+          "codegen/opt/search.py": "16a0632972ebeb16bd890814f0a558b28dcc24933befa064dd34f3c1372afd18"
+        },
+        "parameter_devices": [
+          "CL"
+        ]
+      },
+      "cases": [
+        {
+          "prompt_tokens": 32,
+          "median_prefill_ms": 585.859209,
+          "median_prefill_tokens_per_second": 54.62063155859688,
+          "trial_prefill_ms": [
+            588.282944,
+            569.354241,
+            585.859209
+          ],
+          "trial_prefill_tokens_per_second": [
+            54.39559369581178,
+            56.204025008746704,
+            54.62063155859688
+          ],
+          "median_decode_steps_per_second": 16.713281964300414,
+          "median_decode_ms_per_token": 59.832652984375,
+          "combined_decode_steps_per_second": 16.832734224570952,
+          "trial_decode_steps_per_second": [
+            16.713281964300414,
+            16.661888080555496,
+            17.13082521599441
+          ],
+          "verified_predictions": 195
+        },
+        {
+          "prompt_tokens": 128,
+          "median_prefill_ms": 1920.510926,
+          "median_prefill_tokens_per_second": 66.64893090017235,
+          "trial_prefill_ms": [
+            1915.771903,
+            1920.510926,
+            1921.137239
+          ],
+          "trial_prefill_tokens_per_second": [
+            66.81379959668404,
+            66.64893090017235,
+            66.62720257644227
+          ],
+          "median_decode_steps_per_second": 16.683715442657853,
+          "median_decode_ms_per_token": 59.938687125,
+          "combined_decode_steps_per_second": 16.75418533590047,
+          "trial_decode_steps_per_second": [
+            16.416364101683147,
+            16.683715442657853,
+            17.18029435259777
+          ],
+          "verified_predictions": 195
+        },
+        {
+          "prompt_tokens": 256,
+          "median_prefill_ms": 2147.72665,
+          "median_prefill_tokens_per_second": 119.19580175624304,
+          "trial_prefill_ms": [
+            2126.881533,
+            2147.72665,
+            2150.02227
+          ],
+          "trial_prefill_tokens_per_second": [
+            120.3640146514921,
+            119.19580175624304,
+            119.0685341133699
+          ],
+          "median_decode_steps_per_second": 16.285380712261155,
+          "median_decode_ms_per_token": 61.4047665,
+          "combined_decode_steps_per_second": 16.303627077290468,
+          "trial_decode_steps_per_second": [
+            16.46540984210632,
+            16.162925570827834,
+            16.285380712261155
+          ],
+          "verified_predictions": 195
+        }
+      ]
+    }
+  },
+  "timing_scope": "Completed GPU model execution, KV update, GPU argmax and one-token host read; excludes model loading, first compilation, BEAM tuning, full-logit validation and detokenization",
+  "comparison_scope": "Same M1 GPU, stock Mesa, checkpoint, parameter dtype, prompt and teacher-forced decode tokens. Backend graph lowering and KV cache implementations differ.",
+  "source_sha256": {
+    "bpe.py": "7e3df9e85e1e3d76043113e9725d957686bf1203665eca9544c78ead4d35f486",
+    "common.py": "900103d7a895153ed0748ab03afe1887795497a1728ce3738ad63dd2b8f5a37c",
+    "tinygrad_backend.py": "6c20c0d22dcf56e1ffb107b237d08eea8b208fad1b2418e5c5dfcea4f768a03e",
+    "mlx_backend.py": "e08b7d4dc393c01a47b3776b265a426e2f8f234dd444ca5ac66abdf1e0b05a36",
+    "reference.py": "5837e77a9968512165d9d8210c8205f408e85c907c8e2dc3f5f7006629954bd9",
+    "gpt2.py": "06eb500454adce0d02d5a170e7c98e0b29251516b77c92b48c63c7f40f170535",
+    "bootstrap.py": "3a4e4af40f72cadce26e54d367881257af480a8675b658049fe6e551d0521124",
+    "compare.py": "0e81ec1d1778c22ef1d83bdd53151e2a518beff4b885cf46f34019940a5979d6"
+  },
+  "source_project": "applegpu",
+  "source_report": "gpt2/results/prefill-decode-float32.json",
+  "source_report_sha256": "db6a093a1b33f967f6840d5646da58c24616d571a4b103121301540d7d258ddf",
+  "source_audit": "gpt2/results/prefill-decode-validation-float32.json",
+  "source_audit_sha256": "61c24e74ca2544fd437486cd7ff799338fcaf1879c2fff44c981f21bfcbac61e",
+  "source_worktree_note": "GPT-2 files are uncommitted on applegpu main; report and source hashes identify the measured build.",
+  "import_audit": {
+    "full_logit_checks": 1755,
+    "timed_prediction_checks": 1755,
+    "medians_recomputed": true
+  },
+  "validation": {
+    "status": "PASS",
+    "audited_at_utc": "2026-10-05T10:59:34.154591+00:00",
+    "comparison_json_sha256": "db6a093a1b33f967f6840d5646da58c24616d571a4b103121301540d7d258ddf",
+    "source_sha256": {
+      "bpe.py": "7e3df9e85e1e3d76043113e9725d957686bf1203665eca9544c78ead4d35f486",
+      "common.py": "900103d7a895153ed0748ab03afe1887795497a1728ce3738ad63dd2b8f5a37c",
+      "tinygrad_backend.py": "6c20c0d22dcf56e1ffb107b237d08eea8b208fad1b2418e5c5dfcea4f768a03e",
+      "mlx_backend.py": "e08b7d4dc393c01a47b3776b265a426e2f8f234dd444ca5ac66abdf1e0b05a36",
+      "reference.py": "5837e77a9968512165d9d8210c8205f408e85c907c8e2dc3f5f7006629954bd9",
+      "gpt2.py": "06eb500454adce0d02d5a170e7c98e0b29251516b77c92b48c63c7f40f170535",
+      "bootstrap.py": "3a4e4af40f72cadce26e54d367881257af480a8675b658049fe6e551d0521124",
+      "compare.py": "0e81ec1d1778c22ef1d83bdd53151e2a518beff4b885cf46f34019940a5979d6"
+    },
+    "workers": 9,
+    "resumed_workers": 0,
+    "full_logit_checks": 1755,
+    "greedy_mismatches": 0,
+    "timed_prediction_checks": 1755,
+    "reference_identity_equal": true,
+    "worker_sources_equal": true,
+    "max_normalized_rmse": 0.0005311312620118881,
+    "max_kl_reference_to_gpu": 1.1152596381214362e-09,
+    "prompt_lengths": [
+      32,
+      128,
+      256
+    ],
+    "decode_steps_per_trial": 64,
+    "timing_scope": "Completed GPU model execution, KV update, GPU argmax and one-token host read; excludes model loading, first compilation, BEAM tuning, full-logit validation and detokenization"
+  },
+  "relation_to_qwen3_c": "Separate GPT-2 124M FP32 GPU workload. Qwen3-0.6B Q8 CPU/ANE results use another model, precision, prompt set and decode length."
+}
