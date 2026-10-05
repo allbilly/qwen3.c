@@ -16,6 +16,19 @@ fp16: runq-fp16
 runq-fp16: $(FP16_SRCS) $(FP16_HEADERS) runq.c
 	$(CC) -Ofast -fopenmp -march=native -D_FILE_OFFSET_BITS=64 -I$(FP16_NPU_INCLUDE) $(FP16_SRCS) -lm -ldrm -o $@
 
+# Isolated phase-routing experiment. The selected fp16 target stays separate.
+FP16_ROUTE_DIR = fp16/experiments/yalm
+FP16_ROUTE_SRCS = $(FP16_ROUTE_DIR)/source/fp16/run.c $(FP16_ROUTE_DIR)/npu_backend.c $(FP16_ROUTE_DIR)/source/fp16/gpu_attention.c $(FP16_ROUTE_DIR)/router.c $(FP16_ROUTE_DIR)/linear_gpu.c
+FP16_ROUTE_HEADERS = $(wildcard $(FP16_ROUTE_DIR)/*.h $(FP16_ROUTE_DIR)/source/*.h $(FP16_ROUTE_DIR)/source/fp16/*.h)
+.PHONY: fp16-routes
+fp16-routes: runq-fp16-routes
+$(FP16_ROUTE_DIR)/linear_source.h: $(FP16_ROUTE_DIR)/linear.cl $(FP16_ROUTE_DIR)/embed.py
+	python3 $(FP16_ROUTE_DIR)/embed.py $< $@ linear_source
+$(FP16_ROUTE_DIR)/source/fp16/gpu_source.h: $(FP16_ROUTE_DIR)/attention.cl $(FP16_ROUTE_DIR)/embed.py
+	python3 $(FP16_ROUTE_DIR)/embed.py $< $@ gpu_source
+runq-fp16-routes: $(FP16_ROUTE_SRCS) $(FP16_ROUTE_HEADERS) $(FP16_ROUTE_DIR)/source/runq.c
+	$(CC) -Ofast -fopenmp -march=native -D_FILE_OFFSET_BITS=64 -I$(FP16_NPU_INCLUDE) $(FP16_ROUTE_SRCS) -lm -ldrm -ldl -l:libOpenCL.so.1 -o $@
+
 # the most basic way of building that is most likely to work on most systems
 .PHONY: run
 run: runq.c
@@ -63,3 +76,4 @@ gnuopenmp:
 clean:
 	rm -f runq
 	rm -f runq-fp16
+	rm -f runq-fp16-routes

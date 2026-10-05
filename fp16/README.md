@@ -6,6 +6,10 @@ backends, broader device placements and phase-specific prefill/decode
 comparisons are being developed in the comparison workspace. Their results
 are not claimed by this checkpoint.
 
+The compiled-and-primitive-checked [phase-routing WIP](experiments/yalm/README.md)
+now has explicit CPU/GPU/NPU projection backends. Broader inference measurements
+and complete-request transfer accounting are still in progress.
+
 The engine uses persistent direct-register NPU tasks, three-core matrix
 projections, batched prefill, fused Q/K/V and gate/up projections, prompt
 attention on the NPU, and activation packing directly between feed-forward

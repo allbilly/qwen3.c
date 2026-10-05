@@ -3,3 +3,5 @@ runq
 __pycache__/*
 /runq-fp16
 /fp16/__pycache__/
+/runq-fp16-routes
+/fp16/experiments/yalm/__pycache__/

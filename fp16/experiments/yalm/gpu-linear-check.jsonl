@@ -1,0 +1,9 @@
+{"event":"linear_gpu_init","device":"Mali-LODX r0p0","weight_bytes":1191968768,"projection_count":197,"fp16_weights":true,"event_profiling":false}
+{"event":"routing","dense_prefill":"gpu","dense_decode":"gpu","cpu_classifier":false,"npu_initialized":false,"gpu_projections_initialized":true,"host_non_linear_ops":"CPU"}
+arm_release_ver of this libmali is 'g6p0-01eac0', rk_so_ver is '7'.
+{"event":"linear_check","kind":0,"rows":1,"K":1024,"N":2048,"outputs_checked":2048,"relative_rmse":1.41940253706e-07,"max_absolute_error":8.6089130491e-07,"limit":0.00001,"passed":true}
+{"event":"linear_check","kind":0,"rows":24,"K":1024,"N":2048,"outputs_checked":49152,"relative_rmse":4.41754277447e-07,"max_absolute_error":6.42146915197e-06,"limit":0.00001,"passed":true}
+{"event":"linear_check","kind":0,"rows":64,"K":1024,"N":2048,"outputs_checked":131072,"relative_rmse":4.37518053169e-07,"max_absolute_error":6.42146915197e-06,"limit":0.00001,"passed":true}
+{"event":"linear_check","kind":3,"rows":24,"K":2048,"N":1024,"outputs_checked":24576,"relative_rmse":6.67862681665e-07,"max_absolute_error":9.75321017904e-06,"limit":0.00001,"passed":true}
+{"event":"linear_check","kind":5,"rows":24,"K":3072,"N":1024,"outputs_checked":24576,"relative_rmse":4.32323249194e-07,"max_absolute_error":3.93390655518e-06,"limit":0.00001,"passed":true}
+{"event":"linear_check","kind":7,"rows":1,"K":1024,"N":151936,"outputs_checked":151936,"relative_rmse":1.36518635405e-07,"max_absolute_error":7.84173607826e-07,"limit":0.00001,"passed":true}
