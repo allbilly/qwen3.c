@@ -68,7 +68,8 @@ of fusion speedup against the older unfused GPU prototype.
 The host transformer still runs embedding, norms, RoPE, SwiGLU, residuals and
 sampling on CPU. Dense projections use the native register NPU backend in
 both experiments; the GPU candidate replaces decode attention through Mali
-OpenCL. No concurrent FFN channel partition across CPU/GPU/NPU is implemented.
+OpenCL. This milestone did not implement concurrent FFN channel partitioning.
+The subsequent [concurrent experiment](CONCURRENT.md) now tests that execution.
 The results cover 128/256-token prompts and context 512, with cooled requests
 at fixed clocks; they do not establish sustained hot-loop throughput.
 The older entire 50°C partial request sweep remains rejected and is not used.

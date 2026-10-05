@@ -1,0 +1,4 @@
+{
+  "reason": "Python tuple environment key rejected before Popen launched any native process. Corrected TEACHER_IDS assignment; no device job ran.",
+  "used_for_results": false
+}

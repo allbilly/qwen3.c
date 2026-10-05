@@ -1,0 +1,25 @@
+{
+  "command": [
+    "gcc",
+    "-Ofast",
+    "-fopenmp",
+    "-march=native",
+    "-D_FILE_OFFSET_BITS=64",
+    "-I/home/orangepi/qwen3-bench/matched/roofline/full-profile/source/npu-include",
+    "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/concurrent-ffn/ffn_check.c",
+    "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/concurrent-ffn/concurrent_ffn.c",
+    "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/concurrent-ffn/source/fp16/gpu_attention.c",
+    "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/concurrent-ffn/router.c",
+    "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/concurrent-ffn/linear_gpu.c",
+    "-pthread",
+    "-lm",
+    "-ldrm",
+    "-ldl",
+    "-l:libOpenCL.so.1",
+    "-o",
+    "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/concurrent-ffn/ffn-check"
+  ],
+  "binary_sha256": "66a4b381ee5c454954655cdc2412fa617e4ef54157f2ed3d13ddee468f72732a",
+  "check_source_sha256": "8d7e66cd33a33cb5d477210b729380e90239fe62bfca0a6be3bcf89c9a31883a",
+  "reference": "All gate/up outputs against double accumulation of the identical FP16 operands; unchanged linear primitive limit 1e-5."
+}

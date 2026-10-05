@@ -76,3 +76,8 @@ remains unchanged.
 The `source/` copy preserves the code used in the experiment independently of
 future selected-engine edits. This is a WIP checkpoint, not a claim that every
 route or optimization is complete or faster.
+
+The new [concurrent FFN experiment](CONCURRENT.md) now overlaps disjoint
+CPU/Mali/NPU output channels. Nine primitive cases and thirty full-model
+cases are independently checked. Decode-only splitting passes all five
+prompt lengths; six prefill logit failures remain retained.

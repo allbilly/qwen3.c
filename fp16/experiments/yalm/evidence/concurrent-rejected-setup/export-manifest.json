@@ -1,0 +1,36 @@
+{
+  "workspace_directory": "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/concurrent-ffn/quality-setup-rejected",
+  "files": {
+    "p1-cpu_npu.config.json": {
+      "original_sha256": "176f717c5e4ded27bcf66c2bb70700bcf6fd1008d825c7d929d635a180c487ce",
+      "export": "p1-cpu_npu.config.json",
+      "export_sha256": "176f717c5e4ded27bcf66c2bb70700bcf6fd1008d825c7d929d635a180c487ce"
+    },
+    "p1-cpu_npu.jsonl": {
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "export": "p1-cpu_npu.jsonl",
+      "export_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "p1-cpu_npu.teacher.tokens": {
+      "original_sha256": "725c134d29ca9ca3156d6c893ac0a5e52b84d52525c51e2eb80662655d3dd3d0",
+      "export": "p1-cpu_npu.teacher.tokens",
+      "export_sha256": "725c134d29ca9ca3156d6c893ac0a5e52b84d52525c51e2eb80662655d3dd3d0"
+    },
+    "p1-cpu_npu.tokens": {
+      "original_sha256": "6e1408b01c2dddc443ef8feee1ef5c394b67fc8b2cc74d269933bc02135987c9",
+      "export": "p1-cpu_npu.tokens",
+      "export_sha256": "6e1408b01c2dddc443ef8feee1ef5c394b67fc8b2cc74d269933bc02135987c9"
+    },
+    "rejected.json": {
+      "original_sha256": "8bd5850da752575f887666e8b20d6ad5d90333c99689452659de9926ba639abd",
+      "export": "rejected.json",
+      "export_sha256": "8bd5850da752575f887666e8b20d6ad5d90333c99689452659de9926ba639abd"
+    },
+    "source-provenance.json": {
+      "original_sha256": "f50747ea9e1b5305ae13d4c2b36fbe6eaf280957bf591dcb876fd49b0858d1dc",
+      "export": "source-provenance.json",
+      "export_sha256": "f50747ea9e1b5305ae13d4c2b36fbe6eaf280957bf591dcb876fd49b0858d1dc"
+    }
+  },
+  "external_artifacts": "Shared FP16 model, full per-vocabulary logits and compiled binary remain in the comparison workspace; source/binary/input hashes are retained here."
+}

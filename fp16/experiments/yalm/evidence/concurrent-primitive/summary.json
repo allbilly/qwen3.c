@@ -1,0 +1,108 @@
+{
+  "records": [
+    {
+      "route": "cpu_npu",
+      "cpu_channels": 96,
+      "gpu_channels": 0,
+      "cases": [
+        {
+          "event": "ffn_primitive_check",
+          "rows": 1,
+          "outputs_checked": 6144,
+          "relative_rmse": 1.09265022995e-07,
+          "max_absolute_error": 7.23288394511e-07,
+          "limit": 1e-05,
+          "passed": true
+        },
+        {
+          "event": "ffn_primitive_check",
+          "rows": 24,
+          "outputs_checked": 147456,
+          "relative_rmse": 1.12918825303e-07,
+          "max_absolute_error": 1.38487666845e-06,
+          "limit": 1e-05,
+          "passed": true
+        },
+        {
+          "event": "ffn_primitive_check",
+          "rows": 64,
+          "outputs_checked": 393216,
+          "relative_rmse": 1.12811638074e-07,
+          "max_absolute_error": 1.5557743609e-06,
+          "limit": 1e-05,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "route": "gpu_npu",
+      "cpu_channels": 0,
+      "gpu_channels": 96,
+      "cases": [
+        {
+          "event": "ffn_primitive_check",
+          "rows": 1,
+          "outputs_checked": 6144,
+          "relative_rmse": 1.09488127628e-07,
+          "max_absolute_error": 7.23288394511e-07,
+          "limit": 1e-05,
+          "passed": true
+        },
+        {
+          "event": "ffn_primitive_check",
+          "rows": 24,
+          "outputs_checked": 147456,
+          "relative_rmse": 1.26679411695e-07,
+          "max_absolute_error": 3.0915834941e-06,
+          "limit": 1e-05,
+          "passed": true
+        },
+        {
+          "event": "ffn_primitive_check",
+          "rows": 64,
+          "outputs_checked": 393216,
+          "relative_rmse": 1.27390068963e-07,
+          "max_absolute_error": 3.67593020201e-06,
+          "limit": 1e-05,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "route": "all",
+      "cpu_channels": 96,
+      "gpu_channels": 96,
+      "cases": [
+        {
+          "event": "ffn_primitive_check",
+          "rows": 1,
+          "outputs_checked": 6144,
+          "relative_rmse": 1.10590714922e-07,
+          "max_absolute_error": 7.23288394511e-07,
+          "limit": 1e-05,
+          "passed": true
+        },
+        {
+          "event": "ffn_primitive_check",
+          "rows": 24,
+          "outputs_checked": 147456,
+          "relative_rmse": 1.32879464819e-07,
+          "max_absolute_error": 3.66836320609e-06,
+          "limit": 1e-05,
+          "passed": true
+        },
+        {
+          "event": "ffn_primitive_check",
+          "rows": 64,
+          "outputs_checked": 393216,
+          "relative_rmse": 1.31900411381e-07,
+          "max_absolute_error": 3.66836320609e-06,
+          "limit": 1e-05,
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "check_binary_sha256": "66a4b381ee5c454954655cdc2412fa617e4ef54157f2ed3d13ddee468f72732a",
+  "scope": "All tested outputs, identical FP16 operands, double accumulation; no qualified timings."
+}

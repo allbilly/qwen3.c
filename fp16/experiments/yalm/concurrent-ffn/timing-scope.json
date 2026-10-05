@@ -1,0 +1,7 @@
+{
+  "phase": "Host monotonic spans include activation packing, device copies, submits, blocking waits, output unpacking and host math within that phase.",
+  "request": "One independent monotonic span from prompt prefill start through the last of 32 greedy output tokens; includes phase transition, counter reset and interphase diagnostic writes.",
+  "excluded": "Model initialization, pre-request thermal cooldown, input-ID file reads/tokenization and post-request output/report writes.",
+  "handoff": "Residual request time between first-token completion and decode start. Cache preparation that executes in the first decode forward is included in decode, not this residual.",
+  "warmup": "Two full requests before measurement; first warmup writes logits to disk and is excluded."
+}

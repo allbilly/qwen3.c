@@ -1,0 +1,5 @@
+{"event":"ffn_split_init","cpu_channels":96,"gpu_channels":0,"npu_channels":2976,"mode":3,"cpu_threads":1,"npu_tasks":3,"fp16_operands":true,"cpu_resident_weight_bytes":22020096,"extra_npu_weight_bytes":341311488}
+{"event":"routing","dense_prefill":"npu","dense_decode":"npu","cpu_classifier":false,"npu_initialized":true,"gpu_projections_initialized":false,"host_non_linear_ops":"CPU"}
+{"event":"ffn_primitive_check","rows":1,"outputs_checked":6144,"relative_rmse":1.09265022995e-07,"max_absolute_error":7.23288394511e-07,"limit":0.00001,"passed":true}
+{"event":"ffn_primitive_check","rows":24,"outputs_checked":147456,"relative_rmse":1.12918825303e-07,"max_absolute_error":1.38487666845e-06,"limit":0.00001,"passed":true}
+{"event":"ffn_primitive_check","rows":64,"outputs_checked":393216,"relative_rmse":1.12811638074e-07,"max_absolute_error":1.5557743609e-06,"limit":0.00001,"passed":true}
