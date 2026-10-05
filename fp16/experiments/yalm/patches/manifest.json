@@ -61,5 +61,14 @@
       "source/fp16/run.c"
     ],
     "baseline_binary_sha256": "11d2f9b753cf887a11bd3cdb34d1784127184a099d7fa2382601d46b77ef091a"
+  },
+  "cpu-blas-attention": {
+    "patch_sha256": "887f0a2203b182ebb2bf62bf62b23746aa6a21f002feb033c2b6ea0acea03661",
+    "source_provenance": "/home/orangepi/qwen3-bench/matched/roofline/yalm/variants/cpu-blas-attention/source-provenance.json",
+    "compiled_binary_sha256": "9d94833263d3d4c5e38a84364a97f8d9cfb2b913357a3473484ecd893000507b",
+    "paths": [
+      "router.c"
+    ],
+    "baseline_binary_sha256": "11d2f9b753cf887a11bd3cdb34d1784127184a099d7fa2382601d46b77ef091a"
   }
 }

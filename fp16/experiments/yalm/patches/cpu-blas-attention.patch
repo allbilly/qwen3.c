@@ -1,0 +1,75 @@
+--- a/router.c
++++ b/router.c
+@@ -17,6 +17,8 @@
+ static Sgemm sgemm;
+ typedef struct {uint64_t calls,bytes;double wall_ms,pack_ms,compute_ms;} CpuProfile;
+ static CpuProfile profile;
++static float *attn_q,*attn_k,*attn_v,*attn_prob,*attn_out;
++static double attn_pack_ms,attn_score_ms,attn_softmax_ms,attn_value_ms,attn_layout_ms;
+ static double cpu_attention_ms;static uint64_t cpu_attention_calls;
+ static double now(void){struct timespec t;clock_gettime(CLOCK_MONOTONIC,&t);return t.tv_sec*1000.0+t.tv_nsec/1e6;}
+ static const char *names[]={"cpu","gpu","npu"};
+@@ -51,6 +53,11 @@
+         if(!sgemm||!threads||!config)return 0;threads(4);
+         rounded=malloc((size_t)512*3072*4);weight_tile=malloc((size_t)256*3072*4);result_tile=malloc((size_t)512*256*4);
+         if(!rounded||!weight_tile||!result_tile)return 0;
++        if(getenv("CPU_ATTN_BLAS")) {
++            attn_q=malloc(512*128*4);attn_k=malloc(512*128*4);attn_v=malloc(512*128*4);
++            attn_prob=malloc(512*512*4);attn_out=malloc(512*128*4);
++            if(!attn_q||!attn_k||!attn_v||!attn_prob||!attn_out)return 0;
++        }
+         fprintf(stderr,"{\"event\":\"linear_cpu_init\",\"storage\":\"FP16\",\"accumulation\":\"FP32\",\"blas\":\"%s\"}\n",config());
+     }
+     fprintf(stderr,"{\"event\":\"routing\",\"dense_prefill\":\"%s\",\"dense_decode\":\"%s\",\"cpu_classifier\":%s,\"npu_initialized\":%s,\"gpu_projections_initialized\":%s,\"host_non_linear_ops\":\"CPU\"}\n",names[pre_device],names[decode_device],cpu_head?"true":"false",has_npu?"true":"false",has_gpu?"true":"false");
+@@ -95,6 +102,38 @@
+ int npu_attention_prefill(NpuMatmulContext *ctx,const float *q,const float *k,const float *v,float *out,int rows){
+     if(current_device==NPU)return hw_attention_prefill(ctx,q,k,v,out,rows);
+     double begin=now();
++    if(attn_q) {
++        // Round each Q/K/V operand once; SGEMM changes only reduction scheduling.
++        for(int head=0;head<16;head++) {
++            double stage=now();
++            for(int row=0;row<rows;row++)for(int f=0;f<128;f+=8) {
++                const float *srcs[]={q+(size_t)row*2048+head*128+f,
++                    k+(size_t)row*1024+(head/2)*128+f,v+(size_t)row*1024+(head/2)*128+f};
++                float *dsts[]={attn_q+(size_t)row*128+f,attn_k+(size_t)row*128+f,attn_v+(size_t)row*128+f};
++                for(int item=0;item<3;item++) {
++                    float16x8_t h=vcombine_f16(vcvt_f16_f32(vld1q_f32(srcs[item])),vcvt_f16_f32(vld1q_f32(srcs[item]+4)));
++                    vst1q_f32(dsts[item],vcvt_f32_f16(vget_low_f16(h)));vst1q_f32(dsts[item]+4,vcvt_f32_f16(vget_high_f16(h)));
++                }
++            }
++            attn_pack_ms+=now()-stage;stage=now();
++            sgemm(101,111,112,rows,rows,128,1,attn_q,128,attn_k,128,0,attn_prob,rows);
++            attn_score_ms+=now()-stage;stage=now();
++            extern void softmax(float *,int);
++            for(int row=0;row<rows;row++) {
++                float *prob=attn_prob+(size_t)row*rows;
++                for(int t=0;t<=row;t++)prob[t]/=sqrtf(128);
++                softmax(prob,row+1);
++                for(int t=0;t<=row;t++)prob[t]=(float)(__fp16)prob[t];
++                memset(prob+row+1,0,(rows-row-1)*4);
++            }
++            attn_softmax_ms+=now()-stage;stage=now();
++            sgemm(101,111,111,rows,128,rows,1,attn_prob,rows,attn_v,128,0,attn_out,128);
++            attn_value_ms+=now()-stage;stage=now();
++            for(int row=0;row<rows;row++)memcpy(out+(size_t)row*2048+head*128,attn_out+(size_t)row*128,128*4);
++            attn_layout_ms+=now()-stage;
++        }
++        cpu_attention_ms+=now()-begin;cpu_attention_calls++;return 1;
++    }
+     // Match prompt operand precision; decode remains the original FP32 CPU path.
+     #pragma omp parallel for collapse(2)
+     for(int row=0;row<rows;row++)for(int head=0;head<16;head++){
+@@ -109,9 +148,10 @@
+     }
+     cpu_attention_ms+=now()-begin;cpu_attention_calls++;return 1;
+ }
+-void route_clear(void){memset(&profile,0,sizeof(profile));cpu_attention_ms=0;cpu_attention_calls=0;linear_gpu_clear();}
++void route_clear(void){memset(&profile,0,sizeof(profile));cpu_attention_ms=0;cpu_attention_calls=0;attn_pack_ms=attn_score_ms=attn_softmax_ms=attn_value_ms=attn_layout_ms=0;linear_gpu_clear();}
+ void route_dump(const char *phase,int run){
+     fprintf(stderr,"{\"event\":\"linear_cpu_profile\",\"phase\":\"%s\",\"run\":%d,\"warmup\":%s,\"calls\":%llu,\"weight_bytes\":%llu,\"wall_ms\":%.9f,\"pack_ms\":%.9f,\"compute_ms\":%.9f,\"prefill_attention_calls\":%llu,\"prefill_attention_ms\":%.9f}\n",phase,run,run<=0?"true":"false",(unsigned long long)profile.calls,(unsigned long long)profile.bytes,profile.wall_ms,profile.pack_ms,profile.compute_ms,(unsigned long long)cpu_attention_calls,cpu_attention_ms);
++    if(attn_q)fprintf(stderr,"{\"event\":\"cpu_attention_details\",\"phase\":\"%s\",\"run\":%d,\"warmup\":%s,\"calls\":%llu,\"pack_ms\":%.9f,\"score_blas_ms\":%.9f,\"softmax_round_ms\":%.9f,\"value_blas_ms\":%.9f,\"output_layout_ms\":%.9f}\n",phase,run,run<=0?"true":"false",(unsigned long long)cpu_attention_calls,attn_pack_ms,attn_score_ms,attn_softmax_ms,attn_value_ms,attn_layout_ms);
+     linear_gpu_dump(phase,run);
+ }
+-void npu_matmul_shutdown(NpuMatmulContext *ctx){if(has_npu)hw_shutdown(ctx);linear_gpu_close();free(weights);free(rounded);free(weight_tile);free(result_tile);if(blas)dlclose(blas);}
++void npu_matmul_shutdown(NpuMatmulContext *ctx){if(has_npu)hw_shutdown(ctx);linear_gpu_close();free(weights);free(rounded);free(weight_tile);free(result_tile);free(attn_q);free(attn_k);free(attn_v);free(attn_prob);free(attn_out);if(blas)dlclose(blas);}

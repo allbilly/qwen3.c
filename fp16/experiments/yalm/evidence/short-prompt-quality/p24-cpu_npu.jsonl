@@ -1,0 +1,15 @@
+{"event":"linear_cpu_init","storage":"FP16","accumulation":"FP32","blas":"OpenBLAS 0.3.23.dev  USE64BITINT DYNAMIC_ARCH NO_AFFINITY armv8 MAX_THREADS=64"}
+{"event":"routing","dense_prefill":"cpu","dense_decode":"npu","cpu_classifier":false,"npu_initialized":true,"gpu_projections_initialized":false,"host_non_linear_ops":"CPU"}
+{"event":"initialization","mode":"npu_fp16","init_ms":3425.151,"weights":"shared_FP16","npu_cores":3}
+{"event":"cooldown","run":0,"before_millidegrees":55461,"after_millidegrees":52692,"wait_ms":500.265}
+{"event":"linear_cpu_profile","phase":"prefill","run":0,"warmup":true,"calls":197,"weight_bytes":1191968768,"wall_ms":606.849788986,"pack_ms":3.751069926,"compute_ms":602.994016019,"prefill_attention_calls":28,"prefill_attention_ms":28.309900992}
+{"event":"device_phase","phase":"prefill","run":0,"npu_ops":0,"cpu_ops":197}
+{"event":"linear_cpu_profile","phase":"decode","run":0,"warmup":true,"calls":0,"weight_bytes":0,"wall_ms":0.000000000,"pack_ms":0.000000000,"compute_ms":0.000000000,"prefill_attention_calls":0,"prefill_attention_ms":0.000000000}
+{"event":"device_phase","phase":"decode","run":0,"npu_ops":1695,"cpu_ops":0}
+{"event":"run","mode":"npu_fp16","warmup":true,"run":0,"prefill_tokens":24,"new_tokens":16,"first_token_ms":654.003,"decode_steps":15,"decode_ms":1033.503,"decode_tps":14.514,"npu_ops":1695,"cpu_matmul_ops":197,"generated_ids":[17,488,220,17,284,220,19,13,2055,11,279,4226,374,3070,19,334]}
+{"event":"cooldown","run":1,"before_millidegrees":56384,"after_millidegrees":54538,"wait_ms":500.513}
+{"event":"linear_cpu_profile","phase":"prefill","run":1,"warmup":false,"calls":197,"weight_bytes":1191968768,"wall_ms":605.224475972,"pack_ms":3.681069978,"compute_ms":601.434905985,"prefill_attention_calls":28,"prefill_attention_ms":29.810501016}
+{"event":"device_phase","phase":"prefill","run":1,"npu_ops":0,"cpu_ops":197}
+{"event":"linear_cpu_profile","phase":"decode","run":1,"warmup":false,"calls":0,"weight_bytes":0,"wall_ms":0.000000000,"pack_ms":0.000000000,"compute_ms":0.000000000,"prefill_attention_calls":0,"prefill_attention_ms":0.000000000}
+{"event":"device_phase","phase":"decode","run":1,"npu_ops":1695,"cpu_ops":0}
+{"event":"run","mode":"npu_fp16","warmup":false,"run":1,"prefill_tokens":24,"new_tokens":16,"first_token_ms":650.273,"decode_steps":15,"decode_ms":1001.548,"decode_tps":14.977,"npu_ops":1695,"cpu_matmul_ops":197,"generated_ids":[17,488,220,17,284,220,19,13,2055,11,279,4226,374,3070,19,334]}

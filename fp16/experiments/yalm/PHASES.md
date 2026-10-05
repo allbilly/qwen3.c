@@ -61,6 +61,18 @@ Device names below describe dense projections. Norms, RoPE, SwiGLU, residuals, e
 
 ![Phase comparison](../../yalm-phase-matrix.png)
 
+## Additional short-prompt limits
+
+The 20 displayed 128/256-token rows pass their unchanged numerical gates.
+Additional 24-token checks reveal first-prefill-logit disagreement above `0.001`
+for CPU prefill (`0.001838625`), GPU prefill (`0.001487014`) and the explicit
+three-device route (`0.001141505`). GPU prefill also fails on the 73-token case
+(`0.001926848`). Every tested prediction still matches, but these failures are
+retained and **the affected routes are not qualified for general deployment**.
+Timings remain finite-case implementation diagnostics. NPU-prefill routes pass
+the added 24-token check with bit-identical first logits. See [COSTS.md](COSTS.md)
+and `evidence/short-prompt-quality` / `evidence/gpu-extra-quality`.
+
 ## Qualification and rejected runs
 
 All 20 accepted rows pass the unchanged logit gate and every generated-ID comparison. The largest observed relative RMSE is `0.000669901058`.

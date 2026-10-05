@@ -12,6 +12,7 @@ Do not apply several alternative attention patches together.
 | `gpu-tile16.patch` | 16 regular GEMM rows reuse weights in one FP32 accumulator set; original split-down order retained | Compiled; 6 actual-weight projection cases / 383,360 outputs pass `1e-5` rRMSE |
 | `kv-pack-reuse.patch` | Pack 8 shared KV heads once and copy into the original per-core maps | Compiled; full-model correctness and performance pending |
 | `complete-profile.patch` | All 14 root stages plus CPU/GPU/NPU packing, math, transfer and wait details | Compiled externally; hardware profiles pending |
+| `cpu-blas-attention.patch` | CPU prefill attention SGEMM with identical FP16-rounded operands | Compiled; 4 primitive cases / 985,088 outputs pass `1e-4`; full-model 24/73-token logit checks fail; 128/256 pass, all tested predictions match |
 | `request-timer.patch` | Independent prompt-to-final-output monotonic wall span | Compiled externally; full-request measurements pending |
 
 These are independent candidates, with no claimed performance gain yet. The
@@ -41,3 +42,5 @@ layout preparation inside the first decode call remains in the decode span.
 
 `manifest.json` records the external compiled binaries and patch hashes. The
 selected production runner remains the exact original comparison reference.
+
+`CPU_ATTN_BLAS=1` enables the CPU attention candidate when a CPU projection or classifier route initializes OpenBLAS. These patches preserve the original scalar fallback. Extra short-prompt baseline CPU/GPU prefill checks fail the unchanged logit gate; neither a primitive pass nor a finite long-prompt timing establishes general correctness.

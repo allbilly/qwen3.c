@@ -59,7 +59,10 @@ comparison will use one common successful thermal target.
 binary hash `11d2f9b7...`. The [independent candidate patches](patches/README.md)
 reproduce every compiled source hash in isolated application checks. GPU primitive
 checks pass; full-model candidate tests, detailed cost profiles and independent
-complete-request measurements are the next milestones. The selected `runq-fp16`
+complete-request measurements are the next milestones. The [complete cost
+profiles](COSTS.md) now cover all 14 stages and identify actual packing, device,
+synchronization and host wait costs. Additional short-prompt CPU/GPU prefill
+logit checks fail the unchanged gate; those routes remain WIP diagnostics. The selected `runq-fp16`
 remains unchanged.
 
 The `source/` copy preserves the code used in the experiment independently of

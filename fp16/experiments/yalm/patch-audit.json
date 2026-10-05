@@ -29,6 +29,11 @@
       "name": "request-timer",
       "every_compiled_source_matches": true,
       "binary_sha256": "217b20f4c6c174007989f0b740b44ed591b6ee3b5bbbe91efed796ebae918382"
+    },
+    {
+      "name": "cpu-blas-attention",
+      "every_compiled_source_matches": true,
+      "binary_sha256": "9d94833263d3d4c5e38a84364a97f8d9cfb2b913357a3473484ecd893000507b"
     }
   ]
 }

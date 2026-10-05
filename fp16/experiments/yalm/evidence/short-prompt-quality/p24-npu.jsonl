@@ -1,0 +1,14 @@
+{"event":"routing","dense_prefill":"npu","dense_decode":"npu","cpu_classifier":false,"npu_initialized":true,"gpu_projections_initialized":false,"host_non_linear_ops":"CPU"}
+{"event":"initialization","mode":"npu_fp16","init_ms":3105.423,"weights":"shared_FP16","npu_cores":3}
+{"event":"cooldown","run":0,"before_millidegrees":51769,"after_millidegrees":51769,"wait_ms":0.043}
+{"event":"linear_cpu_profile","phase":"prefill","run":0,"warmup":true,"calls":0,"weight_bytes":0,"wall_ms":0.000000000,"pack_ms":0.000000000,"compute_ms":0.000000000,"prefill_attention_calls":0,"prefill_attention_ms":0.000000000}
+{"event":"device_phase","phase":"prefill","run":0,"npu_ops":449,"cpu_ops":0}
+{"event":"linear_cpu_profile","phase":"decode","run":0,"warmup":true,"calls":0,"weight_bytes":0,"wall_ms":0.000000000,"pack_ms":0.000000000,"compute_ms":0.000000000,"prefill_attention_calls":0,"prefill_attention_ms":0.000000000}
+{"event":"device_phase","phase":"decode","run":0,"npu_ops":1695,"cpu_ops":0}
+{"event":"run","mode":"npu_fp16","warmup":true,"run":0,"prefill_tokens":24,"new_tokens":16,"first_token_ms":211.760,"decode_steps":15,"decode_ms":1006.075,"decode_tps":14.909,"npu_ops":2144,"cpu_matmul_ops":0,"generated_ids":[17,488,220,17,284,220,19,13,2055,11,279,4226,374,3070,19,334]}
+{"event":"cooldown","run":1,"before_millidegrees":51769,"after_millidegrees":51769,"wait_ms":0.092}
+{"event":"linear_cpu_profile","phase":"prefill","run":1,"warmup":false,"calls":0,"weight_bytes":0,"wall_ms":0.000000000,"pack_ms":0.000000000,"compute_ms":0.000000000,"prefill_attention_calls":0,"prefill_attention_ms":0.000000000}
+{"event":"device_phase","phase":"prefill","run":1,"npu_ops":449,"cpu_ops":0}
+{"event":"linear_cpu_profile","phase":"decode","run":1,"warmup":false,"calls":0,"weight_bytes":0,"wall_ms":0.000000000,"pack_ms":0.000000000,"compute_ms":0.000000000,"prefill_attention_calls":0,"prefill_attention_ms":0.000000000}
+{"event":"device_phase","phase":"decode","run":1,"npu_ops":1695,"cpu_ops":0}
+{"event":"run","mode":"npu_fp16","warmup":false,"run":1,"prefill_tokens":24,"new_tokens":16,"first_token_ms":142.425,"decode_steps":15,"decode_ms":1023.178,"decode_tps":14.660,"npu_ops":2144,"cpu_matmul_ops":0,"generated_ids":[17,488,220,17,284,220,19,13,2055,11,279,4226,374,3070,19,334]}

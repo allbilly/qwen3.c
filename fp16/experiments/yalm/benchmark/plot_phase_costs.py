@@ -23,7 +23,7 @@ for ax,phase in zip(axes,['prefill','decode']):
   value=r['wall_ms'];rate=r['effective_prefill_tps'] if phase=='prefill' else r['decode_tps'];ax.text(x,value+max(bottom)*.015,f'{value:,.1f} ms\n{rate:.1f} t/s',ha='center',va='bottom',fontsize=9)
 handles,labels=axes[0].get_legend_handles_labels();fig.legend(handles,labels,loc='lower center',ncol=3,fontsize=8,bbox_to_anchor=(.5,.055))
 fig.suptitle('RK3588 phase costs • identical FP16 model and decode inputs',y=.97,fontsize=14)
-fig.text(.02,.015,'One measured diagnostic profile per route, after two full warmups; all clocks audited. Device times include memory stalls.\n* GPU prefill projections / NPU decode projections / GPU decode attention / CPU classifier and host math. Children counted once.',fontsize=8)
+fig.text(.02,.015,'One measured diagnostic profile per route, after two full warmups; all clocks audited. Device times include memory stalls.\n* GPU prefill projections / NPU decode projections / GPU decode attention / CPU classifier and host math. Children counted once.\nExtra short-prompt CPU/GPU prefill checks fail the unchanged logit gate.',fontsize=8)
 fig.tight_layout(rect=(0,.31,1,.93));files={}
 for ext in ['png','jpg','svg']:
  path=root/('phase-costs.'+ext);fig.savefig(path,dpi=180,facecolor='white');files[path.name]=hashlib.sha256(path.read_bytes()).hexdigest()

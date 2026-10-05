@@ -1,0 +1,22 @@
+{
+  "cpu-blas-attention": {
+    "checker_binary_sha256": "26f8b93324b1727ad836ed803a3d3f60531c3967d61745b123353f8531b80641",
+    "checker_source_sha256": "837f2b27ebf6a859c2caf989d2b11ad22c4e91677827d626b706b60432788844",
+    "model_binary_sha256": "9d94833263d3d4c5e38a84364a97f8d9cfb2b913357a3473484ecd893000507b"
+  },
+  "parallel-softmax": {
+    "checker_binary_sha256": "a2a567069641d261f0e66532762e5773a506269639f5b9a5cf742361d0271fa3",
+    "checker_source_sha256": "951f8d071fe25173806162e5e4b64851c3d513d93d987f6c5c003e75655e8431",
+    "model_binary_sha256": "4d064d46ba70ccaf76fa21899c97b21260183a0c4ee132094112c292feeaf7b8"
+  },
+  "fused-attention": {
+    "checker_binary_sha256": "457e0544efe32579dd0b4e707fa8a79cad4a240d9dd9c91e2cf58548071db97a",
+    "checker_source_sha256": "951f8d071fe25173806162e5e4b64851c3d513d93d987f6c5c003e75655e8431",
+    "model_binary_sha256": "464dab9f3f338727c9d2eb1e87c29b391478c6ce3ba093b59ac9536a2b4d113d"
+  },
+  "gpu-tile16": {
+    "checker_binary_sha256": "49343c30b0fdc86db7c2f8c82de27c026409cb213db4b31634ddab3ad4342f4c",
+    "checker_source_sha256": "8f741abaecbcaa74fbcf2b060548b9627745c7464382fefdd04e0c5d109a5969",
+    "model_binary_sha256": "b24217723edfc2bf08f7c9f575281775e95601482b2c74f923af2e972340ca2d"
+  }
+}

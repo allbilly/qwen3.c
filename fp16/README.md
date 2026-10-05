@@ -9,7 +9,9 @@ independent complete-request measurements remain in progress.
 The compiled-and-primitive-checked [phase-routing WIP](experiments/yalm/README.md)
 now has explicit CPU/GPU/NPU projection backends. The [phase measurement milestone](experiments/yalm/PHASES.md) reports prefill
 time and tokens/s plus decode tokens/s for every tested placement. Complete-request
-transfer accounting is still in progress.
+transfer accounting is still in progress. [Complete phase costs](experiments/yalm/COSTS.md)
+are now profiled. Additional short-prompt CPU/GPU prefill checks exceed the unchanged
+logit gate; those routes remain diagnostics despite matching tested tokens.
 
 The engine uses persistent direct-register NPU tasks, three-core matrix
 projections, batched prefill, fused Q/K/V and gate/up projections, prompt

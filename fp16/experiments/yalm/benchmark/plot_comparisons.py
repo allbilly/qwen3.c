@@ -30,7 +30,7 @@ for row,prompt in enumerate([128,256]):
   ax.spines[['right','top']].set_visible(False)
 fig.suptitle('RK3588 • same Qwen3-0.6B FP16 weights • projection placement: prefill → decode',fontsize=14,y=.98)
 cool_note='All requests start at ≤50°C.' if has_e2e else 'Start ≤55°C; CPU/CPU 256 starts ≤50°C after a rejected thermal run.'
-fig.text(.03,.025,'CPU host norms, RoPE, SwiGLU, residuals and sampling remain in every route. 32 output tokens / 31 decode steps.\nTwo full warmups; median of two measured requests; whiskers show min/max. Fixed clocks verified; cooldown excluded.\nEffective prefill = prompt tokens / time to first token, including classifier and sampling. * GPU decode attention, CPU prefill attention.\n'+cool_note,fontsize=9)
+fig.text(.03,.025,'CPU host norms, RoPE, SwiGLU, residuals and sampling remain in every route. 32 output tokens / 31 decode steps.\nTwo full warmups; median of two measured requests; whiskers show min/max. Fixed clocks verified; cooldown excluded.\nEffective prefill = prompt tokens / time to first token, including classifier and sampling. * GPU decode attention, CPU prefill attention.\n'+cool_note+'\nCPU/GPU prefill routes fail extra short-prompt logit checks; these are finite-case phase measurements.',fontsize=9)
 fig.tight_layout(rect=(.01,.09,.99,.95));files={}
 for ext in ['png','jpg','svg']:
  path=root/(args.stem+'.'+ext);fig.savefig(path,dpi=180,facecolor='white');files[path.name]=hashlib.sha256(path.read_bytes()).hexdigest()

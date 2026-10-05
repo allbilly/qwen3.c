@@ -1,0 +1,60 @@
+{
+  "binary_sha256": "11d2f9b753cf887a11bd3cdb34d1784127184a099d7fa2382601d46b77ef091a",
+  "records": [
+    {
+      "prompt": 1,
+      "route": "gpu",
+      "logit_relative_rmse": 0.0001285262146799512,
+      "unchanged_limit": 0.001,
+      "all_predictions_match": true,
+      "quality_passed": true,
+      "golden_ids": [
+        21806,
+        0,
+        358,
+        2776,
+        264,
+        2699,
+        21815,
+        911,
+        279,
+        3491,
+        13,
+        6771,
+        752,
+        1430,
+        311,
+        3535
+      ],
+      "raw_log_sha256": "5557a32aaab0a32d447112ade3301586a26b5a02a107a45e51d3a183b29df897"
+    },
+    {
+      "prompt": 73,
+      "route": "gpu",
+      "logit_relative_rmse": 0.0019268483607603486,
+      "unchanged_limit": 0.001,
+      "all_predictions_match": true,
+      "quality_passed": false,
+      "golden_ids": [
+        13,
+        81917,
+        3170,
+        11504,
+        8205,
+        21595,
+        323,
+        57323,
+        12341,
+        4925,
+        13,
+        8429,
+        653,
+        807,
+        4925,
+        30
+      ],
+      "raw_log_sha256": "e91ef69bc9712fb4ba20d677f047f20de2d03b625368b2e7e1c00bdfd70dd927"
+    }
+  ],
+  "purpose": "Numerical coverage only. Timings are not qualified performance measurements; clock settings untouched. One complete warmup, one full request with all 16 predictions compared."
+}

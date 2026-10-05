@@ -1,0 +1,56 @@
+{
+  "workspace_directory": "/home/orangepi/qwen3-bench/matched/roofline/yalm/quality-gpu-extra",
+  "files": {
+    "p1-gpu.config.json": {
+      "original_sha256": "906b8c3be0a25b16fd6edf7b54b18a6ea07701732fd0ea1fd0f4fa568b0dc4bf",
+      "export": "p1-gpu.config.json",
+      "export_sha256": "906b8c3be0a25b16fd6edf7b54b18a6ea07701732fd0ea1fd0f4fa568b0dc4bf"
+    },
+    "p1-gpu.jsonl": {
+      "original_sha256": "5557a32aaab0a32d447112ade3301586a26b5a02a107a45e51d3a183b29df897",
+      "export": "p1-gpu.jsonl",
+      "export_sha256": "5557a32aaab0a32d447112ade3301586a26b5a02a107a45e51d3a183b29df897"
+    },
+    "p1-gpu.teacher.tokens": {
+      "original_sha256": "725c134d29ca9ca3156d6c893ac0a5e52b84d52525c51e2eb80662655d3dd3d0",
+      "export": "p1-gpu.teacher.tokens",
+      "export_sha256": "725c134d29ca9ca3156d6c893ac0a5e52b84d52525c51e2eb80662655d3dd3d0"
+    },
+    "p1-gpu.tokens": {
+      "original_sha256": "6e1408b01c2dddc443ef8feee1ef5c394b67fc8b2cc74d269933bc02135987c9",
+      "export": "p1-gpu.tokens",
+      "export_sha256": "6e1408b01c2dddc443ef8feee1ef5c394b67fc8b2cc74d269933bc02135987c9"
+    },
+    "p73-gpu.config.json": {
+      "original_sha256": "f2ede52b3c82d2b3e45963e70349b5ac4976efc0cf240d25eb8d25ac6104815b",
+      "export": "p73-gpu.config.json",
+      "export_sha256": "f2ede52b3c82d2b3e45963e70349b5ac4976efc0cf240d25eb8d25ac6104815b"
+    },
+    "p73-gpu.jsonl": {
+      "original_sha256": "e91ef69bc9712fb4ba20d677f047f20de2d03b625368b2e7e1c00bdfd70dd927",
+      "export": "p73-gpu.jsonl",
+      "export_sha256": "e91ef69bc9712fb4ba20d677f047f20de2d03b625368b2e7e1c00bdfd70dd927"
+    },
+    "p73-gpu.teacher.tokens": {
+      "original_sha256": "342e39f874080b7ad4096754951e157eb949b17f47ae401f1b6eebb1d2f31b62",
+      "export": "p73-gpu.teacher.tokens",
+      "export_sha256": "342e39f874080b7ad4096754951e157eb949b17f47ae401f1b6eebb1d2f31b62"
+    },
+    "p73-gpu.tokens": {
+      "original_sha256": "0ab906efbc2c06416b9834c174d70fe8ce42294f05007ac8431e12ffd82edbc5",
+      "export": "p73-gpu.tokens",
+      "export_sha256": "0ab906efbc2c06416b9834c174d70fe8ce42294f05007ac8431e12ffd82edbc5"
+    },
+    "quality-summary.json": {
+      "original_sha256": "b2e40040bc577f25d91afbc922a3f14fe304e2849519286744c68ebf8a5987f3",
+      "export": "quality-summary.json",
+      "export_sha256": "b2e40040bc577f25d91afbc922a3f14fe304e2849519286744c68ebf8a5987f3"
+    },
+    "source-provenance.json": {
+      "original_sha256": "b97fbe6ddf57a2f6cffd4698755a4a393c7a58eddf511fbb30102e6e790ddd95",
+      "export": "source-provenance.json",
+      "export_sha256": "b97fbe6ddf57a2f6cffd4698755a4a393c7a58eddf511fbb30102e6e790ddd95"
+    }
+  },
+  "external_artifacts": "Shared FP16 model, full per-vocabulary logits and compiled binary remain in the comparison workspace; source/binary/input hashes are retained here."
+}
