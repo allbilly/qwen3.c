@@ -1,3 +1,5 @@
 Qwen3-*
 runq
 __pycache__/*
+/runq-fp16
+/fp16/__pycache__/

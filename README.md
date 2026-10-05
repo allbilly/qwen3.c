@@ -23,6 +23,11 @@ and performance.
 
 ## Step 1: checkout and build
 
+For the tested RK3588 direct-register FP16 engine and the comparison against
+stock RKLLM using the same model and precision, see [fp16/README.md](fp16/README.md).
+Current bandwidth, register optimizations and GPU comparison are in
+[fp16/ROOFLINE.md](fp16/ROOFLINE.md).
+
 First, checkout this repo and build it. I recommend the OpenMP version if your toolchain supports it, as it supports multiple CPU
 cores for dramatically improved performance:
 

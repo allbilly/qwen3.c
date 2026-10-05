@@ -1,0 +1,18 @@
+{
+  "data_sha256": "372bd6975ab9e08f0b41522e7132c8821079d0a74ffb31e7f5bcbbd8596dc36f",
+  "source_sha256": "bc178a1b21f0fa75462c681372f404c5fd4b2378bee3500c6a1576399b98abaf",
+  "outputs": [
+    {
+      "path": "/home/orangepi/qwen3-bench/matched/roofline/full-profile/profile.png",
+      "sha256": "f903dca2596d35c8e296db50669de19183f207f105aec8db156aa9b316070299"
+    },
+    {
+      "path": "/home/orangepi/qwen3-bench/matched/roofline/full-profile/profile.jpg",
+      "sha256": "7e55074baa12c5c8572f01f5fe50c97b83cd4e5ecb9a47d40e562b9edd81161d"
+    },
+    {
+      "path": "/home/orangepi/qwen3-bench/matched/roofline/full-profile/profile.svg",
+      "sha256": "25c21bb4e86c8a8e75f30f65605348627d62390019138600113689288e0e600a"
+    }
+  ]
+}

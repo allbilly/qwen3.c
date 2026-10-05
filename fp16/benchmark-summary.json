@@ -1,0 +1,724 @@
+{
+  "source_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+  "precision": "Shared FP16 weights; no integer quantization",
+  "tensor_count": 311,
+  "workloads": {
+    "128": {
+      "source_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "precision": "Shared FP16 weights; no integer quantization",
+      "conversion": {
+        "input_checkpoint_sha256": "31127445785ad9f9db25f34f6b7e3a662b5a5034d1ace033d93e57a24c58a895",
+        "source_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+        "toolkit_version": "1.2.3",
+        "do_quantization": false,
+        "requested_load_dtype": "float16",
+        "optimization_level": 1,
+        "cpu_load_note": "Toolkit widens FP16 source weights to FP32 on CPU; lossless for FP16 values. Verify exported runtime model_dtype separately.",
+        "quantized_dtype_argument": "w8a8 (unused when quantization is disabled)",
+        "quantized_algorithm": "none",
+        "max_context": 512,
+        "npu_cores": 3,
+        "artifact_sha256": "a777ccda03c982653c754405394d6daed354d773404e07f4c607a1b1e3e80e0a"
+      },
+      "tensor_equivalence": {
+        "verified": true,
+        "tensor_count": 311
+      },
+      "source_hashes": {
+        "qwen_fp16_bench.c": "e9f5f7d989acd396693f4e076a0d0fa4d1a2dfec5727df75caac7eecb91df620",
+        "fp16_backend.c": "b748e3738e479a6bb0673e1a1e03d8a9a76cf9dd7ae5e9088a040e9439574410",
+        "fp16_backend.h": "715300d988472e039bcf4e286ddcfd189fd486eb09cf220683584196bcb2d15f",
+        "prefill.h": "bf9ae24c46b0875ffe8c0f00bf2e34a0510f7c52aeb2ae9dcb5ad92ffd692dcb",
+        "attention_backend.h": "176da3185c7f80ffe4578562f052a4f8bb00267a14d0b5003b3483c8e611d680",
+        "vector_math.h": "f7df06593df17d6d3ee6fcc9bae82470413bd372357fbdf4025553039d060bf5",
+        "rkllm_fp16_bench.cpp": "12a517397303cba951ff7cabfa37c7186a97b03859705341b7e0992560a9d914",
+        "qwen_fp16_bench": "e771d6ef93305bf5d108f5bd021dfcfa5b010f5b72c9110f1f5e1ddc09babd76",
+        "rkllm_fp16_bench": "59be6da790b181b88b92c46008c21ba3a28014a61f1fbeb5455ca66b8e60e55f",
+        "selected_custom_binary": "7938f989427487c9cdea1a554572b906dae229a183d2acfb5ac56dd7b9678c7c",
+        "original_runq.c": "1bb9446c2dc929a1827a2b65e1ab194bfd74749a95853eff0f0d120423f6dcb9",
+        "librkllmrt.so": "f25e9b099db08aaacd0a3ac62b4697d3951d6ae61ae41ea09f6702cfa89eb32c"
+      },
+      "input_sha256": "2a34b3ac4ceb91c34e9aa250c4d623d75e698097618346fadce471b74c82ec60",
+      "settings": {
+        "out": "optimization/results/final-lazy-fp16-128",
+        "custom_binary": "/home/orangepi/qwen3.c/runq-fp16",
+        "tokens": "results/prompt128.tokens",
+        "new_tokens": 32,
+        "runs": 5,
+        "warmups": 2,
+        "cores": 3,
+        "stock_cores": 3,
+        "stock_embed_flash": 0,
+        "fused": 1,
+        "domain": 1,
+        "attention": 1,
+        "spin_count": 1000,
+        "split_down": 1,
+        "classifier_tile": 8192,
+        "stream_ffn": 1,
+        "blocks": "custom,stock,stock,custom",
+        "profile": false
+      },
+      "input_tokens": 128,
+      "decode_steps": 31,
+      "sampling": "greedy; EOS 151645 suppressed; empty templates; empty KV history each run",
+      "timing": "External monotonic TTFT and first-to-last token decode span; loading and complete warmups excluded",
+      "engines": {
+        "custom": {
+          "median_ttft_ms": 258.119,
+          "median_decode_tps": 20.499499999999998,
+          "ttft_ms_range": [
+            253.45,
+            263.609
+          ],
+          "decode_tps_range": [
+            20.347,
+            20.733
+          ],
+          "measured_runs": 10,
+          "initializations_ms": [
+            2550.693,
+            2564.938
+          ],
+          "generated_ids": [
+            4379,
+            438,
+            279,
+            4024,
+            1614,
+            13,
+            576,
+            1273,
+            1265,
+            387,
+            1598,
+            389,
+            279,
+            1852,
+            11773,
+            438,
+            279,
+            4024,
+            1614,
+            13,
+            576,
+            1273,
+            1265,
+            387,
+            1598,
+            389,
+            279,
+            1852,
+            5339,
+            438,
+            279,
+            4024
+          ]
+        },
+        "stock": {
+          "median_ttft_ms": 273.401,
+          "median_decode_tps": 19.298499999999997,
+          "ttft_ms_range": [
+            270.503,
+            281.66
+          ],
+          "decode_tps_range": [
+            18.399,
+            19.614
+          ],
+          "measured_runs": 10,
+          "initializations_ms": [
+            1799.595,
+            1785.12
+          ],
+          "generated_ids": [
+            4379,
+            438,
+            279,
+            4024,
+            1614,
+            13,
+            576,
+            1273,
+            1265,
+            387,
+            1598,
+            389,
+            279,
+            1852,
+            11773,
+            438,
+            279,
+            4024,
+            1614,
+            13,
+            576,
+            1273,
+            1265,
+            387,
+            1598,
+            389,
+            279,
+            1852,
+            5339,
+            438,
+            279,
+            4024
+          ]
+        }
+      },
+      "raw_logs": [
+        {
+          "path": "1-custom.txt",
+          "sha256": "e60aeaed67bbf3dd7d942db424a99976eab6896c4e02ef2864a3f06475f4d449"
+        },
+        {
+          "path": "2-stock.txt",
+          "sha256": "9df0899626fbc80edfffcfae66afbe60361e5c11e402fdd310f000472827e59a"
+        },
+        {
+          "path": "3-stock.txt",
+          "sha256": "eccbb40e6e8d8bb39e8ec847bd50da36f9a09fd909b0b2be5a51aa0ef4b4bde3"
+        },
+        {
+          "path": "4-custom.txt",
+          "sha256": "cd40a40be404325d0c75c69a3c70c50d6a1a96e5ac42b4847a716dada35c4c8a"
+        }
+      ],
+      "all_warm_and_measured_ids_match": true,
+      "clocks": {
+        "cpu4_khz": {
+          "target": 2256000,
+          "observed": [
+            2256000
+          ],
+          "held": true
+        },
+        "cpu6_khz": {
+          "target": 2256000,
+          "observed": [
+            2256000
+          ],
+          "held": true
+        },
+        "npu_hz": {
+          "target": 1000000000,
+          "observed": [
+            1000000000
+          ],
+          "held": true
+        },
+        "ddr_hz": {
+          "target": 2112000000,
+          "observed": [
+            2112000000
+          ],
+          "held": true
+        }
+      },
+      "temperature_c_range": [
+        59.153,
+        80.384
+      ],
+      "clocks_held": true,
+      "same_available_resources": true,
+      "fixed_resources_valid": true,
+      "custom_ttft_speed_ratio": 1.0592052502915321,
+      "custom_decode_speed_ratio": 1.0622328160219707,
+      "both_phases_faster": true
+    },
+    "256": {
+      "source_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "precision": "Shared FP16 weights; no integer quantization",
+      "conversion": {
+        "input_checkpoint_sha256": "31127445785ad9f9db25f34f6b7e3a662b5a5034d1ace033d93e57a24c58a895",
+        "source_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+        "toolkit_version": "1.2.3",
+        "do_quantization": false,
+        "requested_load_dtype": "float16",
+        "optimization_level": 1,
+        "cpu_load_note": "Toolkit widens FP16 source weights to FP32 on CPU; lossless for FP16 values. Verify exported runtime model_dtype separately.",
+        "quantized_dtype_argument": "w8a8 (unused when quantization is disabled)",
+        "quantized_algorithm": "none",
+        "max_context": 512,
+        "npu_cores": 3,
+        "artifact_sha256": "a777ccda03c982653c754405394d6daed354d773404e07f4c607a1b1e3e80e0a"
+      },
+      "tensor_equivalence": {
+        "verified": true,
+        "tensor_count": 311
+      },
+      "source_hashes": {
+        "qwen_fp16_bench.c": "e9f5f7d989acd396693f4e076a0d0fa4d1a2dfec5727df75caac7eecb91df620",
+        "fp16_backend.c": "b748e3738e479a6bb0673e1a1e03d8a9a76cf9dd7ae5e9088a040e9439574410",
+        "fp16_backend.h": "715300d988472e039bcf4e286ddcfd189fd486eb09cf220683584196bcb2d15f",
+        "prefill.h": "bf9ae24c46b0875ffe8c0f00bf2e34a0510f7c52aeb2ae9dcb5ad92ffd692dcb",
+        "attention_backend.h": "176da3185c7f80ffe4578562f052a4f8bb00267a14d0b5003b3483c8e611d680",
+        "vector_math.h": "f7df06593df17d6d3ee6fcc9bae82470413bd372357fbdf4025553039d060bf5",
+        "rkllm_fp16_bench.cpp": "12a517397303cba951ff7cabfa37c7186a97b03859705341b7e0992560a9d914",
+        "qwen_fp16_bench": "e771d6ef93305bf5d108f5bd021dfcfa5b010f5b72c9110f1f5e1ddc09babd76",
+        "rkllm_fp16_bench": "59be6da790b181b88b92c46008c21ba3a28014a61f1fbeb5455ca66b8e60e55f",
+        "selected_custom_binary": "7938f989427487c9cdea1a554572b906dae229a183d2acfb5ac56dd7b9678c7c",
+        "original_runq.c": "1bb9446c2dc929a1827a2b65e1ab194bfd74749a95853eff0f0d120423f6dcb9",
+        "librkllmrt.so": "f25e9b099db08aaacd0a3ac62b4697d3951d6ae61ae41ea09f6702cfa89eb32c"
+      },
+      "input_sha256": "899f36a0548cde0e1a51c6bae9454b21d9be66f13402551f81e037e95ff0d929",
+      "settings": {
+        "out": "optimization/results/final-lazy-fp16-256",
+        "custom_binary": "/home/orangepi/qwen3.c/runq-fp16",
+        "tokens": "optimization/results/vector-integrated-quality/prompt256.tokens",
+        "new_tokens": 32,
+        "runs": 4,
+        "warmups": 2,
+        "cores": 3,
+        "stock_cores": 3,
+        "stock_embed_flash": 0,
+        "fused": 1,
+        "domain": 1,
+        "attention": 1,
+        "spin_count": 1000,
+        "split_down": 1,
+        "classifier_tile": 8192,
+        "stream_ffn": 1,
+        "blocks": "stock,custom,custom,stock",
+        "profile": false
+      },
+      "input_tokens": 256,
+      "decode_steps": 31,
+      "sampling": "greedy; EOS 151645 suppressed; empty templates; empty KV history each run",
+      "timing": "External monotonic TTFT and first-to-last token decode span; loading and complete warmups excluded",
+      "engines": {
+        "custom": {
+          "median_ttft_ms": 548.2185,
+          "median_decode_tps": 19.649500000000003,
+          "ttft_ms_range": [
+            528.96,
+            577.428
+          ],
+          "decode_tps_range": [
+            19.512,
+            20.012
+          ],
+          "measured_runs": 8,
+          "initializations_ms": [
+            2479.639,
+            2509.426
+          ],
+          "generated_ids": [
+            47442,
+            264,
+            7162,
+            11,
+            46936,
+            369,
+            279,
+            5662,
+            11,
+            1221,
+            12341,
+            279,
+            1102,
+            13,
+            576,
+            6645,
+            6801,
+            311,
+            7269,
+            63762,
+            2041,
+            10018,
+            279,
+            11253,
+            13,
+            60785,
+            264,
+            14976,
+            18662,
+            3119,
+            323,
+            10339
+          ]
+        },
+        "stock": {
+          "median_ttft_ms": 566.2529999999999,
+          "median_decode_tps": 18.158,
+          "ttft_ms_range": [
+            558.269,
+            578.833
+          ],
+          "decode_tps_range": [
+            17.897,
+            18.867
+          ],
+          "measured_runs": 8,
+          "initializations_ms": [
+            1792.8,
+            1814.406
+          ],
+          "generated_ids": [
+            47442,
+            264,
+            7162,
+            11,
+            46936,
+            369,
+            279,
+            5662,
+            11,
+            1221,
+            12341,
+            279,
+            1102,
+            13,
+            576,
+            6645,
+            6801,
+            311,
+            7269,
+            63762,
+            2041,
+            10018,
+            279,
+            11253,
+            13,
+            60785,
+            264,
+            14976,
+            18662,
+            3119,
+            323,
+            10339
+          ]
+        }
+      },
+      "raw_logs": [
+        {
+          "path": "1-stock.txt",
+          "sha256": "244e06250fba0b853fce1eb1d50efd7ee62b05ebda0eddbeb224cb2fcdf5407e"
+        },
+        {
+          "path": "2-custom.txt",
+          "sha256": "8f12dfa29478bea54294a43d15302cca57d6c0b895d743fc3959ab6689eee03b"
+        },
+        {
+          "path": "3-custom.txt",
+          "sha256": "f2531a0c099a385def7d8b2a3a9492a4f9a16134cc3a4d58d2f27a8af64e93d4"
+        },
+        {
+          "path": "4-stock.txt",
+          "sha256": "29832b9bbd3c19cfeb5418286ead4ebafa9d8b5d17d0f59243fcd9499c654331"
+        }
+      ],
+      "all_warm_and_measured_ids_match": true,
+      "clocks": {
+        "cpu4_khz": {
+          "target": 2256000,
+          "observed": [
+            2256000
+          ],
+          "held": true
+        },
+        "cpu6_khz": {
+          "target": 2256000,
+          "observed": [
+            2256000
+          ],
+          "held": true
+        },
+        "npu_hz": {
+          "target": 1000000000,
+          "observed": [
+            1000000000
+          ],
+          "held": true
+        },
+        "ddr_hz": {
+          "target": 2112000000,
+          "observed": [
+            2112000000
+          ],
+          "held": true
+        }
+      },
+      "temperature_c_range": [
+        52.692,
+        78.538
+      ],
+      "clocks_held": true,
+      "same_available_resources": true,
+      "fixed_resources_valid": true,
+      "custom_ttft_speed_ratio": 1.0328965549320206,
+      "custom_decode_speed_ratio": 1.0821401035356317,
+      "both_phases_faster": true
+    }
+  },
+  "quality": {
+    "source_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+    "precision": "Shared FP16 weights; no integer quantization",
+    "classifier_tile": 8192,
+    "stock_embed_flash": 0,
+    "prompts": {
+      "hello": {
+        "input_tokens": 1,
+        "input_sha256": "6e1408b01c2dddc443ef8feee1ef5c394b67fc8b2cc74d269933bc02135987c9",
+        "all_warm_and_measured_ids_match": true,
+        "generated_ids": {
+          "custom": [
+            21806,
+            0,
+            358,
+            2776,
+            264,
+            2699,
+            21815,
+            911,
+            279,
+            3491,
+            13,
+            6771,
+            752,
+            1430,
+            311,
+            3535
+          ],
+          "stock": [
+            21806,
+            0,
+            358,
+            2776,
+            264,
+            2699,
+            21815,
+            911,
+            279,
+            3491,
+            13,
+            6771,
+            752,
+            1430,
+            311,
+            3535
+          ]
+        },
+        "relative_rmse_to_stock": 5.7053403424597016e-05,
+        "max_absolute_logit_error": 0.0005800127983093262,
+        "cosine_similarity": 0.9999999983730977,
+        "unmasked_all_finite": true
+      },
+      "chat24": {
+        "input_tokens": 24,
+        "input_sha256": "a438d42ab4ad59dfe3e0469d2836993de16fce180efa9bcac481fb4feb45da83",
+        "all_warm_and_measured_ids_match": true,
+        "generated_ids": {
+          "custom": [
+            17,
+            488,
+            220,
+            17,
+            284,
+            220,
+            19,
+            13,
+            2055,
+            11,
+            279,
+            4226,
+            374,
+            3070,
+            19,
+            334
+          ],
+          "stock": [
+            17,
+            488,
+            220,
+            17,
+            284,
+            220,
+            19,
+            13,
+            2055,
+            11,
+            279,
+            4226,
+            374,
+            3070,
+            19,
+            334
+          ]
+        },
+        "relative_rmse_to_stock": 0.0015295430779986845,
+        "max_absolute_logit_error": 0.02069997787475586,
+        "cosine_similarity": 0.9999988339809516,
+        "unmasked_all_finite": true
+      },
+      "prompt128": {
+        "input_tokens": 128,
+        "input_sha256": "db74195066510380bdeae6f32d2d0c7d5305a2f35d2223ba2114a04f2c0de1fc",
+        "all_warm_and_measured_ids_match": true,
+        "generated_ids": {
+          "custom": [
+            4379,
+            438,
+            279,
+            4024,
+            1614,
+            13,
+            576,
+            1273,
+            1265,
+            387,
+            1598,
+            389,
+            279,
+            1852,
+            11773,
+            438
+          ],
+          "stock": [
+            4379,
+            438,
+            279,
+            4024,
+            1614,
+            13,
+            576,
+            1273,
+            1265,
+            387,
+            1598,
+            389,
+            279,
+            1852,
+            11773,
+            438
+          ]
+        },
+        "relative_rmse_to_stock": 0.000650275717311404,
+        "max_absolute_logit_error": 0.013715744018554688,
+        "cosine_similarity": 0.9999998220564555,
+        "unmasked_all_finite": true
+      },
+      "ragged73": {
+        "input_tokens": 73,
+        "input_sha256": "0ab906efbc2c06416b9834c174d70fe8ce42294f05007ac8431e12ffd82edbc5",
+        "all_warm_and_measured_ids_match": true,
+        "generated_ids": {
+          "custom": [
+            13,
+            81917,
+            3170,
+            11504,
+            8205,
+            21595,
+            323,
+            57323,
+            12341,
+            4925,
+            13,
+            8429,
+            653,
+            807,
+            4925,
+            30
+          ],
+          "stock": [
+            13,
+            81917,
+            3170,
+            11504,
+            8205,
+            21595,
+            323,
+            57323,
+            12341,
+            4925,
+            13,
+            8429,
+            653,
+            807,
+            4925,
+            30
+          ]
+        },
+        "relative_rmse_to_stock": 0.0011217746645538185,
+        "max_absolute_logit_error": 0.013676166534423828,
+        "cosine_similarity": 0.999999413443109,
+        "unmasked_all_finite": true
+      },
+      "prompt256": {
+        "input_tokens": 256,
+        "input_sha256": "899f36a0548cde0e1a51c6bae9454b21d9be66f13402551f81e037e95ff0d929",
+        "all_warm_and_measured_ids_match": true,
+        "generated_ids": {
+          "custom": [
+            47442,
+            264,
+            7162,
+            11,
+            46936,
+            369,
+            279,
+            5662,
+            11,
+            1221,
+            12341,
+            279,
+            1102,
+            13,
+            576,
+            6645
+          ],
+          "stock": [
+            47442,
+            264,
+            7162,
+            11,
+            46936,
+            369,
+            279,
+            5662,
+            11,
+            1221,
+            12341,
+            279,
+            1102,
+            13,
+            576,
+            6645
+          ]
+        },
+        "relative_rmse_to_stock": 0.0008059672564452603,
+        "max_absolute_logit_error": 0.015625,
+        "cosine_similarity": 0.9999997564492709,
+        "unmasked_all_finite": true
+      }
+    },
+    "timings": "Quality diagnostics only; clocks are not locked and these timings are excluded from the performance comparison",
+    "all_prompt_token_sequences_match": true,
+    "custom_binary_path": "/home/orangepi/qwen3.c/runq-fp16",
+    "binary_sha256": {
+      "custom": "7938f989427487c9cdea1a554572b906dae229a183d2acfb5ac56dd7b9678c7c",
+      "stock": "59be6da790b181b88b92c46008c21ba3a28014a61f1fbeb5455ca66b8e60e55f"
+    }
+  },
+  "current_strict_diagnostic": {
+    "left": "optimization/results/final-fp16-quality/hello-custom.f32",
+    "right": "optimization/results/final-fp16-quality/hello-reference.f32",
+    "vocab_size": 151936,
+    "all_finite": true,
+    "explicitly_masked_ids": [],
+    "masked_values": {},
+    "unmasked_all_finite": true,
+    "relative_rmse_to_right": 4.6863973233113215e-05,
+    "max_absolute_error": 0.0004107952117919922,
+    "cosine_similarity": 0.9999999989985381,
+    "left_argmax": 21806,
+    "right_argmax": 21806,
+    "greedy_first_token_matches": true,
+    "note": "Re-run of the original strict numerical diagnostic using its unchanged 1e-4 relative RMSE limit. A greedy-token match does not override a failed numerical diagnostic.",
+    "diagnostic_relative_rmse_limit": 0.0001,
+    "passed": true
+  },
+  "audit_path": "/home/orangepi/qwen3-bench/matched/optimization/results/final-audit.json"
+}

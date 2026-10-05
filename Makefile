@@ -1,10 +1,20 @@
 # choose your compiler, e.g. gcc/clang
 # example override to clang: make run CC=clang
 CC = gcc
+.DEFAULT_GOAL := run
 
 NPU_SRCS = npu_matmul.c
 NPU_INCLUDES = -I../include
 NPU_LIBS = -ldrm
+
+# Direct-register FP16 engine for RK3588 and the matched Qwen3-0.6B checkpoint.
+FP16_NPU_INCLUDE ?= ../npu/include
+FP16_SRCS = fp16/run.c fp16/fp16_backend.c
+FP16_HEADERS = fp16/fp16_backend.h fp16/prefill.h fp16/attention_backend.h fp16/vector_math.h qwen3.h npu_matmul.h
+.PHONY: fp16
+fp16: runq-fp16
+runq-fp16: $(FP16_SRCS) $(FP16_HEADERS) runq.c
+	$(CC) -Ofast -fopenmp -march=native -D_FILE_OFFSET_BITS=64 -I$(FP16_NPU_INCLUDE) $(FP16_SRCS) -lm -ldrm -o $@
 
 # the most basic way of building that is most likely to work on most systems
 .PHONY: run
@@ -52,3 +62,4 @@ gnuopenmp:
 .PHONY: clean
 clean:
 	rm -f runq
+	rm -f runq-fp16

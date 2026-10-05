@@ -1,0 +1,32 @@
+{
+  "data_sha256": "a43dd3f5033d4525de6428d8ec81649d81c81c2688e1f64aefbe970c2aab0b7b",
+  "source_sha256": "75dfbd95e8c73fd44e0c40b87af10bb2101fba3019f1fa3d88dae0e135ad6bd9",
+  "matplotlib": "3.10.8",
+  "numpy": "2.2.6",
+  "outputs": [
+    {
+      "path": "/home/orangepi/qwen3-bench/matched/roofline/hybrid/hybrid.png",
+      "sha256": "4c525f0c1c6e8fa945b98fb59aa28573a470e12a47a913a3930bfbfc2f097fe8"
+    },
+    {
+      "path": "/home/orangepi/qwen3-bench/matched/roofline/hybrid/hybrid.jpg",
+      "sha256": "b3b95b768c855f8d29372d1336b158902fb1a56406d9f5eb29007959a9796dfd"
+    },
+    {
+      "path": "/home/orangepi/qwen3-bench/matched/roofline/hybrid/hybrid.svg",
+      "sha256": "fe61b02467b7e2775a1f8789f633ecb0e3920f25a94dc72ff24d9310dc298db1"
+    },
+    {
+      "path": "/home/orangepi/qwen3-bench/matched/roofline/hybrid/gpu-costs.png",
+      "sha256": "aad1acb7494cc2e94be0d58078a9f2a61eae9b4f3d22d8cc60b24bb820db91dd"
+    },
+    {
+      "path": "/home/orangepi/qwen3-bench/matched/roofline/hybrid/gpu-costs.jpg",
+      "sha256": "560d8dfb3a12b614a7898696f31fa2b70d19aa5f05957bbc95b0de7c4903a9e2"
+    },
+    {
+      "path": "/home/orangepi/qwen3-bench/matched/roofline/hybrid/gpu-costs.svg",
+      "sha256": "97574b074035a8f3b1deb251f51208a9e22707bc88ea883d64f449a45e5fcc75"
+    }
+  ]
+}

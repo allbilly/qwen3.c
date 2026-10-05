@@ -1,0 +1,624 @@
+{
+  "model": "Qwen/Qwen3-0.6B",
+  "source_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+  "precision": "Shared FP16 weights, no integer quantization",
+  "projection_tensor_count": 197,
+  "projection_weight_bytes_per_decode_token": 1191968768,
+  "dense_projection_FLOPs_per_decode_token": 1191968768,
+  "projection_tensors": {
+    "lm_head.weight": 311164928,
+    "model.layers.0.mlp.down_proj.weight": 6291456,
+    "model.layers.0.mlp.gate_proj.weight": 6291456,
+    "model.layers.0.mlp.up_proj.weight": 6291456,
+    "model.layers.0.self_attn.k_proj.weight": 2097152,
+    "model.layers.0.self_attn.o_proj.weight": 4194304,
+    "model.layers.0.self_attn.q_proj.weight": 4194304,
+    "model.layers.0.self_attn.v_proj.weight": 2097152,
+    "model.layers.1.mlp.down_proj.weight": 6291456,
+    "model.layers.1.mlp.gate_proj.weight": 6291456,
+    "model.layers.1.mlp.up_proj.weight": 6291456,
+    "model.layers.1.self_attn.k_proj.weight": 2097152,
+    "model.layers.1.self_attn.o_proj.weight": 4194304,
+    "model.layers.1.self_attn.q_proj.weight": 4194304,
+    "model.layers.1.self_attn.v_proj.weight": 2097152,
+    "model.layers.10.mlp.down_proj.weight": 6291456,
+    "model.layers.10.mlp.gate_proj.weight": 6291456,
+    "model.layers.10.mlp.up_proj.weight": 6291456,
+    "model.layers.10.self_attn.k_proj.weight": 2097152,
+    "model.layers.10.self_attn.o_proj.weight": 4194304,
+    "model.layers.10.self_attn.q_proj.weight": 4194304,
+    "model.layers.10.self_attn.v_proj.weight": 2097152,
+    "model.layers.11.mlp.down_proj.weight": 6291456,
+    "model.layers.11.mlp.gate_proj.weight": 6291456,
+    "model.layers.11.mlp.up_proj.weight": 6291456,
+    "model.layers.11.self_attn.k_proj.weight": 2097152,
+    "model.layers.11.self_attn.o_proj.weight": 4194304,
+    "model.layers.11.self_attn.q_proj.weight": 4194304,
+    "model.layers.11.self_attn.v_proj.weight": 2097152,
+    "model.layers.12.mlp.down_proj.weight": 6291456,
+    "model.layers.12.mlp.gate_proj.weight": 6291456,
+    "model.layers.12.mlp.up_proj.weight": 6291456,
+    "model.layers.12.self_attn.k_proj.weight": 2097152,
+    "model.layers.12.self_attn.o_proj.weight": 4194304,
+    "model.layers.12.self_attn.q_proj.weight": 4194304,
+    "model.layers.12.self_attn.v_proj.weight": 2097152,
+    "model.layers.13.mlp.down_proj.weight": 6291456,
+    "model.layers.13.mlp.gate_proj.weight": 6291456,
+    "model.layers.13.mlp.up_proj.weight": 6291456,
+    "model.layers.13.self_attn.k_proj.weight": 2097152,
+    "model.layers.13.self_attn.o_proj.weight": 4194304,
+    "model.layers.13.self_attn.q_proj.weight": 4194304,
+    "model.layers.13.self_attn.v_proj.weight": 2097152,
+    "model.layers.14.mlp.down_proj.weight": 6291456,
+    "model.layers.14.mlp.gate_proj.weight": 6291456,
+    "model.layers.14.mlp.up_proj.weight": 6291456,
+    "model.layers.14.self_attn.k_proj.weight": 2097152,
+    "model.layers.14.self_attn.o_proj.weight": 4194304,
+    "model.layers.14.self_attn.q_proj.weight": 4194304,
+    "model.layers.14.self_attn.v_proj.weight": 2097152,
+    "model.layers.15.mlp.down_proj.weight": 6291456,
+    "model.layers.15.mlp.gate_proj.weight": 6291456,
+    "model.layers.15.mlp.up_proj.weight": 6291456,
+    "model.layers.15.self_attn.k_proj.weight": 2097152,
+    "model.layers.15.self_attn.o_proj.weight": 4194304,
+    "model.layers.15.self_attn.q_proj.weight": 4194304,
+    "model.layers.15.self_attn.v_proj.weight": 2097152,
+    "model.layers.16.mlp.down_proj.weight": 6291456,
+    "model.layers.16.mlp.gate_proj.weight": 6291456,
+    "model.layers.16.mlp.up_proj.weight": 6291456,
+    "model.layers.16.self_attn.k_proj.weight": 2097152,
+    "model.layers.16.self_attn.o_proj.weight": 4194304,
+    "model.layers.16.self_attn.q_proj.weight": 4194304,
+    "model.layers.16.self_attn.v_proj.weight": 2097152,
+    "model.layers.17.mlp.down_proj.weight": 6291456,
+    "model.layers.17.mlp.gate_proj.weight": 6291456,
+    "model.layers.17.mlp.up_proj.weight": 6291456,
+    "model.layers.17.self_attn.k_proj.weight": 2097152,
+    "model.layers.17.self_attn.o_proj.weight": 4194304,
+    "model.layers.17.self_attn.q_proj.weight": 4194304,
+    "model.layers.17.self_attn.v_proj.weight": 2097152,
+    "model.layers.18.mlp.down_proj.weight": 6291456,
+    "model.layers.18.mlp.gate_proj.weight": 6291456,
+    "model.layers.18.mlp.up_proj.weight": 6291456,
+    "model.layers.18.self_attn.k_proj.weight": 2097152,
+    "model.layers.18.self_attn.o_proj.weight": 4194304,
+    "model.layers.18.self_attn.q_proj.weight": 4194304,
+    "model.layers.18.self_attn.v_proj.weight": 2097152,
+    "model.layers.19.mlp.down_proj.weight": 6291456,
+    "model.layers.19.mlp.gate_proj.weight": 6291456,
+    "model.layers.19.mlp.up_proj.weight": 6291456,
+    "model.layers.19.self_attn.k_proj.weight": 2097152,
+    "model.layers.19.self_attn.o_proj.weight": 4194304,
+    "model.layers.19.self_attn.q_proj.weight": 4194304,
+    "model.layers.19.self_attn.v_proj.weight": 2097152,
+    "model.layers.2.mlp.down_proj.weight": 6291456,
+    "model.layers.2.mlp.gate_proj.weight": 6291456,
+    "model.layers.2.mlp.up_proj.weight": 6291456,
+    "model.layers.2.self_attn.k_proj.weight": 2097152,
+    "model.layers.2.self_attn.o_proj.weight": 4194304,
+    "model.layers.2.self_attn.q_proj.weight": 4194304,
+    "model.layers.2.self_attn.v_proj.weight": 2097152,
+    "model.layers.20.mlp.down_proj.weight": 6291456,
+    "model.layers.20.mlp.gate_proj.weight": 6291456,
+    "model.layers.20.mlp.up_proj.weight": 6291456,
+    "model.layers.20.self_attn.k_proj.weight": 2097152,
+    "model.layers.20.self_attn.o_proj.weight": 4194304,
+    "model.layers.20.self_attn.q_proj.weight": 4194304,
+    "model.layers.20.self_attn.v_proj.weight": 2097152,
+    "model.layers.21.mlp.down_proj.weight": 6291456,
+    "model.layers.21.mlp.gate_proj.weight": 6291456,
+    "model.layers.21.mlp.up_proj.weight": 6291456,
+    "model.layers.21.self_attn.k_proj.weight": 2097152,
+    "model.layers.21.self_attn.o_proj.weight": 4194304,
+    "model.layers.21.self_attn.q_proj.weight": 4194304,
+    "model.layers.21.self_attn.v_proj.weight": 2097152,
+    "model.layers.22.mlp.down_proj.weight": 6291456,
+    "model.layers.22.mlp.gate_proj.weight": 6291456,
+    "model.layers.22.mlp.up_proj.weight": 6291456,
+    "model.layers.22.self_attn.k_proj.weight": 2097152,
+    "model.layers.22.self_attn.o_proj.weight": 4194304,
+    "model.layers.22.self_attn.q_proj.weight": 4194304,
+    "model.layers.22.self_attn.v_proj.weight": 2097152,
+    "model.layers.23.mlp.down_proj.weight": 6291456,
+    "model.layers.23.mlp.gate_proj.weight": 6291456,
+    "model.layers.23.mlp.up_proj.weight": 6291456,
+    "model.layers.23.self_attn.k_proj.weight": 2097152,
+    "model.layers.23.self_attn.o_proj.weight": 4194304,
+    "model.layers.23.self_attn.q_proj.weight": 4194304,
+    "model.layers.23.self_attn.v_proj.weight": 2097152,
+    "model.layers.24.mlp.down_proj.weight": 6291456,
+    "model.layers.24.mlp.gate_proj.weight": 6291456,
+    "model.layers.24.mlp.up_proj.weight": 6291456,
+    "model.layers.24.self_attn.k_proj.weight": 2097152,
+    "model.layers.24.self_attn.o_proj.weight": 4194304,
+    "model.layers.24.self_attn.q_proj.weight": 4194304,
+    "model.layers.24.self_attn.v_proj.weight": 2097152,
+    "model.layers.25.mlp.down_proj.weight": 6291456,
+    "model.layers.25.mlp.gate_proj.weight": 6291456,
+    "model.layers.25.mlp.up_proj.weight": 6291456,
+    "model.layers.25.self_attn.k_proj.weight": 2097152,
+    "model.layers.25.self_attn.o_proj.weight": 4194304,
+    "model.layers.25.self_attn.q_proj.weight": 4194304,
+    "model.layers.25.self_attn.v_proj.weight": 2097152,
+    "model.layers.26.mlp.down_proj.weight": 6291456,
+    "model.layers.26.mlp.gate_proj.weight": 6291456,
+    "model.layers.26.mlp.up_proj.weight": 6291456,
+    "model.layers.26.self_attn.k_proj.weight": 2097152,
+    "model.layers.26.self_attn.o_proj.weight": 4194304,
+    "model.layers.26.self_attn.q_proj.weight": 4194304,
+    "model.layers.26.self_attn.v_proj.weight": 2097152,
+    "model.layers.27.mlp.down_proj.weight": 6291456,
+    "model.layers.27.mlp.gate_proj.weight": 6291456,
+    "model.layers.27.mlp.up_proj.weight": 6291456,
+    "model.layers.27.self_attn.k_proj.weight": 2097152,
+    "model.layers.27.self_attn.o_proj.weight": 4194304,
+    "model.layers.27.self_attn.q_proj.weight": 4194304,
+    "model.layers.27.self_attn.v_proj.weight": 2097152,
+    "model.layers.3.mlp.down_proj.weight": 6291456,
+    "model.layers.3.mlp.gate_proj.weight": 6291456,
+    "model.layers.3.mlp.up_proj.weight": 6291456,
+    "model.layers.3.self_attn.k_proj.weight": 2097152,
+    "model.layers.3.self_attn.o_proj.weight": 4194304,
+    "model.layers.3.self_attn.q_proj.weight": 4194304,
+    "model.layers.3.self_attn.v_proj.weight": 2097152,
+    "model.layers.4.mlp.down_proj.weight": 6291456,
+    "model.layers.4.mlp.gate_proj.weight": 6291456,
+    "model.layers.4.mlp.up_proj.weight": 6291456,
+    "model.layers.4.self_attn.k_proj.weight": 2097152,
+    "model.layers.4.self_attn.o_proj.weight": 4194304,
+    "model.layers.4.self_attn.q_proj.weight": 4194304,
+    "model.layers.4.self_attn.v_proj.weight": 2097152,
+    "model.layers.5.mlp.down_proj.weight": 6291456,
+    "model.layers.5.mlp.gate_proj.weight": 6291456,
+    "model.layers.5.mlp.up_proj.weight": 6291456,
+    "model.layers.5.self_attn.k_proj.weight": 2097152,
+    "model.layers.5.self_attn.o_proj.weight": 4194304,
+    "model.layers.5.self_attn.q_proj.weight": 4194304,
+    "model.layers.5.self_attn.v_proj.weight": 2097152,
+    "model.layers.6.mlp.down_proj.weight": 6291456,
+    "model.layers.6.mlp.gate_proj.weight": 6291456,
+    "model.layers.6.mlp.up_proj.weight": 6291456,
+    "model.layers.6.self_attn.k_proj.weight": 2097152,
+    "model.layers.6.self_attn.o_proj.weight": 4194304,
+    "model.layers.6.self_attn.q_proj.weight": 4194304,
+    "model.layers.6.self_attn.v_proj.weight": 2097152,
+    "model.layers.7.mlp.down_proj.weight": 6291456,
+    "model.layers.7.mlp.gate_proj.weight": 6291456,
+    "model.layers.7.mlp.up_proj.weight": 6291456,
+    "model.layers.7.self_attn.k_proj.weight": 2097152,
+    "model.layers.7.self_attn.o_proj.weight": 4194304,
+    "model.layers.7.self_attn.q_proj.weight": 4194304,
+    "model.layers.7.self_attn.v_proj.weight": 2097152,
+    "model.layers.8.mlp.down_proj.weight": 6291456,
+    "model.layers.8.mlp.gate_proj.weight": 6291456,
+    "model.layers.8.mlp.up_proj.weight": 6291456,
+    "model.layers.8.self_attn.k_proj.weight": 2097152,
+    "model.layers.8.self_attn.o_proj.weight": 4194304,
+    "model.layers.8.self_attn.q_proj.weight": 4194304,
+    "model.layers.8.self_attn.v_proj.weight": 2097152,
+    "model.layers.9.mlp.down_proj.weight": 6291456,
+    "model.layers.9.mlp.gate_proj.weight": 6291456,
+    "model.layers.9.mlp.up_proj.weight": 6291456,
+    "model.layers.9.self_attn.k_proj.weight": 2097152,
+    "model.layers.9.self_attn.o_proj.weight": 4194304,
+    "model.layers.9.self_attn.q_proj.weight": 4194304,
+    "model.layers.9.self_attn.v_proj.weight": 2097152
+  },
+  "method": "Useful projection-weight payload / wall time; not a DRAM counter measurement. Decode reads the tied embedding only as a 1024-element row; the full tied tensor is counted once as the output head.",
+  "cpu_read_GBps": {
+    "1": 17.645402,
+    "4": 26.698412
+  },
+  "NPU_one_core_stream_GBps": 10.901497,
+  "NPU_three_core_stream_GBps": 30.94095,
+  "NPU_three_core_end_to_end_stream_GBps": 30.611466,
+  "best_measured_native_FP16_GEMM_GFLOPs": 1739.44236,
+  "decode_weight_arithmetic_intensity_FLOPs_per_byte": 1,
+  "empirical_compute_ceiling_note": "Best observed native GEMM in this sweep; not a theoretical hardware maximum.",
+  "weight_only_decode_roofline_tps": 25.957852949381977,
+  "ninety_percent_of_stream_roofline_tps": 23.362067654443777,
+  "best_measured_compute_ridge_FLOPs_per_byte": 56.21813034182855,
+  "nominal_64bit_DDR_double_edge_2112MHz_GBps": 33.792,
+  "nominal_ceiling_note": "Conditional theoretical calculation: 4x16-bit bus and 2.112 GHz DDR clock, per Rockchip brief datasheet. The measured NPU stream is the denominator for the reported efficiency.",
+  "DRAM_byte_PMU_available": false,
+  "actual_DRAM_utilization_measured": false,
+  "decode": {
+    "128": {
+      "custom": {
+        "median_ttft_ms": 233.8485,
+        "median_decode_tps": 20.85,
+        "estimated_weight_GBps": 24.852548812800002,
+        "fraction_of_NPU_stream": 0.8032251373277163,
+        "at_90_percent_useful_weight_bandwidth": false
+      },
+      "stock": {
+        "median_ttft_ms": 276.23299999999995,
+        "median_decode_tps": 19.179499999999997,
+        "estimated_weight_GBps": 22.861364985855996,
+        "fraction_of_NPU_stream": 0.7388708163729942,
+        "at_90_percent_useful_weight_bandwidth": false
+      },
+      "KV_footprint_note": {
+        "average_attention_length": 144,
+        "unique_KV_read_bytes": 33030144,
+        "CPU_head_loop_KV_read_bytes": 66060288,
+        "cache_reuse_and_actual_DRAM_reads": "Not measured; GQA heads share keys/values, and CPU cache reuse can reduce transactions."
+      }
+    },
+    "256": {
+      "custom": {
+        "median_ttft_ms": 507.688,
+        "median_decode_tps": 20.1485,
+        "estimated_weight_GBps": 24.016382722047997,
+        "fraction_of_NPU_stream": 0.7762005601653471,
+        "at_90_percent_useful_weight_bandwidth": false
+      },
+      "stock": {
+        "median_ttft_ms": 569.5365,
+        "median_decode_tps": 18.5415,
+        "estimated_weight_GBps": 22.100888911871998,
+        "fraction_of_NPU_stream": 0.7142925124106402,
+        "at_90_percent_useful_weight_bandwidth": false
+      },
+      "KV_footprint_note": {
+        "average_attention_length": 272,
+        "unique_KV_read_bytes": 62390272,
+        "CPU_head_loop_KV_read_bytes": 124780544,
+        "cache_reuse_and_actual_DRAM_reads": "Not measured; GQA heads share keys/values, and CPU cache reuse can reduce transactions."
+      }
+    }
+  },
+  "profiles": {
+    "baseline-profile128": {
+      "pack_ms": 0.35409677419354846,
+      "sync_ms": 0.9456774193548386,
+      "submit_ms": 43.13674193548387,
+      "unpack_ms": 0.4168548387096774,
+      "estimated_weight_GBps_during_submit_intervals": 27.63233184793444,
+      "fraction_of_NPU_stream_during_submit_intervals": 0.8930666914860222,
+      "CPU_attention_ms_per_token": 2.4041774193548386,
+      "note": "Submit intervals include driver/interrupt overhead. This is not hardware counter bus utilization. Prefill streaming FFN is omitted by the older profiler, so no complete prefill decomposition is claimed."
+    },
+    "final-profile128": {
+      "pack_ms": 0.35383870967741937,
+      "sync_ms": 0.9484999999999999,
+      "submit_ms": 41.43714516129033,
+      "unpack_ms": 0.41011290322580646,
+      "estimated_weight_GBps_during_submit_intervals": 28.765706791825778,
+      "fraction_of_NPU_stream_during_submit_intervals": 0.9296969482781161,
+      "CPU_attention_ms_per_token": 2.3853548387096772,
+      "note": "Submit intervals include driver/interrupt overhead. This is not hardware counter bus utilization. Prefill streaming FFN is omitted by the older profiler, so no complete prefill decomposition is claimed."
+    }
+  },
+  "paired_changes": {
+    "128": {
+      "all_ids_match": true,
+      "engines": {
+        "baseline": {
+          "median_ttft_ms": 256.094,
+          "median_decode_tps": 20.6655,
+          "ttft_range": [
+            245.492,
+            272.768
+          ],
+          "decode_range": [
+            20.447,
+            21.04
+          ],
+          "measured_runs": 10
+        },
+        "candidate": {
+          "median_ttft_ms": 237.2865,
+          "median_decode_tps": 20.939500000000002,
+          "ttft_range": [
+            228.986,
+            251.199
+          ],
+          "decode_range": [
+            20.724,
+            21.127
+          ],
+          "measured_runs": 10
+        }
+      },
+      "ttft_speed_ratio": 1.0792607249042825,
+      "decode_speed_ratio": 1.013258812997508
+    },
+    "256": {
+      "all_ids_match": true,
+      "engines": {
+        "baseline": {
+          "median_ttft_ms": 547.402,
+          "median_decode_tps": 19.822,
+          "ttft_range": [
+            532.948,
+            572.789
+          ],
+          "decode_range": [
+            19.739,
+            19.981
+          ],
+          "measured_runs": 10
+        },
+        "candidate": {
+          "median_ttft_ms": 514.8985,
+          "median_decode_tps": 19.948,
+          "ttft_range": [
+            511.346,
+            542.706
+          ],
+          "decode_range": [
+            19.733,
+            20.298
+          ],
+          "measured_runs": 10
+        }
+      },
+      "ttft_speed_ratio": 1.0631260335774915,
+      "decode_speed_ratio": 1.0063565735041873
+    }
+  },
+  "projection_changes": [
+    {
+      "phase": "classifier",
+      "returncode": 0,
+      "correct": true,
+      "modes": {
+        "baseline": {
+          "weight_GBps": 29.0362805,
+          "GFLOPs": 29.0362805,
+          "elapsed_ms": 10.7164184375,
+          "measured_runs": 14
+        },
+        "candidate": {
+          "weight_GBps": 30.371557,
+          "GFLOPs": 30.371557,
+          "elapsed_ms": 10.2452744375,
+          "measured_runs": 14
+        }
+      }
+    },
+    {
+      "phase": "down",
+      "returncode": 0,
+      "correct": true,
+      "modes": {
+        "baseline": {
+          "weight_GBps": 7.2630025,
+          "GFLOPs": 464.832162,
+          "elapsed_ms": 0.8662339649999999,
+          "measured_runs": 14
+        },
+        "candidate": {
+          "weight_GBps": 13.813285,
+          "GFLOPs": 884.0502544999999,
+          "elapsed_ms": 0.455464135,
+          "measured_runs": 14
+        }
+      }
+    }
+  ],
+  "final_audit": {
+    "experiments": {
+      "/home/orangepi/qwen3-bench/matched/roofline/final-stock128": {
+        "verified": true,
+        "medians": {
+          "custom": {
+            "ttft_ms": 233.8485,
+            "decode_tps": 20.85,
+            "measured_runs": 10
+          },
+          "stock": {
+            "ttft_ms": 276.23299999999995,
+            "decode_tps": 19.179499999999997,
+            "measured_runs": 10
+          }
+        },
+        "per_block": [
+          {
+            "block": 1,
+            "engine": "custom",
+            "median_ttft_ms": 241.155,
+            "median_decode_tps": 20.828
+          },
+          {
+            "block": 2,
+            "engine": "stock",
+            "median_ttft_ms": 276.714,
+            "median_decode_tps": 19.238
+          },
+          {
+            "block": 3,
+            "engine": "stock",
+            "median_ttft_ms": 276.167,
+            "median_decode_tps": 19.03
+          },
+          {
+            "block": 4,
+            "engine": "custom",
+            "median_ttft_ms": 227.997,
+            "median_decode_tps": 20.87
+          }
+        ],
+        "custom_ttft_speed_ratio": 1.1812476881399707,
+        "custom_decode_speed_ratio": 1.0870982038113612,
+        "both_phases_faster": true,
+        "generated_ids_match_including_warmups": true,
+        "sampled_clocks_held": true
+      },
+      "/home/orangepi/qwen3-bench/matched/roofline/final-stock256": {
+        "verified": true,
+        "medians": {
+          "custom": {
+            "ttft_ms": 507.688,
+            "decode_tps": 20.1485,
+            "measured_runs": 8
+          },
+          "stock": {
+            "ttft_ms": 569.5365,
+            "decode_tps": 18.5415,
+            "measured_runs": 8
+          }
+        },
+        "per_block": [
+          {
+            "block": 1,
+            "engine": "stock",
+            "median_ttft_ms": 566.154,
+            "median_decode_tps": 18.658
+          },
+          {
+            "block": 2,
+            "engine": "custom",
+            "median_ttft_ms": 506.994,
+            "median_decode_tps": 20.227
+          },
+          {
+            "block": 3,
+            "engine": "custom",
+            "median_ttft_ms": 508.709,
+            "median_decode_tps": 20.1145
+          },
+          {
+            "block": 4,
+            "engine": "stock",
+            "median_ttft_ms": 573.281,
+            "median_decode_tps": 18.395000000000003
+          }
+        ],
+        "custom_ttft_speed_ratio": 1.1218238366870992,
+        "custom_decode_speed_ratio": 1.086670441981501,
+        "both_phases_faster": true,
+        "generated_ids_match_including_warmups": true,
+        "sampled_clocks_held": true
+      }
+    },
+    "quality": "/home/orangepi/qwen3-bench/matched/roofline/final-quality",
+    "quality_all_five_prompts_match": true,
+    "actual_clock_settings_restored": {
+      "cpu4": {
+        "scaling_governor": "ondemand",
+        "scaling_min_freq": "408000",
+        "scaling_max_freq": "2256000"
+      },
+      "cpu6": {
+        "scaling_governor": "ondemand",
+        "scaling_min_freq": "408000",
+        "scaling_max_freq": "2256000"
+      },
+      "npu": {
+        "governor": "rknpu_ondemand",
+        "min_freq": "300000000",
+        "max_freq": "1000000000"
+      },
+      "ddr": {
+        "governor": "dmc_ondemand",
+        "min_freq": "528000000",
+        "max_freq": "2112000000"
+      }
+    },
+    "original_strict_numeric_failure_preserved": true,
+    "original_strict_numeric_relative_rmse": 0.0002352630788963264,
+    "current_strict_reference_diagnostic": {
+      "passed": true,
+      "relative_rmse": 4.6863973233113215e-05,
+      "unchanged_limit": 0.0001,
+      "cpu_reference_sha256": "f4c9e3fbd2b7bbeef5f88178e293fba53c5a6be444e8e96bffd49df86db2b25b"
+    }
+  },
+  "gpu_inventory": {
+    "llama_checkout": "/home/orangepi/rkllama/ggml-org_llama.cpp",
+    "llama_revision": "b92761a515ea31e852e7fbc1fad5f874b46f3718",
+    "opencl_source_sha256": "9b6ed650cdf50cf09407c9f7ea5109fa90ca87ae8e58616930c68d31d6215085",
+    "installed_build_opencl": false,
+    "installed_build_vulkan": false,
+    "driver_device": "Mali-LODX r0p0",
+    "gpu_available_frequencies_hz": [
+      1000000000,
+      900000000,
+      800000000,
+      700000000,
+      600000000,
+      500000000,
+      400000000,
+      300000000
+    ],
+    "current_opencl_source_accepts_only": [
+      "Adreno/Qualcomm",
+      "Intel"
+    ],
+    "full_model_gpu_benchmark_performed": false,
+    "reason": "Installed llama.cpp build exposes no GPU devices. Its OpenCL source rejects Mali; no installed Vulkan loader/ICD was found. No CPU result is reported as GPU."
+  },
+  "GGUF_tensor_equivalence": {
+    "verified": true,
+    "effective_tensor_count": 311,
+    "integer_quantization": false,
+    "gguf_sha256": "6782193cfc9dc18b3ab1db4479893ef2d554650df7b33b460aeefe349e4ce035",
+    "hf_checkpoint_sha256": "31127445785ad9f9db25f34f6b7e3a662b5a5034d1ace033d93e57a24c58a895",
+    "source_revision": "c1899de289a04d12100db370d81485cdf75e47ca"
+  },
+  "gpu_microbenchmark": {
+    "verified": true,
+    "jobs": {
+      "read": {
+        "medians": {
+          "wall_ms": 87.13635400272324,
+          "device_ms": 86.12508700000002,
+          "wall_payload_GBps": 24.64509414673106,
+          "device_payload_GBps": 24.934472902187018
+        },
+        "correctness_checks": 2,
+        "raw_log_sha256": "210fe760b2f247ad28fe76aa8603f8e390158d7f4a7f8f70581ca0e585694006"
+      },
+      "gemv": {
+        "medians": {
+          "wall_ms": 92.2229560019332,
+          "device_ms": 88.481481,
+          "wall_payload_GBps": 17.464336493033663,
+          "device_payload_GBps": 18.20282298394169,
+          "wall_GFLOPs": 17.464336493033663,
+          "device_GFLOPs": 18.20282298394169
+        },
+        "correctness_checks": 8,
+        "raw_log_sha256": "061fa31004c97b43725af8c4895b57fe401c1d7152f17db5b7b4fe08b19ed83a"
+      },
+      "gemm64": {
+        "medians": {
+          "wall_ms": 2034.7508439990634,
+          "device_ms": 2032.9198820000004,
+          "wall_payload_GBps": 0.19788820099891571,
+          "device_payload_GBps": 0.19806643024410142,
+          "wall_GFLOPs": 12.664844863930606,
+          "device_GFLOPs": 12.676251535622491
+        },
+        "correctness_checks": 8,
+        "raw_log_sha256": "7457ec85c5f48f22907968d269af289710ec9b34e4f92e8c63a4d4077540e6e1"
+      }
+    },
+    "sample_count": 135,
+    "clocks_held_and_restored": true,
+    "scope": "Prototype microkernels, FP16 operand storage / FP32 arithmetic / FP32 output; no full-model GPU throughput or hardware ceiling established."
+  },
+  "strict_numerics": {
+    "left": "roofline/final-quality/hello-custom.f32",
+    "right": "roofline/final-quality/hello-reference.f32",
+    "vocab_size": 151936,
+    "all_finite": true,
+    "explicitly_masked_ids": [],
+    "masked_values": {},
+    "unmasked_all_finite": true,
+    "relative_rmse_to_right": 4.6863973233113215e-05,
+    "max_absolute_error": 0.0004107952117919922,
+    "cosine_similarity": 0.9999999989985381,
+    "left_argmax": 21806,
+    "right_argmax": 21806,
+    "greedy_first_token_matches": true,
+    "note": "Fresh CPU reference with the shared FP16 operands and double accumulation; original 1e-4 diagnostic limit retained.",
+    "diagnostic_relative_rmse_limit": 0.0001,
+    "passed": true
+  },
+  "all_five_prompt_logits_bit_identical_to_preserved_baseline": true,
+  "serial_measurement_clocks_held_and_saved_settings_restored": true,
+  "selected_binary_sha256": "100716de3aca7c4efc7a5b0a5a87178c41adc3bc4049a5f1c009a83fe051ff58"
+}

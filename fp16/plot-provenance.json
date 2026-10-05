@@ -1,0 +1,45 @@
+{
+  "data_sha256": "bf69b72d10e274e343076b75d63dbdbc447167e22e8605958fc54b77fbfb7c18",
+  "micro_summary_sha256": "b84a515867cf266ee8c2593d77ee9a532ed0da113dec1e483e2a336d4f4da6f8",
+  "source_sha256": "6b003387b2b92b978b932487a929ec050ff5e0c5f9b58cc61dbc6a2dc7cbf655",
+  "packages": {
+    "matplotlib": "3.10.8",
+    "numpy": "2.2.6",
+    "pillow": "12.3.0"
+  },
+  "dimensions_pixels": [
+    2520,
+    1260
+  ],
+  "outputs": [
+    {
+      "path": "/home/orangepi/qwen3-bench/matched/roofline/roofline.png",
+      "sha256": "4a63f43431e962fce7fd5af2883bfebedd69a2b0ee318a19ea91f29003578b34"
+    },
+    {
+      "path": "/home/orangepi/qwen3-bench/matched/roofline/roofline.jpg",
+      "sha256": "3187d23cc7cd89bd1eb2026a07fde9f932448e7266740035366c553894d9d21b"
+    },
+    {
+      "path": "/home/orangepi/qwen3-bench/matched/roofline/roofline.svg",
+      "sha256": "82c00e3581f4ace20e147ce6b73437c504e77e9894684f4376bab94a2bee4da2"
+    }
+  ],
+  "prefill_points": {
+    "128": {
+      "logical_weight_bytes": 2307653632,
+      "dense_FLOPs": 113054056448,
+      "ttft_ms": 233.8485,
+      "weight_intensity": 48.99091218902647,
+      "dense_GFLOPs": 483.44999624970865
+    },
+    "256": {
+      "logical_weight_bytes": 4304142336,
+      "dense_FLOPs": 225796947968,
+      "ttft_ms": 507.688,
+      "weight_intensity": 52.46038126560692,
+      "dense_GFLOPs": 444.75533786104853
+    }
+  },
+  "method": "min(empirical useful NPU weight streaming slope \u00d7 useful-weight intensity, best observed native GEMM)"
+}
