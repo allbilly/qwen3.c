@@ -95,19 +95,29 @@ on CPUs 4–7, and compares every vocabulary logit on fixed decode inputs.
 Prompt token IDs, checkpoint SHA-256, individual trials, timing ranges, and
 accuracy checks are saved in its JSON output.
 
-On this base M1 with Qwen3-0.6B Q8, five paired trials gave these median prompt
-times after one full warmup per process:
+On this base M1 with Qwen3-0.6B Q8, four threads on CPUs 4–7 and five queued
+paired trials gave these medians after one full warmup per process. The
+default hybrid mode uses ANE prefill and CPU Q8 decode; its five-token prompt
+also uses CPU prefill.
 
-| Prompt tokens | CPU prefill | ANE/CPU prefill | Speedup |
-| --- | --- | --- | --- |
-| 5 | 65.1 ms | 65.4 ms (CPU) | 1.00× |
-| 16 | 202.1 ms | 102.7 ms | 1.97× |
-| 32 | 397.8 ms | 184.8 ms | 2.15× |
-| 65 | 843.5 ms | 355.2 ms | 2.37× |
+| Prompt tokens | CPU prefill (ms) | Hybrid prefill (ms) | Prefill speedup | CPU decode (tokens/s) | Hybrid decode (tokens/s) |
+| --- | --- | --- | --- | --- | --- |
+| 5 | 65.1 | 65.4 (CPU) | 1.00× | 59.1 | 56.8 |
+| 16 | 202.1 | 102.7 | 1.97× | 58.7 | 57.2 |
+| 32 | 397.8 | 184.8 | 2.15× | 58.9 | 56.4 |
+| 65 | 843.5 | 355.2 | 2.37× | 55.0 | 56.7 |
 
-Hybrid decode measured about 56–57 tokens/s. With 16 output tokens, prompt
-plus decode was 1.26–1.80× faster for the 16–65-token prompts. Initialization
-is excluded: resident weight preparation took about 0.5–0.6 seconds, versus
+For a 32-token prompt and 16 output tokens, the decode routing comparison is:
+
+| Mode | Trials | Prefill (ms) | Decode (tokens/s) | Prompt + 16 output tokens (ms) |
+| --- | --- | --- | --- | --- |
+| CPU Q8 | 5 | 397.8 | 58.9 | 649.7 |
+| ANE prefill + CPU decode (default) | 5 | 184.8 | 56.4 | 450.9 |
+| ANE prefill + ANE decode (`ANE_DECODE=1`) | 3 | 176.5 | 24.4 | 783.5 |
+
+With 16 output tokens, prompt plus decode was 1.26–1.80× faster in hybrid mode
+for the 16–65-token prompts. Initialization is excluded from both tables:
+resident weight preparation took about 0.5–0.6 seconds, versus
 0.15–0.23 seconds for CPU loading. CPU can be faster for a single short request.
 These are shared-desktop measurements; the raw ranges include occasional
 background-load outliers. See [the full results](ane/benchmarks/m1-qwen3-0.6b.json).
