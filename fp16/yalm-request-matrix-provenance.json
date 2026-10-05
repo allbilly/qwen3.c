@@ -1,0 +1,12 @@
+{
+  "audit": "request-matrix51-audit.json",
+  "audit_sha256": "df5d1e656dc3f2c4e0e3cb4b157455faf261836dde1043156d7f763b3a4e1ce4",
+  "suite": [
+    "e2e/baseline-guarded/all-placements51"
+  ],
+  "files_sha256": {
+    "request-matrix51.png": "b556b0ee877b0022c8b3fd647753d40350eaa86d5632c27bd8d61a6492322628",
+    "request-matrix51.jpg": "a5b4be6806f505426ef18ead29d48698a1d91108af217d8eca37dde47990332f",
+    "request-matrix51.svg": "0d317e987aee374a29a1a0563ffb2c8b8d2cdd698befabf87e85e8a697b16a8e"
+  }
+}

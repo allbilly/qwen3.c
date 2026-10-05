@@ -1,0 +1,11 @@
+{
+  "scores_ms_per_token": 2.3178199999999998,
+  "softmax_values_ms_per_token": 3.505618322580645,
+  "copy_event_ms_per_token": 0.10112335483870968,
+  "host_queue_wait_residual_ms_per_token": 3.176186710032258,
+  "attention_wall_ms_per_token": 9.100748387451613,
+  "root_coverage": 0.999744482901984,
+  "kernel_calls_per_token": 56.0,
+  "output_steps": 31,
+  "scope": "Single complete 256-token diagnostic at <=51C, two full warmups and one measurement, OpenCL profiling enabled. Device execution includes memory stalls; host residual includes event collection. Speed claims use separate unprofiled paired runs."
+}

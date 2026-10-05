@@ -1,0 +1,2688 @@
+{
+  "shared_fp16_model_sha256": "c92807935bfbb81f6628e9c2723267da367577a3f2b1bb2530b87bf5e5bba879",
+  "selected_binary_unchanged": true,
+  "records": [
+    {
+      "directory": "profiles/fused-profile/fused-costs25651",
+      "label": "p256-1-attention",
+      "route": "attention",
+      "prompt": 256,
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": "decode",
+      "cpu_classifier": false,
+      "quality_passed": true,
+      "relative_rmse": 0.0,
+      "all_predictions_match": true,
+      "ttft_ms": 526.51,
+      "effective_prefill_tps": 486.22058460428104,
+      "decode_tps": 18.589,
+      "measured_runs": 1,
+      "ttft_range": [
+        526.51,
+        526.51
+      ],
+      "decode_range": [
+        18.589,
+        18.589
+      ],
+      "root_profiles": [
+        {
+          "event": "phase_profile",
+          "phase": "prefill",
+          "run": 1,
+          "warmup": false,
+          "prompt_tokens": 256,
+          "steps": 1,
+          "wall_ms": 526.509639993,
+          "root": {
+            "cache_layout": {
+              "ms": 0.0,
+              "calls": 1
+            },
+            "embedding": {
+              "ms": 0.130373001,
+              "calls": 1
+            },
+            "attention_norm": {
+              "ms": 1.214191005,
+              "calls": 28
+            },
+            "qkv": {
+              "ms": 76.592057988,
+              "calls": 28
+            },
+            "qk_norm_rope": {
+              "ms": 6.860199004,
+              "calls": 28
+            },
+            "kv_write": {
+              "ms": 4.968761981,
+              "calls": 28
+            },
+            "attention": {
+              "ms": 220.848970994,
+              "calls": 28
+            },
+            "wo": {
+              "ms": 64.082652017,
+              "calls": 28
+            },
+            "residual_ffn_norm": {
+              "ms": 2.695840999,
+              "calls": 28
+            },
+            "ffn": {
+              "ms": 136.219854027,
+              "calls": 28
+            },
+            "ffn_residual": {
+              "ms": 2.031137973,
+              "calls": 28
+            },
+            "final_norm": {
+              "ms": 0.001750007,
+              "calls": 1
+            },
+            "classifier": {
+              "ms": 10.197690994,
+              "calls": 1
+            },
+            "sampling": {
+              "ms": 0.620365992,
+              "calls": 1
+            }
+          },
+          "details": {
+            "q": {
+              "register_update": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "fp16_native_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "input_memcpy": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_to_device": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_from_device": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "submit": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "output_copy_unpack_reduce": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_kv_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_softmax": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "swiglu_and_optional_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              }
+            },
+            "k": {
+              "register_update": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "fp16_native_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "input_memcpy": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_to_device": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_from_device": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "submit": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "output_copy_unpack_reduce": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_kv_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_softmax": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "swiglu_and_optional_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              }
+            },
+            "v": {
+              "register_update": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "fp16_native_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "input_memcpy": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_to_device": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_from_device": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "submit": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "output_copy_unpack_reduce": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_kv_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_softmax": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "swiglu_and_optional_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              }
+            },
+            "wo": {
+              "register_update": {
+                "ms": 0.076705977,
+                "calls": 84,
+                "bytes": 30240,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "fp16_native_pack": {
+                "ms": 8.125135064,
+                "calls": 224,
+                "bytes": 88080384,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "input_memcpy": {
+                "ms": 3.860159963,
+                "calls": 224,
+                "bytes": 88080384,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_to_device": {
+                "ms": 2.997416973,
+                "calls": 756,
+                "bytes": 88110624,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_from_device": {
+                "ms": 1.141857088,
+                "calls": 672,
+                "bytes": 29360128,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "submit": {
+                "ms": 38.621665955,
+                "calls": 224,
+                "bytes": 0,
+                "driver_ms": 37.572563,
+                "driver_min_ms": 0.158081,
+                "driver_max_ms": 0.221664,
+                "invalid_driver_times": 0
+              },
+              "output_copy_unpack_reduce": {
+                "ms": 8.928662911,
+                "calls": 224,
+                "bytes": 29360128,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_kv_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_softmax": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "swiglu_and_optional_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              }
+            },
+            "gate": {
+              "register_update": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "fp16_native_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "input_memcpy": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_to_device": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_from_device": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "submit": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "output_copy_unpack_reduce": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_kv_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_softmax": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "swiglu_and_optional_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              }
+            },
+            "down": {
+              "register_update": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "fp16_native_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "input_memcpy": {
+                "ms": 3.313880846,
+                "calls": 336,
+                "bytes": 44040192,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_to_device": {
+                "ms": 1.867795125,
+                "calls": 336,
+                "bytes": 44040192,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_from_device": {
+                "ms": 2.158889085,
+                "calls": 336,
+                "bytes": 88080384,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "submit": {
+                "ms": 30.365576938,
+                "calls": 112,
+                "bytes": 0,
+                "driver_ms": 29.792755,
+                "driver_min_ms": 0.256372,
+                "driver_max_ms": 0.297204,
+                "invalid_driver_times": 0
+              },
+              "output_copy_unpack_reduce": {
+                "ms": 9.463579938,
+                "calls": 112,
+                "bytes": 88080384,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_kv_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_softmax": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "swiglu_and_optional_pack": {
+                "ms": 19.171570078,
+                "calls": 112,
+                "bytes": 220200960,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              }
+            },
+            "up": {
+              "register_update": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "fp16_native_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "input_memcpy": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_to_device": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_from_device": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "submit": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "output_copy_unpack_reduce": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_kv_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_softmax": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "swiglu_and_optional_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              }
+            },
+            "classifier": {
+              "register_update": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "fp16_native_pack": {
+                "ms": 0.009916022,
+                "calls": 7,
+                "bytes": 43008,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "input_memcpy": {
+                "ms": 0.011083961,
+                "calls": 7,
+                "bytes": 43008,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_to_device": {
+                "ms": 0.030917019,
+                "calls": 21,
+                "bytes": 43008,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_from_device": {
+                "ms": 0.035870999,
+                "calls": 21,
+                "bytes": 607744,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "submit": {
+                "ms": 10.023570001,
+                "calls": 7,
+                "bytes": 0,
+                "driver_ms": 9.987989,
+                "driver_min_ms": 1.409606,
+                "driver_max_ms": 1.453647,
+                "invalid_driver_times": 0
+              },
+              "output_copy_unpack_reduce": {
+                "ms": 0.07495901,
+                "calls": 7,
+                "bytes": 607744,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_kv_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_softmax": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "swiglu_and_optional_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              }
+            },
+            "qkv": {
+              "register_update": {
+                "ms": 0.069713011,
+                "calls": 84,
+                "bytes": 30240,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "fp16_native_pack": {
+                "ms": 3.447453961,
+                "calls": 112,
+                "bytes": 44040192,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "input_memcpy": {
+                "ms": 2.08947809,
+                "calls": 112,
+                "bytes": 44040192,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_to_device": {
+                "ms": 1.526852876,
+                "calls": 420,
+                "bytes": 44070432,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_from_device": {
+                "ms": 2.988366991,
+                "calls": 336,
+                "bytes": 117440512,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "submit": {
+                "ms": 38.899044022,
+                "calls": 112,
+                "bytes": 0,
+                "driver_ms": 38.292974,
+                "driver_min_ms": 0.329871,
+                "driver_max_ms": 0.379453,
+                "invalid_driver_times": 0
+              },
+              "output_copy_unpack_reduce": {
+                "ms": 27.317116961,
+                "calls": 112,
+                "bytes": 117440512,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_kv_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_softmax": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "swiglu_and_optional_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              }
+            },
+            "gate_up": {
+              "register_update": {
+                "ms": 0.069703922,
+                "calls": 84,
+                "bytes": 30240,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "fp16_native_pack": {
+                "ms": 4.401768073,
+                "calls": 112,
+                "bytes": 44040192,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "input_memcpy": {
+                "ms": 2.519094035,
+                "calls": 336,
+                "bytes": 44040192,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_to_device": {
+                "ms": 1.947139069,
+                "calls": 420,
+                "bytes": 44070432,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_from_device": {
+                "ms": 4.685266942,
+                "calls": 336,
+                "bytes": 176160768,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "submit": {
+                "ms": 55.878755957,
+                "calls": 112,
+                "bytes": 0,
+                "driver_ms": 55.243233,
+                "driver_min_ms": 0.479494,
+                "driver_max_ms": 0.531701,
+                "invalid_driver_times": 0
+              },
+              "output_copy_unpack_reduce": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_kv_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_softmax": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "swiglu_and_optional_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              }
+            },
+            "attention_scores": {
+              "register_update": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "fp16_native_pack": {
+                "ms": 25.25532797,
+                "calls": 1792,
+                "bytes": 88080384,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "input_memcpy": {
+                "ms": 1.411051154,
+                "calls": 1792,
+                "bytes": 29360128,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_to_device": {
+                "ms": 2.869097307,
+                "calls": 1792,
+                "bytes": 29360128,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_from_device": {
+                "ms": 3.330499455,
+                "calls": 1792,
+                "bytes": 117440512,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "submit": {
+                "ms": 23.853915781,
+                "calls": 672,
+                "bytes": 0,
+                "driver_ms": 20.720001,
+                "driver_min_ms": 0.016916,
+                "driver_max_ms": 0.081374,
+                "invalid_driver_times": 0
+              },
+              "output_copy_unpack_reduce": {
+                "ms": 26.979365557,
+                "calls": 1792,
+                "bytes": 117440512,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_kv_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_softmax": {
+                "ms": 41.710370854,
+                "calls": 672,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "swiglu_and_optional_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              }
+            },
+            "attention_values": {
+              "register_update": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "fp16_native_pack": {
+                "ms": 13.080785871,
+                "calls": 1792,
+                "bytes": 176160768,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "input_memcpy": {
+                "ms": 3.288770914,
+                "calls": 1792,
+                "bytes": 58720256,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_to_device": {
+                "ms": 4.459819928,
+                "calls": 1792,
+                "bytes": 58720256,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_from_device": {
+                "ms": 2.248139814,
+                "calls": 1792,
+                "bytes": 58720256,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "submit": {
+                "ms": 21.692695871,
+                "calls": 672,
+                "bytes": 0,
+                "driver_ms": 18.697606,
+                "driver_min_ms": 0.013999,
+                "driver_max_ms": 0.074666,
+                "invalid_driver_times": 0
+              },
+              "output_copy_unpack_reduce": {
+                "ms": 16.043185115,
+                "calls": 1792,
+                "bytes": 58720256,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_kv_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_softmax": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "swiglu_and_optional_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              }
+            },
+            "attention_kv": {
+              "register_update": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "fp16_native_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "input_memcpy": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_to_device": {
+                "ms": 4.464187026,
+                "calls": 896,
+                "bytes": 58720256,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_from_device": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "submit": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "output_copy_unpack_reduce": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_kv_pack": {
+                "ms": 20.769589007,
+                "calls": 168,
+                "bytes": 176160768,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_softmax": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "swiglu_and_optional_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              }
+            }
+          }
+        },
+        {
+          "event": "phase_profile",
+          "phase": "decode",
+          "run": 1,
+          "warmup": false,
+          "prompt_tokens": 256,
+          "steps": 31,
+          "wall_ms": 1667.622402996,
+          "root": {
+            "cache_layout": {
+              "ms": 0.00013174261290322583,
+              "calls": 31
+            },
+            "embedding": {
+              "ms": 0.0011102893548387096,
+              "calls": 31
+            },
+            "attention_norm": {
+              "ms": 0.042713867548387095,
+              "calls": 868
+            },
+            "qkv": {
+              "ms": 8.818851736290322,
+              "calls": 868
+            },
+            "qk_norm_rope": {
+              "ms": 0.10466970983870967,
+              "calls": 868
+            },
+            "kv_write": {
+              "ms": 0.03496135916129032,
+              "calls": 868
+            },
+            "attention": {
+              "ms": 9.106534899709677,
+              "calls": 868
+            },
+            "wo": {
+              "ms": 5.128285065774194,
+              "calls": 868
+            },
+            "residual_ffn_norm": {
+              "ms": 0.050824609,
+              "calls": 868
+            },
+            "ffn": {
+              "ms": 19.595945749064516,
+              "calls": 868
+            },
+            "ffn_residual": {
+              "ms": 0.022279550967741934,
+              "calls": 868
+            },
+            "final_norm": {
+              "ms": 0.0011947746129032258,
+              "calls": 31
+            },
+            "classifier": {
+              "ms": 10.249466514387096,
+              "calls": 31
+            },
+            "sampling": {
+              "ms": 0.6235558400322581,
+              "calls": 31
+            }
+          },
+          "details": {
+            "q": {
+              "register_update": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "fp16_native_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "input_memcpy": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_to_device": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_from_device": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "submit": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "output_copy_unpack_reduce": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_kv_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_softmax": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "swiglu_and_optional_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              }
+            },
+            "k": {
+              "register_update": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "fp16_native_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "input_memcpy": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_to_device": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_from_device": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "submit": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "output_copy_unpack_reduce": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_kv_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_softmax": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "swiglu_and_optional_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              }
+            },
+            "v": {
+              "register_update": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "fp16_native_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "input_memcpy": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_to_device": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_from_device": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "submit": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "output_copy_unpack_reduce": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_kv_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_softmax": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "swiglu_and_optional_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              }
+            },
+            "wo": {
+              "register_update": {
+                "ms": 0.064164981,
+                "calls": 84,
+                "bytes": 30240,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "fp16_native_pack": {
+                "ms": 2.296563864,
+                "calls": 868,
+                "bytes": 10665984,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "input_memcpy": {
+                "ms": 1.369340986,
+                "calls": 868,
+                "bytes": 10665984,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_to_device": {
+                "ms": 5.585648298,
+                "calls": 2688,
+                "bytes": 10696224,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_from_device": {
+                "ms": 2.796447814,
+                "calls": 2604,
+                "bytes": 3555328,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "submit": {
+                "ms": 143.34721522,
+                "calls": 868,
+                "bytes": 0,
+                "driver_ms": 139.101189,
+                "driver_min_ms": 0.142915,
+                "driver_max_ms": 0.188997,
+                "invalid_driver_times": 0
+              },
+              "output_copy_unpack_reduce": {
+                "ms": 1.859933048,
+                "calls": 868,
+                "bytes": 3555328,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_kv_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_softmax": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "swiglu_and_optional_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              }
+            },
+            "gate": {
+              "register_update": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "fp16_native_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "input_memcpy": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_to_device": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_from_device": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "submit": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "output_copy_unpack_reduce": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_kv_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_softmax": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "swiglu_and_optional_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              }
+            },
+            "down": {
+              "register_update": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "fp16_native_pack": {
+                "ms": 1.482237548,
+                "calls": 868,
+                "bytes": 15998976,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "input_memcpy": {
+                "ms": 1.778290421,
+                "calls": 868,
+                "bytes": 15998976,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_to_device": {
+                "ms": 4.444655001,
+                "calls": 2604,
+                "bytes": 15998976,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_from_device": {
+                "ms": 2.833800703,
+                "calls": 2604,
+                "bytes": 3555328,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "submit": {
+                "ms": 199.444128081,
+                "calls": 868,
+                "bytes": 0,
+                "driver_ms": 195.328494,
+                "driver_min_ms": 0.208539,
+                "driver_max_ms": 0.25433,
+                "invalid_driver_times": 0
+              },
+              "output_copy_unpack_reduce": {
+                "ms": 1.63243182,
+                "calls": 868,
+                "bytes": 3555328,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_kv_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_softmax": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "swiglu_and_optional_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              }
+            },
+            "up": {
+              "register_update": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "fp16_native_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "input_memcpy": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_to_device": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_from_device": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "submit": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "output_copy_unpack_reduce": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_kv_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_softmax": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "swiglu_and_optional_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              }
+            },
+            "classifier": {
+              "register_update": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "fp16_native_pack": {
+                "ms": 0.216123044,
+                "calls": 217,
+                "bytes": 1333248,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "input_memcpy": {
+                "ms": 0.33220388,
+                "calls": 217,
+                "bytes": 1333248,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_to_device": {
+                "ms": 0.893086076,
+                "calls": 651,
+                "bytes": 1333248,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_from_device": {
+                "ms": 1.032196879,
+                "calls": 651,
+                "bytes": 18840064,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "submit": {
+                "ms": 312.802901104,
+                "calls": 217,
+                "bytes": 0,
+                "driver_ms": 311.639754,
+                "driver_min_ms": 1.397064,
+                "driver_max_ms": 1.488646,
+                "invalid_driver_times": 0
+              },
+              "output_copy_unpack_reduce": {
+                "ms": 2.144882038,
+                "calls": 217,
+                "bytes": 18840064,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_kv_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_softmax": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "swiglu_and_optional_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              }
+            },
+            "qkv": {
+              "register_update": {
+                "ms": 0.060373023,
+                "calls": 84,
+                "bytes": 30240,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "fp16_native_pack": {
+                "ms": 0.802356079,
+                "calls": 868,
+                "bytes": 5332992,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "input_memcpy": {
+                "ms": 1.27252765,
+                "calls": 868,
+                "bytes": 5332992,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_to_device": {
+                "ms": 3.641111284,
+                "calls": 2688,
+                "bytes": 5363232,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_from_device": {
+                "ms": 2.82707876,
+                "calls": 2604,
+                "bytes": 14221312,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "submit": {
+                "ms": 259.57596086,
+                "calls": 868,
+                "bytes": 0,
+                "driver_ms": 255.465821,
+                "driver_min_ms": 0.274162,
+                "driver_max_ms": 0.322288,
+                "invalid_driver_times": 0
+              },
+              "output_copy_unpack_reduce": {
+                "ms": 3.540777937,
+                "calls": 868,
+                "bytes": 14221312,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_kv_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_softmax": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "swiglu_and_optional_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              }
+            },
+            "gate_up": {
+              "register_update": {
+                "ms": 0.053671002,
+                "calls": 84,
+                "bytes": 30240,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "fp16_native_pack": {
+                "ms": 0.945275068,
+                "calls": 868,
+                "bytes": 5332992,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "input_memcpy": {
+                "ms": 1.16753082,
+                "calls": 868,
+                "bytes": 5332992,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_to_device": {
+                "ms": 3.643451944,
+                "calls": 2688,
+                "bytes": 5363232,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_from_device": {
+                "ms": 3.013771549,
+                "calls": 2604,
+                "bytes": 21331968,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "submit": {
+                "ms": 372.970275179,
+                "calls": 868,
+                "bytes": 0,
+                "driver_ms": 368.85404,
+                "driver_min_ms": 0.405411,
+                "driver_max_ms": 0.463744,
+                "invalid_driver_times": 0
+              },
+              "output_copy_unpack_reduce": {
+                "ms": 3.554177254,
+                "calls": 868,
+                "bytes": 21331968,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_kv_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_softmax": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "swiglu_and_optional_pack": {
+                "ms": 7.511475891,
+                "calls": 868,
+                "bytes": 31997952,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              }
+            },
+            "attention_scores": {
+              "register_update": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "fp16_native_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "input_memcpy": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_to_device": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_from_device": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "submit": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "output_copy_unpack_reduce": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_kv_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_softmax": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "swiglu_and_optional_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              }
+            },
+            "attention_values": {
+              "register_update": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "fp16_native_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "input_memcpy": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_to_device": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_from_device": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "submit": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "output_copy_unpack_reduce": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_kv_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_softmax": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "swiglu_and_optional_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              }
+            },
+            "attention_kv": {
+              "register_update": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "fp16_native_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "input_memcpy": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_to_device": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "sync_from_device": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "submit": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "output_copy_unpack_reduce": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_kv_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "attention_softmax": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              },
+              "swiglu_and_optional_pack": {
+                "ms": 0.0,
+                "calls": 0,
+                "bytes": 0,
+                "driver_ms": 0.0,
+                "driver_min_ms": 0.0,
+                "driver_max_ms": 0.0,
+                "invalid_driver_times": 0
+              }
+            }
+          }
+        }
+      ],
+      "gpu_attention_profiles": [
+        {
+          "event": "gpu_profile",
+          "phase": "prefill",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "cache_upload_calls": 28,
+          "kernel_calls": 0,
+          "upload_bytes": 58720256,
+          "download_bytes": 0,
+          "wall_ms": 7.817431918,
+          "enqueue_ms": 0.548323999,
+          "blocking_read_ms": 0.0,
+          "upload_device_ms": 4.370334,
+          "download_device_ms": 0.0,
+          "event_collection_ms": 0.065912993,
+          "kernels": {
+            "pack_kv": 0.0,
+            "prefill_scores": 0.0,
+            "prefill_softmax": 0.0,
+            "prefill_values": 0.0,
+            "decode_scores": 0.0,
+            "decode_softmax_values": 0.0,
+            "decode_values": 0.0
+          }
+        },
+        {
+          "event": "gpu_profile",
+          "phase": "decode",
+          "run": 1,
+          "warmup": false,
+          "calls": 868,
+          "cache_upload_calls": 0,
+          "kernel_calls": 1736,
+          "upload_bytes": 14221312,
+          "download_bytes": 7110656,
+          "wall_ms": 282.123200011,
+          "enqueue_ms": 12.697499094,
+          "blocking_read_ms": 265.61568596,
+          "upload_device_ms": 2.036978,
+          "download_device_ms": 1.097846,
+          "event_collection_ms": 2.794714987,
+          "kernels": {
+            "pack_kv": 0.0,
+            "prefill_scores": 0.0,
+            "prefill_softmax": 0.0,
+            "prefill_values": 0.0,
+            "decode_scores": 71.85242,
+            "decode_softmax_values": 108.674168,
+            "decode_values": 0.0
+          }
+        }
+      ],
+      "gpu_projection_profiles": [],
+      "cpu_projection_profiles": [
+        {
+          "event": "linear_cpu_profile",
+          "phase": "prefill",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "decode",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        }
+      ],
+      "cpu_projection_details": [
+        {
+          "event": "cpu_projection_details",
+          "phase": "prefill",
+          "run": 1,
+          "warmup": false,
+          "input_round_ms": 0.0,
+          "weight_expand_ms": 0.0,
+          "blas_ms": 0.0,
+          "result_layout_ms": 0.0,
+          "gemv_and_loop_ms": 0.0
+        },
+        {
+          "event": "cpu_projection_details",
+          "phase": "decode",
+          "run": 1,
+          "warmup": false,
+          "input_round_ms": 0.0,
+          "weight_expand_ms": 0.0,
+          "blas_ms": 0.0,
+          "result_layout_ms": 0.0,
+          "gemv_and_loop_ms": 0.0
+        }
+      ]
+    }
+  ],
+  "audits": {
+    "profiles/fused-profile/fused-costs25651": {
+      "clock_samples": 44,
+      "clocks_held_and_restored": true,
+      "checked_jobs": [
+        {
+          "label": "p256-1-attention",
+          "device_counts_checked_all_runs": true,
+          "same_teacher_ids": true,
+          "independent_request_span": false
+        }
+      ]
+    }
+  },
+  "raw_log_sha256": {
+    "profiles/fused-profile/fused-costs25651/p256-1-attention.jsonl": "ec6586002dad375ba36ecaa19b59fbb1a4b5bce50828db8b58ef7a505abf750f"
+  },
+  "scope": "All nine dense-projection prefill/decode backend pairs plus an explicit three-device placement. CPU host non-linear operations remain in every route. Teacher-forced timing uses identical decode inputs; matching every prediction proves the same greedy sequence on the finite tested cases."
+}

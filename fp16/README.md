@@ -3,15 +3,22 @@
 Work in progress: the selected CPU+NPU engine, roofline, complete phase
 profile and GPU-attention comparison are tested. CPU/GPU projection backends and all nine prefill/decode projection placements
 plus one explicit three-device route now have audited 128/256-token phase
-measurements. Detailed new cost profiles, candidate performance tests and
-independent complete-request measurements remain in progress.
+measurements. Complete cost profiles and independent complete-request
+measurements are now audited. Additional candidate optimizations and general
+CPU/GPU prefill correctness remain work in progress.
 
 The compiled-and-primitive-checked [phase-routing WIP](experiments/yalm/README.md)
 now has explicit CPU/GPU/NPU projection backends. The [phase measurement milestone](experiments/yalm/PHASES.md) reports prefill
-time and tokens/s plus decode tokens/s for every tested placement. Complete-request
-transfer accounting is still in progress. [Complete phase costs](experiments/yalm/COSTS.md)
+time and tokens/s plus decode tokens/s for every tested placement. The [complete-request
+comparison](experiments/yalm/REQUESTS.md) now reports independently measured,
+transfer-inclusive request spans for all twenty rows. [Complete phase costs](experiments/yalm/COSTS.md)
 are now profiled. Additional short-prompt CPU/GPU prefill checks exceed the unchanged
 logit gate; those routes remain diagnostics despite matching tested tokens.
+The [independent candidate comparisons](experiments/yalm/ITERATIONS.md) show
+4.71–4.84% faster prefill from attention batch 128, with overlapping request
+ranges; fused GPU decode attention remains slower than CPU. These candidates
+have not been promoted into the selected runner. Request and iteration charts
+are rendered as PNG/JPG/SVG.
 
 The engine uses persistent direct-register NPU tasks, three-core matrix
 projections, batched prefill, fused Q/K/V and gate/up projections, prompt

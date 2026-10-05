@@ -2,7 +2,7 @@
 
 All nine CPU/GPU/NPU projection-backend pairs were measured for 128 and 256 input tokens, plus an explicit three-device placement. Every row reports prefill time, effective prefill tokens/s and decode tokens/s. The selected `runq-fp16` remains unchanged.
 
-**These are transfer-inclusive phase timings. An independent complete-request timer and phase profiling are separate follow-up milestones.** Model initialization, input file reading/tokenization, full warmups and thermal cooldown are excluded; the final classifier and sampling are included in TTFT.
+**These are transfer-inclusive phase timings.** Complete phase costs are in [COSTS.md](COSTS.md), and the separately measured complete requests are in [REQUESTS.md](REQUESTS.md). Model initialization, input file reading/tokenization, full warmups and thermal cooldown are excluded; the final classifier and sampling are included in TTFT.
 
 ## Same workload and precision
 
@@ -76,7 +76,7 @@ and `evidence/short-prompt-quality` / `evidence/gpu-extra-quality`.
 ## Qualification and rejected runs
 
 All 20 accepted rows pass the unchanged logit gate and every generated-ID comparison. The largest observed relative RMSE is `0.000669901058`.
-The initial unrestricted sweep was rejected after thermal clock changes. A sweep cooling every request to 55°C had five GPU-clock drops only in its final CPU/CPU 256-token job; the complete failed suite remains intact. The other 19 whole jobs pass the unchanged clock targets and output gate and are retained in `phase-qualified`. The affected CPU job was rerun with a 50°C start target and independently audited. This temperature difference is explicit; final complete-request comparisons use one shared 50°C target.
+The initial unrestricted sweep was rejected after thermal clock changes. A sweep cooling every request to 55°C had five GPU-clock drops only in its final CPU/CPU 256-token job; the complete failed suite remains intact. The other 19 whole jobs pass the unchanged clock targets and output gate and are retained in `phase-qualified`. The affected CPU job was rerun with a 50°C start target and independently audited. This temperature difference is explicit. The independent single-change [complete-request comparisons](ITERATIONS.md) use one shared 51°C start limit; the earlier 50°C partial request sweep is rejected in full.
 The fan PWM was already at its maximum exposed value, 255. No fan or thermal policy was changed. These short cooled-request measurements do not establish sustained hot-loop throughput.
 Raw logs, inputs, configurations, compressed clock samples, source hashes and audit are under `evidence/`. The shared model and full vocabulary logits remain in `/home/orangepi/qwen3-bench/matched/roofline/yalm`; their hashes and exact paths are retained. `make fp16-routes` produced the exact benchmark SHA256 `11d2f9b753cf887a11bd3cdb34d1784127184a099d7fa2382601d46b77ef091a`.
 

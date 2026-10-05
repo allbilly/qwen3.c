@@ -1,0 +1,292 @@
+{
+  "plan": "iteration-fused-gpu-vs-cpu-e2e51-baab-plan.json",
+  "plan_sha256": "42bbecdc6d0078e1847c293ed5fb68b6136afc4f94bc834a5e9790886200696d",
+  "audit": "iteration-fused-gpu-vs-cpu-e2e51-audit.json",
+  "cool_c": 51,
+  "audit_sha256": "db1cd8b579d82cbfab91a89106be7f2baacd140452a410439bd40a6813937d01",
+  "results": [
+    {
+      "prompt": 128,
+      "baseline": {
+        "engine": "baseline-guarded",
+        "route": "npu",
+        "measurements": 4,
+        "median": {
+          "ttft_ms": 245.8275,
+          "decode_tps": 20.901,
+          "request_ms": 1729.067939,
+          "handoff_ms": 0.0325205,
+          "effective_prefill_tps": 520.6903214652551,
+          "output_tps": 18.507080767749983
+        },
+        "ranges": {
+          "ttft_ms": [
+            237.406,
+            247.742
+          ],
+          "decode_tps": [
+            20.76,
+            21.133
+          ],
+          "request_ms": [
+            1704.364609,
+            1741.009892
+          ]
+        },
+        "requests": [
+          {
+            "ttft_ms": 246.76,
+            "decode_tps": 20.994,
+            "request_ms": 1723.426467,
+            "handoff_ms": 0.027125,
+            "directory": "e2e/baseline-guarded/iteration-fused-gpu-vs-cpu-e2e51-baab-2",
+            "label": "p128-1-npu",
+            "run": 1
+          },
+          {
+            "ttft_ms": 237.406,
+            "decode_tps": 21.133,
+            "request_ms": 1704.364609,
+            "handoff_ms": 0.032666,
+            "directory": "e2e/baseline-guarded/iteration-fused-gpu-vs-cpu-e2e51-baab-2",
+            "label": "p128-1-npu",
+            "run": 2
+          },
+          {
+            "ttft_ms": 244.895,
+            "decode_tps": 20.808,
+            "request_ms": 1734.709411,
+            "handoff_ms": 0.033832,
+            "directory": "e2e/baseline-guarded/iteration-fused-gpu-vs-cpu-e2e51-baab-3",
+            "label": "p128-1-npu",
+            "run": 1
+          },
+          {
+            "ttft_ms": 247.742,
+            "decode_tps": 20.76,
+            "request_ms": 1741.009892,
+            "handoff_ms": 0.032375,
+            "directory": "e2e/baseline-guarded/iteration-fused-gpu-vs-cpu-e2e51-baab-3",
+            "label": "p128-1-npu",
+            "run": 2
+          }
+        ]
+      },
+      "candidate": {
+        "engine": "fused-attention",
+        "route": "attention",
+        "measurements": 4,
+        "median": {
+          "ttft_ms": 242.3515,
+          "decode_tps": 19.631500000000003,
+          "request_ms": 1824.777668,
+          "handoff_ms": 0.0618325,
+          "effective_prefill_tps": 528.1584805540713,
+          "output_tps": 17.53638295840872
+        },
+        "ranges": {
+          "ttft_ms": [
+            241.616,
+            248.143
+          ],
+          "decode_tps": [
+            19.162,
+            19.753
+          ],
+          "request_ms": [
+            1811.11313,
+            1859.44215
+          ]
+        },
+        "requests": [
+          {
+            "ttft_ms": 243.053,
+            "decode_tps": 19.53,
+            "request_ms": 1830.366368,
+            "handoff_ms": 0.052208,
+            "directory": "e2e/fused-attention/iteration-fused-gpu-vs-cpu-e2e51-baab-1",
+            "label": "p128-1-attention",
+            "run": 1
+          },
+          {
+            "ttft_ms": 241.616,
+            "decode_tps": 19.162,
+            "request_ms": 1859.44215,
+            "handoff_ms": 0.072041,
+            "directory": "e2e/fused-attention/iteration-fused-gpu-vs-cpu-e2e51-baab-1",
+            "label": "p128-1-attention",
+            "run": 2
+          },
+          {
+            "ttft_ms": 241.65,
+            "decode_tps": 19.753,
+            "request_ms": 1811.11313,
+            "handoff_ms": 0.053083,
+            "directory": "e2e/fused-attention/iteration-fused-gpu-vs-cpu-e2e51-baab-4",
+            "label": "p128-1-attention",
+            "run": 1
+          },
+          {
+            "ttft_ms": 248.143,
+            "decode_tps": 19.733,
+            "request_ms": 1819.188968,
+            "handoff_ms": 0.070582,
+            "directory": "e2e/fused-attention/iteration-fused-gpu-vs-cpu-e2e51-baab-4",
+            "label": "p128-1-attention",
+            "run": 2
+          }
+        ]
+      },
+      "prefill_gain_percent": 1.4342803737546594,
+      "decode_gain_percent": -6.07387206353761,
+      "request_gain_percent": -5.24500768934224,
+      "observed_ranges_overlap": {
+        "ttft_ms": true,
+        "decode_tps": false,
+        "request_ms": false
+      }
+    },
+    {
+      "prompt": 256,
+      "baseline": {
+        "engine": "baseline-guarded",
+        "route": "npu",
+        "measurements": 4,
+        "median": {
+          "ttft_ms": 541.7985,
+          "decode_tps": 19.8415,
+          "request_ms": 2105.0654194999997,
+          "handoff_ms": 0.0325205,
+          "effective_prefill_tps": 472.5003852908415,
+          "output_tps": 15.20142780531767
+        },
+        "ranges": {
+          "ttft_ms": [
+            537.828,
+            542.854
+          ],
+          "decode_tps": [
+            19.747,
+            19.923
+          ],
+          "request_ms": [
+            2093.84883,
+            2111.104719
+          ]
+        },
+        "requests": [
+          {
+            "ttft_ms": 542.854,
+            "decode_tps": 19.895,
+            "request_ms": 2101.067463,
+            "handoff_ms": 0.032375,
+            "directory": "e2e/baseline-guarded/iteration-fused-gpu-vs-cpu-e2e51-baab-2",
+            "label": "p256-1-npu",
+            "run": 1
+          },
+          {
+            "ttft_ms": 542.386,
+            "decode_tps": 19.788,
+            "request_ms": 2109.063376,
+            "handoff_ms": 0.032666,
+            "directory": "e2e/baseline-guarded/iteration-fused-gpu-vs-cpu-e2e51-baab-2",
+            "label": "p256-1-npu",
+            "run": 2
+          },
+          {
+            "ttft_ms": 537.828,
+            "decode_tps": 19.923,
+            "request_ms": 2093.84883,
+            "handoff_ms": 0.032083,
+            "directory": "e2e/baseline-guarded/iteration-fused-gpu-vs-cpu-e2e51-baab-3",
+            "label": "p256-1-npu",
+            "run": 1
+          },
+          {
+            "ttft_ms": 541.211,
+            "decode_tps": 19.747,
+            "request_ms": 2111.104719,
+            "handoff_ms": 0.034124,
+            "directory": "e2e/baseline-guarded/iteration-fused-gpu-vs-cpu-e2e51-baab-3",
+            "label": "p256-1-npu",
+            "run": 2
+          }
+        ]
+      },
+      "candidate": {
+        "engine": "fused-attention",
+        "route": "attention",
+        "measurements": 4,
+        "median": {
+          "ttft_ms": 534.494,
+          "decode_tps": 18.7125,
+          "request_ms": 2191.180581,
+          "handoff_ms": 0.059936,
+          "effective_prefill_tps": 478.95766837420064,
+          "output_tps": 14.60399945010283
+        },
+        "ranges": {
+          "ttft_ms": [
+            529.247,
+            538.257
+          ],
+          "decode_tps": [
+            18.329,
+            19.195
+          ],
+          "request_ms": [
+            2144.31197,
+            2229.577808
+          ]
+        },
+        "requests": [
+          {
+            "ttft_ms": 538.257,
+            "decode_tps": 18.329,
+            "request_ms": 2229.577808,
+            "handoff_ms": 0.048416,
+            "directory": "e2e/fused-attention/iteration-fused-gpu-vs-cpu-e2e51-baab-1",
+            "label": "p256-1-attention",
+            "run": 1
+          },
+          {
+            "ttft_ms": 532.09,
+            "decode_tps": 18.7,
+            "request_ms": 2189.903615,
+            "handoff_ms": 0.071165,
+            "directory": "e2e/fused-attention/iteration-fused-gpu-vs-cpu-e2e51-baab-1",
+            "label": "p256-1-attention",
+            "run": 2
+          },
+          {
+            "ttft_ms": 536.898,
+            "decode_tps": 18.725,
+            "request_ms": 2192.457547,
+            "handoff_ms": 0.051332,
+            "directory": "e2e/fused-attention/iteration-fused-gpu-vs-cpu-e2e51-baab-4",
+            "label": "p256-1-attention",
+            "run": 1
+          },
+          {
+            "ttft_ms": 529.247,
+            "decode_tps": 19.195,
+            "request_ms": 2144.31197,
+            "handoff_ms": 0.06854,
+            "directory": "e2e/fused-attention/iteration-fused-gpu-vs-cpu-e2e51-baab-4",
+            "label": "p256-1-attention",
+            "run": 2
+          }
+        ]
+      },
+      "prefill_gain_percent": 1.3666196439997336,
+      "decode_gain_percent": -5.690093994909661,
+      "request_gain_percent": -3.9300805349735013,
+      "observed_ranges_overlap": {
+        "ttft_ms": true,
+        "decode_tps": false,
+        "request_ms": false
+      }
+    }
+  ],
+  "scope": "Four independently measured requests per engine/prompt in ABBA or BAAB blocks. Phase and request medians recomputed from all four raw measurements. Full min/max ranges retained; overlapping ranges do not establish a statistically significant small gain."
+}

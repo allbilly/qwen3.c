@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 root=Path(__file__).resolve().parent
 p=argparse.ArgumentParser();p.add_argument('--audit',default='matrix-audit.json');p.add_argument('--suite',nargs='+',default=['phase-qualified','cpu256-cooled50']);p.add_argument('--stem',default='phase-matrix');args=p.parse_args()
 report=json.loads((root/args.audit).read_text());records=[r for r in report['records'] if r['directory'] in args.suite]
+assert len(records)==20 and len({(r['prompt'],r['route']) for r in records})==20
 order=['cpu','gpu','npu','cpu_gpu','gpu_cpu','cpu_npu','npu_cpu','gpu_npu','npu_gpu','all']
 labels=['CPU → CPU','GPU → GPU','NPU → NPU','CPU → GPU','GPU → CPU','CPU → NPU','NPU → CPU','GPU → NPU','NPU → GPU','GPU → NPU + CPU head*']
 colours=['#64748b','#16a34a','#e88621',*['#6d5fc7']*7]
@@ -29,7 +30,11 @@ for row,prompt in enumerate([128,256]):
   for y,v,r in zip(range(10),values,subset):ax.text(v+max(values)*.015,y,f'{v:,.1f}'+(' ×' if not r['quality_passed'] else ''),va='center',fontsize=9)
   ax.spines[['right','top']].set_visible(False)
 fig.suptitle('RK3588 • same Qwen3-0.6B FP16 weights • projection placement: prefill → decode',fontsize=14,y=.98)
-cool_note='All requests start at ≤50°C.' if has_e2e else 'Start ≤55°C; CPU/CPU 256 starts ≤50°C after a rejected thermal run.'
+if has_e2e:
+ limits={json.loads((root/r['directory']/(r['label']+'.config.json')).read_text())['environment']['COOL_REQUEST_C'] for r in records}
+ assert len(limits)==1, 'Complete-request comparisons require one common start limit.'
+ cool_note=f'All requests start at ≤{next(iter(limits))}°C.'
+else:cool_note='Start ≤55°C; CPU/CPU 256 starts ≤50°C after a rejected thermal run.'
 fig.text(.03,.025,'CPU host norms, RoPE, SwiGLU, residuals and sampling remain in every route. 32 output tokens / 31 decode steps.\nTwo full warmups; median of two measured requests; whiskers show min/max. Fixed clocks verified; cooldown excluded.\nEffective prefill = prompt tokens / time to first token, including classifier and sampling. * GPU decode attention, CPU prefill attention.\n'+cool_note+'\nCPU/GPU prefill routes fail extra short-prompt logit checks; these are finite-case phase measurements.',fontsize=9)
 fig.tight_layout(rect=(.01,.09,.99,.95));files={}
 for ext in ['png','jpg','svg']:

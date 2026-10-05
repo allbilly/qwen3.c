@@ -71,7 +71,7 @@ flushing those values to zero; it does not explain the full-model CPU/GPU logit
 differences or establish exhaustive floating-point equivalence. Its source,
 compiled binary and backend hashes are [recorded](candidate-checks/npu-fp16-probe-provenance.json).
 
-## Pending complete-request experiments
+## Complete-request experiments
 
 The original independent request-timer sweep completed only the ten 128-token
 placements. The common 50°C target stalled while GPU/NPU buffers were resident
@@ -82,24 +82,29 @@ verified against live sysfs and immutable before-run snapshots. The entire
 [partial sweep is rejected](evidence/rejected-request-cool50/rejected.json),
 including earlier rows; none of its timings qualify as final speed evidence.
 
-Four bounded timer builds now compile: baseline, cooperative GPU softmax,
-fused GPU attention and shared NPU KV packing. A deliberately impossible
+Five bounded timer builds now compile: baseline, cooperative GPU softmax,
+fused GPU attention, shared NPU KV packing and NPU attention batch 128. A deliberately impossible
 cooldown target exercised the baseline timeout after 180.127 seconds with
 CPU/GPU/NPU buffers initialized. It exited normally with status 1, before
 inference, without a signal; clock settings were unchanged. The
 [timeout evidence](evidence/guarded-request-timeout/summary.json) and compiled
-source/binary provenance are retained. A successful complete-request sweep of
-the bounded builds remains pending.
+source/binary provenance are retained. The bounded baseline now completes the
+fresh [twenty-row placement sweep](REQUESTS.md), with all independent numerical,
+device-count, clock and restoration audits passing.
 
-The next complete placement sweep and counterbalanced candidate comparisons
-will use a common 51°C target and the 180-second idle-wait bound. They have not
-run. Their measurements must be audited without mixing the rejected 50°C
-partial sweep into the new protocol.
+The complete placement sweep and two counterbalanced candidate comparisons
+use a common 51°C target and the 180-second idle-wait bound. No rejected 50°C
+rows are mixed into these results. [The candidate comparisons](ITERATIONS.md)
+show a 4.71–4.84% prefill gain from attention batch 128, with overlapping
+complete-request ranges. Fused GPU decode attention is slower than CPU decode
+attention. Neither candidate is promoted into the selected runner.
 
 The exported tools prepare frozen timer builds, run serial ABBA/BAAB
 comparisons, aggregate all four individual measurements per engine/prompt,
 and plot transfer-inclusive prefill, decode and independently measured request
-time. Those iteration tools and their figures are pending execution. The
+time. Both comparisons pass independent audits and their PNG/JPG/SVG figures
+are rendered and inspected. Shared KV packing and cooperative-softmax-alone
+performance comparisons remain pending. The
 benchmark scripts are workspace source snapshots: their original location is
 `/home/orangepi/qwen3-bench/matched/roofline/yalm`, not a claim of a portable
 standalone package in this directory.

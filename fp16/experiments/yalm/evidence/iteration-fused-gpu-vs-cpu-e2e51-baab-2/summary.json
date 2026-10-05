@@ -1,0 +1,81 @@
+{
+  "records": [
+    {
+      "label": "p128-1-npu",
+      "prompt": 128,
+      "route": "npu",
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "teacher_forced_identical_decode_inputs": true,
+      "prefill_logit_relative_rmse": 0.0,
+      "max_logit_error": 0.0,
+      "unchanged_limit": 0.001,
+      "all_predictions_match": true,
+      "quality_passed": true,
+      "ttft_ms": 242.083,
+      "effective_prefill_tps": 528.7442736582082,
+      "decode_tps": 21.063499999999998,
+      "measured_runs": 2,
+      "ttft_range": [
+        237.406,
+        246.76
+      ],
+      "decode_range": [
+        20.994,
+        21.133
+      ],
+      "request_ms": 1713.895538,
+      "output_tps": 18.67091622009929,
+      "request_range": [
+        1704.364609,
+        1723.426467
+      ],
+      "handoff_ms": 0.0298955
+    },
+    {
+      "label": "p256-1-npu",
+      "prompt": 256,
+      "route": "npu",
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "teacher_forced_identical_decode_inputs": true,
+      "prefill_logit_relative_rmse": 0.0,
+      "max_logit_error": 0.0,
+      "unchanged_limit": 0.001,
+      "all_predictions_match": true,
+      "quality_passed": true,
+      "ttft_ms": 542.62,
+      "effective_prefill_tps": 471.7850429398105,
+      "decode_tps": 19.8415,
+      "measured_runs": 2,
+      "ttft_range": [
+        542.386,
+        542.854
+      ],
+      "decode_range": [
+        19.788,
+        19.895
+      ],
+      "request_ms": 2105.0654194999997,
+      "output_tps": 15.20142780531767,
+      "request_range": [
+        2101.067463,
+        2109.063376
+      ],
+      "handoff_ms": 0.0325205
+    }
+  ],
+  "clocks_held": true,
+  "clocks_restored": true,
+  "samples": 130,
+  "temperature_range_c": [
+    48.076,
+    56.384
+  ],
+  "binary_sha256": "5854860c2f53b8b286f00280d595139cb6da154a5e2148aefe233878d45f700e",
+  "interpretation": "Phase-placement experiment. Non-linear host operations stay CPU. Failed quality rows are diagnostic timings, not qualified inference speed claims."
+}

@@ -1,0 +1,40 @@
+{
+  "records": [
+    {
+      "label": "p256-1-attention",
+      "prompt": 256,
+      "route": "attention",
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": "decode",
+      "cpu_classifier": false,
+      "teacher_forced_identical_decode_inputs": true,
+      "prefill_logit_relative_rmse": 0.0,
+      "max_logit_error": 0.0,
+      "unchanged_limit": 0.001,
+      "all_predictions_match": true,
+      "quality_passed": true,
+      "ttft_ms": 526.51,
+      "effective_prefill_tps": 486.22058460428104,
+      "decode_tps": 18.589,
+      "measured_runs": 1,
+      "ttft_range": [
+        526.51,
+        526.51
+      ],
+      "decode_range": [
+        18.589,
+        18.589
+      ]
+    }
+  ],
+  "clocks_held": true,
+  "clocks_restored": true,
+  "samples": 44,
+  "temperature_range_c": [
+    41.615,
+    51.769
+  ],
+  "binary_sha256": "112655d3684b2a3448dd9cfd73a00eb2aa0220699d4c176bded8f2d4e68b6f57",
+  "interpretation": "Phase-placement experiment. Non-linear host operations stay CPU. Failed quality rows are diagnostic timings, not qualified inference speed claims."
+}

@@ -1,0 +1,811 @@
+{
+  "shared_fp16_model_sha256": "c92807935bfbb81f6628e9c2723267da367577a3f2b1bb2530b87bf5e5bba879",
+  "selected_binary_unchanged": true,
+  "records": [
+    {
+      "directory": "e2e/baseline-guarded/iteration-row128-e2e51-abba-1",
+      "label": "p128-1-npu",
+      "route": "npu",
+      "prompt": 128,
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "quality_passed": true,
+      "relative_rmse": 0.0,
+      "all_predictions_match": true,
+      "ttft_ms": 244.089,
+      "effective_prefill_tps": 524.398887291111,
+      "decode_tps": 21.0655,
+      "measured_runs": 2,
+      "ttft_range": [
+        238.72,
+        249.458
+      ],
+      "decode_range": [
+        21.058,
+        21.073
+      ],
+      "root_profiles": [],
+      "gpu_attention_profiles": [],
+      "gpu_projection_profiles": [],
+      "cpu_projection_profiles": [
+        {
+          "event": "linear_cpu_profile",
+          "phase": "prefill",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "decode",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "prefill",
+          "run": 2,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "decode",
+          "run": 2,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        }
+      ],
+      "cpu_projection_details": [],
+      "request_ms": 1715.730405,
+      "output_tps": 18.650948835985687,
+      "handoff_ms": 0.0293115,
+      "request_range": [
+        1709.823222,
+        1721.637588
+      ]
+    },
+    {
+      "directory": "e2e/baseline-guarded/iteration-row128-e2e51-abba-1",
+      "label": "p256-1-npu",
+      "route": "npu",
+      "prompt": 256,
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "quality_passed": true,
+      "relative_rmse": 0.0,
+      "all_predictions_match": true,
+      "ttft_ms": 541.1804999999999,
+      "effective_prefill_tps": 473.03995616989164,
+      "decode_tps": 20.0255,
+      "measured_runs": 2,
+      "ttft_range": [
+        532.53,
+        549.831
+      ],
+      "decode_range": [
+        19.908,
+        20.143
+      ],
+      "root_profiles": [],
+      "gpu_attention_profiles": [],
+      "gpu_projection_profiles": [],
+      "cpu_projection_profiles": [
+        {
+          "event": "linear_cpu_profile",
+          "phase": "prefill",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "decode",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "prefill",
+          "run": 2,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "decode",
+          "run": 2,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        }
+      ],
+      "cpu_projection_details": [],
+      "request_ms": 2089.2773854999996,
+      "output_tps": 15.316300373558036,
+      "handoff_ms": 0.034999,
+      "request_range": [
+        2071.544607,
+        2107.010164
+      ]
+    },
+    {
+      "directory": "e2e/attention-row128/iteration-row128-e2e51-abba-2",
+      "label": "p128-1-npu",
+      "route": "npu",
+      "prompt": 128,
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "quality_passed": true,
+      "relative_rmse": 0.0,
+      "all_predictions_match": true,
+      "ttft_ms": 235.45049999999998,
+      "effective_prefill_tps": 543.6386841395538,
+      "decode_tps": 20.799500000000002,
+      "measured_runs": 2,
+      "ttft_range": [
+        235.118,
+        235.783
+      ],
+      "decode_range": [
+        20.697,
+        20.902
+      ],
+      "root_profiles": [],
+      "gpu_attention_profiles": [],
+      "gpu_projection_profiles": [],
+      "cpu_projection_profiles": [
+        {
+          "event": "linear_cpu_profile",
+          "phase": "prefill",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "decode",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "prefill",
+          "run": 2,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "decode",
+          "run": 2,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        }
+      ],
+      "cpu_projection_details": [],
+      "request_ms": 1725.9277605,
+      "output_tps": 18.54075282428369,
+      "handoff_ms": 0.0315,
+      "request_range": [
+        1718.908332,
+        1732.947189
+      ]
+    },
+    {
+      "directory": "e2e/attention-row128/iteration-row128-e2e51-abba-2",
+      "label": "p256-1-npu",
+      "route": "npu",
+      "prompt": 256,
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "quality_passed": true,
+      "relative_rmse": 0.0,
+      "all_predictions_match": true,
+      "ttft_ms": 518.0675000000001,
+      "effective_prefill_tps": 494.1441028437413,
+      "decode_tps": 20.1995,
+      "measured_runs": 2,
+      "ttft_range": [
+        516.089,
+        520.046
+      ],
+      "decode_range": [
+        20.154,
+        20.245
+      ],
+      "root_profiles": [],
+      "gpu_attention_profiles": [],
+      "gpu_projection_profiles": [],
+      "cpu_projection_profiles": [
+        {
+          "event": "linear_cpu_profile",
+          "phase": "prefill",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "decode",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "prefill",
+          "run": 2,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "decode",
+          "run": 2,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        }
+      ],
+      "cpu_projection_details": [],
+      "request_ms": 2052.795804,
+      "output_tps": 15.588496399713025,
+      "handoff_ms": 0.035874500000000004,
+      "request_range": [
+        2047.356454,
+        2058.235154
+      ]
+    },
+    {
+      "directory": "e2e/attention-row128/iteration-row128-e2e51-abba-3",
+      "label": "p128-1-npu",
+      "route": "npu",
+      "prompt": 128,
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "quality_passed": true,
+      "relative_rmse": 0.0,
+      "all_predictions_match": true,
+      "ttft_ms": 234.751,
+      "effective_prefill_tps": 545.2585931476331,
+      "decode_tps": 21.0045,
+      "measured_runs": 2,
+      "ttft_range": [
+        233.684,
+        235.818
+      ],
+      "decode_range": [
+        20.967,
+        21.042
+      ],
+      "root_profiles": [],
+      "gpu_attention_profiles": [],
+      "gpu_projection_profiles": [],
+      "cpu_projection_profiles": [
+        {
+          "event": "linear_cpu_profile",
+          "phase": "prefill",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "decode",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "prefill",
+          "run": 2,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "decode",
+          "run": 2,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        }
+      ],
+      "cpu_projection_details": [],
+      "request_ms": 1710.6802565,
+      "output_tps": 18.706008839706275,
+      "handoff_ms": 0.033541,
+      "request_range": [
+        1709.109657,
+        1712.250856
+      ]
+    },
+    {
+      "directory": "e2e/attention-row128/iteration-row128-e2e51-abba-3",
+      "label": "p256-1-npu",
+      "route": "npu",
+      "prompt": 256,
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "quality_passed": true,
+      "relative_rmse": 0.0,
+      "all_predictions_match": true,
+      "ttft_ms": 525.9359999999999,
+      "effective_prefill_tps": 486.75123969456365,
+      "decode_tps": 19.924,
+      "measured_runs": 2,
+      "ttft_range": [
+        525.813,
+        526.059
+      ],
+      "decode_range": [
+        19.81,
+        20.038
+      ],
+      "root_profiles": [],
+      "gpu_attention_profiles": [],
+      "gpu_projection_profiles": [],
+      "cpu_projection_profiles": [
+        {
+          "event": "linear_cpu_profile",
+          "phase": "prefill",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "decode",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "prefill",
+          "run": 2,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "decode",
+          "run": 2,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        }
+      ],
+      "cpu_projection_details": [],
+      "request_ms": 2081.937355,
+      "output_tps": 15.370299170216867,
+      "handoff_ms": 0.034562,
+      "request_range": [
+        2073.122747,
+        2090.751963
+      ]
+    },
+    {
+      "directory": "e2e/baseline-guarded/iteration-row128-e2e51-abba-4",
+      "label": "p128-1-npu",
+      "route": "npu",
+      "prompt": 128,
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "quality_passed": true,
+      "relative_rmse": 0.0,
+      "all_predictions_match": true,
+      "ttft_ms": 246.5515,
+      "effective_prefill_tps": 519.1613111256675,
+      "decode_tps": 20.975,
+      "measured_runs": 2,
+      "ttft_range": [
+        244.264,
+        248.839
+      ],
+      "decode_range": [
+        20.927,
+        21.023
+      ],
+      "root_profiles": [],
+      "gpu_attention_profiles": [],
+      "gpu_projection_profiles": [],
+      "cpu_projection_profiles": [
+        {
+          "event": "linear_cpu_profile",
+          "phase": "prefill",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "decode",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "prefill",
+          "run": 2,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "decode",
+          "run": 2,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        }
+      ],
+      "cpu_projection_details": [],
+      "request_ms": 1724.564387,
+      "output_tps": 18.555410422029087,
+      "handoff_ms": 0.034562,
+      "request_range": [
+        1718.887041,
+        1730.241733
+      ]
+    },
+    {
+      "directory": "e2e/baseline-guarded/iteration-row128-e2e51-abba-4",
+      "label": "p256-1-npu",
+      "route": "npu",
+      "prompt": 256,
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "quality_passed": true,
+      "relative_rmse": 0.0,
+      "all_predictions_match": true,
+      "ttft_ms": 548.262,
+      "effective_prefill_tps": 466.9300443948332,
+      "decode_tps": 19.801499999999997,
+      "measured_runs": 2,
+      "ttft_range": [
+        547.136,
+        549.388
+      ],
+      "decode_range": [
+        19.79,
+        19.813
+      ],
+      "root_profiles": [],
+      "gpu_attention_profiles": [],
+      "gpu_projection_profiles": [],
+      "cpu_projection_profiles": [
+        {
+          "event": "linear_cpu_profile",
+          "phase": "prefill",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "decode",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "prefill",
+          "run": 2,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "decode",
+          "run": 2,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        }
+      ],
+      "cpu_projection_details": [],
+      "request_ms": 2113.836132,
+      "output_tps": 15.138354158854922,
+      "handoff_ms": 0.034562,
+      "request_range": [
+        2111.838831,
+        2115.833433
+      ]
+    }
+  ],
+  "audits": {
+    "e2e/baseline-guarded/iteration-row128-e2e51-abba-1": {
+      "clock_samples": 93,
+      "clocks_held_and_restored": true,
+      "checked_jobs": [
+        {
+          "label": "p128-1-npu",
+          "device_counts_checked_all_runs": true,
+          "same_teacher_ids": true,
+          "independent_request_span": true
+        },
+        {
+          "label": "p256-1-npu",
+          "device_counts_checked_all_runs": true,
+          "same_teacher_ids": true,
+          "independent_request_span": true
+        }
+      ]
+    },
+    "e2e/attention-row128/iteration-row128-e2e51-abba-2": {
+      "clock_samples": 109,
+      "clocks_held_and_restored": true,
+      "checked_jobs": [
+        {
+          "label": "p128-1-npu",
+          "device_counts_checked_all_runs": true,
+          "same_teacher_ids": true,
+          "independent_request_span": true
+        },
+        {
+          "label": "p256-1-npu",
+          "device_counts_checked_all_runs": true,
+          "same_teacher_ids": true,
+          "independent_request_span": true
+        }
+      ]
+    },
+    "e2e/attention-row128/iteration-row128-e2e51-abba-3": {
+      "clock_samples": 127,
+      "clocks_held_and_restored": true,
+      "checked_jobs": [
+        {
+          "label": "p128-1-npu",
+          "device_counts_checked_all_runs": true,
+          "same_teacher_ids": true,
+          "independent_request_span": true
+        },
+        {
+          "label": "p256-1-npu",
+          "device_counts_checked_all_runs": true,
+          "same_teacher_ids": true,
+          "independent_request_span": true
+        }
+      ]
+    },
+    "e2e/baseline-guarded/iteration-row128-e2e51-abba-4": {
+      "clock_samples": 136,
+      "clocks_held_and_restored": true,
+      "checked_jobs": [
+        {
+          "label": "p128-1-npu",
+          "device_counts_checked_all_runs": true,
+          "same_teacher_ids": true,
+          "independent_request_span": true
+        },
+        {
+          "label": "p256-1-npu",
+          "device_counts_checked_all_runs": true,
+          "same_teacher_ids": true,
+          "independent_request_span": true
+        }
+      ]
+    }
+  },
+  "raw_log_sha256": {
+    "e2e/baseline-guarded/iteration-row128-e2e51-abba-1/p128-1-npu.jsonl": "c8829f5c89087c846c188b647c13b3ca47116fa00b54e66759d80f9dc00ae2c3",
+    "e2e/baseline-guarded/iteration-row128-e2e51-abba-1/p256-1-npu.jsonl": "011839a2ed6bf3a1099cfed658012e77ad41b888a8f5d71820ddf291ec253c97",
+    "e2e/attention-row128/iteration-row128-e2e51-abba-2/p128-1-npu.jsonl": "399703b97e0fce5e05e687213a6fc6896df5241391fe30a8b3c6eed52fd9cf49",
+    "e2e/attention-row128/iteration-row128-e2e51-abba-2/p256-1-npu.jsonl": "9f9100d577a6089aa92692aef4fa873d334370924c5afbf4275b6983c05d7a3c",
+    "e2e/attention-row128/iteration-row128-e2e51-abba-3/p128-1-npu.jsonl": "59d7b98508f6022504fe29a1aa54500d7f7fe12797f0546c5d445da63381f2fb",
+    "e2e/attention-row128/iteration-row128-e2e51-abba-3/p256-1-npu.jsonl": "fdef50c2e9e9df0984cc8426e9fa0c1249789a8daa171c75f12ace0cb85d0a4f",
+    "e2e/baseline-guarded/iteration-row128-e2e51-abba-4/p128-1-npu.jsonl": "3f132a5d57f739cbfd4c323c1aa7684fb40e5533ec1f5377d88004081b8db1db",
+    "e2e/baseline-guarded/iteration-row128-e2e51-abba-4/p256-1-npu.jsonl": "e359f54ae697c108dc3cf7706cd8962b91c810b9abf5aeb392ab6b8e37b1752f"
+  },
+  "scope": "All nine dense-projection prefill/decode backend pairs plus an explicit three-device placement. CPU host non-linear operations remain in every route. Teacher-forced timing uses identical decode inputs; matching every prediction proves the same greedy sequence on the finite tested cases."
+}

@@ -52,8 +52,9 @@ samples and restores CPU/GPU/NPU/DDR clocks and records exact inputs and hashes.
 The [phase report](PHASES.md) includes TTFT milliseconds, effective prefill
 tokens/s, decode tokens/s, full min/max ranges and PNG/JPG/SVG plots. Two thermal
 failures and an unreachable 45°C setup target are preserved; accepted rows
-retain the original strict clock and numerical gates. The final complete-request
-comparison will use one common successful thermal target.
+retain the original strict clock and numerical gates. The new [complete-request
+comparison](REQUESTS.md) uses one common 51°C start limit for all twenty rows,
+with independent request spans and passing clock/device/output audits.
 
 `make fp16-routes` was built locally and reproduced the exact external benchmark
 binary hash `11d2f9b7...`. The [independent candidate patches](patches/README.md)
@@ -61,9 +62,12 @@ reproduce every compiled source hash in isolated application checks. GPU primiti
 checks pass. The [candidate numerical checks](CANDIDATES.md) now cover five
 prompt lengths, including retained failures, with 42 independently audited
 cases. The attention-only 128-row NPU candidate passes primitive and full-model
-checks. Independent complete-request measurements and candidate performance
-remain pending; the earlier 50°C request sweep is rejected and a bounded
-cooldown runner now passes its timeout cleanup check. The [complete cost
+checks. The [independent candidate comparisons](ITERATIONS.md) now include
+four individual complete-request measurements per engine/prompt. Attention
+batch 128 improves prefill by 4.71–4.84% but request ranges overlap; fused GPU
+decode attention is slower than CPU. Other candidate performance comparisons
+remain pending. The earlier 50°C request sweep is rejected and the bounded
+cooldown runner passes its timeout cleanup check. The [complete cost
 profiles](COSTS.md) now cover all 14 stages and identify actual packing, device,
 synchronization and host wait costs. Additional short-prompt CPU/GPU prefill
 logit checks fail the unchanged gate; those routes remain WIP diagnostics. The selected `runq-fp16`

@@ -1,0 +1,292 @@
+{
+  "plan": "iteration-row128-e2e51-abba-plan.json",
+  "plan_sha256": "23771c63daa813d0674fe22f7d7eed88762776d285e41d675143c3aa7eb119a6",
+  "audit": "iteration-row128-e2e51-audit.json",
+  "cool_c": 51,
+  "audit_sha256": "6efe607c8229820c936e5694c2e92d23c190b9afa17c5e3ae027030a5d5ffaac",
+  "results": [
+    {
+      "prompt": 128,
+      "baseline": {
+        "engine": "baseline-guarded",
+        "route": "npu",
+        "measurements": 4,
+        "median": {
+          "ttft_ms": 246.5515,
+          "decode_tps": 21.0405,
+          "request_ms": 1720.2623145,
+          "handoff_ms": 0.033395,
+          "effective_prefill_tps": 519.1613111256675,
+          "output_tps": 18.60181422930311
+        },
+        "ranges": {
+          "ttft_ms": [
+            238.72,
+            249.458
+          ],
+          "decode_tps": [
+            20.927,
+            21.073
+          ],
+          "request_ms": [
+            1709.823222,
+            1730.241733
+          ]
+        },
+        "requests": [
+          {
+            "ttft_ms": 249.458,
+            "decode_tps": 21.058,
+            "request_ms": 1721.637588,
+            "handoff_ms": 0.032374,
+            "directory": "e2e/baseline-guarded/iteration-row128-e2e51-abba-1",
+            "label": "p128-1-npu",
+            "run": 1
+          },
+          {
+            "ttft_ms": 238.72,
+            "decode_tps": 21.073,
+            "request_ms": 1709.823222,
+            "handoff_ms": 0.026249,
+            "directory": "e2e/baseline-guarded/iteration-row128-e2e51-abba-1",
+            "label": "p128-1-npu",
+            "run": 2
+          },
+          {
+            "ttft_ms": 248.839,
+            "decode_tps": 20.927,
+            "request_ms": 1730.241733,
+            "handoff_ms": 0.034708,
+            "directory": "e2e/baseline-guarded/iteration-row128-e2e51-abba-4",
+            "label": "p128-1-npu",
+            "run": 1
+          },
+          {
+            "ttft_ms": 244.264,
+            "decode_tps": 21.023,
+            "request_ms": 1718.887041,
+            "handoff_ms": 0.034416,
+            "directory": "e2e/baseline-guarded/iteration-row128-e2e51-abba-4",
+            "label": "p128-1-npu",
+            "run": 2
+          }
+        ]
+      },
+      "candidate": {
+        "engine": "attention-row128",
+        "route": "npu",
+        "measurements": 4,
+        "median": {
+          "ttft_ms": 235.45049999999998,
+          "decode_tps": 20.9345,
+          "request_ms": 1715.579594,
+          "handoff_ms": 0.0315,
+          "effective_prefill_tps": 543.6386841395538,
+          "output_tps": 18.65258837999445
+        },
+        "ranges": {
+          "ttft_ms": [
+            233.684,
+            235.818
+          ],
+          "decode_tps": [
+            20.697,
+            21.042
+          ],
+          "request_ms": [
+            1709.109657,
+            1732.947189
+          ]
+        },
+        "requests": [
+          {
+            "ttft_ms": 235.783,
+            "decode_tps": 20.902,
+            "request_ms": 1718.908332,
+            "handoff_ms": 0.02975,
+            "directory": "e2e/attention-row128/iteration-row128-e2e51-abba-2",
+            "label": "p128-1-npu",
+            "run": 1
+          },
+          {
+            "ttft_ms": 235.118,
+            "decode_tps": 20.697,
+            "request_ms": 1732.947189,
+            "handoff_ms": 0.03325,
+            "directory": "e2e/attention-row128/iteration-row128-e2e51-abba-2",
+            "label": "p128-1-npu",
+            "run": 2
+          },
+          {
+            "ttft_ms": 233.684,
+            "decode_tps": 20.967,
+            "request_ms": 1712.250856,
+            "handoff_ms": 0.037332,
+            "directory": "e2e/attention-row128/iteration-row128-e2e51-abba-3",
+            "label": "p128-1-npu",
+            "run": 1
+          },
+          {
+            "ttft_ms": 235.818,
+            "decode_tps": 21.042,
+            "request_ms": 1709.109657,
+            "handoff_ms": 0.02975,
+            "directory": "e2e/attention-row128/iteration-row128-e2e51-abba-3",
+            "label": "p128-1-npu",
+            "run": 2
+          }
+        ]
+      },
+      "prefill_gain_percent": 4.7147914317446915,
+      "decode_gain_percent": -0.5037903091656637,
+      "request_gain_percent": 0.27295268120330896,
+      "observed_ranges_overlap": {
+        "ttft_ms": false,
+        "decode_tps": true,
+        "request_ms": true
+      }
+    },
+    {
+      "prompt": 256,
+      "baseline": {
+        "engine": "baseline-guarded",
+        "route": "npu",
+        "measurements": 4,
+        "median": {
+          "ttft_ms": 548.262,
+          "decode_tps": 19.860500000000002,
+          "request_ms": 2109.4244975,
+          "handoff_ms": 0.034999,
+          "effective_prefill_tps": 466.9300443948332,
+          "output_tps": 15.170014398678424
+        },
+        "ranges": {
+          "ttft_ms": [
+            532.53,
+            549.831
+          ],
+          "decode_tps": [
+            19.79,
+            20.143
+          ],
+          "request_ms": [
+            2071.544607,
+            2115.833433
+          ]
+        },
+        "requests": [
+          {
+            "ttft_ms": 549.831,
+            "decode_tps": 19.908,
+            "request_ms": 2107.010164,
+            "handoff_ms": 0.035582,
+            "directory": "e2e/baseline-guarded/iteration-row128-e2e51-abba-1",
+            "label": "p256-1-npu",
+            "run": 1
+          },
+          {
+            "ttft_ms": 532.53,
+            "decode_tps": 20.143,
+            "request_ms": 2071.544607,
+            "handoff_ms": 0.034416,
+            "directory": "e2e/baseline-guarded/iteration-row128-e2e51-abba-1",
+            "label": "p256-1-npu",
+            "run": 2
+          },
+          {
+            "ttft_ms": 549.388,
+            "decode_tps": 19.79,
+            "request_ms": 2115.833433,
+            "handoff_ms": 0.032667,
+            "directory": "e2e/baseline-guarded/iteration-row128-e2e51-abba-4",
+            "label": "p256-1-npu",
+            "run": 1
+          },
+          {
+            "ttft_ms": 547.136,
+            "decode_tps": 19.813,
+            "request_ms": 2111.838831,
+            "handoff_ms": 0.036457,
+            "directory": "e2e/baseline-guarded/iteration-row128-e2e51-abba-4",
+            "label": "p256-1-npu",
+            "run": 2
+          }
+        ]
+      },
+      "candidate": {
+        "engine": "attention-row128",
+        "route": "npu",
+        "measurements": 4,
+        "median": {
+          "ttft_ms": 522.9295,
+          "decode_tps": 20.096,
+          "request_ms": 2065.6789504999997,
+          "handoff_ms": 0.034562,
+          "effective_prefill_tps": 489.5497385402813,
+          "output_tps": 15.491274668919083
+        },
+        "ranges": {
+          "ttft_ms": [
+            516.089,
+            526.059
+          ],
+          "decode_tps": [
+            19.81,
+            20.245
+          ],
+          "request_ms": [
+            2047.356454,
+            2090.751963
+          ]
+        },
+        "requests": [
+          {
+            "ttft_ms": 516.089,
+            "decode_tps": 20.245,
+            "request_ms": 2047.356454,
+            "handoff_ms": 0.037624,
+            "directory": "e2e/attention-row128/iteration-row128-e2e51-abba-2",
+            "label": "p256-1-npu",
+            "run": 1
+          },
+          {
+            "ttft_ms": 520.046,
+            "decode_tps": 20.154,
+            "request_ms": 2058.235154,
+            "handoff_ms": 0.034125,
+            "directory": "e2e/attention-row128/iteration-row128-e2e51-abba-2",
+            "label": "p256-1-npu",
+            "run": 2
+          },
+          {
+            "ttft_ms": 526.059,
+            "decode_tps": 20.038,
+            "request_ms": 2073.122747,
+            "handoff_ms": 0.034999,
+            "directory": "e2e/attention-row128/iteration-row128-e2e51-abba-3",
+            "label": "p256-1-npu",
+            "run": 1
+          },
+          {
+            "ttft_ms": 525.813,
+            "decode_tps": 19.81,
+            "request_ms": 2090.751963,
+            "handoff_ms": 0.034125,
+            "directory": "e2e/attention-row128/iteration-row128-e2e51-abba-3",
+            "label": "p256-1-npu",
+            "run": 2
+          }
+        ]
+      },
+      "prefill_gain_percent": 4.844343262332673,
+      "decode_gain_percent": 1.1857707509881354,
+      "request_gain_percent": 2.1177321378722302,
+      "observed_ranges_overlap": {
+        "ttft_ms": false,
+        "decode_tps": true,
+        "request_ms": true
+      }
+    }
+  ],
+  "scope": "Four independently measured requests per engine/prompt in ABBA or BAAB blocks. Phase and request medians recomputed from all four raw measurements. Full min/max ranges retained; overlapping ranges do not establish a statistically significant small gain."
+}

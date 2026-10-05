@@ -1,0 +1,108 @@
+{
+  "name": "fused-gpu-vs-cpu-e2e51-baab",
+  "baseline": "baseline-guarded",
+  "candidate": "fused-attention",
+  "baseline_route": "npu",
+  "candidate_route": "attention",
+  "order": "BAAB",
+  "jobs": [
+    {
+      "block": 1,
+      "letter": "B",
+      "engine": "fused-attention",
+      "route": "attention",
+      "directory": "e2e/fused-attention/iteration-fused-gpu-vs-cpu-e2e51-baab-1",
+      "command": [
+        "python3",
+        "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/fused-attention/run_matrix.py",
+        "--output",
+        "iteration-fused-gpu-vs-cpu-e2e51-baab-1",
+        "--routes",
+        "attention",
+        "--prompts",
+        "128",
+        "256",
+        "--runs",
+        "2",
+        "--new-tokens",
+        "32",
+        "--cool-c",
+        "51"
+      ]
+    },
+    {
+      "block": 2,
+      "letter": "A",
+      "engine": "baseline-guarded",
+      "route": "npu",
+      "directory": "e2e/baseline-guarded/iteration-fused-gpu-vs-cpu-e2e51-baab-2",
+      "command": [
+        "python3",
+        "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/baseline-guarded/run_matrix.py",
+        "--output",
+        "iteration-fused-gpu-vs-cpu-e2e51-baab-2",
+        "--routes",
+        "npu",
+        "--prompts",
+        "128",
+        "256",
+        "--runs",
+        "2",
+        "--new-tokens",
+        "32",
+        "--cool-c",
+        "51"
+      ]
+    },
+    {
+      "block": 3,
+      "letter": "A",
+      "engine": "baseline-guarded",
+      "route": "npu",
+      "directory": "e2e/baseline-guarded/iteration-fused-gpu-vs-cpu-e2e51-baab-3",
+      "command": [
+        "python3",
+        "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/baseline-guarded/run_matrix.py",
+        "--output",
+        "iteration-fused-gpu-vs-cpu-e2e51-baab-3",
+        "--routes",
+        "npu",
+        "--prompts",
+        "256",
+        "128",
+        "--runs",
+        "2",
+        "--new-tokens",
+        "32",
+        "--cool-c",
+        "51"
+      ]
+    },
+    {
+      "block": 4,
+      "letter": "B",
+      "engine": "fused-attention",
+      "route": "attention",
+      "directory": "e2e/fused-attention/iteration-fused-gpu-vs-cpu-e2e51-baab-4",
+      "command": [
+        "python3",
+        "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/fused-attention/run_matrix.py",
+        "--output",
+        "iteration-fused-gpu-vs-cpu-e2e51-baab-4",
+        "--routes",
+        "attention",
+        "--prompts",
+        "256",
+        "128",
+        "--runs",
+        "2",
+        "--new-tokens",
+        "32",
+        "--cool-c",
+        "51"
+      ]
+    }
+  ],
+  "cool_c": 51,
+  "protocol": "Same shared FP16 weights and teacher-forced decode inputs; all actual predictions checked. Two complete warmups and two measured requests per prompt per block; four measurements per engine/prompt. Start every request at <=51C; cooldown excluded. Hardware processes serial. Independently measured resident request spans."
+}

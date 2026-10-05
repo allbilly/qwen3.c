@@ -2,7 +2,7 @@
 
 All four representative routes have complete 256-token prefill and 31-step decode profiles. Root-stage coverage is 99.9441–99.9992%; every tested prediction matches and every requested CPU/GPU/NPU/DDR clock holds. Original clock settings are restored.
 
-Each diagnostic uses two complete warmups and one measured request, starting at ≤50°C. OpenCL event profiling and additional host timers are enabled; use the [phase matrix](PHASES.md) for unprofiled performance ranges. An independently measured complete-request comparison is still the next milestone.
+Each diagnostic uses two complete warmups and one measured request, starting at ≤50°C. OpenCL event profiling and additional host timers are enabled; use the [phase matrix](PHASES.md) for unprofiled performance ranges. The independent [single-change complete-request comparisons](ITERATIONS.md) now include phase and complete-request ranges at a common 51°C start limit.
 
 ## Phase totals
 
@@ -87,6 +87,29 @@ The exact component values are in `phase-costs.json`. GPU event intervals repres
 The GPU projection path executes 197 host/device round trips per model step. It keeps all FP16 weights resident, but uploads rounded activations and performs a blocking output read for every projection. Its measured decode projection residual is 19.129 ms/token beyond kernel execution, device-copy events and input packing; that residual includes host API/queue/wait and profiling costs. GPU attention is another 14.184 ms/token, with softmax at 5.310 ms/token. Tiny copy-event durations do not prove that transfer/synchronization overhead is negligible.
 The CPU prefill root has 2,417.823 ms in attention. Dense projections take 2,200.317 ms: 33.189 ms input rounding, 130.433 ms FP16 weight expansion, 1,924.004 ms BLAS, 84.687 ms result layout, and 27.940 ms GEMV/loop overhead. Norms/RoPE/residuals remain separate roots.
 
+### Fused GPU decode attention diagnostic
+
+A new 256-token NPU-projection / fused-GPU-attention profile passes numerical,
+device, clock and restoration audits. It uses a common <=51°C start limit,
+two complete warmups and one measurement, with event profiling enabled.
+Decode root-stage coverage is 99.9744%. Per subsequent token:
+
+| GPU attention component | ms/token |
+|---|---:|
+| Q×K score kernel | 2.318 |
+| Fused softmax/P×V kernel | 3.506 |
+| Device copy events | 0.101 |
+| Host/API/queue/wait/event-collection residual | 3.176 |
+| Total GPU attention wall | 9.101 |
+
+There are 56 attention kernel launches per token. Device intervals include
+memory stalls. The blocking-read API waits for preceding commands and must
+not be added to these components as pure download time. Profiling overhead
+is present; use [ITERATIONS.md](ITERATIONS.md) for the matched unprofiled
+CPU-versus-fused-GPU result. This diagnostic is not a paired fusion-versus-old-GPU
+speed claim. [Derived values](fused-attention-costs51.json),
+[independent audit](fused-costs25651-audit.json) and raw evidence are retained.
+
 ## Decode versus the measured memory roofline
 
 Use the exact algorithmic weight payload `1,191,968,768` bytes/token and the measured three-core NPU native streamed-weight rate `30.941 GB/s`. This yields a weight-only ceiling of `25.958` t/s; 90% is `23.362` t/s.
@@ -99,9 +122,10 @@ These are weight-payload/time ratios, not observed DDR transactions. This board 
 The [YALM profiling article](https://andrewkchan.dev/posts/yalm.html) motivates measuring full-model stages, changing one kernel/layout decision at a time and checking output quality before interpreting speed. The RK3588 experiments use local device/driver timers; CUDA-specific profiling counters are unavailable here.
 
 - Pack the eight shared KV heads once, preserving original native payloads, DMA requests and NPU submit flags; target shared KV packing (21.925 ms here) within the 180.941 ms NPU prefill packing/copy/unpack/register component. Input native packing is 55.399 ms and output copy/unpack/reduction 86.779 ms, so KV reuse can address only part of that total.
-- Use a cooperative GPU softmax, then separately fuse softmax/P×V; primitive checks pass, model/performance checks still required.
+- Use a cooperative GPU softmax, then separately fuse softmax/P×V; primitive and five-prompt model checks pass. Fused GPU decode attention is still slower than CPU in the new independently timed complete-request comparison; a matched fusion-versus-unfused performance comparison remains pending.
 - Reuse 16 regular GEMM prompt rows with one FP32 accumulator set; six actual-weight GPU projection cases pass.
-- Replace repeated CPU prompt-attention dot/value loops with SGEMM over the same FP16-rounded values. Four primitive cases / 985,088 outputs pass `1e-4`, maximum observed relative RMSE `1.20862711335e-6`; complete-model quality and performance are pending.
+- Replace repeated CPU prompt-attention dot/value loops with SGEMM over the same FP16-rounded values. Four primitive cases / 985,088 outputs pass `1e-4`, maximum observed relative RMSE `1.20862711335e-6`; complete-model 24/73-token logits fail the unchanged gate. This candidate remains rejected for general use, with no qualified performance gain.
+- Increase only NPU attention batches to 128 rows inside the existing four-data-bank guard. Primitive and five-prompt model checks pass. The matched prefill throughput gain is 4.71–4.84%; complete-request ranges overlap, so a reliable complete-request win is not established.
 - Judge the tested candidates using an independent resident-model request timer, not only a kernel or phase speedup. Include prefill-to-decode cache preparation and all activation transfers/waits.
 
 Raw configs/logs/inputs/clock samples are in `evidence/phase-costs`; `costs-audit.json` checks source/binary/model hashes, actual device counts, predictions, numerical gates, root coverage, driver intervals and restored clocks. `phase-costs.json` records the non-overlapping derived decomposition. The selected runner is unchanged.
