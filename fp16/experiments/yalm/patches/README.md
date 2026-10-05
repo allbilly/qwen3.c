@@ -7,11 +7,11 @@ Do not apply several alternative attention patches together.
 
 | Patch | Change | Observed verification so far |
 |---|---|---|
-| `parallel-softmax.patch` | One cooperative 64-lane group per decode head | Compiled; 8 primitive cases / 993,280 outputs pass unchanged limits |
-| `fused-attention.patch` | Cooperative softmax and P×V in one kernel; contiguous feature loads | Compiled; 8 primitive cases / 993,280 outputs pass unchanged limits |
-| `gpu-tile16.patch` | 16 regular GEMM rows reuse weights in one FP32 accumulator set; original split-down order retained | Compiled; 6 actual-weight projection cases / 383,360 outputs pass `1e-5` rRMSE |
-| `kv-pack-reuse.patch` | Pack 8 shared KV heads once and copy into the original per-core maps | Compiled; full-model correctness and performance pending |
-| `complete-profile.patch` | All 14 root stages plus CPU/GPU/NPU packing, math, transfer and wait details | Compiled externally; hardware profiles pending |
+| `parallel-softmax.patch` | One cooperative 64-lane group per decode head | Compiled; 8 primitive cases / 993,280 outputs pass unchanged limits; all five full-model prompt cases pass |
+| `fused-attention.patch` | Cooperative softmax and P×V in one kernel; contiguous feature loads | Compiled; 8 primitive cases / 993,280 outputs pass unchanged limits; all five full-model prompt cases pass |
+| `gpu-tile16.patch` | 16 regular GEMM rows reuse weights in one FP32 accumulator set; original split-down order retained | Compiled; 6 projection cases pass `1e-5`; full-model 24/73-token logits fail, all tested IDs match |
+| `kv-pack-reuse.patch` | Pack 8 shared KV heads once and copy into the original per-core maps | Compiled; all five full-model prompt cases pass with bit-identical first logits; performance pending |
+| `complete-profile.patch` | All 14 root stages plus CPU/GPU/NPU packing, math, transfer and wait details | Complete baseline profiles audited; candidate profiles pending |
 | `cpu-blas-attention.patch` | CPU prefill attention SGEMM with identical FP16-rounded operands | Compiled; 4 primitive cases / 985,088 outputs pass `1e-4`; full-model 24/73-token logit checks fail; 128/256 pass, all tested predictions match |
 | `request-timer.patch` | Independent prompt-to-final-output monotonic wall span | Compiled externally; full-request measurements pending |
 

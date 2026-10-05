@@ -1,0 +1,116 @@
+{
+  "workspace_directory": "/home/orangepi/qwen3-bench/matched/roofline/yalm/variants/parallel-softmax/quality-five",
+  "files": {
+    "p1-attention.config.json": {
+      "original_sha256": "6adcc97594423046394b58775ebd650367242ea835a4c95423e857f226cc492f",
+      "export": "p1-attention.config.json",
+      "export_sha256": "6adcc97594423046394b58775ebd650367242ea835a4c95423e857f226cc492f"
+    },
+    "p1-attention.jsonl": {
+      "original_sha256": "3f7b7d7d9ada14ed6eee5e8af66e285c14734255e70f49395ac174c3afc614f2",
+      "export": "p1-attention.jsonl",
+      "export_sha256": "3f7b7d7d9ada14ed6eee5e8af66e285c14734255e70f49395ac174c3afc614f2"
+    },
+    "p1-attention.teacher.tokens": {
+      "original_sha256": "725c134d29ca9ca3156d6c893ac0a5e52b84d52525c51e2eb80662655d3dd3d0",
+      "export": "p1-attention.teacher.tokens",
+      "export_sha256": "725c134d29ca9ca3156d6c893ac0a5e52b84d52525c51e2eb80662655d3dd3d0"
+    },
+    "p1-attention.tokens": {
+      "original_sha256": "6e1408b01c2dddc443ef8feee1ef5c394b67fc8b2cc74d269933bc02135987c9",
+      "export": "p1-attention.tokens",
+      "export_sha256": "6e1408b01c2dddc443ef8feee1ef5c394b67fc8b2cc74d269933bc02135987c9"
+    },
+    "p128-attention.config.json": {
+      "original_sha256": "03b8b1ff6f3f570a27c8f283b16c08fba0dfc59fc73e856b26e3b365b56ce013",
+      "export": "p128-attention.config.json",
+      "export_sha256": "03b8b1ff6f3f570a27c8f283b16c08fba0dfc59fc73e856b26e3b365b56ce013"
+    },
+    "p128-attention.jsonl": {
+      "original_sha256": "fb7abfe8cfdd5c88cc47e52594dc1b49b884e0cec72f0f3e24591520bd7f32cc",
+      "export": "p128-attention.jsonl",
+      "export_sha256": "fb7abfe8cfdd5c88cc47e52594dc1b49b884e0cec72f0f3e24591520bd7f32cc"
+    },
+    "p128-attention.teacher.tokens": {
+      "original_sha256": "d02314ff65bbeb9dd5eedd937c3bc85b8faa0ecaf88c185f730f0f92ba7836db",
+      "export": "p128-attention.teacher.tokens",
+      "export_sha256": "d02314ff65bbeb9dd5eedd937c3bc85b8faa0ecaf88c185f730f0f92ba7836db"
+    },
+    "p128-attention.tokens": {
+      "original_sha256": "db74195066510380bdeae6f32d2d0c7d5305a2f35d2223ba2114a04f2c0de1fc",
+      "export": "p128-attention.tokens",
+      "export_sha256": "db74195066510380bdeae6f32d2d0c7d5305a2f35d2223ba2114a04f2c0de1fc"
+    },
+    "p24-attention.config.json": {
+      "original_sha256": "9a71948b84230458e320858ef9bb482a31cd026d3c6a82b6f0e9e593750aecff",
+      "export": "p24-attention.config.json",
+      "export_sha256": "9a71948b84230458e320858ef9bb482a31cd026d3c6a82b6f0e9e593750aecff"
+    },
+    "p24-attention.jsonl": {
+      "original_sha256": "9dc5c20878022e0eee7fb12d46892073dbf4a71e97dafad035d5e0a47ea1b84a",
+      "export": "p24-attention.jsonl",
+      "export_sha256": "9dc5c20878022e0eee7fb12d46892073dbf4a71e97dafad035d5e0a47ea1b84a"
+    },
+    "p24-attention.teacher.tokens": {
+      "original_sha256": "cf736da7621436fcfdf3ec9f94f8cf447c15f04c45cf7129cbd5ac27ce2b3c5e",
+      "export": "p24-attention.teacher.tokens",
+      "export_sha256": "cf736da7621436fcfdf3ec9f94f8cf447c15f04c45cf7129cbd5ac27ce2b3c5e"
+    },
+    "p24-attention.tokens": {
+      "original_sha256": "a438d42ab4ad59dfe3e0469d2836993de16fce180efa9bcac481fb4feb45da83",
+      "export": "p24-attention.tokens",
+      "export_sha256": "a438d42ab4ad59dfe3e0469d2836993de16fce180efa9bcac481fb4feb45da83"
+    },
+    "p256-attention.config.json": {
+      "original_sha256": "9c816cff9e704ab47eae15714da149da5716d5a1f6ea2d91f9507267cf99f79a",
+      "export": "p256-attention.config.json",
+      "export_sha256": "9c816cff9e704ab47eae15714da149da5716d5a1f6ea2d91f9507267cf99f79a"
+    },
+    "p256-attention.jsonl": {
+      "original_sha256": "db387cc4c690d4ab1318f1c32e8ab026b544d5f1f82110ebcbecf941383d1fb8",
+      "export": "p256-attention.jsonl",
+      "export_sha256": "db387cc4c690d4ab1318f1c32e8ab026b544d5f1f82110ebcbecf941383d1fb8"
+    },
+    "p256-attention.teacher.tokens": {
+      "original_sha256": "dd507b4afd4becf9ae263ec6fde688da3cd000b2de677a4483ef7493edf82cd0",
+      "export": "p256-attention.teacher.tokens",
+      "export_sha256": "dd507b4afd4becf9ae263ec6fde688da3cd000b2de677a4483ef7493edf82cd0"
+    },
+    "p256-attention.tokens": {
+      "original_sha256": "899f36a0548cde0e1a51c6bae9454b21d9be66f13402551f81e037e95ff0d929",
+      "export": "p256-attention.tokens",
+      "export_sha256": "899f36a0548cde0e1a51c6bae9454b21d9be66f13402551f81e037e95ff0d929"
+    },
+    "p73-attention.config.json": {
+      "original_sha256": "f65e4cf672efe0fe3f75a2c3d6501bb0519fbf828e62ac478e3466821c960e5b",
+      "export": "p73-attention.config.json",
+      "export_sha256": "f65e4cf672efe0fe3f75a2c3d6501bb0519fbf828e62ac478e3466821c960e5b"
+    },
+    "p73-attention.jsonl": {
+      "original_sha256": "ab7581b4c1a5a3afc114ecf8892c84af32c613ec405243cbd456ff951862ce0a",
+      "export": "p73-attention.jsonl",
+      "export_sha256": "ab7581b4c1a5a3afc114ecf8892c84af32c613ec405243cbd456ff951862ce0a"
+    },
+    "p73-attention.teacher.tokens": {
+      "original_sha256": "342e39f874080b7ad4096754951e157eb949b17f47ae401f1b6eebb1d2f31b62",
+      "export": "p73-attention.teacher.tokens",
+      "export_sha256": "342e39f874080b7ad4096754951e157eb949b17f47ae401f1b6eebb1d2f31b62"
+    },
+    "p73-attention.tokens": {
+      "original_sha256": "0ab906efbc2c06416b9834c174d70fe8ce42294f05007ac8431e12ffd82edbc5",
+      "export": "p73-attention.tokens",
+      "export_sha256": "0ab906efbc2c06416b9834c174d70fe8ce42294f05007ac8431e12ffd82edbc5"
+    },
+    "quality-summary.json": {
+      "original_sha256": "a36fa74c7f5e43f0389a3e198a8ea8cf68dfd3921645dba7ed6d3fff237dc27f",
+      "export": "quality-summary.json",
+      "export_sha256": "a36fa74c7f5e43f0389a3e198a8ea8cf68dfd3921645dba7ed6d3fff237dc27f"
+    },
+    "source-provenance.json": {
+      "original_sha256": "46038662388271ecd141cb0637335d368a11693bff562fdcb9ec12accd64a61a",
+      "export": "source-provenance.json",
+      "export_sha256": "46038662388271ecd141cb0637335d368a11693bff562fdcb9ec12accd64a61a"
+    }
+  },
+  "external_artifacts": "Shared FP16 model, full per-vocabulary logits and compiled binary remain in the comparison workspace; source/binary/input hashes are retained here."
+}

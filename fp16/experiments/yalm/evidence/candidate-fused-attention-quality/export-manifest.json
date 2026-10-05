@@ -1,0 +1,116 @@
+{
+  "workspace_directory": "/home/orangepi/qwen3-bench/matched/roofline/yalm/variants/fused-attention/quality-five",
+  "files": {
+    "p1-attention.config.json": {
+      "original_sha256": "52ca4a17c156bca0b5e3cda9a378db36cb912ec4c15e97ddf0e6e29ed0f65bee",
+      "export": "p1-attention.config.json",
+      "export_sha256": "52ca4a17c156bca0b5e3cda9a378db36cb912ec4c15e97ddf0e6e29ed0f65bee"
+    },
+    "p1-attention.jsonl": {
+      "original_sha256": "8c2fe07f237b6d463dffe9664eb68f66e2905d421a388b8fbd4103af10ae61a4",
+      "export": "p1-attention.jsonl",
+      "export_sha256": "8c2fe07f237b6d463dffe9664eb68f66e2905d421a388b8fbd4103af10ae61a4"
+    },
+    "p1-attention.teacher.tokens": {
+      "original_sha256": "725c134d29ca9ca3156d6c893ac0a5e52b84d52525c51e2eb80662655d3dd3d0",
+      "export": "p1-attention.teacher.tokens",
+      "export_sha256": "725c134d29ca9ca3156d6c893ac0a5e52b84d52525c51e2eb80662655d3dd3d0"
+    },
+    "p1-attention.tokens": {
+      "original_sha256": "6e1408b01c2dddc443ef8feee1ef5c394b67fc8b2cc74d269933bc02135987c9",
+      "export": "p1-attention.tokens",
+      "export_sha256": "6e1408b01c2dddc443ef8feee1ef5c394b67fc8b2cc74d269933bc02135987c9"
+    },
+    "p128-attention.config.json": {
+      "original_sha256": "d302f8354df0aab3e85bad5adfeccbb8de95612e768efc817996de6f453160d7",
+      "export": "p128-attention.config.json",
+      "export_sha256": "d302f8354df0aab3e85bad5adfeccbb8de95612e768efc817996de6f453160d7"
+    },
+    "p128-attention.jsonl": {
+      "original_sha256": "7db51782597dfba9a537120905ff79b3c2de328f69e7048ad77ac555545551a2",
+      "export": "p128-attention.jsonl",
+      "export_sha256": "7db51782597dfba9a537120905ff79b3c2de328f69e7048ad77ac555545551a2"
+    },
+    "p128-attention.teacher.tokens": {
+      "original_sha256": "d02314ff65bbeb9dd5eedd937c3bc85b8faa0ecaf88c185f730f0f92ba7836db",
+      "export": "p128-attention.teacher.tokens",
+      "export_sha256": "d02314ff65bbeb9dd5eedd937c3bc85b8faa0ecaf88c185f730f0f92ba7836db"
+    },
+    "p128-attention.tokens": {
+      "original_sha256": "db74195066510380bdeae6f32d2d0c7d5305a2f35d2223ba2114a04f2c0de1fc",
+      "export": "p128-attention.tokens",
+      "export_sha256": "db74195066510380bdeae6f32d2d0c7d5305a2f35d2223ba2114a04f2c0de1fc"
+    },
+    "p24-attention.config.json": {
+      "original_sha256": "536e4b4754cb0575d1f82ee963d459951f233ef095ff9de9fbde091e33ef5dd5",
+      "export": "p24-attention.config.json",
+      "export_sha256": "536e4b4754cb0575d1f82ee963d459951f233ef095ff9de9fbde091e33ef5dd5"
+    },
+    "p24-attention.jsonl": {
+      "original_sha256": "bb037c8efebbd2bcec52dd3aa42d341d3acd773b46060c16ef8534d3168c32bd",
+      "export": "p24-attention.jsonl",
+      "export_sha256": "bb037c8efebbd2bcec52dd3aa42d341d3acd773b46060c16ef8534d3168c32bd"
+    },
+    "p24-attention.teacher.tokens": {
+      "original_sha256": "cf736da7621436fcfdf3ec9f94f8cf447c15f04c45cf7129cbd5ac27ce2b3c5e",
+      "export": "p24-attention.teacher.tokens",
+      "export_sha256": "cf736da7621436fcfdf3ec9f94f8cf447c15f04c45cf7129cbd5ac27ce2b3c5e"
+    },
+    "p24-attention.tokens": {
+      "original_sha256": "a438d42ab4ad59dfe3e0469d2836993de16fce180efa9bcac481fb4feb45da83",
+      "export": "p24-attention.tokens",
+      "export_sha256": "a438d42ab4ad59dfe3e0469d2836993de16fce180efa9bcac481fb4feb45da83"
+    },
+    "p256-attention.config.json": {
+      "original_sha256": "8ab0ff556fe5f2295820e522f8b90cd7b4d2f2bfddff74a4eeafe0111c46a048",
+      "export": "p256-attention.config.json",
+      "export_sha256": "8ab0ff556fe5f2295820e522f8b90cd7b4d2f2bfddff74a4eeafe0111c46a048"
+    },
+    "p256-attention.jsonl": {
+      "original_sha256": "ddabc059f314b91dccf564528ab1298ef4d010deeb5a028fa5e09a940168c772",
+      "export": "p256-attention.jsonl",
+      "export_sha256": "ddabc059f314b91dccf564528ab1298ef4d010deeb5a028fa5e09a940168c772"
+    },
+    "p256-attention.teacher.tokens": {
+      "original_sha256": "dd507b4afd4becf9ae263ec6fde688da3cd000b2de677a4483ef7493edf82cd0",
+      "export": "p256-attention.teacher.tokens",
+      "export_sha256": "dd507b4afd4becf9ae263ec6fde688da3cd000b2de677a4483ef7493edf82cd0"
+    },
+    "p256-attention.tokens": {
+      "original_sha256": "899f36a0548cde0e1a51c6bae9454b21d9be66f13402551f81e037e95ff0d929",
+      "export": "p256-attention.tokens",
+      "export_sha256": "899f36a0548cde0e1a51c6bae9454b21d9be66f13402551f81e037e95ff0d929"
+    },
+    "p73-attention.config.json": {
+      "original_sha256": "8a5b34ec12d9fe30d1282b8e0d5d51e3ee0822c8a6ba60fb7887e81966def56c",
+      "export": "p73-attention.config.json",
+      "export_sha256": "8a5b34ec12d9fe30d1282b8e0d5d51e3ee0822c8a6ba60fb7887e81966def56c"
+    },
+    "p73-attention.jsonl": {
+      "original_sha256": "a88bbedc5f69471d80ce6e6f4cccbc166b5c3a269370729f8184e126c6d6a968",
+      "export": "p73-attention.jsonl",
+      "export_sha256": "a88bbedc5f69471d80ce6e6f4cccbc166b5c3a269370729f8184e126c6d6a968"
+    },
+    "p73-attention.teacher.tokens": {
+      "original_sha256": "342e39f874080b7ad4096754951e157eb949b17f47ae401f1b6eebb1d2f31b62",
+      "export": "p73-attention.teacher.tokens",
+      "export_sha256": "342e39f874080b7ad4096754951e157eb949b17f47ae401f1b6eebb1d2f31b62"
+    },
+    "p73-attention.tokens": {
+      "original_sha256": "0ab906efbc2c06416b9834c174d70fe8ce42294f05007ac8431e12ffd82edbc5",
+      "export": "p73-attention.tokens",
+      "export_sha256": "0ab906efbc2c06416b9834c174d70fe8ce42294f05007ac8431e12ffd82edbc5"
+    },
+    "quality-summary.json": {
+      "original_sha256": "9d1f5afc3597d828f78d50fcc35cd0345d11cd3dce42436f3b0cdc6a19bf3350",
+      "export": "quality-summary.json",
+      "export_sha256": "9d1f5afc3597d828f78d50fcc35cd0345d11cd3dce42436f3b0cdc6a19bf3350"
+    },
+    "source-provenance.json": {
+      "original_sha256": "7cba5ee8ae784d50d2be194eb90e130ea951ba68773c3154b279c222668224d9",
+      "export": "source-provenance.json",
+      "export_sha256": "7cba5ee8ae784d50d2be194eb90e130ea951ba68773c3154b279c222668224d9"
+    }
+  },
+  "external_artifacts": "Shared FP16 model, full per-vocabulary logits and compiled binary remain in the comparison workspace; source/binary/input hashes are retained here."
+}

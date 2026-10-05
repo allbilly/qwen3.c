@@ -1,0 +1,116 @@
+{
+  "workspace_directory": "/home/orangepi/qwen3-bench/matched/roofline/yalm/variants/kv-pack-reuse/quality-five",
+  "files": {
+    "p1-npu.config.json": {
+      "original_sha256": "51d2b7a82a6b492c5557bd76eb035b3d960a53f36bc7ce2c8834164d84d3b84f",
+      "export": "p1-npu.config.json",
+      "export_sha256": "51d2b7a82a6b492c5557bd76eb035b3d960a53f36bc7ce2c8834164d84d3b84f"
+    },
+    "p1-npu.jsonl": {
+      "original_sha256": "6753e49b3ebf9e31ba71c38a1386f38b3b60731b4946753395ac372729089ea1",
+      "export": "p1-npu.jsonl",
+      "export_sha256": "6753e49b3ebf9e31ba71c38a1386f38b3b60731b4946753395ac372729089ea1"
+    },
+    "p1-npu.teacher.tokens": {
+      "original_sha256": "725c134d29ca9ca3156d6c893ac0a5e52b84d52525c51e2eb80662655d3dd3d0",
+      "export": "p1-npu.teacher.tokens",
+      "export_sha256": "725c134d29ca9ca3156d6c893ac0a5e52b84d52525c51e2eb80662655d3dd3d0"
+    },
+    "p1-npu.tokens": {
+      "original_sha256": "6e1408b01c2dddc443ef8feee1ef5c394b67fc8b2cc74d269933bc02135987c9",
+      "export": "p1-npu.tokens",
+      "export_sha256": "6e1408b01c2dddc443ef8feee1ef5c394b67fc8b2cc74d269933bc02135987c9"
+    },
+    "p128-npu.config.json": {
+      "original_sha256": "546d4ae6b95d5ebea2549409a217c7c2032d7e703351f181418dd0a887b14f14",
+      "export": "p128-npu.config.json",
+      "export_sha256": "546d4ae6b95d5ebea2549409a217c7c2032d7e703351f181418dd0a887b14f14"
+    },
+    "p128-npu.jsonl": {
+      "original_sha256": "7c20b5bb891e9cd85d99b539a970bc05111ad2b7e2f1e207d1bc6a0681780a72",
+      "export": "p128-npu.jsonl",
+      "export_sha256": "7c20b5bb891e9cd85d99b539a970bc05111ad2b7e2f1e207d1bc6a0681780a72"
+    },
+    "p128-npu.teacher.tokens": {
+      "original_sha256": "d02314ff65bbeb9dd5eedd937c3bc85b8faa0ecaf88c185f730f0f92ba7836db",
+      "export": "p128-npu.teacher.tokens",
+      "export_sha256": "d02314ff65bbeb9dd5eedd937c3bc85b8faa0ecaf88c185f730f0f92ba7836db"
+    },
+    "p128-npu.tokens": {
+      "original_sha256": "db74195066510380bdeae6f32d2d0c7d5305a2f35d2223ba2114a04f2c0de1fc",
+      "export": "p128-npu.tokens",
+      "export_sha256": "db74195066510380bdeae6f32d2d0c7d5305a2f35d2223ba2114a04f2c0de1fc"
+    },
+    "p24-npu.config.json": {
+      "original_sha256": "b68680d2f95e184eb48cfc390bc84c04f7e41c28320befcf186d091cd9dbbefa",
+      "export": "p24-npu.config.json",
+      "export_sha256": "b68680d2f95e184eb48cfc390bc84c04f7e41c28320befcf186d091cd9dbbefa"
+    },
+    "p24-npu.jsonl": {
+      "original_sha256": "9794c350a2a65eec9dd5a2c285a42f542b4cee3774b654f933f111cd503ef23b",
+      "export": "p24-npu.jsonl",
+      "export_sha256": "9794c350a2a65eec9dd5a2c285a42f542b4cee3774b654f933f111cd503ef23b"
+    },
+    "p24-npu.teacher.tokens": {
+      "original_sha256": "cf736da7621436fcfdf3ec9f94f8cf447c15f04c45cf7129cbd5ac27ce2b3c5e",
+      "export": "p24-npu.teacher.tokens",
+      "export_sha256": "cf736da7621436fcfdf3ec9f94f8cf447c15f04c45cf7129cbd5ac27ce2b3c5e"
+    },
+    "p24-npu.tokens": {
+      "original_sha256": "a438d42ab4ad59dfe3e0469d2836993de16fce180efa9bcac481fb4feb45da83",
+      "export": "p24-npu.tokens",
+      "export_sha256": "a438d42ab4ad59dfe3e0469d2836993de16fce180efa9bcac481fb4feb45da83"
+    },
+    "p256-npu.config.json": {
+      "original_sha256": "a3d36076c624c19da14ae09dff3d3ae0330bd419fe305ff56e549fc6a5a9959d",
+      "export": "p256-npu.config.json",
+      "export_sha256": "a3d36076c624c19da14ae09dff3d3ae0330bd419fe305ff56e549fc6a5a9959d"
+    },
+    "p256-npu.jsonl": {
+      "original_sha256": "fc5b95358c9c9636b84efc1f34b301b92ba212efdfa7eaa7bb28d08a6bb7d453",
+      "export": "p256-npu.jsonl",
+      "export_sha256": "fc5b95358c9c9636b84efc1f34b301b92ba212efdfa7eaa7bb28d08a6bb7d453"
+    },
+    "p256-npu.teacher.tokens": {
+      "original_sha256": "dd507b4afd4becf9ae263ec6fde688da3cd000b2de677a4483ef7493edf82cd0",
+      "export": "p256-npu.teacher.tokens",
+      "export_sha256": "dd507b4afd4becf9ae263ec6fde688da3cd000b2de677a4483ef7493edf82cd0"
+    },
+    "p256-npu.tokens": {
+      "original_sha256": "899f36a0548cde0e1a51c6bae9454b21d9be66f13402551f81e037e95ff0d929",
+      "export": "p256-npu.tokens",
+      "export_sha256": "899f36a0548cde0e1a51c6bae9454b21d9be66f13402551f81e037e95ff0d929"
+    },
+    "p73-npu.config.json": {
+      "original_sha256": "867015a38fe333126244f57b417fcd1835c74a2ee941e0e98202be0e894873cb",
+      "export": "p73-npu.config.json",
+      "export_sha256": "867015a38fe333126244f57b417fcd1835c74a2ee941e0e98202be0e894873cb"
+    },
+    "p73-npu.jsonl": {
+      "original_sha256": "88a1bfd1ea5fa88074450d6deed12c57bfea1b8f5339955978a546bcf2838a3b",
+      "export": "p73-npu.jsonl",
+      "export_sha256": "88a1bfd1ea5fa88074450d6deed12c57bfea1b8f5339955978a546bcf2838a3b"
+    },
+    "p73-npu.teacher.tokens": {
+      "original_sha256": "342e39f874080b7ad4096754951e157eb949b17f47ae401f1b6eebb1d2f31b62",
+      "export": "p73-npu.teacher.tokens",
+      "export_sha256": "342e39f874080b7ad4096754951e157eb949b17f47ae401f1b6eebb1d2f31b62"
+    },
+    "p73-npu.tokens": {
+      "original_sha256": "0ab906efbc2c06416b9834c174d70fe8ce42294f05007ac8431e12ffd82edbc5",
+      "export": "p73-npu.tokens",
+      "export_sha256": "0ab906efbc2c06416b9834c174d70fe8ce42294f05007ac8431e12ffd82edbc5"
+    },
+    "quality-summary.json": {
+      "original_sha256": "b244aac66cbe94180bdd320b7a214d141a593669fc54a91b936b9f81d3e8afe9",
+      "export": "quality-summary.json",
+      "export_sha256": "b244aac66cbe94180bdd320b7a214d141a593669fc54a91b936b9f81d3e8afe9"
+    },
+    "source-provenance.json": {
+      "original_sha256": "53214485bce97551149f66ac94bfd29262dca9ef814a7e5d0ca3ca4f1385fc63",
+      "export": "source-provenance.json",
+      "export_sha256": "53214485bce97551149f66ac94bfd29262dca9ef814a7e5d0ca3ca4f1385fc63"
+    }
+  },
+  "external_artifacts": "Shared FP16 model, full per-vocabulary logits and compiled binary remain in the comparison workspace; source/binary/input hashes are retained here."
+}

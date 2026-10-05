@@ -1,0 +1,116 @@
+{
+  "workspace_directory": "/home/orangepi/qwen3-bench/matched/roofline/yalm/variants/cpu-blas-attention/quality-five",
+  "files": {
+    "p1-cpu.config.json": {
+      "original_sha256": "8d49afef46bd79867b4e28419c16ebd2651f543be6848ebb865a14af7f37f567",
+      "export": "p1-cpu.config.json",
+      "export_sha256": "8d49afef46bd79867b4e28419c16ebd2651f543be6848ebb865a14af7f37f567"
+    },
+    "p1-cpu.jsonl": {
+      "original_sha256": "1e79ab36c011854400180b5941564858c3d128f5621fdec50f37ea6420543462",
+      "export": "p1-cpu.jsonl",
+      "export_sha256": "1e79ab36c011854400180b5941564858c3d128f5621fdec50f37ea6420543462"
+    },
+    "p1-cpu.teacher.tokens": {
+      "original_sha256": "725c134d29ca9ca3156d6c893ac0a5e52b84d52525c51e2eb80662655d3dd3d0",
+      "export": "p1-cpu.teacher.tokens",
+      "export_sha256": "725c134d29ca9ca3156d6c893ac0a5e52b84d52525c51e2eb80662655d3dd3d0"
+    },
+    "p1-cpu.tokens": {
+      "original_sha256": "6e1408b01c2dddc443ef8feee1ef5c394b67fc8b2cc74d269933bc02135987c9",
+      "export": "p1-cpu.tokens",
+      "export_sha256": "6e1408b01c2dddc443ef8feee1ef5c394b67fc8b2cc74d269933bc02135987c9"
+    },
+    "p128-cpu.config.json": {
+      "original_sha256": "505700f1b1279f957617d61e9e54c81fe8ff7d3cf5106bf819ef3a2449da309f",
+      "export": "p128-cpu.config.json",
+      "export_sha256": "505700f1b1279f957617d61e9e54c81fe8ff7d3cf5106bf819ef3a2449da309f"
+    },
+    "p128-cpu.jsonl": {
+      "original_sha256": "cdde90bfe430cc417f2f5423d2f8ac8a7c62e20838e0c7210b4b5018ead66efc",
+      "export": "p128-cpu.jsonl",
+      "export_sha256": "cdde90bfe430cc417f2f5423d2f8ac8a7c62e20838e0c7210b4b5018ead66efc"
+    },
+    "p128-cpu.teacher.tokens": {
+      "original_sha256": "d02314ff65bbeb9dd5eedd937c3bc85b8faa0ecaf88c185f730f0f92ba7836db",
+      "export": "p128-cpu.teacher.tokens",
+      "export_sha256": "d02314ff65bbeb9dd5eedd937c3bc85b8faa0ecaf88c185f730f0f92ba7836db"
+    },
+    "p128-cpu.tokens": {
+      "original_sha256": "db74195066510380bdeae6f32d2d0c7d5305a2f35d2223ba2114a04f2c0de1fc",
+      "export": "p128-cpu.tokens",
+      "export_sha256": "db74195066510380bdeae6f32d2d0c7d5305a2f35d2223ba2114a04f2c0de1fc"
+    },
+    "p24-cpu.config.json": {
+      "original_sha256": "4d036998a7e9278536b1c5897babb8051475438437e8b0d6bdb1b85dfcaa67b3",
+      "export": "p24-cpu.config.json",
+      "export_sha256": "4d036998a7e9278536b1c5897babb8051475438437e8b0d6bdb1b85dfcaa67b3"
+    },
+    "p24-cpu.jsonl": {
+      "original_sha256": "b38c92df20417996ff775e55a69bd4b8a1ddad5c7775053296bcc3f5f425897f",
+      "export": "p24-cpu.jsonl",
+      "export_sha256": "b38c92df20417996ff775e55a69bd4b8a1ddad5c7775053296bcc3f5f425897f"
+    },
+    "p24-cpu.teacher.tokens": {
+      "original_sha256": "cf736da7621436fcfdf3ec9f94f8cf447c15f04c45cf7129cbd5ac27ce2b3c5e",
+      "export": "p24-cpu.teacher.tokens",
+      "export_sha256": "cf736da7621436fcfdf3ec9f94f8cf447c15f04c45cf7129cbd5ac27ce2b3c5e"
+    },
+    "p24-cpu.tokens": {
+      "original_sha256": "a438d42ab4ad59dfe3e0469d2836993de16fce180efa9bcac481fb4feb45da83",
+      "export": "p24-cpu.tokens",
+      "export_sha256": "a438d42ab4ad59dfe3e0469d2836993de16fce180efa9bcac481fb4feb45da83"
+    },
+    "p256-cpu.config.json": {
+      "original_sha256": "997449cab02cfd4963d7df53625adca623aba0636e6f2ed1287e47f00e51a1d0",
+      "export": "p256-cpu.config.json",
+      "export_sha256": "997449cab02cfd4963d7df53625adca623aba0636e6f2ed1287e47f00e51a1d0"
+    },
+    "p256-cpu.jsonl": {
+      "original_sha256": "b2dcf566198f5a54329cdcfdb04ff042fc3ae529d0b2f9206a6dcd05f9dd7a87",
+      "export": "p256-cpu.jsonl",
+      "export_sha256": "b2dcf566198f5a54329cdcfdb04ff042fc3ae529d0b2f9206a6dcd05f9dd7a87"
+    },
+    "p256-cpu.teacher.tokens": {
+      "original_sha256": "dd507b4afd4becf9ae263ec6fde688da3cd000b2de677a4483ef7493edf82cd0",
+      "export": "p256-cpu.teacher.tokens",
+      "export_sha256": "dd507b4afd4becf9ae263ec6fde688da3cd000b2de677a4483ef7493edf82cd0"
+    },
+    "p256-cpu.tokens": {
+      "original_sha256": "899f36a0548cde0e1a51c6bae9454b21d9be66f13402551f81e037e95ff0d929",
+      "export": "p256-cpu.tokens",
+      "export_sha256": "899f36a0548cde0e1a51c6bae9454b21d9be66f13402551f81e037e95ff0d929"
+    },
+    "p73-cpu.config.json": {
+      "original_sha256": "77b58cbff6d97f9aa026ee1419de369608ded383638774d8122b4b06f7b51961",
+      "export": "p73-cpu.config.json",
+      "export_sha256": "77b58cbff6d97f9aa026ee1419de369608ded383638774d8122b4b06f7b51961"
+    },
+    "p73-cpu.jsonl": {
+      "original_sha256": "611db43f389de954c9878d2a7b6ce0749adc214b6bea451e8f7839e74290abe1",
+      "export": "p73-cpu.jsonl",
+      "export_sha256": "611db43f389de954c9878d2a7b6ce0749adc214b6bea451e8f7839e74290abe1"
+    },
+    "p73-cpu.teacher.tokens": {
+      "original_sha256": "342e39f874080b7ad4096754951e157eb949b17f47ae401f1b6eebb1d2f31b62",
+      "export": "p73-cpu.teacher.tokens",
+      "export_sha256": "342e39f874080b7ad4096754951e157eb949b17f47ae401f1b6eebb1d2f31b62"
+    },
+    "p73-cpu.tokens": {
+      "original_sha256": "0ab906efbc2c06416b9834c174d70fe8ce42294f05007ac8431e12ffd82edbc5",
+      "export": "p73-cpu.tokens",
+      "export_sha256": "0ab906efbc2c06416b9834c174d70fe8ce42294f05007ac8431e12ffd82edbc5"
+    },
+    "quality-summary.json": {
+      "original_sha256": "7477b4c005df4a15cf7027f9afbefeccbc1bf77bf7eb85f3cb67d3e8dbc8c47d",
+      "export": "quality-summary.json",
+      "export_sha256": "7477b4c005df4a15cf7027f9afbefeccbc1bf77bf7eb85f3cb67d3e8dbc8c47d"
+    },
+    "source-provenance.json": {
+      "original_sha256": "2e6a405a5c590352fc6344da1e39d3df769a6df323a88104593ec1787ef9a17e",
+      "export": "source-provenance.json",
+      "export_sha256": "2e6a405a5c590352fc6344da1e39d3df769a6df323a88104593ec1787ef9a17e"
+    }
+  },
+  "external_artifacts": "Shared FP16 model, full per-vocabulary logits and compiled binary remain in the comparison workspace; source/binary/input hashes are retained here."
+}

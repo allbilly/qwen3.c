@@ -15,4 +15,4 @@ for name,row in manifest.items():
    subprocess.run(['python3',str(dest/'embed.py'),str(dest/raw),str(dest/header),symbol],check=True)
   for path,digest in target_meta['source_sha256'].items():assert sha(dest/path)==digest,(name,path)
   checks.append({'name':name,'every_compiled_source_matches':True,'binary_sha256':target_meta['binary_sha256']})
-(root/'patch-audit.json').write_text(json.dumps({'checks':checks},indent=2)+'\n');print('All six patches reproduce every externally compiled source hash')
+(root/'patch-audit.json').write_text(json.dumps({'checks':checks},indent=2)+'\n');print(f'All {len(checks)} patches reproduce every externally compiled source hash')

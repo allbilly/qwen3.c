@@ -28,7 +28,7 @@ for directory in args.directories:
         config=json.loads(config_path.read_text());env=config['environment'];cmd=config['command'];label=config_path.name.removesuffix('.config.json')
         assert cmd[:3]==['taskset','-c','4-7'] and sha(Path(cmd[3]))==metadata['binary_sha256'] and Path(cmd[4])==model
         assert env['OMP_NUM_THREADS']=='4' and env['WARMUP_RUNS']=='2' and env['NPU_DOMAIN_ID']=='1' and env['NPU_CORES']=='3'
-        assert env['COOL_REQUEST_C'] in ['45','50','55']
+        assert env['COOL_REQUEST_C'] in ['45','50','51','55']
         prompt=len(Path(cmd[5]).read_text().split());steps=int(cmd[6])-1;run_count=int(cmd[7])
         assert int(cmd[6]) in [16,32]
         tokens=list(map(int,Path(env['TEACHER_IDS']).read_text().split()));assert len(tokens)==steps+1

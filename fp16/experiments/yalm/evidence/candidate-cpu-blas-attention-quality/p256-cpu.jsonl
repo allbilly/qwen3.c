@@ -1,0 +1,19 @@
+{"event":"linear_cpu_init","storage":"FP16","accumulation":"FP32","blas":"OpenBLAS 0.3.23.dev  USE64BITINT DYNAMIC_ARCH NO_AFFINITY armv8 MAX_THREADS=64"}
+{"event":"routing","dense_prefill":"cpu","dense_decode":"cpu","cpu_classifier":false,"npu_initialized":false,"gpu_projections_initialized":false,"host_non_linear_ops":"CPU"}
+{"event":"initialization","mode":"npu_fp16","init_ms":319.877,"weights":"shared_FP16","npu_cores":0}
+{"event":"cooldown","run":0,"before_millidegrees":66538,"after_millidegrees":54538,"wait_ms":3002.356}
+{"event":"linear_cpu_profile","phase":"prefill","run":0,"warmup":true,"calls":197,"weight_bytes":1191968768,"wall_ms":2523.486755036,"pack_ms":43.108020090,"compute_ms":2480.268190995,"prefill_attention_calls":28,"prefill_attention_ms":373.317304000}
+{"event":"cpu_attention_details","phase":"prefill","run":0,"warmup":true,"calls":28,"pack_ms":63.893646984,"score_blas_ms":70.083592145,"softmax_round_ms":150.068261909,"value_blas_ms":66.269244989,"output_layout_ms":22.842726999}
+{"event":"device_phase","phase":"prefill","run":0,"npu_ops":0,"cpu_ops":197}
+{"event":"linear_cpu_profile","phase":"decode","run":0,"warmup":true,"calls":2955,"weight_bytes":17879531520,"wall_ms":756.194151036,"pack_ms":2.394845173,"compute_ms":753.348974931,"prefill_attention_calls":0,"prefill_attention_ms":0.000000000}
+{"event":"cpu_attention_details","phase":"decode","run":0,"warmup":true,"calls":0,"pack_ms":0.000000000,"score_blas_ms":0.000000000,"softmax_round_ms":0.000000000,"value_blas_ms":0.000000000,"output_layout_ms":0.000000000}
+{"event":"device_phase","phase":"decode","run":0,"npu_ops":0,"cpu_ops":2955}
+{"event":"run","mode":"npu_fp16","warmup":true,"run":0,"prefill_tokens":256,"new_tokens":16,"first_token_ms":3037.268,"decode_steps":15,"decode_ms":885.483,"decode_tps":16.940,"npu_ops":0,"cpu_matmul_ops":3152,"generated_ids":[47442,264,7162,11,46936,369,279,5662,11,1221,12341,279,1102,13,576,6645]}
+{"event":"cooldown","run":1,"before_millidegrees":78538,"after_millidegrees":54538,"wait_ms":5004.053}
+{"event":"linear_cpu_profile","phase":"prefill","run":1,"warmup":false,"calls":197,"weight_bytes":1191968768,"wall_ms":2794.766742967,"pack_ms":61.104765937,"compute_ms":2733.511780022,"prefill_attention_calls":28,"prefill_attention_ms":433.361295015}
+{"event":"cpu_attention_details","phase":"prefill","run":1,"warmup":false,"calls":28,"pack_ms":106.110039168,"score_blas_ms":72.074781012,"softmax_round_ms":150.150520937,"value_blas_ms":67.398853962,"output_layout_ms":37.464052968}
+{"event":"device_phase","phase":"prefill","run":1,"npu_ops":0,"cpu_ops":197}
+{"event":"linear_cpu_profile","phase":"decode","run":1,"warmup":false,"calls":2955,"weight_bytes":17879531520,"wall_ms":773.525314100,"pack_ms":2.404181153,"compute_ms":770.712251014,"prefill_attention_calls":0,"prefill_attention_ms":0.000000000}
+{"event":"cpu_attention_details","phase":"decode","run":1,"warmup":false,"calls":0,"pack_ms":0.000000000,"score_blas_ms":0.000000000,"softmax_round_ms":0.000000000,"value_blas_ms":0.000000000,"output_layout_ms":0.000000000}
+{"event":"device_phase","phase":"decode","run":1,"npu_ops":0,"cpu_ops":2955}
+{"event":"run","mode":"npu_fp16","warmup":false,"run":1,"prefill_tokens":256,"new_tokens":16,"first_token_ms":3369.933,"decode_steps":15,"decode_ms":913.121,"decode_tps":16.427,"npu_ops":0,"cpu_matmul_ops":3152,"generated_ids":[47442,264,7162,11,46936,369,279,5662,11,1221,12341,279,1102,13,576,6645]}
