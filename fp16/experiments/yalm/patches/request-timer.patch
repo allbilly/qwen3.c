@@ -1,0 +1,15 @@
+--- a/source/fp16/run.c
++++ b/source/fp16/run.c
+@@ -158,7 +158,11 @@
+             else logits=forward_batch_atpos(&t,&prefill,teacher_path?teacher+step-1:generated+step-1,1,count+step-1);
+             generated[step] = argmax(logits, t.config.vocab_size);
+         }
+-        double decode_ms = now_ms() - decode_start;
++        double request_end=now_ms();
++        double decode_ms = request_end - decode_start;
++        double request_ms = request_end - begin;
++        double handoff_ms = decode_start - (begin + first_ms);
++        fprintf(stderr,"{\"event\":\"request_wall\",\"run\":%d,\"warmup\":%s,\"prompt_tokens\":%d,\"output_tokens\":%d,\"request_ms\":%.6f,\"prefill_ms\":%.6f,\"decode_ms\":%.6f,\"handoff_ms\":%.6f,\"output_tps\":%.6f,\"weights_resident\":true}\n",run,run<=0?"true":"false",count,new_tokens,request_ms,first_ms,decode_ms,handoff_ms,new_tokens*1000.0/request_ms);
+         gpu_profile_dump("decode",run);route_dump("decode",run);
+         fprintf(stderr,"{\"event\":\"device_phase\",\"phase\":\"decode\",\"run\":%d,\"npu_ops\":%llu,\"cpu_ops\":%llu}\n",run,g_npu.npu_ops-pre_npu_ops,g_npu.cpu_ops-pre_cpu_ops);
+         npu_profile_dump(run<=0?"warmup-decode":"measured-decode");

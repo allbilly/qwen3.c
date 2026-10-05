@@ -1,0 +1,8 @@
+{
+  "reason": "45C below observed fixed-clock idle equilibrium; 180s cooldown timeout before launching inference. No device job killed.",
+  "clock_settings_restored": true,
+  "temperatures_c": [
+    49.0,
+    51.769
+  ]
+}

@@ -1,0 +1,54 @@
+--- a/source/fp16/gpu_attention.c
++++ b/source/fp16/gpu_attention.c
+@@ -15,7 +15,7 @@
+ static cl_mem queries,half_queries,output,scores,half_prob,float_prob,half_keys,half_values;
+ static cl_mem *key_cache,*value_cache;
+ static int layers,capacity,enabled_prefill,enabled_decode,event_profile;
+-static const char *kernel_names[]={"pack_kv","prefill_scores","prefill_softmax","prefill_values","decode_scores","decode_softmax","decode_values"};
++static const char *kernel_names[]={"pack_kv","prefill_scores","prefill_softmax","prefill_values","decode_scores","decode_softmax_values","decode_values"};
+ typedef struct { uint64_t calls,kernel_calls,cache_upload_calls,upload_bytes,download_bytes; double wall_ms,enqueue_ms,blocking_read_ms,upload_device_ms,download_device_ms,kernel_device_ms[7],event_collection_ms; } GpuProfile;
+ static GpuProfile stats;
+ typedef struct { cl_event event; int kind; } Event;
+@@ -119,8 +119,7 @@
+         arg_mem(kernels[3],0,half_prob);arg_mem(kernels[3],1,half_values);arg_mem(kernels[3],2,output);arg_int(kernels[3],3,rows);launch(3,(size_t)rows*512);
+     } else {
+         arg_mem(kernels[4],0,queries);arg_mem(kernels[4],1,key_cache[layer]);arg_mem(kernels[4],2,scores);arg_int(kernels[4],3,length);launch(4,16*length);
+-        arg_mem(kernels[5],0,scores);arg_mem(kernels[5],1,float_prob);arg_int(kernels[5],2,length);launch(5,16);
+-        arg_mem(kernels[6],0,float_prob);arg_mem(kernels[6],1,value_cache[layer]);arg_mem(kernels[6],2,output);arg_int(kernels[6],3,length);launch(6,2048);
++        arg_mem(kernels[5],0,scores);arg_mem(kernels[5],1,value_cache[layer]);arg_mem(kernels[5],2,output);arg_int(kernels[5],3,length);launch(5,16*64);
+     }
+     cl_event event;double read_begin=clock_ms();size_t bytes=(size_t)rows*2048*4;
+     check(clEnqueueReadBuffer(queue,output,CL_TRUE,0,bytes,out,0,NULL,event_profile?&event:NULL),"result read");
+--- a/attention.cl
++++ b/attention.cl
+@@ -52,12 +52,24 @@
+     for(int f=0;f<128;f+=4)acc=fma(vload4(0,q+head*128+f),vload4(0,k+time*1024+(head/2)*128+f),acc);
+     scores[i]=(acc.s0+acc.s1+acc.s2+acc.s3)*0.08838834764831845f;
+ }
+-__kernel void decode_softmax(__global float *scores,__global float *prob,int length) {
+-    int head=get_global_id(0);if(head>=16)return;
+-    int base=head*length;float maximum=0;
+-    for(int t=0;t<length;t++)maximum=fmax(maximum,scores[base+t]);
+-    float total=0;for(int t=0;t<length;t++){float value=exp(scores[base+t]-maximum);scores[base+t]=value;total+=value;}
+-    for(int t=0;t<length;t++)prob[base+t]=scores[base+t]/total;
++// Each group cooperates on softmax, then uses contiguous feature loads.
++// Local probabilities avoid a global intermediate and a separate value launch.
++__kernel void decode_softmax_values(__global float *scores,__global const float *v,
++                                    __global float *out,int length) {
++    int head=get_group_id(0),lane=get_local_id(0),base=head*length;
++    __local float reduction[64],probability[512];float maximum=0;
++    for(int t=lane;t<length;t+=64)maximum=fmax(maximum,scores[base+t]);
++    reduction[lane]=maximum;barrier(CLK_LOCAL_MEM_FENCE);
++    for(int width=32;width;width/=2){if(lane<width)reduction[lane]=fmax(reduction[lane],reduction[lane+width]);barrier(CLK_LOCAL_MEM_FENCE);}
++    maximum=reduction[0];float sum=0;
++    for(int t=lane;t<length;t+=64){float value=exp(scores[base+t]-maximum);probability[t]=value;sum+=value;}
++    reduction[lane]=sum;barrier(CLK_LOCAL_MEM_FENCE);
++    for(int width=32;width;width/=2){if(lane<width)reduction[lane]+=reduction[lane+width];barrier(CLK_LOCAL_MEM_FENCE);}
++    sum=reduction[0];for(int t=lane;t<length;t+=64)probability[t]/=sum;
++    barrier(CLK_LOCAL_MEM_FENCE);
++    float2 acc=(float2)(0);int feature=lane*2;
++    for(int t=0;t<length;t++)acc=fma((float2)(probability[t]),vload2(0,v+(size_t)t*1024+(head/2)*128+feature),acc);
++    vstore2(acc,0,out+head*128+feature);
+ }
+ __kernel void decode_values(__global const float *prob,__global const float *v,
+                             __global float *out,int length) {

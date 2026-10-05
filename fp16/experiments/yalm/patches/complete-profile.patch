@@ -1,0 +1,488 @@
+--- a/source/fp16/run.c
++++ b/source/fp16/run.c
+@@ -124,7 +124,7 @@
+             }while(temp>target);
+             fprintf(stderr,"{\"event\":\"cooldown\",\"run\":%d,\"before_millidegrees\":%d,\"after_millidegrees\":%d,\"wait_ms\":%.3f}\n",run,initial,temp,now_ms()-cool_start);}
+         npu_matmul_reset_stats(&g_npu);
+-        gpu_profile_clear();route_clear();
++        gpu_profile_clear();route_clear();if(getenv("ROUTE_PROFILE"))pp_begin();
+         begin = now_ms();
+         float *logits = NULL;
+         int serial=getenv("SERIAL_PREFILL")!=NULL;
+@@ -138,8 +138,10 @@
+             logits = forward(&t, ids[pos], pos);
+         }
+         npu_skip_classifier(0);
+-        generated[0] = argmax(logits, t.config.vocab_size);
++        double pp_sample=pp_active?pp_clock():0;
++        generated[0] = argmax(logits, t.config.vocab_size);pp_root(PP_SAMPLE,pp_sample);
+         double first_ms = now_ms() - begin;
++        if(pp_active)pp_end("prefill",run,count,1,first_ms);
+         gpu_profile_dump("prefill",run);route_dump("prefill",run);
+         if (run == 1-warmups && argc > 5) {
+             FILE *f = fopen(argv[5], "wb");
+@@ -152,13 +154,16 @@
+         gpu_profile_clear();route_clear();
+         unsigned long long pre_npu_ops=g_npu.npu_ops,pre_cpu_ops=g_npu.cpu_ops;
+         fprintf(stderr,"{\"event\":\"device_phase\",\"phase\":\"prefill\",\"run\":%d,\"npu_ops\":%llu,\"cpu_ops\":%llu}\n",run,pre_npu_ops,pre_cpu_ops);
++        if(getenv("ROUTE_PROFILE"))pp_begin();
+         double decode_start = now_ms();
+         for (int step = 1; step < new_tokens; step++) {
+             if(serial)logits = forward(&t, generated[step - 1], count + step - 1);
+             else logits=forward_batch_atpos(&t,&prefill,teacher_path?teacher+step-1:generated+step-1,1,count+step-1);
+-            generated[step] = argmax(logits, t.config.vocab_size);
++            double pp_sample=pp_active?pp_clock():0;
++            generated[step] = argmax(logits, t.config.vocab_size);pp_root(PP_SAMPLE,pp_sample);
+         }
+         double decode_ms = now_ms() - decode_start;
++        if(pp_active)pp_end("decode",run,count,new_tokens-1,decode_ms);
+         gpu_profile_dump("decode",run);route_dump("decode",run);
+         fprintf(stderr,"{\"event\":\"device_phase\",\"phase\":\"decode\",\"run\":%d,\"npu_ops\":%llu,\"cpu_ops\":%llu}\n",run,g_npu.npu_ops-pre_npu_ops,g_npu.cpu_ops-pre_cpu_ops);
+         npu_profile_dump(run<=0?"warmup-decode":"measured-decode");
+--- a/source/fp16/prefill.h
++++ b/source/fp16/prefill.h
+@@ -1,6 +1,7 @@
+ // Layer-by-layer prompt processing with persistent CPU scratch and NPU batches.
+ #include <arm_neon.h>
+ #include "vector_math.h"
++#include "phase_profile.h"
+ #include "gpu_attention.h"
+ #include "../../router.h"
+ typedef struct {
+@@ -88,6 +89,7 @@
+     Config *p=&t->config; TransformerWeights *w=&t->weights; RunState *s=&t->state;
+     int dim=p->dim,hidden=p->hidden_dim,hd=p->head_dim;
+     int qdim=p->n_heads*hd,kdim=p->n_kv_heads*hd,share=p->n_heads/p->n_kv_heads;
++    double pp_stage=pp_active?pp_clock():0;
+     if(position==0)b->heads_ready=0;
+     else if(!b->heads_ready && !gpu_decode_enabled()) {
+         // Build the CPU decode layout on the first decode call. This work is
+@@ -104,11 +106,15 @@
+         }
+         b->heads_ready=1;
+     }
++    pp_root(PP_CACHE_LAYOUT,pp_stage);pp_stage=pp_active?pp_clock():0;
+     for(int row=0;row<count;row++)memcpy(b->x+(size_t)row*dim,w->token_embedding_table+(size_t)ids[row]*dim,dim*4);
++    pp_root(PP_EMBED,pp_stage);
+     for(int layer=0;layer<p->n_layers;layer++) {
++        pp_stage=pp_active?pp_clock():0;
+         size_t offset=(size_t)layer*p->seq_len*kdim;
+         #pragma omp parallel for if(count>1)
+         for(int row=0;row<count;row++)rmsnorm(b->xb+(size_t)row*dim,b->x+(size_t)row*dim,w->rms_att_weight+layer*dim,dim);
++        pp_root(PP_ATTN_NORM,pp_stage);pp_stage=pp_active?pp_clock():0;
+         if(npu_uses_fused()) {
+             npu_matmul_fused_to(&g_npu,0,layer,b->xb,b->q,b->k,b->v,count);
+         } else {
+@@ -116,12 +122,14 @@
+             npu_matmul_batch(&g_npu,NPU_MATMUL_WK,layer,b->xb,b->k,count);
+             npu_matmul_batch(&g_npu,NPU_MATMUL_WV,layer,b->xb,b->v,count);
+         }
++        pp_root(PP_QKV,pp_stage);pp_stage=pp_active?pp_clock():0;
+         #pragma omp parallel for collapse(2) if(count>1)
+         for(int row=0;row<count;row++)for(int head=0;head<p->n_heads;head++)
+             normalize_rotate(b->q+(size_t)row*qdim+head*hd,w->q_norm_weights+layer*hd,b,position+row,hd);
+         #pragma omp parallel for collapse(2) if(count>1)
+         for(int row=0;row<count;row++)for(int head=0;head<p->n_kv_heads;head++)
+             normalize_rotate(b->k+(size_t)row*kdim+head*hd,w->k_norm_weights+layer*hd,b,position+row,hd);
++        pp_root(PP_QK_ROPE,pp_stage);pp_stage=pp_active?pp_clock():0;
+         // Keep each KV head contiguous through time for CPU decode attention.
+         // Cache values remain FP32; only their address layout changes.
+         if(!b->heads_ready) {
+@@ -135,6 +143,7 @@
+             memcpy(b->value_heads+at,b->v+(size_t)row*kdim+head*hd,hd*4);
+         }
+         }
++        pp_root(PP_KV_WRITE,pp_stage);pp_stage=pp_active?pp_clock():0;
+         double attention_start=b->profiling?prefill_clock():0;
+         if(position==0 && gpu_decode_enabled() && !(count>1 && gpu_prefill_enabled()))
+             gpu_cache_upload(layer,b->k,b->v,count);
+@@ -163,13 +172,16 @@
+         }
+         }
+         if(b->profiling)b->attention_ms+=prefill_clock()-attention_start;
++        pp_root(PP_ATTENTION,pp_stage);pp_stage=pp_active?pp_clock():0;
+         npu_matmul_batch(&g_npu,NPU_MATMUL_WO,layer,b->xb,b->xb,count);
++        pp_root(PP_WO,pp_stage);pp_stage=pp_active?pp_clock():0;
+         #pragma omp parallel for if(count>1)
+         for(int row=0;row<count;row++) {
+             float *x=b->x+(size_t)row*dim,*xb=b->xb+(size_t)row*dim;
+             for(int i=0;i<dim;i++)x[i]+=xb[i];
+             rmsnorm(xb,x,w->rms_ffn_weight+layer*dim,dim);
+         }
++        pp_root(PP_RESIDUAL_NORM,pp_stage);pp_stage=pp_active?pp_clock():0;
+         if(npu_stream_ffn_enabled() && position==0 && count>1) {
+             npu_stream_ffn_prefill(&g_npu,layer,b->xb,b->xb,count);
+         } else {
+@@ -179,17 +191,24 @@
+             npu_matmul_batch(&g_npu,NPU_MATMUL_W1,layer,b->xb,b->hb,count);
+             npu_matmul_batch(&g_npu,NPU_MATMUL_W3,layer,b->xb,b->hb2,count);
+         }
++        double pp_swiglu_start=pp_active?pp_clock():0;pp_owner=9;
+         #pragma omp parallel for if(count>1)
+         for(int i=0;i<count*hidden;i+=4)
+             vst1q_f32(b->hb+i,qwen_swiglu4(vld1q_f32(b->hb+i),vld1q_f32(b->hb2+i)));
++        pp_detail(PP_SWIGLU,pp_swiglu_start,(size_t)count*hidden*12);
+         npu_matmul_batch(&g_npu,NPU_MATMUL_W2,layer,b->hb,b->xb,count);
+         }
++        pp_root(PP_FFN,pp_stage);pp_stage=pp_active?pp_clock():0;
+         #pragma omp parallel for if(count>1)
+         for(int i=0;i<count*dim;i++)b->x[i]+=b->xb[i];
+-    }
++        pp_root(PP_RESIDUAL_FFN,pp_stage);
++    }
++    pp_stage=pp_active?pp_clock():0;
+     rmsnorm(s->x,b->x+(size_t)(count-1)*dim,w->rms_final_weight,dim);
++    pp_root(PP_FINAL_NORM,pp_stage);pp_stage=pp_active?pp_clock():0;
+     npu_skip_classifier(0);
+     npu_matmul_run(&g_npu,NPU_MATMUL_WCLS,0,s->x,s->logits);
++    pp_root(PP_CLASSIFIER,pp_stage);
+     return s->logits;
+ }
+ 
+--- a/source/fp16/fp16_backend.c
++++ b/source/fp16/fp16_backend.c
+@@ -1,6 +1,7 @@
+ // Persistent direct-register FP16 backend for the matched-checkpoint experiment.
+ // Matrix multiplies use one or three NPU cores; CPU norms and nonlinear operations reuse the checkout's logic.
+ #include "fp16_backend.h"
++#include "phase_profile.h"
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
+@@ -43,7 +44,10 @@
+ static void sync_verified(int fd,uint64_t obj,uint64_t offset,uint64_t size,uint32_t flags) {
+     if(!size)return;
+     struct rknpu_mem_sync request={.flags=flags,.obj_addr=obj,.offset=offset,.size=size};
+-    if(ioctl(fd,DRM_IOCTL_RKNPU_MEM_SYNC,&request)<0) {
++    double pp_sync_start=pp_active?pp_clock():0;
++    int pp_result=ioctl(fd,DRM_IOCTL_RKNPU_MEM_SYNC,&request);
++    pp_detail(flags==RKNPU_MEM_SYNC_TO_DEVICE?PP_SYNC_TO:PP_SYNC_FROM,pp_sync_start,size);
++    if(pp_result<0) {
+         perror("FP16 DMA synchronization failed");exit(1);
+     }
+ }
+@@ -108,6 +112,7 @@
+ // and native FP32 (N/4,M,4) output. Only register fields change between batches.
+ static void configure_rows(Plan *p, int rows, int sync) {
+     if (p->current_rows == rows) return;
++    double pp_config_start=pp_active?pp_clock():0;
+     uint64_t *cmd = p->mem.weights;
+     struct rknpu_task *task = p->mem.tasks;
+     uint32_t banks = ((size_t)rows * p->K * 2 + NPU_CBUF_BANK_SIZE - 1) / NPU_CBUF_BANK_SIZE;
+@@ -135,6 +140,7 @@
+         }
+         cmd[i] = (cmd[i] & 0xffff00000000ffffull) | ((uint64_t)value << 16);
+     }
++    pp_detail(PP_CONFIG,pp_config_start,task[0].regcfg_amount*8);
+     if (sync) mem_sync(device_fd, p->mem.weights_obj, 0, task[0].regcfg_amount * 8, RKNPU_MEM_SYNC_TO_DEVICE);
+     p->current_rows = rows;
+ }
+@@ -190,7 +196,10 @@
+     };
+     int base=count==3?2:0;
+     for(int i=0;i<count;i++)request.subcore_task[base+i]=(struct rknpu_subcore_task){.task_start=i,.task_number=1};
+-    return ioctl(device_fd,DRM_IOCTL_RKNPU_SUBMIT,&request);
++    double pp_submit_start=pp_active?pp_clock():0;
++    int result=ioctl(device_fd,DRM_IOCTL_RKNPU_SUBMIT,&request);
++    pp_submit(pp_submit_start,request.hw_elapse_time,result);
++    return result;
+ }
+ 
+ static int prepare_projection(Plan **head,const __fp16 *source,int K,int N,int classifier) {
+@@ -374,6 +383,7 @@
+ static int run_projection(NpuMatmulContext *ctx,int kind,Plan *first,
+                           const float *input,float *output,int rows,int output_stride,
+                           float **outputs,const int *dimensions,int output_count,int input_stride) {
++    pp_owner=kind;
+     if(!first || rows<1)exit(1);
+     if(!input_stride)input_stride=first->K;
+     for (Plan *p = first; p;) {
+@@ -383,6 +393,7 @@
+         int m = rows-start < p->max_rows ? rows-start : p->max_rows;
+         for(int i=0;i<p->bundle_count;i++)configure_rows(group[i], m, 1);
+         double a=profiling?profile_time():0;
++        double pp_pack_start=pp_active?pp_clock():0;
+         __fp16 *in = p->packed_input;
+         #pragma omp parallel for if(m>=16)
+         for (int k=0; k<p->K; k+=8) for(int row=0; row<m; row++)
+@@ -391,7 +402,10 @@
+             float16x8_t half=vcombine_f16(vcvt_f16_f32(vld1q_f32(source)),vcvt_f16_f32(vld1q_f32(source+4)));
+             vst1q_f16(in+(size_t)(k/8)*m*8+row*8,half);
+         }
++        pp_detail(PP_PACK,pp_pack_start,(size_t)m*p->K*6);
++        double pp_copy_start=pp_active?pp_clock():0;
+         for(int i=0;i<p->bundle_count;i++)memcpy(group[i]->mem.input,in,(size_t)m*p->K*2);
++        pp_detail(PP_COPY_IN,pp_copy_start,(size_t)p->bundle_count*m*p->K*2);
+         double b=profiling?profile_time():0;
+         for(int i=0;i<p->bundle_count;i++)mem_sync(device_fd, group[i]->mem.input_obj, 0, (size_t)m*p->K*2, RKNPU_MEM_SYNC_TO_DEVICE);
+         double c=profiling?profile_time():0;
+@@ -402,6 +416,7 @@
+         double d=profiling?profile_time():0;
+         for(int i=0;i<p->bundle_count;i++)mem_sync(device_fd, group[i]->mem.output_obj, 0, (size_t)m*group[i]->N*4, RKNPU_MEM_SYNC_FROM_DEVICE);
+         double e=profiling?profile_time():0;
++        double pp_read_start=pp_active?pp_clock():0;
+         #pragma omp parallel for if(m>=32 && output_stride>=4096)
+         for(int i=0;i<p->bundle_count;i++) {
+             Plan *q=group[i];
+@@ -432,6 +447,9 @@
+                 }
+             }
+         }
++        uint64_t pp_output_bytes=0;
++        for(int i=0;i<p->bundle_count;i++)pp_output_bytes+=(size_t)m*group[i]->N*4;
++        pp_detail(PP_READ_OUT,pp_read_start,pp_output_bytes);
+         if(profiling) {
+             Profile *pstat=&profile[kind];pstat->calls++;
+             pstat->pack_ms+=b-a;pstat->sync_ms+=(c-b)+(e-d);
+@@ -446,6 +464,7 @@
+ 
+ static int run_split_down(NpuMatmulContext *ctx,int layer,const float *input,float *output,int rows) {
+     if(stream_ffn) {
++        pp_owner=NPU_MATMUL_W2;
+         Plan *down[3],*next=down_parts[layer];
+         for(int i=0;i<3;i++){down[i]=next;next=next->next;}
+         for(int start=0;start<rows;start+=64) {
+@@ -475,12 +494,16 @@
+ }
+ 
+ static void submit_down_parts(NpuMatmulContext *ctx,Plan **down,float *output,int start,int rows) {
++    pp_owner=NPU_MATMUL_W2;
+     for(int i=0;i<3;i++) {
++        double pp_copy_start=pp_active?pp_clock():0;
+         memcpy(down[i]->mem.input,down[i]->packed_input,(size_t)rows*ctx->dim*2);
++        pp_detail(PP_COPY_IN,pp_copy_start,(size_t)rows*ctx->dim*2);
+         mem_sync(device_fd,down[i]->mem.input_obj,0,(size_t)rows*ctx->dim*2,RKNPU_MEM_SYNC_TO_DEVICE);
+     }
+     if(submit_bundle(down[0])<0){perror("NPU streaming down");exit(1);}
+     for(int i=0;i<3;i++)mem_sync(device_fd,down[i]->mem.output_obj,0,(size_t)rows*ctx->dim*4,RKNPU_MEM_SYNC_FROM_DEVICE);
++    double pp_read_start=pp_active?pp_clock():0;
+     for(int n=0;n<ctx->dim;n+=4)for(int row=0;row<rows;row++) {
+         size_t index=(size_t)(n/4)*rows*4+row*4;
+         float32x4_t value=vld1q_f32((const float*)down[0]->mem.output+index);
+@@ -488,6 +511,7 @@
+         for(int block=1;block<3;block++)value=vaddq_f32(value,vld1q_f32((const float*)down[block]->mem.output+index));
+         vst1q_f32(output+(size_t)(start+row)*ctx->dim+n,value);
+     }
++    pp_detail(PP_READ_OUT,pp_read_start,(size_t)rows*ctx->dim*4*3);
+ }
+ 
+ int npu_stream_ffn_prefill(NpuMatmulContext *ctx,int layer,const float *input,float *output,int rows) {
+@@ -496,16 +520,21 @@
+     for(int i=0;i<3;i++){ff[i]=p;p=p->next;}
+     for(int start=0;start<rows;start+=64) {
+         int m=rows-start<64?rows-start:64;
++        pp_owner=9;
+         for(int i=0;i<3;i++)configure_rows(ff[i],m,1);
+         attention_pack(ff[0],input+(size_t)start*ctx->dim,ctx->dim,m);
+         for(int i=1;i<3;i++) {
++            double pp_copy_start=pp_active?pp_clock():0;
+             memcpy(ff[i]->mem.input,ff[0]->packed_input,(size_t)m*ctx->dim*2);
++            pp_detail(PP_COPY_IN,pp_copy_start,(size_t)m*ctx->dim*2);
+             mem_sync(device_fd,ff[i]->mem.input_obj,0,(size_t)m*ctx->dim*2,RKNPU_MEM_SYNC_TO_DEVICE);
+         }
+         if(submit_bundle(ff[0])<0){perror("NPU streaming gate/up");exit(1);}
+         for(int i=0;i<3;i++)mem_sync(device_fd,ff[i]->mem.output_obj,0,(size_t)m*ff[i]->N*4,RKNPU_MEM_SYNC_FROM_DEVICE);
++        pp_owner=NPU_MATMUL_W2;
+         Plan *down[3],*next=down_parts[layer];
+         for(int i=0;i<3;i++){down[i]=next;next=next->next;configure_rows(down[i],m,1);}
++        double pp_swiglu_start=pp_active?pp_clock():0;
+         #pragma omp parallel for collapse(2)
+         for(int block=0;block<3;block++)
+             for(int k=0;k<1024;k+=8)for(int row=0;row<m;row++) {
+@@ -519,6 +548,7 @@
+                 vst1q_f16(down[block]->packed_input+(size_t)(k/8)*m*8+row*8,
+                           vcombine_f16(vcvt_f16_f32(low),vcvt_f16_f32(high)));
+             }
++        pp_detail(PP_SWIGLU,pp_swiglu_start,(size_t)m*ctx->hidden_dim*10);
+         submit_down_parts(ctx,down,output,start,m);
+     }
+     ctx->npu_ops+=2;
+--- a/source/fp16/attention_backend.h
++++ b/source/fp16/attention_backend.h
+@@ -10,6 +10,7 @@
+ static void attention_shape(Plan *p,int K,int N) {
+     if(p->K==K && p->N==N)return;
+     p->K=K;p->N=N;p->current_rows=-1;
++    double pp_config_start=pp_active?pp_clock():0;
+     uint64_t *commands=p->mem.weights;
+     struct rknpu_task *task=p->mem.tasks;
+     for(uint32_t i=0;i<task[0].regcfg_amount;i++) {
+@@ -26,6 +27,7 @@
+         }
+         commands[i]=(commands[i]&0xffff00000000ffffull)|((uint64_t)value<<16);
+     }
++    pp_detail(PP_CONFIG,pp_config_start,task[0].regcfg_amount*8);
+ }
+ 
+ static int attention_prepare(void) {
+@@ -72,22 +74,28 @@
+ }
+ 
+ static void attention_pack(Plan *p,const float *source,int stride,int rows) {
++    double pp_pack_start=pp_active?pp_clock():0;
+     for(int k=0;k<p->K;k+=8)for(int row=0;row<rows;row++) {
+         const float *s=source+(size_t)row*stride+k;
+         float16x8_t h=vcombine_f16(vcvt_f16_f32(vld1q_f32(s)),vcvt_f16_f32(vld1q_f32(s+4)));
+         vst1q_f16(p->packed_input+(size_t)(k/8)*rows*8+row*8,h);
+     }
++    pp_detail(PP_PACK,pp_pack_start,(size_t)rows*p->K*6);
++    double pp_copy_start=pp_active?pp_clock():0;
+     memcpy(p->mem.input,p->packed_input,(size_t)rows*p->K*2);
++    pp_detail(PP_COPY_IN,pp_copy_start,(size_t)rows*p->K*2);
+     mem_sync(device_fd,p->mem.input_obj,0,(size_t)rows*p->K*2,RKNPU_MEM_SYNC_TO_DEVICE);
+ }
+ 
+ static void attention_read(Plan *p,float *destination,int stride,int rows) {
+     mem_sync(device_fd,p->mem.output_obj,0,(size_t)rows*p->N*4,RKNPU_MEM_SYNC_FROM_DEVICE);
++    double pp_read_start=pp_active?pp_clock():0;
+     memcpy(p->native_output,p->mem.output,(size_t)rows*p->N*4);
+     for(int row_block=0;row_block<rows;row_block+=4)for(int n=0;n<p->N;n+=16)
+         for(int row=row_block;row<rows && row<row_block+4;row++)for(int channel=0;channel<16;channel+=4)
+             vst1q_f32(destination+(size_t)row*stride+n+channel,
+                        vld1q_f32(p->native_output+(size_t)((n+channel)/4)*rows*4+row*4));
++    pp_detail(PP_READ_OUT,pp_read_start,(size_t)rows*p->N*4);
+ }
+ 
+ int npu_attention_prefill(NpuMatmulContext *ctx,const float *queries,const float *keys,
+@@ -95,6 +103,7 @@
+     if(!attention_enabled||rows<1||rows>512)exit(1);
+     int qdim=ctx->all_heads_dim,kdim=ctx->kv_dim;
+     int padded_rows=(rows+31)&~31;
++    pp_owner=PP_OWNER_KV;
+     for(int i=0;i<3;i++) {
+         attention_shape(attention_score[i],128,padded_rows);
+         attention_shape(attention_value[i],padded_rows,128);
+@@ -102,9 +111,12 @@
+     for(int head=0;head<16;head+=3) {
+         int count=16-head<3?16-head:3;
+         attention_score[0]->bundle_count=count;attention_value[0]->bundle_count=count;
++        pp_owner=PP_OWNER_KV;
++        double pp_weight_start=pp_active?pp_clock():0;
+         // CPU writes independent weight maps in parallel; all ioctls stay serial.
+         #pragma omp parallel for
+         for(int i=0;i<count;i++)attention_weights(attention_score[i],attention_value[i],keys,values,rows,kdim,(head+i)/2);
++        pp_detail(PP_WEIGHT_PACK,pp_weight_start,(size_t)count*rows*128*12);
+         for(int i=0;i<count;i++) {
+             mem_sync(device_fd,attention_score[i]->mem.weights_obj,REGCMD_RESERVED,attention_score[i]->N*128*2,RKNPU_MEM_SYNC_TO_DEVICE);
+             mem_sync(device_fd,attention_value[i]->mem.weights_obj,REGCMD_RESERVED,attention_value[i]->K*128*2,RKNPU_MEM_SYNC_TO_DEVICE);
+@@ -112,11 +124,14 @@
+         for(int start=0;start<rows;start+=64) {
+             int m=rows-start<64?rows-start:64;
+             for(int i=0;i<count;i++) {
+-                configure_rows(attention_score[i],m,1);configure_rows(attention_value[i],m,1);
++                pp_owner=PP_OWNER_SCORES;configure_rows(attention_score[i],m,1);
++                pp_owner=PP_OWNER_VALUES;configure_rows(attention_value[i],m,1);
++                pp_owner=PP_OWNER_SCORES;
+                 attention_pack(attention_score[i],queries+(size_t)start*qdim+(head+i)*128,qdim,m);
+             }
+             if(submit_bundle(attention_score[0])<0){perror("NPU attention scores");exit(1);}
+             for(int i=0;i<count;i++)attention_read(attention_score[i],attention_prob[i],512,m);
++            double pp_softmax_start=pp_active?pp_clock():0;
+             #pragma omp parallel for collapse(2)
+             for(int i=0;i<count;i++)for(int row=0;row<m;row++) {
+                 float *prob=attention_prob[i]+row*512;
+@@ -125,6 +140,8 @@
+                 softmax(prob,length);
+                 memset(prob+length,0,(512-length)*4);
+             }
++            pp_detail(PP_SOFTMAX,pp_softmax_start,0);
++            pp_owner=PP_OWNER_VALUES;
+             for(int i=0;i<count;i++)attention_pack(attention_value[i],attention_prob[i],512,m);
+             if(submit_bundle(attention_value[0])<0){perror("NPU attention values");exit(1);}
+             for(int i=0;i<count;i++)attention_read(attention_value[i],output+(size_t)start*qdim+(head+i)*128,qdim,m);
+--- /dev/null
++++ b/source/fp16/phase_profile.c
+@@ -0,0 +1,39 @@
++#include "phase_profile.h"
++#include <stdio.h>
++#include <string.h>
++#include <stdlib.h>
++#include <time.h>
++typedef struct { double ms, driver_ms, driver_min_ms, driver_max_ms; uint64_t calls, bytes, invalid_driver_times; } Counter;
++int pp_active, pp_owner;
++static Counter roots[PP_ROOT_COUNT], detail[PP_OWNER_COUNT][PP_DETAIL_COUNT];
++static const char *root_names[]={"cache_layout","embedding","attention_norm","qkv","qk_norm_rope","kv_write","attention","wo","residual_ffn_norm","ffn","ffn_residual","final_norm","classifier","sampling"};
++static const char *detail_names[]={"register_update","fp16_native_pack","input_memcpy","sync_to_device","sync_from_device","submit","output_copy_unpack_reduce","attention_kv_pack","attention_softmax","swiglu_and_optional_pack"};
++static const char *owner_names[]={"q","k","v","wo","gate","down","up","classifier","qkv","gate_up","attention_scores","attention_values","attention_kv"};
++double pp_clock(void) { struct timespec t;clock_gettime(CLOCK_MONOTONIC,&t);return t.tv_sec*1000.0+t.tv_nsec/1e6; }
++void pp_root(int category,double start) { if(!pp_active)return;roots[category].ms+=pp_clock()-start;roots[category].calls++; }
++void pp_detail(int category,double start,uint64_t bytes) { if(!pp_active)return;Counter *c=&detail[pp_owner][category];c->ms+=pp_clock()-start;c->calls++;c->bytes+=bytes; }
++void pp_submit(double start,int64_t driver_ns,int result) {
++    if(!pp_active)return;
++    double wall=pp_clock()-start,driver=driver_ns/1e6;
++    Counter *c=&detail[pp_owner][PP_SUBMIT];c->ms+=wall;c->calls++;
++    if(result<0||driver_ns<=0||driver>wall+.01){c->invalid_driver_times++;return;}
++    c->driver_ms+=driver;
++    if(c->calls==1||driver<c->driver_min_ms)c->driver_min_ms=driver;
++    if(driver>c->driver_max_ms)c->driver_max_ms=driver;
++}
++void pp_begin(void) { memset(roots,0,sizeof(roots));memset(detail,0,sizeof(detail));pp_owner=0;pp_active=1; }
++void pp_end(const char *phase,int run,int prompt,int steps,double wall_ms) {
++    pp_active=0;
++    fprintf(stderr,"{\"event\":\"phase_profile\",\"phase\":\"%s\",\"run\":%d,\"warmup\":%s,\"prompt_tokens\":%d,\"steps\":%d,\"wall_ms\":%.9f,\"root\":{",phase,run,run<=0?"true":"false",prompt,steps,wall_ms);
++    for(int i=0;i<PP_ROOT_COUNT;i++)fprintf(stderr,"%s\"%s\":{\"ms\":%.9f,\"calls\":%llu}",i?",":"",root_names[i],roots[i].ms,(unsigned long long)roots[i].calls);
++    fprintf(stderr,"},\"details\":{");
++    for(int i=0;i<PP_OWNER_COUNT;i++) {
++        fprintf(stderr,"%s\"%s\":{",i?",":"",owner_names[i]);
++        for(int j=0;j<PP_DETAIL_COUNT;j++) {
++            Counter *c=&detail[i][j];
++            fprintf(stderr,"%s\"%s\":{\"ms\":%.9f,\"calls\":%llu,\"bytes\":%llu,\"driver_ms\":%.9f,\"driver_min_ms\":%.9f,\"driver_max_ms\":%.9f,\"invalid_driver_times\":%llu}",j?",":"",detail_names[j],c->ms,(unsigned long long)c->calls,(unsigned long long)c->bytes,c->driver_ms,c->driver_min_ms,c->driver_max_ms,(unsigned long long)c->invalid_driver_times);
++        }
++        fprintf(stderr,"}");
++    }
++    fprintf(stderr,"}}\n");
++}
+--- /dev/null
++++ b/source/fp16/phase_profile.h
+@@ -0,0 +1,17 @@
++#ifndef PHASE_PROFILE_H
++#define PHASE_PROFILE_H
++#include <stdint.h>
++enum { PP_CONFIG, PP_PACK, PP_COPY_IN, PP_SYNC_TO, PP_SYNC_FROM, PP_SUBMIT,
++       PP_READ_OUT, PP_WEIGHT_PACK, PP_SOFTMAX, PP_SWIGLU, PP_DETAIL_COUNT };
++enum { PP_CACHE_LAYOUT, PP_EMBED, PP_ATTN_NORM, PP_QKV, PP_QK_ROPE, PP_KV_WRITE,
++       PP_ATTENTION, PP_WO, PP_RESIDUAL_NORM, PP_FFN, PP_RESIDUAL_FFN,
++       PP_FINAL_NORM, PP_CLASSIFIER, PP_SAMPLE, PP_ROOT_COUNT };
++enum { PP_OWNER_SCORES=10, PP_OWNER_VALUES, PP_OWNER_KV, PP_OWNER_COUNT };
++extern int pp_active, pp_owner;
++double pp_clock(void);
++void pp_root(int category, double start);
++void pp_detail(int category, double start, uint64_t bytes);
++void pp_submit(double start, int64_t driver_ns, int result);
++void pp_begin(void);
++void pp_end(const char *phase, int run, int prompt, int steps, double wall_ms);
++#endif
+--- a/router.c
++++ b/router.c
+@@ -15,7 +15,7 @@
+ static float *rounded,*weight_tile,*result_tile;static void *blas;
+ typedef void (*Sgemm)(int,int,int,int64_t,int64_t,int64_t,float,const float *,int64_t,const float *,int64_t,float,float *,int64_t);
+ static Sgemm sgemm;
+-typedef struct {uint64_t calls,bytes;double wall_ms,pack_ms,compute_ms;} CpuProfile;
++typedef struct {uint64_t calls,bytes;double wall_ms,pack_ms,compute_ms,weight_expand_ms,blas_ms,result_layout_ms;} CpuProfile;
+ static CpuProfile profile;
+ static double cpu_attention_ms;static uint64_t cpu_attention_calls;
+ static double now(void){struct timespec t;clock_gettime(CLOCK_MONOTONIC,&t);return t.tv_sec*1000.0+t.tv_nsec/1e6;}
+@@ -70,10 +70,14 @@
+     }else for(int n0=0;n0<N;n0+=256){
+         int width=N-n0<256?N-n0:256,chunks=split?3:1,block=K/chunks;
+         for(int c=0;c<chunks;c++){
++            double expand_start=now();
+             #pragma omp parallel for
+             for(int n=0;n<width;n++)for(int k=0;k<block;k+=8){float16x8_t h=vld1q_f16(w+(size_t)(n+n0)*K+c*block+k);vst1q_f32(weight_tile+(size_t)n*block+k,vcvt_f32_f16(vget_low_f16(h)));vst1q_f32(weight_tile+(size_t)n*block+k+4,vcvt_f32_f16(vget_high_f16(h)));}
++            profile.weight_expand_ms+=now()-expand_start;double blas_start=now();
+             sgemm(101,111,112,rows,width,block,1,rounded+c*block,K,weight_tile,block,0,result_tile,width);
++            profile.blas_ms+=now()-blas_start;double layout_start=now();
+             for(int r=0;r<rows;r++)for(int n=0;n<width;n++){size_t index=(size_t)r*N+n0+n;if(c==0)output[index]=result_tile[(size_t)r*width+n];else output[index]+=result_tile[(size_t)r*width+n];}
++            profile.result_layout_ms+=now()-layout_start;
+         }
+     }
+     profile.compute_ms+=now()-compute;profile.wall_ms+=now()-begin;profile.calls++;profile.bytes+=(size_t)K*N*2;
+@@ -112,6 +116,7 @@
+ void route_clear(void){memset(&profile,0,sizeof(profile));cpu_attention_ms=0;cpu_attention_calls=0;linear_gpu_clear();}
+ void route_dump(const char *phase,int run){
+     fprintf(stderr,"{\"event\":\"linear_cpu_profile\",\"phase\":\"%s\",\"run\":%d,\"warmup\":%s,\"calls\":%llu,\"weight_bytes\":%llu,\"wall_ms\":%.9f,\"pack_ms\":%.9f,\"compute_ms\":%.9f,\"prefill_attention_calls\":%llu,\"prefill_attention_ms\":%.9f}\n",phase,run,run<=0?"true":"false",(unsigned long long)profile.calls,(unsigned long long)profile.bytes,profile.wall_ms,profile.pack_ms,profile.compute_ms,(unsigned long long)cpu_attention_calls,cpu_attention_ms);
++    fprintf(stderr,"{\"event\":\"cpu_projection_details\",\"phase\":\"%s\",\"run\":%d,\"warmup\":%s,\"input_round_ms\":%.9f,\"weight_expand_ms\":%.9f,\"blas_ms\":%.9f,\"result_layout_ms\":%.9f,\"gemv_and_loop_ms\":%.9f}\n",phase,run,run<=0?"true":"false",profile.pack_ms,profile.weight_expand_ms,profile.blas_ms,profile.result_layout_ms,profile.compute_ms-profile.weight_expand_ms-profile.blas_ms-profile.result_layout_ms);
+     linear_gpu_dump(phase,run);
+ }
+ void npu_matmul_shutdown(NpuMatmulContext *ctx){if(has_npu)hw_shutdown(ctx);linear_gpu_close();free(weights);free(rounded);free(weight_tile);free(result_tile);if(blas)dlclose(blas);}

@@ -1,0 +1,20 @@
+{
+  "status": "REJECTED_FIXED_CLOCK_COMPARISON",
+  "reason": "Thermal throttling; unchanged clock audit failed after all jobs safely completed.",
+  "samples": 1849,
+  "bad_samples": 532,
+  "first_bad": {
+    "time": 1791180035.1599386,
+    "phase": "p128-1-cpu",
+    "cpu4_khz": 2208000,
+    "cpu6_khz": 2208000,
+    "npu_hz": 1000000000,
+    "gpu_hz": 300000000,
+    "ddr_hz": 2112000000,
+    "temperature_millidegrees": 83153
+  },
+  "max_temperature_c": 85.888,
+  "clocks_restored": true,
+  "rows_numerically_checked": 20,
+  "no_job_killed": true
+}

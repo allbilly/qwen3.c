@@ -1,14 +1,15 @@
 # RK3588 FP16 engine
 
 Work in progress: the selected CPU+NPU engine, roofline, complete phase
-profile and GPU-attention comparison are tested. Full CPU/GPU projection
-backends, broader device placements and phase-specific prefill/decode
-comparisons are being developed in the comparison workspace. Their results
-are not claimed by this checkpoint.
+profile and GPU-attention comparison are tested. CPU/GPU projection backends and all nine prefill/decode projection placements
+plus one explicit three-device route now have audited 128/256-token phase
+measurements. Detailed new cost profiles, candidate performance tests and
+independent complete-request measurements remain in progress.
 
 The compiled-and-primitive-checked [phase-routing WIP](experiments/yalm/README.md)
-now has explicit CPU/GPU/NPU projection backends. Broader inference measurements
-and complete-request transfer accounting are still in progress.
+now has explicit CPU/GPU/NPU projection backends. The [phase measurement milestone](experiments/yalm/PHASES.md) reports prefill
+time and tokens/s plus decode tokens/s for every tested placement. Complete-request
+transfer accounting is still in progress.
 
 The engine uses persistent direct-register NPU tasks, three-core matrix
 projections, batched prefill, fused Q/K/V and gate/up projections, prompt

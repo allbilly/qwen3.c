@@ -1,0 +1,34 @@
+--- a/linear.cl
++++ b/linear.cl
+@@ -20,7 +20,18 @@
+ // Down prefill preserves three K=1024 partial sums and their addition order.
+ __kernel void linear_gemm(__global const half *x,__global const half *w,
+                           __global float *out,int M,int K,int N,int split_down) {
+-    int n=get_global_id(0)*4,m=get_global_id(1)*8;if(n>=N)return;
++    int n=get_global_id(0)*4,m=get_global_id(1)*(split_down?8:16);if(n>=N)return;
++    // Sixteen rows retain one accumulator set and reuse each FP16 weight.
++    // The three-part down projection below preserves its original tile and sum order.
++    if(!split_down) {
++        float4 acc[16];for(int r=0;r<16;r++)acc[r]=(float4)(0);
++        for(int k=0;k<K;k++) {
++            float4 weight=vload_half4(0,w+(size_t)k*N+n);
++            for(int r=0;r<16;r++)if(m+r<M)acc[r]=fma((float4)((float)x[(size_t)(m+r)*K+k]),weight,acc[r]);
++        }
++        for(int r=0;r<16;r++)if(m+r<M)vstore4(acc[r],0,out+(size_t)(m+r)*N+n);
++        return;
++    }
+     float4 total[8];for(int r=0;r<8;r++)total[r]=(float4)(0);
+     int chunks=split_down?3:1,block=K/chunks;
+     for(int c=0;c<chunks;c++) {
+--- a/linear_gpu.c
++++ b/linear_gpu.c
+@@ -73,7 +73,8 @@
+     }else{
+         memarg(gemm,0,input_buffer);memarg(gemm,1,weights[index]);memarg(gemm,2,output_buffer);
+         intarg(gemm,3,rows);intarg(gemm,4,K);intarg(gemm,5,N);intarg(gemm,6,split_down);
+-        size_t global[]={((N/4+63)/64)*64,(rows+7)/8},local[]={64,1};
++        int tile=split_down?8:16;
++        size_t global[]={((N/4+63)/64)*64,(rows+tile-1)/tile},local[]={64,1};
+         check(clEnqueueNDRangeKernel(queue,gemm,2,NULL,global,local,0,NULL,event_profile?&compute[0]:NULL),"gemm launch");profile.kernels++;
+     }
+     check(clEnqueueReadBuffer(queue,output_buffer,CL_TRUE,0,(size_t)rows*N*4,output,0,NULL,event_profile?&download:NULL),"output read");

@@ -1,0 +1,13 @@
+{
+  "audit": "phase-audit.json",
+  "audit_sha256": "ef0ad9bd9b1d133bbfe12fc43ff67d5c374ef2f5b70fea4eea7820e826bc78e2",
+  "suite": [
+    "phase-qualified",
+    "cpu256-cooled50"
+  ],
+  "files_sha256": {
+    "phase-matrix.png": "44c5daa6518cbf7a42b0711ca3335a899a599af10492d476a28290c92c2e1d07",
+    "phase-matrix.jpg": "43c329cea9e16ba82d2e96f2f5ddec9aedb6abbe7200509eae51afce27612f10",
+    "phase-matrix.svg": "2b561ac5eaabe05714fb9b8e2fe8aeae8548de38a0ba75c7893bacf1193fcde0"
+  }
+}

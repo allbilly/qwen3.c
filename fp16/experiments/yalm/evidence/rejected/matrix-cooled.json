@@ -1,0 +1,22 @@
+{
+  "qualified_suite": false,
+  "reason": "Thermal clock changes in last CPU256 job despite request cooldown55C. Any row with non-target clocks is rejected.",
+  "samples": 8692,
+  "bad_samples": 5,
+  "bad_by_phase": {
+    "p256-10-cpu": 5
+  },
+  "first_bad": {
+    "time": 1791182776.4860852,
+    "phase": "p256-10-cpu",
+    "cpu4_khz": 2256000,
+    "cpu6_khz": 2256000,
+    "npu_hz": 1000000000,
+    "gpu_hz": 300000000,
+    "ddr_hz": 2112000000,
+    "temperature_millidegrees": 84076
+  },
+  "clocks_restored": true,
+  "temperature_max_c": 84.076,
+  "no_process_killed": true
+}

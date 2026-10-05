@@ -4,7 +4,8 @@ This is the exact source export of the isolated `11d2f9b7...` benchmark build.
 Six CPU and six GPU projection cases check every output against double
 accumulation of identical FP16 operands, including the vocabulary head.
 All pass the unchanged `1e-5` relative RMSE limit. Check logs and source hashes
-are included. The broader cooled inference sweep is in progress.
+are included. The [20-row phase sweep](PHASES.md) now passes clock, placement
+and output audits, including a rerun of the rejected thermal CPU256 case.
 
 It supports all nine CPU/GPU/NPU projection-backend pairs for prefill and
 decode, plus an explicit placement with CPU classifier, GPU prefill projections
@@ -48,13 +49,18 @@ Run hardware processes serially. This command does not fix clocks. The
 comparison harness in `/home/orangepi/qwen3-bench/matched/roofline/yalm` fixes,
 samples and restores CPU/GPU/NPU/DDR clocks and records exact inputs and hashes.
 
-The first unrestricted sweep reached thermal limits and failed the unchanged
-clock audit. Its timings are rejected and retained in `yalm/matrix/rejected.json`.
-The cooled sweep is in `yalm/matrix-cooled` and will report **TTFT milliseconds,
-effective prefill tokens/s, and decode tokens/s**. Effective prefill throughput
-is input token count divided by TTFT; it includes the final classifier/sampling.
-Full request timing and packing/copy/cache-sync/handoff costs must be checked
-before promoting any phase optimization. The selected `runq-fp16` is unchanged.
+The [phase report](PHASES.md) includes TTFT milliseconds, effective prefill
+tokens/s, decode tokens/s, full min/max ranges and PNG/JPG/SVG plots. Two thermal
+failures and an unreachable 45°C setup target are preserved; accepted rows
+retain the original strict clock and numerical gates. The final complete-request
+comparison will use one common successful thermal target.
+
+`make fp16-routes` was built locally and reproduced the exact external benchmark
+binary hash `11d2f9b7...`. The [independent candidate patches](patches/README.md)
+reproduce every compiled source hash in isolated application checks. GPU primitive
+checks pass; full-model candidate tests, detailed cost profiles and independent
+complete-request measurements are the next milestones. The selected `runq-fp16`
+remains unchanged.
 
 The `source/` copy preserves the code used in the experiment independently of
 future selected-engine edits. This is a WIP checkpoint, not a claim that every

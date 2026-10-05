@@ -1,0 +1,65 @@
+{
+  "parallel-softmax": {
+    "patch_sha256": "5cf19562ab4293fd5579d84091a9245431ebf3fe66cba74605b001dea0bd02d5",
+    "source_provenance": "/home/orangepi/qwen3-bench/matched/roofline/yalm/variants/parallel-softmax/source-provenance.json",
+    "compiled_binary_sha256": "4d064d46ba70ccaf76fa21899c97b21260183a0c4ee132094112c292feeaf7b8",
+    "paths": [
+      "source/fp16/gpu_attention.c",
+      "attention.cl"
+    ],
+    "baseline_binary_sha256": "11d2f9b753cf887a11bd3cdb34d1784127184a099d7fa2382601d46b77ef091a"
+  },
+  "fused-attention": {
+    "patch_sha256": "a30ab9169f0aa4de38617d29257fa44d4923d30ad7a0a41b96b1dcc302c737f0",
+    "source_provenance": "/home/orangepi/qwen3-bench/matched/roofline/yalm/variants/fused-attention/source-provenance.json",
+    "compiled_binary_sha256": "464dab9f3f338727c9d2eb1e87c29b391478c6ce3ba093b59ac9536a2b4d113d",
+    "paths": [
+      "source/fp16/gpu_attention.c",
+      "attention.cl"
+    ],
+    "baseline_binary_sha256": "11d2f9b753cf887a11bd3cdb34d1784127184a099d7fa2382601d46b77ef091a"
+  },
+  "kv-pack-reuse": {
+    "patch_sha256": "c284ee8825c50d214c08eec0da55747b7a805cbf72b4858181a7dc8d5bb4517e",
+    "source_provenance": "/home/orangepi/qwen3-bench/matched/roofline/yalm/variants/kv-pack-reuse/source-provenance.json",
+    "compiled_binary_sha256": "815fceb0f83604dbd0d6efd3c2554d214d0c4b5fd0c51efc12596a12ea189158",
+    "paths": [
+      "source/fp16/attention_backend.h"
+    ],
+    "baseline_binary_sha256": "11d2f9b753cf887a11bd3cdb34d1784127184a099d7fa2382601d46b77ef091a"
+  },
+  "gpu-tile16": {
+    "patch_sha256": "82586b6075ca46e3800673b51476571369b6ec8729ba0dc84c849dd1c69caf32",
+    "source_provenance": "/home/orangepi/qwen3-bench/matched/roofline/yalm/variants/gpu-tile16/source-provenance.json",
+    "compiled_binary_sha256": "b24217723edfc2bf08f7c9f575281775e95601482b2c74f923af2e972340ca2d",
+    "paths": [
+      "linear.cl",
+      "linear_gpu.c"
+    ],
+    "baseline_binary_sha256": "11d2f9b753cf887a11bd3cdb34d1784127184a099d7fa2382601d46b77ef091a"
+  },
+  "complete-profile": {
+    "patch_sha256": "511145d7099f39919ea431ef3be99c0fea4ad58d1431bddceee0a59b74f662e0",
+    "source_provenance": "/home/orangepi/qwen3-bench/matched/roofline/yalm/profiles/baseline-profile/source-provenance.json",
+    "compiled_binary_sha256": "5cdd4f175e483c77a6f94b00431943ccae52ccc61566879d3b2ad28d1eb77f3b",
+    "paths": [
+      "source/fp16/run.c",
+      "source/fp16/prefill.h",
+      "source/fp16/fp16_backend.c",
+      "source/fp16/attention_backend.h",
+      "source/fp16/phase_profile.c",
+      "source/fp16/phase_profile.h",
+      "router.c"
+    ],
+    "baseline_binary_sha256": "11d2f9b753cf887a11bd3cdb34d1784127184a099d7fa2382601d46b77ef091a"
+  },
+  "request-timer": {
+    "patch_sha256": "dafd14124587d40ed55e42a0f093936c1087554032791dd4a0edb7b28a3da410",
+    "source_provenance": "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/baseline/source-provenance.json",
+    "compiled_binary_sha256": "217b20f4c6c174007989f0b740b44ed591b6ee3b5bbbe91efed796ebae918382",
+    "paths": [
+      "source/fp16/run.c"
+    ],
+    "baseline_binary_sha256": "11d2f9b753cf887a11bd3cdb34d1784127184a099d7fa2382601d46b77ef091a"
+  }
+}

@@ -1,0 +1,62 @@
+--- a/source/fp16/attention_backend.h
++++ b/source/fp16/attention_backend.h
+@@ -3,6 +3,7 @@
+ static Plan *attention_score[3],*attention_value[3];
+ static float *attention_prob[3];
+ static int attention_enabled;
++static __fp16 *shared_keys,*shared_values;
+ extern void softmax(float *,int);
+ 
+ int npu_attention_enabled(void) { return attention_enabled; }
+@@ -29,6 +30,8 @@
+ }
+ 
+ static int attention_prepare(void) {
++    shared_keys=malloc(8*512*128*2);shared_values=malloc(8*512*128*2);
++    if(!shared_keys||!shared_values)return 0;
+     __fp16 *zero=calloc(512*128,2);
+     if(!zero)return 0;
+     for(int i=0;i<3;i++) {
+@@ -52,6 +55,7 @@
+         free(attention_prob[i]);attention_prob[i]=NULL;
+         attention_score[i]=attention_value[i]=NULL;
+     }
++    free(shared_keys);free(shared_values);shared_keys=shared_values=NULL;
+     attention_enabled=0;
+ }
+ 
+@@ -99,12 +103,33 @@
+         attention_shape(attention_score[i],128,padded_rows);
+         attention_shape(attention_value[i],padded_rows,128);
+     }
++    // Pack each shared KV head once per layer, before copying into the
++    // existing per-core maps. Payloads and all DMA requests are unchanged.
++    #pragma omp parallel for
++    for(int head=0;head<8;head++) {
++        __fp16 *kw=shared_keys+(size_t)head*512*128;
++        __fp16 *vw=shared_values+(size_t)head*512*128;
++        memset(kw,0,padded_rows*128*2);memset(vw,0,padded_rows*128*2);
++        for(int time=0;time<rows;time++) {
++            const float *k=keys+(size_t)time*kdim+head*128;
++            const float *v=values+(size_t)time*kdim+head*128;
++            for(int feature=0;feature<128;feature+=8) {
++                float16x8_t h=vcombine_f16(vcvt_f16_f32(vld1q_f32(k+feature)),vcvt_f16_f32(vld1q_f32(k+feature+4)));
++                vst1q_f16(kw+weight_fp16(128,time+1,feature+1),h);
++            }
++            for(int feature=0;feature<128;feature++)vw[weight_fp16(padded_rows,feature+1,time+1)]=(__fp16)v[feature];
++        }
++    }
+     for(int head=0;head<16;head+=3) {
+         int count=16-head<3?16-head:3;
+         attention_score[0]->bundle_count=count;attention_value[0]->bundle_count=count;
+         // CPU writes independent weight maps in parallel; all ioctls stay serial.
+         #pragma omp parallel for
+-        for(int i=0;i<count;i++)attention_weights(attention_score[i],attention_value[i],keys,values,rows,kdim,(head+i)/2);
++        for(int i=0;i<count;i++) {
++            int shared=(head+i)/2;
++            memcpy((char*)attention_score[i]->mem.weights+REGCMD_RESERVED,shared_keys+(size_t)shared*512*128,padded_rows*128*2);
++            memcpy((char*)attention_value[i]->mem.weights+REGCMD_RESERVED,shared_values+(size_t)shared*512*128,padded_rows*128*2);
++        }
+         for(int i=0;i<count;i++) {
+             mem_sync(device_fd,attention_score[i]->mem.weights_obj,REGCMD_RESERVED,attention_score[i]->N*128*2,RKNPU_MEM_SYNC_TO_DEVICE);
+             mem_sync(device_fd,attention_value[i]->mem.weights_obj,REGCMD_RESERVED,attention_value[i]->K*128*2,RKNPU_MEM_SYNC_TO_DEVICE);

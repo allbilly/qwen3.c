@@ -1,0 +1,34 @@
+{
+  "checks": [
+    {
+      "name": "parallel-softmax",
+      "every_compiled_source_matches": true,
+      "binary_sha256": "4d064d46ba70ccaf76fa21899c97b21260183a0c4ee132094112c292feeaf7b8"
+    },
+    {
+      "name": "fused-attention",
+      "every_compiled_source_matches": true,
+      "binary_sha256": "464dab9f3f338727c9d2eb1e87c29b391478c6ce3ba093b59ac9536a2b4d113d"
+    },
+    {
+      "name": "kv-pack-reuse",
+      "every_compiled_source_matches": true,
+      "binary_sha256": "815fceb0f83604dbd0d6efd3c2554d214d0c4b5fd0c51efc12596a12ea189158"
+    },
+    {
+      "name": "gpu-tile16",
+      "every_compiled_source_matches": true,
+      "binary_sha256": "b24217723edfc2bf08f7c9f575281775e95601482b2c74f923af2e972340ca2d"
+    },
+    {
+      "name": "complete-profile",
+      "every_compiled_source_matches": true,
+      "binary_sha256": "5cdd4f175e483c77a6f94b00431943ccae52ccc61566879d3b2ad28d1eb77f3b"
+    },
+    {
+      "name": "request-timer",
+      "every_compiled_source_matches": true,
+      "binary_sha256": "217b20f4c6c174007989f0b740b44ed591b6ee3b5bbbe91efed796ebae918382"
+    }
+  ]
+}
