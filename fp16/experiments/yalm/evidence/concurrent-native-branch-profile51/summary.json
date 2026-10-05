@@ -1,0 +1,149 @@
+{
+  "records": [
+    {
+      "label": "p256-1-npu",
+      "prompt": 256,
+      "route": "npu",
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "teacher_forced_identical_decode_inputs": true,
+      "prefill_logit_relative_rmse": 0.0,
+      "max_logit_error": 0.0,
+      "unchanged_limit": 0.001,
+      "all_predictions_match": true,
+      "quality_passed": true,
+      "ttft_ms": 537.599,
+      "effective_prefill_tps": 476.19136196309887,
+      "decode_tps": 19.787,
+      "measured_runs": 1,
+      "ttft_range": [
+        537.599,
+        537.599
+      ],
+      "decode_range": [
+        19.787,
+        19.787
+      ],
+      "request_ms": 2104.398405,
+      "output_tps": 15.206246081525613,
+      "request_range": [
+        2104.398405,
+        2104.398405
+      ],
+      "handoff_ms": 0.07904
+    },
+    {
+      "label": "p256-2-cpu_npu_both",
+      "prompt": 256,
+      "route": "cpu_npu_both",
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "teacher_forced_identical_decode_inputs": true,
+      "prefill_logit_relative_rmse": 0.0005708448141561974,
+      "max_logit_error": 0.014348983764648438,
+      "unchanged_limit": 0.001,
+      "all_predictions_match": true,
+      "quality_passed": true,
+      "ttft_ms": 594.597,
+      "effective_prefill_tps": 430.5437128004346,
+      "decode_tps": 19.664,
+      "measured_runs": 1,
+      "ttft_range": [
+        594.597,
+        594.597
+      ],
+      "decode_range": [
+        19.664,
+        19.664
+      ],
+      "request_ms": 2171.190203,
+      "output_tps": 14.73846001874208,
+      "request_range": [
+        2171.190203,
+        2171.190203
+      ],
+      "handoff_ms": 0.090998
+    },
+    {
+      "label": "p256-3-gpu_npu_both",
+      "prompt": 256,
+      "route": "gpu_npu_both",
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "teacher_forced_identical_decode_inputs": true,
+      "prefill_logit_relative_rmse": 0.0005344644107788363,
+      "max_logit_error": 0.013852119445800781,
+      "unchanged_limit": 0.001,
+      "all_predictions_match": true,
+      "quality_passed": true,
+      "ttft_ms": 1044.231,
+      "effective_prefill_tps": 245.1564835749944,
+      "decode_tps": 19.197,
+      "measured_runs": 1,
+      "ttft_range": [
+        1044.231,
+        1044.231
+      ],
+      "decode_range": [
+        19.197,
+        19.197
+      ],
+      "request_ms": 2659.151187,
+      "output_tps": 12.033915241991842,
+      "request_range": [
+        2659.151187,
+        2659.151187
+      ],
+      "handoff_ms": 0.081957
+    },
+    {
+      "label": "p256-4-all_both",
+      "prompt": 256,
+      "route": "all_both",
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "teacher_forced_identical_decode_inputs": true,
+      "prefill_logit_relative_rmse": 0.0005757857429929989,
+      "max_logit_error": 0.01558375358581543,
+      "unchanged_limit": 0.001,
+      "all_predictions_match": true,
+      "quality_passed": true,
+      "ttft_ms": 1044.113,
+      "effective_prefill_tps": 245.18418983385897,
+      "decode_tps": 19.427,
+      "measured_runs": 1,
+      "ttft_range": [
+        1044.113,
+        1044.113
+      ],
+      "decode_range": [
+        19.427,
+        19.427
+      ],
+      "request_ms": 2639.949027,
+      "output_tps": 12.121446161543632,
+      "request_range": [
+        2639.949027,
+        2639.949027
+      ],
+      "handoff_ms": 0.093915
+    }
+  ],
+  "clocks_held": true,
+  "clocks_restored": true,
+  "samples": 235,
+  "temperature_range_c": [
+    43.461,
+    57.307
+  ],
+  "binary_sha256": "2922f25167fa8b7a769c15fba9b7c7b5b34a2371153e655c51dfb03a84efbe93",
+  "interpretation": "Phase-placement experiment. Non-linear host operations stay CPU. Failed quality rows are diagnostic timings, not qualified inference speed claims."
+}

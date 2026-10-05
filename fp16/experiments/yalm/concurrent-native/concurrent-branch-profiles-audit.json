@@ -1,0 +1,911 @@
+{
+  "shared_fp16_model_sha256": "c92807935bfbb81f6628e9c2723267da367577a3f2b1bb2530b87bf5e5bba879",
+  "selected_binary_unchanged": true,
+  "records": [
+    {
+      "directory": "e2e/concurrent-ffn/branch-profile51",
+      "label": "p256-1-npu",
+      "route": "npu",
+      "prompt": 256,
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "quality_passed": true,
+      "relative_rmse": 0.0,
+      "all_predictions_match": true,
+      "ttft_ms": 540.398,
+      "effective_prefill_tps": 473.7249212617367,
+      "decode_tps": 20.235,
+      "measured_runs": 1,
+      "ttft_range": [
+        540.398,
+        540.398
+      ],
+      "decode_range": [
+        20.235,
+        20.235
+      ],
+      "root_profiles": [],
+      "gpu_attention_profiles": [],
+      "gpu_projection_profiles": [],
+      "cpu_projection_profiles": [
+        {
+          "event": "linear_cpu_profile",
+          "phase": "prefill",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "decode",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        }
+      ],
+      "ffn_split_profiles": [],
+      "cpu_projection_details": [],
+      "request_ms": 2072.451712,
+      "output_tps": 15.440649263243245,
+      "handoff_ms": 0.083999,
+      "request_range": [
+        2072.451712,
+        2072.451712
+      ]
+    },
+    {
+      "directory": "e2e/concurrent-ffn/branch-profile51",
+      "label": "p256-2-cpu_npu_both",
+      "route": "cpu_npu_both",
+      "prompt": 256,
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "quality_passed": true,
+      "relative_rmse": 0.0005708448141561974,
+      "all_predictions_match": true,
+      "ttft_ms": 671.06,
+      "effective_prefill_tps": 381.4860072124699,
+      "decode_tps": 20.004,
+      "measured_runs": 1,
+      "ttft_range": [
+        671.06,
+        671.06
+      ],
+      "decode_range": [
+        20.004,
+        20.004
+      ],
+      "root_profiles": [],
+      "gpu_attention_profiles": [],
+      "gpu_projection_profiles": [],
+      "cpu_projection_profiles": [
+        {
+          "event": "linear_cpu_profile",
+          "phase": "prefill",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "decode",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        }
+      ],
+      "ffn_split_profiles": [
+        {
+          "event": "ffn_split_profile",
+          "phase": "prefill",
+          "run": 1,
+          "warmup": false,
+          "calls": 28,
+          "cpu_calls": 28,
+          "gpu_calls": 0,
+          "npu_calls": 28,
+          "rows": 7168,
+          "gpu_completed_during_npu": 0,
+          "wall_ms": 158.76473701,
+          "round_ms": 3.367533982,
+          "dispatch_ms": 0.093624994,
+          "npu_branch_ms": 119.890208066,
+          "cpu_branch_ms": 111.51220496,
+          "cpu_npu_overlap_ms": 101.10364297,
+          "join_wait_ms": 10.515890002,
+          "merge_ms": 24.897479966,
+          "gpu_upload_ms": 0.0,
+          "gpu_kernel_ms": 0.0,
+          "gpu_download_ms": 0.0,
+          "event_profiling": true
+        },
+        {
+          "event": "ffn_split_profile",
+          "phase": "decode",
+          "run": 1,
+          "warmup": false,
+          "calls": 868,
+          "cpu_calls": 868,
+          "gpu_calls": 0,
+          "npu_calls": 868,
+          "rows": 868,
+          "gpu_completed_during_npu": 0,
+          "wall_ms": 397.00343214,
+          "round_ms": 0.517111883,
+          "dispatch_ms": 1.26640901,
+          "npu_branch_ms": 393.263155103,
+          "cpu_branch_ms": 120.500356168,
+          "cpu_npu_overlap_ms": 120.500356168,
+          "join_wait_ms": 0.211441875,
+          "merge_ms": 1.74531427,
+          "gpu_upload_ms": 0.0,
+          "gpu_kernel_ms": 0.0,
+          "gpu_download_ms": 0.0,
+          "event_profiling": true
+        }
+      ],
+      "cpu_projection_details": [],
+      "request_ms": 2220.82918,
+      "output_tps": 14.409032575841785,
+      "handoff_ms": 0.070582,
+      "request_range": [
+        2220.82918,
+        2220.82918
+      ]
+    },
+    {
+      "directory": "e2e/concurrent-ffn/branch-profile51",
+      "label": "p256-3-gpu_npu_both",
+      "route": "gpu_npu_both",
+      "prompt": 256,
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "quality_passed": true,
+      "relative_rmse": 0.0005344644107788363,
+      "all_predictions_match": true,
+      "ttft_ms": 667.976,
+      "effective_prefill_tps": 383.2473022982862,
+      "decode_tps": 19.343,
+      "measured_runs": 1,
+      "ttft_range": [
+        667.976,
+        667.976
+      ],
+      "decode_range": [
+        19.343,
+        19.343
+      ],
+      "root_profiles": [],
+      "gpu_attention_profiles": [],
+      "gpu_projection_profiles": [],
+      "cpu_projection_profiles": [
+        {
+          "event": "linear_cpu_profile",
+          "phase": "prefill",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "decode",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        }
+      ],
+      "ffn_split_profiles": [
+        {
+          "event": "ffn_split_profile",
+          "phase": "prefill",
+          "run": 1,
+          "warmup": false,
+          "calls": 28,
+          "cpu_calls": 0,
+          "gpu_calls": 28,
+          "npu_calls": 28,
+          "rows": 7168,
+          "gpu_completed_during_npu": 0,
+          "wall_ms": 149.658743009,
+          "round_ms": 3.300452992,
+          "dispatch_ms": 3.400783986,
+          "npu_branch_ms": 95.990217,
+          "cpu_branch_ms": 0.0,
+          "cpu_npu_overlap_ms": 0.0,
+          "join_wait_ms": 20.980739951,
+          "merge_ms": 25.986549079,
+          "gpu_upload_ms": 2.038462,
+          "gpu_kernel_ms": 96.639092,
+          "gpu_download_ms": 0.539585,
+          "event_profiling": true
+        },
+        {
+          "event": "ffn_split_profile",
+          "phase": "decode",
+          "run": 1,
+          "warmup": false,
+          "calls": 868,
+          "cpu_calls": 0,
+          "gpu_calls": 868,
+          "npu_calls": 868,
+          "rows": 868,
+          "gpu_completed_during_npu": 837,
+          "wall_ms": 437.55733797,
+          "round_ms": 0.541332811,
+          "dispatch_ms": 32.350916043,
+          "npu_branch_ms": 395.559108987,
+          "cpu_branch_ms": 0.0,
+          "cpu_npu_overlap_ms": 0.0,
+          "join_wait_ms": 7.451677725,
+          "merge_ms": 1.654302403,
+          "gpu_upload_ms": 0.482109,
+          "gpu_kernel_ms": 110.576231,
+          "gpu_download_ms": 0.748986,
+          "event_profiling": true
+        }
+      ],
+      "cpu_projection_details": [],
+      "request_ms": 2270.706385,
+      "output_tps": 14.092530946047434,
+      "handoff_ms": 0.085749,
+      "request_range": [
+        2270.706385,
+        2270.706385
+      ]
+    },
+    {
+      "directory": "e2e/concurrent-ffn/branch-profile51",
+      "label": "p256-4-all_both",
+      "route": "all_both",
+      "prompt": 256,
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "quality_passed": true,
+      "relative_rmse": 0.0005757857429929989,
+      "all_predictions_match": true,
+      "ttft_ms": 683.26,
+      "effective_prefill_tps": 374.67435529666596,
+      "decode_tps": 19.523,
+      "measured_runs": 1,
+      "ttft_range": [
+        683.26,
+        683.26
+      ],
+      "decode_range": [
+        19.523,
+        19.523
+      ],
+      "root_profiles": [],
+      "gpu_attention_profiles": [],
+      "gpu_projection_profiles": [],
+      "cpu_projection_profiles": [
+        {
+          "event": "linear_cpu_profile",
+          "phase": "prefill",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "decode",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        }
+      ],
+      "ffn_split_profiles": [
+        {
+          "event": "ffn_split_profile",
+          "phase": "prefill",
+          "run": 1,
+          "warmup": false,
+          "calls": 28,
+          "cpu_calls": 28,
+          "gpu_calls": 28,
+          "npu_calls": 28,
+          "rows": 7168,
+          "gpu_completed_during_npu": 12,
+          "wall_ms": 166.656250983,
+          "round_ms": 3.310951963,
+          "dispatch_ms": 4.261775061,
+          "npu_branch_ms": 122.337256938,
+          "cpu_branch_ms": 110.171133041,
+          "cpu_npu_overlap_ms": 99.379332975,
+          "join_wait_ms": 9.507027075,
+          "merge_ms": 27.239239946,
+          "gpu_upload_ms": 2.072872,
+          "gpu_kernel_ms": 96.81524,
+          "gpu_download_ms": 0.928083,
+          "event_profiling": true
+        },
+        {
+          "event": "ffn_split_profile",
+          "phase": "decode",
+          "run": 1,
+          "warmup": false,
+          "calls": 868,
+          "cpu_calls": 868,
+          "gpu_calls": 868,
+          "npu_calls": 868,
+          "rows": 868,
+          "gpu_completed_during_npu": 837,
+          "wall_ms": 432.662961096,
+          "round_ms": 0.596463919,
+          "dispatch_ms": 39.264166817,
+          "npu_branch_ms": 382.672303215,
+          "cpu_branch_ms": 46.523095191,
+          "cpu_npu_overlap_ms": 11.858442351,
+          "join_wait_ms": 8.062443137,
+          "merge_ms": 2.067584008,
+          "gpu_upload_ms": 0.615125,
+          "gpu_kernel_ms": 109.805542,
+          "gpu_download_ms": 0.831828,
+          "event_profiling": true
+        }
+      ],
+      "cpu_projection_details": [],
+      "request_ms": 2271.199003,
+      "output_tps": 14.089474307505231,
+      "handoff_ms": 0.091583,
+      "request_range": [
+        2271.199003,
+        2271.199003
+      ]
+    },
+    {
+      "directory": "e2e/concurrent-native/branch-profile51",
+      "label": "p256-1-npu",
+      "route": "npu",
+      "prompt": 256,
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "quality_passed": true,
+      "relative_rmse": 0.0,
+      "all_predictions_match": true,
+      "ttft_ms": 537.599,
+      "effective_prefill_tps": 476.19136196309887,
+      "decode_tps": 19.787,
+      "measured_runs": 1,
+      "ttft_range": [
+        537.599,
+        537.599
+      ],
+      "decode_range": [
+        19.787,
+        19.787
+      ],
+      "root_profiles": [],
+      "gpu_attention_profiles": [],
+      "gpu_projection_profiles": [],
+      "cpu_projection_profiles": [
+        {
+          "event": "linear_cpu_profile",
+          "phase": "prefill",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "decode",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        }
+      ],
+      "ffn_split_profiles": [],
+      "cpu_projection_details": [],
+      "request_ms": 2104.398405,
+      "output_tps": 15.206246081525613,
+      "handoff_ms": 0.07904,
+      "request_range": [
+        2104.398405,
+        2104.398405
+      ]
+    },
+    {
+      "directory": "e2e/concurrent-native/branch-profile51",
+      "label": "p256-2-cpu_npu_both",
+      "route": "cpu_npu_both",
+      "prompt": 256,
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "quality_passed": true,
+      "relative_rmse": 0.0005708448141561974,
+      "all_predictions_match": true,
+      "ttft_ms": 594.597,
+      "effective_prefill_tps": 430.5437128004346,
+      "decode_tps": 19.664,
+      "measured_runs": 1,
+      "ttft_range": [
+        594.597,
+        594.597
+      ],
+      "decode_range": [
+        19.664,
+        19.664
+      ],
+      "root_profiles": [],
+      "gpu_attention_profiles": [],
+      "gpu_projection_profiles": [],
+      "cpu_projection_profiles": [
+        {
+          "event": "linear_cpu_profile",
+          "phase": "prefill",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "decode",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        }
+      ],
+      "ffn_split_profiles": [
+        {
+          "event": "ffn_split_profile",
+          "phase": "prefill",
+          "run": 1,
+          "warmup": false,
+          "calls": 112,
+          "cpu_calls": 112,
+          "gpu_calls": 0,
+          "npu_calls": 112,
+          "rows": 7168,
+          "gpu_completed_during_npu": 0,
+          "wall_ms": 114.926558122,
+          "round_ms": 3.351492107,
+          "dispatch_ms": 0.236831024,
+          "npu_branch_ms": 71.197061971,
+          "cpu_branch_ms": 110.538497001,
+          "cpu_npu_overlap_ms": 70.856106967,
+          "join_wait_ms": 40.126881972,
+          "merge_ms": 0.014291048,
+          "gpu_upload_ms": 0.0,
+          "gpu_kernel_ms": 0.0,
+          "gpu_download_ms": 0.0,
+          "activation_pack_ms": 22.971891969,
+          "down_wall_ms": 49.777689934,
+          "logical_cpu_ops": 28,
+          "event_profiling": true
+        },
+        {
+          "event": "ffn_split_profile",
+          "phase": "decode",
+          "run": 1,
+          "warmup": false,
+          "calls": 868,
+          "cpu_calls": 868,
+          "gpu_calls": 0,
+          "npu_calls": 868,
+          "rows": 868,
+          "gpu_completed_during_npu": 0,
+          "wall_ms": 402.470434099,
+          "round_ms": 0.516241208,
+          "dispatch_ms": 1.194945902,
+          "npu_branch_ms": 398.926146939,
+          "cpu_branch_ms": 120.392614961,
+          "cpu_npu_overlap_ms": 120.392614961,
+          "join_wait_ms": 0.149600968,
+          "merge_ms": 1.683499083,
+          "gpu_upload_ms": 0.0,
+          "gpu_kernel_ms": 0.0,
+          "gpu_download_ms": 0.0,
+          "activation_pack_ms": 0.0,
+          "down_wall_ms": 0.0,
+          "logical_cpu_ops": 868,
+          "event_profiling": true
+        }
+      ],
+      "cpu_projection_details": [],
+      "request_ms": 2171.190203,
+      "output_tps": 14.73846001874208,
+      "handoff_ms": 0.090998,
+      "request_range": [
+        2171.190203,
+        2171.190203
+      ]
+    },
+    {
+      "directory": "e2e/concurrent-native/branch-profile51",
+      "label": "p256-3-gpu_npu_both",
+      "route": "gpu_npu_both",
+      "prompt": 256,
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "quality_passed": true,
+      "relative_rmse": 0.0005344644107788363,
+      "all_predictions_match": true,
+      "ttft_ms": 1044.231,
+      "effective_prefill_tps": 245.1564835749944,
+      "decode_tps": 19.197,
+      "measured_runs": 1,
+      "ttft_range": [
+        1044.231,
+        1044.231
+      ],
+      "decode_range": [
+        19.197,
+        19.197
+      ],
+      "root_profiles": [],
+      "gpu_attention_profiles": [],
+      "gpu_projection_profiles": [],
+      "cpu_projection_profiles": [
+        {
+          "event": "linear_cpu_profile",
+          "phase": "prefill",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "decode",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        }
+      ],
+      "ffn_split_profiles": [
+        {
+          "event": "ffn_split_profile",
+          "phase": "prefill",
+          "run": 1,
+          "warmup": false,
+          "calls": 112,
+          "cpu_calls": 0,
+          "gpu_calls": 112,
+          "npu_calls": 112,
+          "rows": 7168,
+          "gpu_completed_during_npu": 0,
+          "wall_ms": 571.373447925,
+          "round_ms": 3.370154917,
+          "dispatch_ms": 6.123454049,
+          "npu_branch_ms": 70.14766103,
+          "cpu_branch_ms": 0.0,
+          "cpu_npu_overlap_ms": 0.0,
+          "join_wait_ms": 491.723428935,
+          "merge_ms": 0.008748993,
+          "gpu_upload_ms": 1.337585,
+          "gpu_kernel_ms": 534.53795,
+          "gpu_download_ms": 0.470457,
+          "activation_pack_ms": 23.285724998,
+          "down_wall_ms": 49.003614992,
+          "logical_cpu_ops": 0,
+          "event_profiling": true
+        },
+        {
+          "event": "ffn_split_profile",
+          "phase": "decode",
+          "run": 1,
+          "warmup": false,
+          "calls": 868,
+          "cpu_calls": 0,
+          "gpu_calls": 868,
+          "npu_calls": 868,
+          "rows": 868,
+          "gpu_completed_during_npu": 837,
+          "wall_ms": 438.896689817,
+          "round_ms": 0.597310662,
+          "dispatch_ms": 31.983677059,
+          "npu_branch_ms": 397.850493729,
+          "cpu_branch_ms": 0.0,
+          "cpu_npu_overlap_ms": 0.0,
+          "join_wait_ms": 6.831609145,
+          "merge_ms": 1.633599222,
+          "gpu_upload_ms": 0.474819,
+          "gpu_kernel_ms": 107.823213,
+          "gpu_download_ms": 0.727426,
+          "activation_pack_ms": 0.0,
+          "down_wall_ms": 0.0,
+          "logical_cpu_ops": 0,
+          "event_profiling": true
+        }
+      ],
+      "cpu_projection_details": [],
+      "request_ms": 2659.151187,
+      "output_tps": 12.033915241991842,
+      "handoff_ms": 0.081957,
+      "request_range": [
+        2659.151187,
+        2659.151187
+      ]
+    },
+    {
+      "directory": "e2e/concurrent-native/branch-profile51",
+      "label": "p256-4-all_both",
+      "route": "all_both",
+      "prompt": 256,
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "quality_passed": true,
+      "relative_rmse": 0.0005757857429929989,
+      "all_predictions_match": true,
+      "ttft_ms": 1044.113,
+      "effective_prefill_tps": 245.18418983385897,
+      "decode_tps": 19.427,
+      "measured_runs": 1,
+      "ttft_range": [
+        1044.113,
+        1044.113
+      ],
+      "decode_range": [
+        19.427,
+        19.427
+      ],
+      "root_profiles": [],
+      "gpu_attention_profiles": [],
+      "gpu_projection_profiles": [],
+      "cpu_projection_profiles": [
+        {
+          "event": "linear_cpu_profile",
+          "phase": "prefill",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        },
+        {
+          "event": "linear_cpu_profile",
+          "phase": "decode",
+          "run": 1,
+          "warmup": false,
+          "calls": 0,
+          "weight_bytes": 0,
+          "wall_ms": 0.0,
+          "pack_ms": 0.0,
+          "compute_ms": 0.0,
+          "prefill_attention_calls": 0,
+          "prefill_attention_ms": 0.0
+        }
+      ],
+      "ffn_split_profiles": [
+        {
+          "event": "ffn_split_profile",
+          "phase": "prefill",
+          "run": 1,
+          "warmup": false,
+          "calls": 112,
+          "cpu_calls": 112,
+          "gpu_calls": 112,
+          "npu_calls": 112,
+          "rows": 7168,
+          "gpu_completed_during_npu": 0,
+          "wall_ms": 575.69674103,
+          "round_ms": 3.378621012,
+          "dispatch_ms": 7.409956038,
+          "npu_branch_ms": 71.517605022,
+          "cpu_branch_ms": 111.982215852,
+          "cpu_npu_overlap_ms": 71.030529022,
+          "join_wait_ms": 493.374816895,
+          "merge_ms": 0.015742064,
+          "gpu_upload_ms": 1.521621,
+          "gpu_kernel_ms": 536.758304,
+          "gpu_download_ms": 0.464923,
+          "activation_pack_ms": 25.187068105,
+          "down_wall_ms": 50.343800873,
+          "logical_cpu_ops": 28,
+          "event_profiling": true
+        },
+        {
+          "event": "ffn_split_profile",
+          "phase": "decode",
+          "run": 1,
+          "warmup": false,
+          "calls": 868,
+          "cpu_calls": 868,
+          "gpu_calls": 868,
+          "npu_calls": 868,
+          "rows": 868,
+          "gpu_completed_during_npu": 837,
+          "wall_ms": 434.580091983,
+          "round_ms": 0.567555726,
+          "dispatch_ms": 37.170896187,
+          "npu_branch_ms": 386.322270036,
+          "cpu_branch_ms": 48.516850159,
+          "cpu_npu_overlap_ms": 15.741008967,
+          "join_wait_ms": 8.356125772,
+          "merge_ms": 2.163244262,
+          "gpu_upload_ms": 0.618915,
+          "gpu_kernel_ms": 108.898501,
+          "gpu_download_ms": 0.790124,
+          "activation_pack_ms": 0.0,
+          "down_wall_ms": 0.0,
+          "logical_cpu_ops": 868,
+          "event_profiling": true
+        }
+      ],
+      "cpu_projection_details": [],
+      "request_ms": 2639.949027,
+      "output_tps": 12.121446161543632,
+      "handoff_ms": 0.093915,
+      "request_range": [
+        2639.949027,
+        2639.949027
+      ]
+    }
+  ],
+  "audits": {
+    "e2e/concurrent-ffn/branch-profile51": {
+      "clock_samples": 207,
+      "clocks_held_and_restored": true,
+      "checked_jobs": [
+        {
+          "label": "p256-1-npu",
+          "device_counts_checked_all_runs": true,
+          "same_teacher_ids": true,
+          "independent_request_span": true
+        },
+        {
+          "label": "p256-2-cpu_npu_both",
+          "device_counts_checked_all_runs": true,
+          "same_teacher_ids": true,
+          "independent_request_span": true
+        },
+        {
+          "label": "p256-3-gpu_npu_both",
+          "device_counts_checked_all_runs": true,
+          "same_teacher_ids": true,
+          "independent_request_span": true
+        },
+        {
+          "label": "p256-4-all_both",
+          "device_counts_checked_all_runs": true,
+          "same_teacher_ids": true,
+          "independent_request_span": true
+        }
+      ]
+    },
+    "e2e/concurrent-native/branch-profile51": {
+      "clock_samples": 235,
+      "clocks_held_and_restored": true,
+      "checked_jobs": [
+        {
+          "label": "p256-1-npu",
+          "device_counts_checked_all_runs": true,
+          "same_teacher_ids": true,
+          "independent_request_span": true
+        },
+        {
+          "label": "p256-2-cpu_npu_both",
+          "device_counts_checked_all_runs": true,
+          "same_teacher_ids": true,
+          "independent_request_span": true
+        },
+        {
+          "label": "p256-3-gpu_npu_both",
+          "device_counts_checked_all_runs": true,
+          "same_teacher_ids": true,
+          "independent_request_span": true
+        },
+        {
+          "label": "p256-4-all_both",
+          "device_counts_checked_all_runs": true,
+          "same_teacher_ids": true,
+          "independent_request_span": true
+        }
+      ]
+    }
+  },
+  "raw_log_sha256": {
+    "e2e/concurrent-ffn/branch-profile51/p256-1-npu.jsonl": "af92c8b07719b6bc700d87f1c30d069f164cf33ef2ba928303d43fc889dc37b7",
+    "e2e/concurrent-ffn/branch-profile51/p256-2-cpu_npu_both.jsonl": "938349f20711a6c4bba4284d6fec17538db65a905feb3ee4b5af2b8a3fa117cf",
+    "e2e/concurrent-ffn/branch-profile51/p256-3-gpu_npu_both.jsonl": "0b36c1d98a8fde70cfe144a82bc9bf6127a56329701218ebfb400f02a01368ba",
+    "e2e/concurrent-ffn/branch-profile51/p256-4-all_both.jsonl": "9895e5b84f7d6814b587be0c043a5047bcd947d7e7b45dc36418afba74e8a6b2",
+    "e2e/concurrent-native/branch-profile51/p256-1-npu.jsonl": "ffb5a4cfd90f2b7e982f69c3fe617d6293e81116a39bc171063a429700cfa5fd",
+    "e2e/concurrent-native/branch-profile51/p256-2-cpu_npu_both.jsonl": "958caa837a7c1b93704823985a092e34f4dc1d47b0c7d436fae432a0e0a11d40",
+    "e2e/concurrent-native/branch-profile51/p256-3-gpu_npu_both.jsonl": "edf3b6535dd4e414aec96eb4d45403bc997ef9b8fda2ff14be9a01403cca198a",
+    "e2e/concurrent-native/branch-profile51/p256-4-all_both.jsonl": "67d371d7b47de29ebc43853a3c7786d130e45df8c555eb7508e64f311dd35073"
+  },
+  "scope": "All nine dense-projection prefill/decode backend pairs plus an explicit three-device placement. CPU host non-linear operations remain in every route. Teacher-forced timing uses identical decode inputs; matching every prediction proves the same greedy sequence on the finite tested cases."
+}

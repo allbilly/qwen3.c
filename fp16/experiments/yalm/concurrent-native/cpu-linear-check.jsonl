@@ -1,0 +1,8 @@
+{"event":"linear_cpu_init","storage":"FP16","accumulation":"FP32","blas":"OpenBLAS 0.3.23.dev  USE64BITINT DYNAMIC_ARCH NO_AFFINITY armv8 MAX_THREADS=64"}
+{"event":"routing","dense_prefill":"cpu","dense_decode":"cpu","cpu_classifier":false,"npu_initialized":false,"gpu_projections_initialized":false,"host_non_linear_ops":"CPU"}
+{"event":"linear_check","kind":0,"rows":1,"K":1024,"N":2048,"outputs_checked":2048,"relative_rmse":1.36939028052e-07,"max_absolute_error":8.18865373731e-07,"limit":0.00001,"passed":true}
+{"event":"linear_check","kind":0,"rows":24,"K":1024,"N":2048,"outputs_checked":49152,"relative_rmse":2.30781281018e-07,"max_absolute_error":4.27570194006e-06,"limit":0.00001,"passed":true}
+{"event":"linear_check","kind":0,"rows":64,"K":1024,"N":2048,"outputs_checked":131072,"relative_rmse":2.29477861943e-07,"max_absolute_error":4.31062653661e-06,"limit":0.00001,"passed":true}
+{"event":"linear_check","kind":3,"rows":24,"K":2048,"N":1024,"outputs_checked":24576,"relative_rmse":2.22432459133e-07,"max_absolute_error":2.2591339075e-06,"limit":0.00001,"passed":true}
+{"event":"linear_check","kind":5,"rows":24,"K":3072,"N":1024,"outputs_checked":24576,"relative_rmse":2.30112161043e-07,"max_absolute_error":3.33786010742e-06,"limit":0.00001,"passed":true}
+{"event":"linear_check","kind":7,"rows":1,"K":1024,"N":151936,"outputs_checked":151936,"relative_rmse":1.40076082641e-07,"max_absolute_error":7.22415279597e-07,"limit":0.00001,"passed":true}

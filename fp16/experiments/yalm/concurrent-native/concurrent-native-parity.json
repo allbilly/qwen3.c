@@ -1,0 +1,21 @@
+{
+  "all_first_logits_bit_identical": true,
+  "cases": [
+    "p1-all.f32",
+    "p1-cpu_npu.f32",
+    "p1-gpu_npu.f32",
+    "p128-all.f32",
+    "p128-cpu_npu.f32",
+    "p128-gpu_npu.f32",
+    "p24-all.f32",
+    "p24-cpu_npu.f32",
+    "p24-gpu_npu.f32",
+    "p256-all.f32",
+    "p256-cpu_npu.f32",
+    "p256-gpu_npu.f32",
+    "p73-all.f32",
+    "p73-cpu_npu.f32",
+    "p73-gpu_npu.f32"
+  ],
+  "scope": "Bit comparison of every full-vocabulary first-token logit from all 15 original-split/native-packing quality cases. Actual generated IDs independently audited."
+}

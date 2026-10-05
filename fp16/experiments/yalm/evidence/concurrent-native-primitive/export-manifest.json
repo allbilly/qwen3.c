@@ -1,0 +1,41 @@
+{
+  "workspace_directory": "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/concurrent-native/primitive",
+  "files": {
+    "all.config.json": {
+      "original_sha256": "14426526cb1deed3772c7a38c86b536e691dc75153f88dc5b35c941b62530b1d",
+      "export": "all.config.json",
+      "export_sha256": "14426526cb1deed3772c7a38c86b536e691dc75153f88dc5b35c941b62530b1d"
+    },
+    "all.jsonl": {
+      "original_sha256": "d7e76aaaa2fee14246a31689ad14eca80f2e51bad31d44e7114b60cffe6a3ae7",
+      "export": "all.jsonl",
+      "export_sha256": "d7e76aaaa2fee14246a31689ad14eca80f2e51bad31d44e7114b60cffe6a3ae7"
+    },
+    "cpu_npu.config.json": {
+      "original_sha256": "e3469b65d8f18a5fb3b39a8f48f9846b14ac8809461aafc24faa815e4a048885",
+      "export": "cpu_npu.config.json",
+      "export_sha256": "e3469b65d8f18a5fb3b39a8f48f9846b14ac8809461aafc24faa815e4a048885"
+    },
+    "cpu_npu.jsonl": {
+      "original_sha256": "0139c5643d53d347567d3c6f01badd0e9e88b344a8bbbb6eb76746b65c8686da",
+      "export": "cpu_npu.jsonl",
+      "export_sha256": "0139c5643d53d347567d3c6f01badd0e9e88b344a8bbbb6eb76746b65c8686da"
+    },
+    "gpu_npu.config.json": {
+      "original_sha256": "d2af9cf707bdf0e4244dc77616ce52b3d5fc14397909511e7fae5bfa16dccbb0",
+      "export": "gpu_npu.config.json",
+      "export_sha256": "d2af9cf707bdf0e4244dc77616ce52b3d5fc14397909511e7fae5bfa16dccbb0"
+    },
+    "gpu_npu.jsonl": {
+      "original_sha256": "145d17cc203196b595e2243cfd471885600773a5093aa2e5a8511642d152bd2a",
+      "export": "gpu_npu.jsonl",
+      "export_sha256": "145d17cc203196b595e2243cfd471885600773a5093aa2e5a8511642d152bd2a"
+    },
+    "summary.json": {
+      "original_sha256": "4fd48253357baaecded451a1f51b87757a97dd0acba9d234c868bbb83e48a202",
+      "export": "summary.json",
+      "export_sha256": "4fd48253357baaecded451a1f51b87757a97dd0acba9d234c868bbb83e48a202"
+    }
+  },
+  "external_artifacts": "Shared FP16 model, full per-vocabulary logits and compiled binary remain in the comparison workspace; source/binary/input hashes are retained here."
+}

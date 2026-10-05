@@ -1,0 +1,9 @@
+{"event":"ffn_gpu_init","device":"Mali-LODX r0p0","weight_bytes":11010048,"projection_count":28,"event_profiling":false}
+{"event":"ffn_split_init","cpu_channels":0,"gpu_channels":96,"npu_channels":2976,"mode":3,"cpu_threads":1,"npu_tasks":3,"prefill_block_rows":64,"fp16_operands":true,"cpu_resident_weight_bytes":0,"extra_npu_weight_bytes":341311488}
+{"event":"routing","dense_prefill":"npu","dense_decode":"npu","cpu_classifier":false,"npu_initialized":true,"gpu_projections_initialized":false,"host_non_linear_ops":"CPU"}
+arm_release_ver of this libmali is 'g6p0-01eac0', rk_so_ver is '7'.
+{"event":"ffn_primitive_check","rows":1,"outputs_checked":6144,"relative_rmse":1.09488127628e-07,"max_absolute_error":7.23288394511e-07,"limit":0.00001,"passed":true}
+{"event":"ffn_primitive_check","rows":24,"outputs_checked":147456,"relative_rmse":1.26679411695e-07,"max_absolute_error":3.0915834941e-06,"limit":0.00001,"passed":true}
+{"event":"ffn_primitive_check","rows":64,"outputs_checked":393216,"relative_rmse":1.27390068963e-07,"max_absolute_error":3.67593020201e-06,"limit":0.00001,"passed":true}
+{"event":"ffn_native_check","rows":24,"outputs_checked":24576,"relative_rmse":2.75561968935e-07,"max_absolute_error":3.21865081787e-06,"limit":0.0001,"passed":true}
+{"event":"ffn_native_check","rows":64,"outputs_checked":65536,"relative_rmse":2.69201252287e-07,"max_absolute_error":3.21865081787e-06,"limit":0.0001,"passed":true}

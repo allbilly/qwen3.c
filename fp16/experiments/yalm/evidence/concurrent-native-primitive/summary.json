@@ -1,0 +1,168 @@
+{
+  "records": [
+    {
+      "native_cases": [
+        {
+          "event": "ffn_native_check",
+          "rows": 24,
+          "outputs_checked": 24576,
+          "relative_rmse": 4.94804107694e-07,
+          "max_absolute_error": 5.96046447754e-06,
+          "limit": 0.0001,
+          "passed": true
+        },
+        {
+          "event": "ffn_native_check",
+          "rows": 64,
+          "outputs_checked": 65536,
+          "relative_rmse": 7.28766113581e-07,
+          "max_absolute_error": 1.52587890625e-05,
+          "limit": 0.0001,
+          "passed": true
+        }
+      ],
+      "route": "cpu_npu",
+      "cpu_channels": 96,
+      "gpu_channels": 0,
+      "cases": [
+        {
+          "event": "ffn_primitive_check",
+          "rows": 1,
+          "outputs_checked": 6144,
+          "relative_rmse": 1.09265022995e-07,
+          "max_absolute_error": 7.23288394511e-07,
+          "limit": 1e-05,
+          "passed": true
+        },
+        {
+          "event": "ffn_primitive_check",
+          "rows": 24,
+          "outputs_checked": 147456,
+          "relative_rmse": 1.12918825303e-07,
+          "max_absolute_error": 1.38487666845e-06,
+          "limit": 1e-05,
+          "passed": true
+        },
+        {
+          "event": "ffn_primitive_check",
+          "rows": 64,
+          "outputs_checked": 393216,
+          "relative_rmse": 1.12811638074e-07,
+          "max_absolute_error": 1.5557743609e-06,
+          "limit": 1e-05,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "native_cases": [
+        {
+          "event": "ffn_native_check",
+          "rows": 24,
+          "outputs_checked": 24576,
+          "relative_rmse": 2.75561968935e-07,
+          "max_absolute_error": 3.21865081787e-06,
+          "limit": 0.0001,
+          "passed": true
+        },
+        {
+          "event": "ffn_native_check",
+          "rows": 64,
+          "outputs_checked": 65536,
+          "relative_rmse": 2.69201252287e-07,
+          "max_absolute_error": 3.21865081787e-06,
+          "limit": 0.0001,
+          "passed": true
+        }
+      ],
+      "route": "gpu_npu",
+      "cpu_channels": 0,
+      "gpu_channels": 96,
+      "cases": [
+        {
+          "event": "ffn_primitive_check",
+          "rows": 1,
+          "outputs_checked": 6144,
+          "relative_rmse": 1.09488127628e-07,
+          "max_absolute_error": 7.23288394511e-07,
+          "limit": 1e-05,
+          "passed": true
+        },
+        {
+          "event": "ffn_primitive_check",
+          "rows": 24,
+          "outputs_checked": 147456,
+          "relative_rmse": 1.26679411695e-07,
+          "max_absolute_error": 3.0915834941e-06,
+          "limit": 1e-05,
+          "passed": true
+        },
+        {
+          "event": "ffn_primitive_check",
+          "rows": 64,
+          "outputs_checked": 393216,
+          "relative_rmse": 1.27390068963e-07,
+          "max_absolute_error": 3.67593020201e-06,
+          "limit": 1e-05,
+          "passed": true
+        }
+      ]
+    },
+    {
+      "native_cases": [
+        {
+          "event": "ffn_native_check",
+          "rows": 24,
+          "outputs_checked": 24576,
+          "relative_rmse": 6.72305014359e-07,
+          "max_absolute_error": 5.96046447754e-06,
+          "limit": 0.0001,
+          "passed": true
+        },
+        {
+          "event": "ffn_native_check",
+          "rows": 64,
+          "outputs_checked": 65536,
+          "relative_rmse": 4.63321290521e-06,
+          "max_absolute_error": 0.000164985656738,
+          "limit": 0.0001,
+          "passed": true
+        }
+      ],
+      "route": "all",
+      "cpu_channels": 96,
+      "gpu_channels": 96,
+      "cases": [
+        {
+          "event": "ffn_primitive_check",
+          "rows": 1,
+          "outputs_checked": 6144,
+          "relative_rmse": 1.10590714922e-07,
+          "max_absolute_error": 7.23288394511e-07,
+          "limit": 1e-05,
+          "passed": true
+        },
+        {
+          "event": "ffn_primitive_check",
+          "rows": 24,
+          "outputs_checked": 147456,
+          "relative_rmse": 1.32879464819e-07,
+          "max_absolute_error": 3.66836320609e-06,
+          "limit": 1e-05,
+          "passed": true
+        },
+        {
+          "event": "ffn_primitive_check",
+          "rows": 64,
+          "outputs_checked": 393216,
+          "relative_rmse": 1.31900411381e-07,
+          "max_absolute_error": 3.66836320609e-06,
+          "limit": 1e-05,
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "check_binary_sha256": "509d7c5787c8d1fc79765ca5677ba9b3a38eec7a17be04aad74b6efa9698017a",
+  "scope": "All tested outputs, identical FP16 operands, double accumulation; no qualified timings."
+}

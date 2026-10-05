@@ -1,0 +1,121 @@
+{
+  "workspace_directory": "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/concurrent-ffn/branch-profile51",
+  "files": {
+    "clock-samples.jsonl": {
+      "original_sha256": "92de3bc1d50679b1edacffc004ad41c96ab67005ad4129ac4f39f12fd9f88ba5",
+      "export": "clock-samples.jsonl.gz",
+      "export_sha256": "7997ce7173531770447cd2e2749804783a4a4be9d4d40680a335a22faebbca0e"
+    },
+    "clock-state-before.json": {
+      "original_sha256": "41926b8ee4e0b41ac8c7a20c218e884de60c6d0a6c928849bec7b00b278bfce6",
+      "export": "clock-state-before.json",
+      "export_sha256": "41926b8ee4e0b41ac8c7a20c218e884de60c6d0a6c928849bec7b00b278bfce6"
+    },
+    "clock-state-restored.json": {
+      "original_sha256": "41926b8ee4e0b41ac8c7a20c218e884de60c6d0a6c928849bec7b00b278bfce6",
+      "export": "clock-state-restored.json",
+      "export_sha256": "41926b8ee4e0b41ac8c7a20c218e884de60c6d0a6c928849bec7b00b278bfce6"
+    },
+    "gpu-clock-state-before.json": {
+      "original_sha256": "173bf1112031cdfa91fd19df773ccbda2dd4fb75837e6024a6dd82e3b772e182",
+      "export": "gpu-clock-state-before.json",
+      "export_sha256": "173bf1112031cdfa91fd19df773ccbda2dd4fb75837e6024a6dd82e3b772e182"
+    },
+    "gpu-clock-state-restored.json": {
+      "original_sha256": "173bf1112031cdfa91fd19df773ccbda2dd4fb75837e6024a6dd82e3b772e182",
+      "export": "gpu-clock-state-restored.json",
+      "export_sha256": "173bf1112031cdfa91fd19df773ccbda2dd4fb75837e6024a6dd82e3b772e182"
+    },
+    "p256-1-npu.config.json": {
+      "original_sha256": "eb7b939d360c4d2f2e782a32ba26db092b7025a50dd3cdfbd7bf291cabe3d91c",
+      "export": "p256-1-npu.config.json",
+      "export_sha256": "eb7b939d360c4d2f2e782a32ba26db092b7025a50dd3cdfbd7bf291cabe3d91c"
+    },
+    "p256-1-npu.jsonl": {
+      "original_sha256": "af92c8b07719b6bc700d87f1c30d069f164cf33ef2ba928303d43fc889dc37b7",
+      "export": "p256-1-npu.jsonl",
+      "export_sha256": "af92c8b07719b6bc700d87f1c30d069f164cf33ef2ba928303d43fc889dc37b7"
+    },
+    "p256-1-npu.teacher.tokens": {
+      "original_sha256": "b918dd6f9735d37d462b1abb6d5811e633417a6a98da3882d1bfcb776d2bde9c",
+      "export": "p256-1-npu.teacher.tokens",
+      "export_sha256": "b918dd6f9735d37d462b1abb6d5811e633417a6a98da3882d1bfcb776d2bde9c"
+    },
+    "p256-1-npu.tokens": {
+      "original_sha256": "899f36a0548cde0e1a51c6bae9454b21d9be66f13402551f81e037e95ff0d929",
+      "export": "p256-1-npu.tokens",
+      "export_sha256": "899f36a0548cde0e1a51c6bae9454b21d9be66f13402551f81e037e95ff0d929"
+    },
+    "p256-2-cpu_npu_both.config.json": {
+      "original_sha256": "6bbe313094891f3cf05c750c2064fee96f48ef5b3fab5c2c4d08831093cb6bfc",
+      "export": "p256-2-cpu_npu_both.config.json",
+      "export_sha256": "6bbe313094891f3cf05c750c2064fee96f48ef5b3fab5c2c4d08831093cb6bfc"
+    },
+    "p256-2-cpu_npu_both.jsonl": {
+      "original_sha256": "938349f20711a6c4bba4284d6fec17538db65a905feb3ee4b5af2b8a3fa117cf",
+      "export": "p256-2-cpu_npu_both.jsonl",
+      "export_sha256": "938349f20711a6c4bba4284d6fec17538db65a905feb3ee4b5af2b8a3fa117cf"
+    },
+    "p256-2-cpu_npu_both.teacher.tokens": {
+      "original_sha256": "b918dd6f9735d37d462b1abb6d5811e633417a6a98da3882d1bfcb776d2bde9c",
+      "export": "p256-2-cpu_npu_both.teacher.tokens",
+      "export_sha256": "b918dd6f9735d37d462b1abb6d5811e633417a6a98da3882d1bfcb776d2bde9c"
+    },
+    "p256-2-cpu_npu_both.tokens": {
+      "original_sha256": "899f36a0548cde0e1a51c6bae9454b21d9be66f13402551f81e037e95ff0d929",
+      "export": "p256-2-cpu_npu_both.tokens",
+      "export_sha256": "899f36a0548cde0e1a51c6bae9454b21d9be66f13402551f81e037e95ff0d929"
+    },
+    "p256-3-gpu_npu_both.config.json": {
+      "original_sha256": "7223412abf14f7850936ff613c44ca5de96eaad3b24a9920c322c3ff2c79bfc5",
+      "export": "p256-3-gpu_npu_both.config.json",
+      "export_sha256": "7223412abf14f7850936ff613c44ca5de96eaad3b24a9920c322c3ff2c79bfc5"
+    },
+    "p256-3-gpu_npu_both.jsonl": {
+      "original_sha256": "0b36c1d98a8fde70cfe144a82bc9bf6127a56329701218ebfb400f02a01368ba",
+      "export": "p256-3-gpu_npu_both.jsonl",
+      "export_sha256": "0b36c1d98a8fde70cfe144a82bc9bf6127a56329701218ebfb400f02a01368ba"
+    },
+    "p256-3-gpu_npu_both.teacher.tokens": {
+      "original_sha256": "b918dd6f9735d37d462b1abb6d5811e633417a6a98da3882d1bfcb776d2bde9c",
+      "export": "p256-3-gpu_npu_both.teacher.tokens",
+      "export_sha256": "b918dd6f9735d37d462b1abb6d5811e633417a6a98da3882d1bfcb776d2bde9c"
+    },
+    "p256-3-gpu_npu_both.tokens": {
+      "original_sha256": "899f36a0548cde0e1a51c6bae9454b21d9be66f13402551f81e037e95ff0d929",
+      "export": "p256-3-gpu_npu_both.tokens",
+      "export_sha256": "899f36a0548cde0e1a51c6bae9454b21d9be66f13402551f81e037e95ff0d929"
+    },
+    "p256-4-all_both.config.json": {
+      "original_sha256": "cb6a3f1656d522d0dd8cb89b0fa639400e358849687dca86d0814a2612f43597",
+      "export": "p256-4-all_both.config.json",
+      "export_sha256": "cb6a3f1656d522d0dd8cb89b0fa639400e358849687dca86d0814a2612f43597"
+    },
+    "p256-4-all_both.jsonl": {
+      "original_sha256": "9895e5b84f7d6814b587be0c043a5047bcd947d7e7b45dc36418afba74e8a6b2",
+      "export": "p256-4-all_both.jsonl",
+      "export_sha256": "9895e5b84f7d6814b587be0c043a5047bcd947d7e7b45dc36418afba74e8a6b2"
+    },
+    "p256-4-all_both.teacher.tokens": {
+      "original_sha256": "b918dd6f9735d37d462b1abb6d5811e633417a6a98da3882d1bfcb776d2bde9c",
+      "export": "p256-4-all_both.teacher.tokens",
+      "export_sha256": "b918dd6f9735d37d462b1abb6d5811e633417a6a98da3882d1bfcb776d2bde9c"
+    },
+    "p256-4-all_both.tokens": {
+      "original_sha256": "899f36a0548cde0e1a51c6bae9454b21d9be66f13402551f81e037e95ff0d929",
+      "export": "p256-4-all_both.tokens",
+      "export_sha256": "899f36a0548cde0e1a51c6bae9454b21d9be66f13402551f81e037e95ff0d929"
+    },
+    "source-provenance.json": {
+      "original_sha256": "f50747ea9e1b5305ae13d4c2b36fbe6eaf280957bf591dcb876fd49b0858d1dc",
+      "export": "source-provenance.json",
+      "export_sha256": "f50747ea9e1b5305ae13d4c2b36fbe6eaf280957bf591dcb876fd49b0858d1dc"
+    },
+    "summary.json": {
+      "original_sha256": "bd389da6f96ec1586a61852fefe9e06fc3c33684086e6f157bde32201dfe6097",
+      "export": "summary.json",
+      "export_sha256": "bd389da6f96ec1586a61852fefe9e06fc3c33684086e6f157bde32201dfe6097"
+    }
+  },
+  "external_artifacts": "Shared FP16 model, full per-vocabulary logits and compiled binary remain in the comparison workspace; source/binary/input hashes are retained here."
+}

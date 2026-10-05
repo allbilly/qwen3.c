@@ -1,0 +1,316 @@
+{
+  "workspace_directory": "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/concurrent-native/quality",
+  "files": {
+    "p1-all.config.json": {
+      "original_sha256": "91ed58ed4e75b61ce87b33f0f45cd1285025768e3233eed981bef7e9f9de93f8",
+      "export": "p1-all.config.json",
+      "export_sha256": "91ed58ed4e75b61ce87b33f0f45cd1285025768e3233eed981bef7e9f9de93f8"
+    },
+    "p1-all.jsonl": {
+      "original_sha256": "7b015ca7b37e6d856a055cf62b1de3b5fdc49016eda9da1a0ca0016be806bba1",
+      "export": "p1-all.jsonl",
+      "export_sha256": "7b015ca7b37e6d856a055cf62b1de3b5fdc49016eda9da1a0ca0016be806bba1"
+    },
+    "p1-all.teacher.tokens": {
+      "original_sha256": "725c134d29ca9ca3156d6c893ac0a5e52b84d52525c51e2eb80662655d3dd3d0",
+      "export": "p1-all.teacher.tokens",
+      "export_sha256": "725c134d29ca9ca3156d6c893ac0a5e52b84d52525c51e2eb80662655d3dd3d0"
+    },
+    "p1-all.tokens": {
+      "original_sha256": "6e1408b01c2dddc443ef8feee1ef5c394b67fc8b2cc74d269933bc02135987c9",
+      "export": "p1-all.tokens",
+      "export_sha256": "6e1408b01c2dddc443ef8feee1ef5c394b67fc8b2cc74d269933bc02135987c9"
+    },
+    "p1-cpu_npu.config.json": {
+      "original_sha256": "68dc3d9ea7e476cc91d29b1a10aa057349f830c71cbd8c43a46fd01323931087",
+      "export": "p1-cpu_npu.config.json",
+      "export_sha256": "68dc3d9ea7e476cc91d29b1a10aa057349f830c71cbd8c43a46fd01323931087"
+    },
+    "p1-cpu_npu.jsonl": {
+      "original_sha256": "396dc4bd34bccf1d433f653f7cba3cb7f379fb5d9bf5f23f888a691d19d4afd4",
+      "export": "p1-cpu_npu.jsonl",
+      "export_sha256": "396dc4bd34bccf1d433f653f7cba3cb7f379fb5d9bf5f23f888a691d19d4afd4"
+    },
+    "p1-cpu_npu.teacher.tokens": {
+      "original_sha256": "725c134d29ca9ca3156d6c893ac0a5e52b84d52525c51e2eb80662655d3dd3d0",
+      "export": "p1-cpu_npu.teacher.tokens",
+      "export_sha256": "725c134d29ca9ca3156d6c893ac0a5e52b84d52525c51e2eb80662655d3dd3d0"
+    },
+    "p1-cpu_npu.tokens": {
+      "original_sha256": "6e1408b01c2dddc443ef8feee1ef5c394b67fc8b2cc74d269933bc02135987c9",
+      "export": "p1-cpu_npu.tokens",
+      "export_sha256": "6e1408b01c2dddc443ef8feee1ef5c394b67fc8b2cc74d269933bc02135987c9"
+    },
+    "p1-gpu_npu.config.json": {
+      "original_sha256": "5c76794e2dec302198b31e66a99f2fd0a63d100f43606846ac79882cef675241",
+      "export": "p1-gpu_npu.config.json",
+      "export_sha256": "5c76794e2dec302198b31e66a99f2fd0a63d100f43606846ac79882cef675241"
+    },
+    "p1-gpu_npu.jsonl": {
+      "original_sha256": "6fe15d5b49d54a3958d4d03fa5ae945430e164a8242a519cab90dedd7159e92d",
+      "export": "p1-gpu_npu.jsonl",
+      "export_sha256": "6fe15d5b49d54a3958d4d03fa5ae945430e164a8242a519cab90dedd7159e92d"
+    },
+    "p1-gpu_npu.teacher.tokens": {
+      "original_sha256": "725c134d29ca9ca3156d6c893ac0a5e52b84d52525c51e2eb80662655d3dd3d0",
+      "export": "p1-gpu_npu.teacher.tokens",
+      "export_sha256": "725c134d29ca9ca3156d6c893ac0a5e52b84d52525c51e2eb80662655d3dd3d0"
+    },
+    "p1-gpu_npu.tokens": {
+      "original_sha256": "6e1408b01c2dddc443ef8feee1ef5c394b67fc8b2cc74d269933bc02135987c9",
+      "export": "p1-gpu_npu.tokens",
+      "export_sha256": "6e1408b01c2dddc443ef8feee1ef5c394b67fc8b2cc74d269933bc02135987c9"
+    },
+    "p128-all.config.json": {
+      "original_sha256": "86939b9cc99e979fbc1a7fa369263164e54006f3fc78cde9c084a73d71f81d15",
+      "export": "p128-all.config.json",
+      "export_sha256": "86939b9cc99e979fbc1a7fa369263164e54006f3fc78cde9c084a73d71f81d15"
+    },
+    "p128-all.jsonl": {
+      "original_sha256": "23f8fce48392b8534363a6ae2afa1d1880ca7213c7e61220284cf0e44195de67",
+      "export": "p128-all.jsonl",
+      "export_sha256": "23f8fce48392b8534363a6ae2afa1d1880ca7213c7e61220284cf0e44195de67"
+    },
+    "p128-all.teacher.tokens": {
+      "original_sha256": "d02314ff65bbeb9dd5eedd937c3bc85b8faa0ecaf88c185f730f0f92ba7836db",
+      "export": "p128-all.teacher.tokens",
+      "export_sha256": "d02314ff65bbeb9dd5eedd937c3bc85b8faa0ecaf88c185f730f0f92ba7836db"
+    },
+    "p128-all.tokens": {
+      "original_sha256": "db74195066510380bdeae6f32d2d0c7d5305a2f35d2223ba2114a04f2c0de1fc",
+      "export": "p128-all.tokens",
+      "export_sha256": "db74195066510380bdeae6f32d2d0c7d5305a2f35d2223ba2114a04f2c0de1fc"
+    },
+    "p128-cpu_npu.config.json": {
+      "original_sha256": "166ae32db73805d1220e571bd6762ccdcf42c917890528759d579184c5bbe058",
+      "export": "p128-cpu_npu.config.json",
+      "export_sha256": "166ae32db73805d1220e571bd6762ccdcf42c917890528759d579184c5bbe058"
+    },
+    "p128-cpu_npu.jsonl": {
+      "original_sha256": "17ba82312ba8772197379a5fddbdd273c631f6ec3956f74bceaadbb2932a6a37",
+      "export": "p128-cpu_npu.jsonl",
+      "export_sha256": "17ba82312ba8772197379a5fddbdd273c631f6ec3956f74bceaadbb2932a6a37"
+    },
+    "p128-cpu_npu.teacher.tokens": {
+      "original_sha256": "d02314ff65bbeb9dd5eedd937c3bc85b8faa0ecaf88c185f730f0f92ba7836db",
+      "export": "p128-cpu_npu.teacher.tokens",
+      "export_sha256": "d02314ff65bbeb9dd5eedd937c3bc85b8faa0ecaf88c185f730f0f92ba7836db"
+    },
+    "p128-cpu_npu.tokens": {
+      "original_sha256": "db74195066510380bdeae6f32d2d0c7d5305a2f35d2223ba2114a04f2c0de1fc",
+      "export": "p128-cpu_npu.tokens",
+      "export_sha256": "db74195066510380bdeae6f32d2d0c7d5305a2f35d2223ba2114a04f2c0de1fc"
+    },
+    "p128-gpu_npu.config.json": {
+      "original_sha256": "63b658148f5de292972b89e2a67c3707d0332db390229c7df2010ff829fe502d",
+      "export": "p128-gpu_npu.config.json",
+      "export_sha256": "63b658148f5de292972b89e2a67c3707d0332db390229c7df2010ff829fe502d"
+    },
+    "p128-gpu_npu.jsonl": {
+      "original_sha256": "6eba7b5ad9c6250441f514d05a72bb05481f7cbf4af74f78e7fda64712d38e22",
+      "export": "p128-gpu_npu.jsonl",
+      "export_sha256": "6eba7b5ad9c6250441f514d05a72bb05481f7cbf4af74f78e7fda64712d38e22"
+    },
+    "p128-gpu_npu.teacher.tokens": {
+      "original_sha256": "d02314ff65bbeb9dd5eedd937c3bc85b8faa0ecaf88c185f730f0f92ba7836db",
+      "export": "p128-gpu_npu.teacher.tokens",
+      "export_sha256": "d02314ff65bbeb9dd5eedd937c3bc85b8faa0ecaf88c185f730f0f92ba7836db"
+    },
+    "p128-gpu_npu.tokens": {
+      "original_sha256": "db74195066510380bdeae6f32d2d0c7d5305a2f35d2223ba2114a04f2c0de1fc",
+      "export": "p128-gpu_npu.tokens",
+      "export_sha256": "db74195066510380bdeae6f32d2d0c7d5305a2f35d2223ba2114a04f2c0de1fc"
+    },
+    "p24-all.config.json": {
+      "original_sha256": "5f524f2f5822be43ca7680483462da234c6d066b3511decbc1a68f567f1fb9e8",
+      "export": "p24-all.config.json",
+      "export_sha256": "5f524f2f5822be43ca7680483462da234c6d066b3511decbc1a68f567f1fb9e8"
+    },
+    "p24-all.jsonl": {
+      "original_sha256": "6d57157f7e333b513e592944380e6757eca3175dfb4598ef75a28f3286befa10",
+      "export": "p24-all.jsonl",
+      "export_sha256": "6d57157f7e333b513e592944380e6757eca3175dfb4598ef75a28f3286befa10"
+    },
+    "p24-all.teacher.tokens": {
+      "original_sha256": "cf736da7621436fcfdf3ec9f94f8cf447c15f04c45cf7129cbd5ac27ce2b3c5e",
+      "export": "p24-all.teacher.tokens",
+      "export_sha256": "cf736da7621436fcfdf3ec9f94f8cf447c15f04c45cf7129cbd5ac27ce2b3c5e"
+    },
+    "p24-all.tokens": {
+      "original_sha256": "a438d42ab4ad59dfe3e0469d2836993de16fce180efa9bcac481fb4feb45da83",
+      "export": "p24-all.tokens",
+      "export_sha256": "a438d42ab4ad59dfe3e0469d2836993de16fce180efa9bcac481fb4feb45da83"
+    },
+    "p24-cpu_npu.config.json": {
+      "original_sha256": "64fdbb64f9187631017e2608faff077b60ec509c01c327e22543a638eb77af05",
+      "export": "p24-cpu_npu.config.json",
+      "export_sha256": "64fdbb64f9187631017e2608faff077b60ec509c01c327e22543a638eb77af05"
+    },
+    "p24-cpu_npu.jsonl": {
+      "original_sha256": "1a37904cc6cbcd1b8740af9c9591f49033c76c3ec1acbf5ab287cc024e54ac30",
+      "export": "p24-cpu_npu.jsonl",
+      "export_sha256": "1a37904cc6cbcd1b8740af9c9591f49033c76c3ec1acbf5ab287cc024e54ac30"
+    },
+    "p24-cpu_npu.teacher.tokens": {
+      "original_sha256": "cf736da7621436fcfdf3ec9f94f8cf447c15f04c45cf7129cbd5ac27ce2b3c5e",
+      "export": "p24-cpu_npu.teacher.tokens",
+      "export_sha256": "cf736da7621436fcfdf3ec9f94f8cf447c15f04c45cf7129cbd5ac27ce2b3c5e"
+    },
+    "p24-cpu_npu.tokens": {
+      "original_sha256": "a438d42ab4ad59dfe3e0469d2836993de16fce180efa9bcac481fb4feb45da83",
+      "export": "p24-cpu_npu.tokens",
+      "export_sha256": "a438d42ab4ad59dfe3e0469d2836993de16fce180efa9bcac481fb4feb45da83"
+    },
+    "p24-gpu_npu.config.json": {
+      "original_sha256": "e7ec4407053b7aaadf0399e32de7eb5ac0bcd0a945987176ac1562f681cc52c2",
+      "export": "p24-gpu_npu.config.json",
+      "export_sha256": "e7ec4407053b7aaadf0399e32de7eb5ac0bcd0a945987176ac1562f681cc52c2"
+    },
+    "p24-gpu_npu.jsonl": {
+      "original_sha256": "01f6ae2bcca83d1e106ce064199cf7075d77adb6865043442188d716442e62d1",
+      "export": "p24-gpu_npu.jsonl",
+      "export_sha256": "01f6ae2bcca83d1e106ce064199cf7075d77adb6865043442188d716442e62d1"
+    },
+    "p24-gpu_npu.teacher.tokens": {
+      "original_sha256": "cf736da7621436fcfdf3ec9f94f8cf447c15f04c45cf7129cbd5ac27ce2b3c5e",
+      "export": "p24-gpu_npu.teacher.tokens",
+      "export_sha256": "cf736da7621436fcfdf3ec9f94f8cf447c15f04c45cf7129cbd5ac27ce2b3c5e"
+    },
+    "p24-gpu_npu.tokens": {
+      "original_sha256": "a438d42ab4ad59dfe3e0469d2836993de16fce180efa9bcac481fb4feb45da83",
+      "export": "p24-gpu_npu.tokens",
+      "export_sha256": "a438d42ab4ad59dfe3e0469d2836993de16fce180efa9bcac481fb4feb45da83"
+    },
+    "p256-all.config.json": {
+      "original_sha256": "92df820233e5f5ebf27eea0ec7397a8dca60819ff3dfa0b2e8def862bba53456",
+      "export": "p256-all.config.json",
+      "export_sha256": "92df820233e5f5ebf27eea0ec7397a8dca60819ff3dfa0b2e8def862bba53456"
+    },
+    "p256-all.jsonl": {
+      "original_sha256": "518bab05b1f8fe6a79f51f043cd450525111fd06c19a46f90d93e30f74b9422f",
+      "export": "p256-all.jsonl",
+      "export_sha256": "518bab05b1f8fe6a79f51f043cd450525111fd06c19a46f90d93e30f74b9422f"
+    },
+    "p256-all.teacher.tokens": {
+      "original_sha256": "dd507b4afd4becf9ae263ec6fde688da3cd000b2de677a4483ef7493edf82cd0",
+      "export": "p256-all.teacher.tokens",
+      "export_sha256": "dd507b4afd4becf9ae263ec6fde688da3cd000b2de677a4483ef7493edf82cd0"
+    },
+    "p256-all.tokens": {
+      "original_sha256": "899f36a0548cde0e1a51c6bae9454b21d9be66f13402551f81e037e95ff0d929",
+      "export": "p256-all.tokens",
+      "export_sha256": "899f36a0548cde0e1a51c6bae9454b21d9be66f13402551f81e037e95ff0d929"
+    },
+    "p256-cpu_npu.config.json": {
+      "original_sha256": "3cdc9ea3245eec03dc4005729d48d278eae4b4c49bb9034214acb9a8999df8d9",
+      "export": "p256-cpu_npu.config.json",
+      "export_sha256": "3cdc9ea3245eec03dc4005729d48d278eae4b4c49bb9034214acb9a8999df8d9"
+    },
+    "p256-cpu_npu.jsonl": {
+      "original_sha256": "fb4eb7fcdbb78458b72806982cc93030adf3528c65e0c8599f5fa123bb74b392",
+      "export": "p256-cpu_npu.jsonl",
+      "export_sha256": "fb4eb7fcdbb78458b72806982cc93030adf3528c65e0c8599f5fa123bb74b392"
+    },
+    "p256-cpu_npu.teacher.tokens": {
+      "original_sha256": "dd507b4afd4becf9ae263ec6fde688da3cd000b2de677a4483ef7493edf82cd0",
+      "export": "p256-cpu_npu.teacher.tokens",
+      "export_sha256": "dd507b4afd4becf9ae263ec6fde688da3cd000b2de677a4483ef7493edf82cd0"
+    },
+    "p256-cpu_npu.tokens": {
+      "original_sha256": "899f36a0548cde0e1a51c6bae9454b21d9be66f13402551f81e037e95ff0d929",
+      "export": "p256-cpu_npu.tokens",
+      "export_sha256": "899f36a0548cde0e1a51c6bae9454b21d9be66f13402551f81e037e95ff0d929"
+    },
+    "p256-gpu_npu.config.json": {
+      "original_sha256": "018132a97b2cc37e889874451606a3de06bae7de85fdf7d3444df87ea9526c5b",
+      "export": "p256-gpu_npu.config.json",
+      "export_sha256": "018132a97b2cc37e889874451606a3de06bae7de85fdf7d3444df87ea9526c5b"
+    },
+    "p256-gpu_npu.jsonl": {
+      "original_sha256": "fa453a5c3a95ad6a350690ef27e72d2b371b1e31c49d8bc8c59799c5e58d2c23",
+      "export": "p256-gpu_npu.jsonl",
+      "export_sha256": "fa453a5c3a95ad6a350690ef27e72d2b371b1e31c49d8bc8c59799c5e58d2c23"
+    },
+    "p256-gpu_npu.teacher.tokens": {
+      "original_sha256": "dd507b4afd4becf9ae263ec6fde688da3cd000b2de677a4483ef7493edf82cd0",
+      "export": "p256-gpu_npu.teacher.tokens",
+      "export_sha256": "dd507b4afd4becf9ae263ec6fde688da3cd000b2de677a4483ef7493edf82cd0"
+    },
+    "p256-gpu_npu.tokens": {
+      "original_sha256": "899f36a0548cde0e1a51c6bae9454b21d9be66f13402551f81e037e95ff0d929",
+      "export": "p256-gpu_npu.tokens",
+      "export_sha256": "899f36a0548cde0e1a51c6bae9454b21d9be66f13402551f81e037e95ff0d929"
+    },
+    "p73-all.config.json": {
+      "original_sha256": "693ce4ec31d7fa21951dfa47e2e36dccf0951dd9602eb8594f757fa36db1b513",
+      "export": "p73-all.config.json",
+      "export_sha256": "693ce4ec31d7fa21951dfa47e2e36dccf0951dd9602eb8594f757fa36db1b513"
+    },
+    "p73-all.jsonl": {
+      "original_sha256": "0b5c647a7b2d7a4e93e23651e9e815c9248bcd5d31f4026ca7800468378e2e70",
+      "export": "p73-all.jsonl",
+      "export_sha256": "0b5c647a7b2d7a4e93e23651e9e815c9248bcd5d31f4026ca7800468378e2e70"
+    },
+    "p73-all.teacher.tokens": {
+      "original_sha256": "342e39f874080b7ad4096754951e157eb949b17f47ae401f1b6eebb1d2f31b62",
+      "export": "p73-all.teacher.tokens",
+      "export_sha256": "342e39f874080b7ad4096754951e157eb949b17f47ae401f1b6eebb1d2f31b62"
+    },
+    "p73-all.tokens": {
+      "original_sha256": "0ab906efbc2c06416b9834c174d70fe8ce42294f05007ac8431e12ffd82edbc5",
+      "export": "p73-all.tokens",
+      "export_sha256": "0ab906efbc2c06416b9834c174d70fe8ce42294f05007ac8431e12ffd82edbc5"
+    },
+    "p73-cpu_npu.config.json": {
+      "original_sha256": "8966ded89ef23d7f3e88b4acc1527e7301d55aeeaa45fa1425229bc3ca7e8d98",
+      "export": "p73-cpu_npu.config.json",
+      "export_sha256": "8966ded89ef23d7f3e88b4acc1527e7301d55aeeaa45fa1425229bc3ca7e8d98"
+    },
+    "p73-cpu_npu.jsonl": {
+      "original_sha256": "763778f4fa91a9a3b07672534400d15da7def98e98d45045b3173597bef72855",
+      "export": "p73-cpu_npu.jsonl",
+      "export_sha256": "763778f4fa91a9a3b07672534400d15da7def98e98d45045b3173597bef72855"
+    },
+    "p73-cpu_npu.teacher.tokens": {
+      "original_sha256": "342e39f874080b7ad4096754951e157eb949b17f47ae401f1b6eebb1d2f31b62",
+      "export": "p73-cpu_npu.teacher.tokens",
+      "export_sha256": "342e39f874080b7ad4096754951e157eb949b17f47ae401f1b6eebb1d2f31b62"
+    },
+    "p73-cpu_npu.tokens": {
+      "original_sha256": "0ab906efbc2c06416b9834c174d70fe8ce42294f05007ac8431e12ffd82edbc5",
+      "export": "p73-cpu_npu.tokens",
+      "export_sha256": "0ab906efbc2c06416b9834c174d70fe8ce42294f05007ac8431e12ffd82edbc5"
+    },
+    "p73-gpu_npu.config.json": {
+      "original_sha256": "a624007259febd8e86a929d0b28fde4a0be5327368aaa4783c12065dfa26e938",
+      "export": "p73-gpu_npu.config.json",
+      "export_sha256": "a624007259febd8e86a929d0b28fde4a0be5327368aaa4783c12065dfa26e938"
+    },
+    "p73-gpu_npu.jsonl": {
+      "original_sha256": "eb25d0d43b23f6b731078ef07f87d41b67cc19068354d18062b35a9628060c0d",
+      "export": "p73-gpu_npu.jsonl",
+      "export_sha256": "eb25d0d43b23f6b731078ef07f87d41b67cc19068354d18062b35a9628060c0d"
+    },
+    "p73-gpu_npu.teacher.tokens": {
+      "original_sha256": "342e39f874080b7ad4096754951e157eb949b17f47ae401f1b6eebb1d2f31b62",
+      "export": "p73-gpu_npu.teacher.tokens",
+      "export_sha256": "342e39f874080b7ad4096754951e157eb949b17f47ae401f1b6eebb1d2f31b62"
+    },
+    "p73-gpu_npu.tokens": {
+      "original_sha256": "0ab906efbc2c06416b9834c174d70fe8ce42294f05007ac8431e12ffd82edbc5",
+      "export": "p73-gpu_npu.tokens",
+      "export_sha256": "0ab906efbc2c06416b9834c174d70fe8ce42294f05007ac8431e12ffd82edbc5"
+    },
+    "quality-summary.json": {
+      "original_sha256": "077446cbf32c28162268b7ca9fe180504e870a0d1e87e58f69e9218613a221af",
+      "export": "quality-summary.json",
+      "export_sha256": "077446cbf32c28162268b7ca9fe180504e870a0d1e87e58f69e9218613a221af"
+    },
+    "source-provenance.json": {
+      "original_sha256": "42d7c36da8b0b6896902eae6e49cae90da51fdfbbae7ab26cb83179cd5027bde",
+      "export": "source-provenance.json",
+      "export_sha256": "42d7c36da8b0b6896902eae6e49cae90da51fdfbbae7ab26cb83179cd5027bde"
+    }
+  },
+  "external_artifacts": "Shared FP16 model, full per-vocabulary logits and compiled binary remain in the comparison workspace; source/binary/input hashes are retained here."
+}
