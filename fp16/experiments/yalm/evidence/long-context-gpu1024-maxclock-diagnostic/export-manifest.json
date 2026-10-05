@@ -1,0 +1,61 @@
+{
+  "workspace_directory": "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/long-context/p1024-gpu-screen55-fanheld",
+  "files": {
+    "clock-samples.jsonl": {
+      "original_sha256": "fbe4ca506fc81d2247812674638c1ca5482d2ec176686481911dde88e21aef5d",
+      "export": "clock-samples.jsonl.gz",
+      "export_sha256": "291547ac983cbd4b7813c5409e8efa3575773b8b21eccf8a0bf295ec553892bf"
+    },
+    "clock-state-before.json": {
+      "original_sha256": "41926b8ee4e0b41ac8c7a20c218e884de60c6d0a6c928849bec7b00b278bfce6",
+      "export": "clock-state-before.json",
+      "export_sha256": "41926b8ee4e0b41ac8c7a20c218e884de60c6d0a6c928849bec7b00b278bfce6"
+    },
+    "clock-state-restored.json": {
+      "original_sha256": "41926b8ee4e0b41ac8c7a20c218e884de60c6d0a6c928849bec7b00b278bfce6",
+      "export": "clock-state-restored.json",
+      "export_sha256": "41926b8ee4e0b41ac8c7a20c218e884de60c6d0a6c928849bec7b00b278bfce6"
+    },
+    "gpu-clock-state-before.json": {
+      "original_sha256": "173bf1112031cdfa91fd19df773ccbda2dd4fb75837e6024a6dd82e3b772e182",
+      "export": "gpu-clock-state-before.json",
+      "export_sha256": "173bf1112031cdfa91fd19df773ccbda2dd4fb75837e6024a6dd82e3b772e182"
+    },
+    "gpu-clock-state-restored.json": {
+      "original_sha256": "173bf1112031cdfa91fd19df773ccbda2dd4fb75837e6024a6dd82e3b772e182",
+      "export": "gpu-clock-state-restored.json",
+      "export_sha256": "173bf1112031cdfa91fd19df773ccbda2dd4fb75837e6024a6dd82e3b772e182"
+    },
+    "p1024-1-gpu.config.json": {
+      "original_sha256": "52edb83046dbe79a20cea6fdf4638b022f0fcccc121f296e33f0f75f0795bd44",
+      "export": "p1024-1-gpu.config.json",
+      "export_sha256": "52edb83046dbe79a20cea6fdf4638b022f0fcccc121f296e33f0f75f0795bd44"
+    },
+    "p1024-1-gpu.jsonl": {
+      "original_sha256": "31ba5061e3c8a58b5795447482325b18f86578edb37392ffee89634da779716c",
+      "export": "p1024-1-gpu.jsonl",
+      "export_sha256": "31ba5061e3c8a58b5795447482325b18f86578edb37392ffee89634da779716c"
+    },
+    "p1024-1-gpu.teacher.tokens": {
+      "original_sha256": "23389877041a02050b2967cedf1df5b39e82196e3b9c8f361cf96fef7fb2999e",
+      "export": "p1024-1-gpu.teacher.tokens",
+      "export_sha256": "23389877041a02050b2967cedf1df5b39e82196e3b9c8f361cf96fef7fb2999e"
+    },
+    "p1024-1-gpu.tokens": {
+      "original_sha256": "68dfc51920a6064d55e953d060bb535b32ba0bd25b9d92193b32633114d70e0c",
+      "export": "p1024-1-gpu.tokens",
+      "export_sha256": "68dfc51920a6064d55e953d060bb535b32ba0bd25b9d92193b32633114d70e0c"
+    },
+    "source-provenance.json": {
+      "original_sha256": "7140f48959ad361bb4434b6243ce378caf4da62fb34be5c756375edba01ba3d9",
+      "export": "source-provenance.json",
+      "export_sha256": "7140f48959ad361bb4434b6243ce378caf4da62fb34be5c756375edba01ba3d9"
+    },
+    "summary.json": {
+      "original_sha256": "0f2a1fd0cc161c025c85c2a7bd8e2d37e0de0cb2176ae9878100ea0dc943f584",
+      "export": "summary.json",
+      "export_sha256": "0f2a1fd0cc161c025c85c2a7bd8e2d37e0de0cb2176ae9878100ea0dc943f584"
+    }
+  },
+  "external_artifacts": "Shared FP16 model, full per-vocabulary logits and compiled binary remain in the comparison workspace; source/binary/input hashes are retained here."
+}

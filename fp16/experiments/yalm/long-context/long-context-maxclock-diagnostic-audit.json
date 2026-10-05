@@ -1,0 +1,242 @@
+{
+  "cpu_target_khz": 2256000,
+  "cooldown_target_c": 55,
+  "model_sha256": "c92807935bfbb81f6628e9c2723267da367577a3f2b1bb2530b87bf5e5bba879",
+  "binary_sha256": "f8b4f9ebf81f28efdca38b3389f80cf96347b2728f655e6d577f70fdfbe9ec9b",
+  "selected_binary_unchanged": true,
+  "records": [
+    {
+      "directory": "e2e/long-context/references55-fanheld",
+      "label": "p1024-1-npu",
+      "prompt": 1024,
+      "route": "npu",
+      "reference": true,
+      "quality_passed": true,
+      "relative_rmse": 0.0,
+      "all_predictions_match": true,
+      "clocks_held": true,
+      "controller_clocks_held": true,
+      "row_clock_samples": 1071,
+      "row_clock_drops": 0,
+      "row_temperature_range_c": [
+        54.538,
+        70.23
+      ],
+      "device_counts_checked": true,
+      "prefill_ms": 3780.9415,
+      "prefill_tps": 270.8320136664373,
+      "decode_tps": 14.478,
+      "request_ms": 5922.1875185,
+      "prefill_range": [
+        3758.003,
+        3803.88
+      ],
+      "decode_range": [
+        14.388,
+        14.568
+      ],
+      "request_range": [
+        5885.928296,
+        5958.446741
+      ],
+      "logit_sha256": "5d863cf8f2d474621cfec9b6b65a7cb1c86fe3d5411ec8ae68bd87e9470edf17",
+      "golden_logit_sha256": "5d863cf8f2d474621cfec9b6b65a7cb1c86fe3d5411ec8ae68bd87e9470edf17",
+      "raw_log_sha256": "229f5daf8d1bd194dacde0fed0af29ce38e7784ff6ad7f135f1aacc48d97a71d",
+      "prompt_sha256": "68dfc51920a6064d55e953d060bb535b32ba0bd25b9d92193b32633114d70e0c"
+    },
+    {
+      "directory": "e2e/long-context/references55-fanheld",
+      "label": "p2048-1-npu",
+      "prompt": 2048,
+      "route": "npu",
+      "reference": true,
+      "quality_passed": true,
+      "relative_rmse": 0.0,
+      "all_predictions_match": true,
+      "clocks_held": true,
+      "controller_clocks_held": true,
+      "row_clock_samples": 482,
+      "row_clock_drops": 0,
+      "row_temperature_range_c": [
+        54.538,
+        76.692
+      ],
+      "device_counts_checked": true,
+      "prefill_ms": 10867.497500000001,
+      "prefill_tps": 188.4518491952724,
+      "decode_tps": 9.868,
+      "request_ms": 14009.1288045,
+      "prefill_range": [
+        10745.27,
+        10989.725
+      ],
+      "decode_range": [
+        9.861,
+        9.875
+      ],
+      "request_range": [
+        13889.160006,
+        14129.097603
+      ],
+      "logit_sha256": "64c66a3f4777e8fd4f9a85faddec3614fcc3b8eec3a5deae13bd168c1371b082",
+      "golden_logit_sha256": "64c66a3f4777e8fd4f9a85faddec3614fcc3b8eec3a5deae13bd168c1371b082",
+      "raw_log_sha256": "1f2486be7edcd02a547cd80ba2012747b80e7882a22890f08297393cc56e2ec1",
+      "prompt_sha256": "07c5922399fdcbd89059116e57782153dd4af528af492a9338b2595237c1e7b0"
+    },
+    {
+      "directory": "e2e/long-context/references55-fanheld",
+      "label": "p4096-1-npu",
+      "prompt": 4096,
+      "route": "npu",
+      "reference": true,
+      "quality_passed": true,
+      "relative_rmse": 0.0,
+      "all_predictions_match": true,
+      "clocks_held": true,
+      "controller_clocks_held": true,
+      "row_clock_samples": 967,
+      "row_clock_drops": 0,
+      "row_temperature_range_c": [
+        54.538,
+        82.23
+      ],
+      "device_counts_checked": true,
+      "prefill_ms": 37473.026,
+      "prefill_tps": 109.30529069096262,
+      "decode_tps": 5.4895,
+      "request_ms": 43120.177593,
+      "prefill_range": [
+        37438.557,
+        37507.495
+      ],
+      "decode_range": [
+        5.475,
+        5.504
+      ],
+      "request_range": [
+        43070.508402,
+        43169.846784
+      ],
+      "logit_sha256": "e67a3fc59cb6af16c93cf3af9e72a5b1de316d631ae6e7cc69b1aa2df7eace0b",
+      "golden_logit_sha256": "e67a3fc59cb6af16c93cf3af9e72a5b1de316d631ae6e7cc69b1aa2df7eace0b",
+      "raw_log_sha256": "4a7a7ba30902851c03d807144da04348352a1a8b5e0a8567078228031e92eed5",
+      "prompt_sha256": "1611db95b226442b2cba4a00c59ea1fff141fbdca9d711a062b24ea3c4f9376b"
+    },
+    {
+      "directory": "e2e/long-context/p1024-cpu-screen55-fanheld",
+      "label": "p1024-1-cpu",
+      "prompt": 1024,
+      "route": "cpu",
+      "reference": false,
+      "quality_passed": true,
+      "relative_rmse": 0.0009690493530615345,
+      "all_predictions_match": true,
+      "clocks_held": false,
+      "controller_clocks_held": false,
+      "row_clock_samples": 1273,
+      "row_clock_drops": 37,
+      "row_temperature_range_c": [
+        54.538,
+        85.0
+      ],
+      "device_counts_checked": true,
+      "prefill_ms": 59445.997,
+      "prefill_tps": 17.225718327173485,
+      "decode_tps": 10.949000000000002,
+      "request_ms": 62277.4296235,
+      "prefill_range": [
+        59444.987,
+        59447.007
+      ],
+      "decode_range": [
+        10.941,
+        10.957
+      ],
+      "request_range": [
+        62276.378033,
+        62278.481214
+      ],
+      "logit_sha256": "c22a3034b3c218e254ea294fe9ec860f9e28eaacc516bbda60ff055962c888e1",
+      "golden_logit_sha256": "5d863cf8f2d474621cfec9b6b65a7cb1c86fe3d5411ec8ae68bd87e9470edf17",
+      "raw_log_sha256": "1a42651ecb8b2806810238e5fa0354da73c08d72411cda07d2793c095d89c92c",
+      "prompt_sha256": "68dfc51920a6064d55e953d060bb535b32ba0bd25b9d92193b32633114d70e0c"
+    },
+    {
+      "directory": "e2e/long-context/p1024-gpu-screen55-fanheld",
+      "label": "p1024-1-gpu",
+      "prompt": 1024,
+      "route": "gpu",
+      "reference": false,
+      "quality_passed": true,
+      "relative_rmse": 0.0007862517043196279,
+      "all_predictions_match": true,
+      "clocks_held": true,
+      "controller_clocks_held": true,
+      "row_clock_samples": 582,
+      "row_clock_drops": 0,
+      "row_temperature_range_c": [
+        54.538,
+        64.692
+      ],
+      "device_counts_checked": true,
+      "prefill_ms": 23701.545,
+      "prefill_tps": 43.203934595824876,
+      "decode_tps": 8.682500000000001,
+      "request_ms": 27272.022327,
+      "prefill_range": [
+        23696.311,
+        23706.779
+      ],
+      "decode_range": [
+        8.628,
+        8.737
+      ],
+      "request_range": [
+        27244.361296,
+        27299.683358
+      ],
+      "logit_sha256": "6212fc0f242a57fb1d45a38f7f93362b8f5b9340e643a8f0a138667dd00a124d",
+      "golden_logit_sha256": "5d863cf8f2d474621cfec9b6b65a7cb1c86fe3d5411ec8ae68bd87e9470edf17",
+      "raw_log_sha256": "31ba5061e3c8a58b5795447482325b18f86578edb37392ffee89634da779716c",
+      "prompt_sha256": "68dfc51920a6064d55e953d060bb535b32ba0bd25b9d92193b32633114d70e0c"
+    }
+  ],
+  "clock_audits": {
+    "e2e/long-context/references55-fanheld": {
+      "samples": 2520,
+      "targets_held": true,
+      "snapshots_restored": true,
+      "temperature_max_c": 82.23,
+      "fan_pwm_counts": {
+        "200": 16,
+        "100": 7,
+        "150": 6,
+        "255": 2491
+      }
+    },
+    "e2e/long-context/p1024-cpu-screen55-fanheld": {
+      "samples": 1273,
+      "targets_held": false,
+      "snapshots_restored": true,
+      "temperature_max_c": 85.0,
+      "fan_pwm_counts": {
+        "200": 5,
+        "100": 1,
+        "150": 1,
+        "255": 1266
+      }
+    },
+    "e2e/long-context/p1024-gpu-screen55-fanheld": {
+      "samples": 582,
+      "targets_held": true,
+      "snapshots_restored": true,
+      "temperature_max_c": 64.692,
+      "fan_pwm_counts": {
+        "100": 1,
+        "150": 14,
+        "255": 567
+      }
+    }
+  },
+  "scope": "Independent audit. Long reference is this checked native NPU path, not an independent HF full-model oracle. Exact FP16 primitive checks and short-prompt parity are separate. Failed rows remain diagnostics at the unchanged0.001 gate."
+}

@@ -3,7 +3,7 @@ from pathlib import Path
 import argparse,hashlib,json,subprocess,time
 root=Path(__file__).resolve().parent;parent=root/'e2e/long-context'
 parser=argparse.ArgumentParser();parser.add_argument('--cool-c',type=int,default=55);args=parser.parse_args()
-suffix=f'screen{args.cool_c}-fanheld';references=f'references{args.cool_c}-fanheld'
+suffix=f'screen{args.cool_c}-cpu1800-fanheld';references=f'references{args.cool_c}-cpu1800-fanheld'
 routes=['cpu','gpu','cpu_npu_dec','gpu_npu_dec','all_dec']
 jobs=[{'directory':f'e2e/long-context/{references}','reference':True,'routes':['npu'],'prompts':[1024,2048,4096]}]
 for index,prompt in enumerate([1024,2048,4096]):
@@ -11,11 +11,11 @@ for index,prompt in enumerate([1024,2048,4096]):
         jobs.append({'directory':f'e2e/long-context/p{prompt}-{route}-{suffix}','reference':False,'routes':[route],'prompts':[prompt]})
 for job in jobs:
     command=['taskset','-c','0-3','python3',str(parent/'run_matrix.py'),'--output',Path(job['directory']).name,
-             '--routes',*job['routes'],'--prompts',*map(str,job['prompts']),'--runs','2','--cool-c',str(args.cool_c),'--context','4128','--golden-directory',references]
+             '--routes',*job['routes'],'--prompts',*map(str,job['prompts']),'--runs','2','--cool-c',str(args.cool_c),'--context','4128','--golden-directory',references,'--cpu-khz','1800000']
     if job['reference']:command.append('--reference')
     job['command']=command
-plan={'cooldown_target_c':args.cool_c,'rejected_attempt':'e2e/long-context/references (51C cooldown timeout after first4K warmup; no4K measured row)', 'binary_sha256':hashlib.sha256((parent/'runq-routes').read_bytes()).hexdigest(),'jobs':jobs,
-      'fan_policy':'setpoint255 reasserted by common10ms feedback loop; kernel thermal protections and notifier remain active','protocol':f'Pinned shared FP16 model bytes; runtime capacity4128; synthetic exact1024/2048/4096-token nested prefixes; 32 outputs/31 decode steps; same four threads, fixed CPU2.256/NPU1/GPU1/DDR2.112GHz, common<={args.cool_c}C start, fanPWM255 feedback setpoint, two warmups/two measurements, independently timed resident-model request; teacher IDs from the checked extended NPU path, every actual prediction retained. References supply NPU benchmark rows. Six placements per prompt. Clock failures remain diagnostics, no gates weakened.',
+plan={'cpu_target_khz':1800000,'cooldown_target_c':args.cool_c,'rejected_attempt':'e2e/long-context/references (51C cooldown timeout after first4K warmup; no4K measured row)', 'binary_sha256':hashlib.sha256((parent/'runq-routes').read_bytes()).hexdigest(),'jobs':jobs,
+      'fan_policy':'setpoint255 reasserted by common10ms feedback loop; kernel thermal protections and notifier remain active','protocol':f'Pinned shared FP16 model bytes; runtime capacity4128; synthetic exact1024/2048/4096-token nested prefixes; 32 outputs/31 decode steps; same four threads, fixed CPU1.800/NPU1/GPU1/DDR2.112GHz, common<={args.cool_c}C start, fanPWM255 feedback setpoint, two warmups/two measurements, independently timed resident-model request; teacher IDs from the checked extended NPU path, every actual prediction retained. References supply NPU benchmark rows. Six placements per prompt. Clock failures remain diagnostics, no gates weakened.',
       'scope':'Screening, not counterbalanced statistical evidence. Long NPU references are not independent HF full-model oracles.'}
 (root/f'long-context-execution-plan-{suffix}.json').write_text(json.dumps(plan,indent=2)+'\n')
 matched=root.parents[1]

@@ -64,3 +64,5 @@ request timing; movement, synchronization and waits stay inside it.
 INTENT: the benchmark runner and attention scratch are limited to 512 tokens; the user requests 1024/2048/4096-token prompts with CPU/OpenCL/NPU combinations; fp16/README.md specifies pinned shared FP16 weights, measured phase/request spans and numerical checks.
 
 AUTH: user said "wip commit per milestone".
+
+The subsequent CPU1K row at2.256GHz thermally dropped to2.208GHz (NPU800MHz and Mali300MHz also observed), so it is retained as a failed-clock diagnostic. The GPU1K row passed clocks but stays in that separate attempt. All final18 rows are being rerun at common CPU1.800GHz and NPU/GPU/DDR1.000/1.000/2.112GHz, with all other conditions and gates retained. Original clock/fan settings were restored after each rejected attempt.

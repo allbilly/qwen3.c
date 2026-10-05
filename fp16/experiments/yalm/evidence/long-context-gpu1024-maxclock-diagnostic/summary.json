@@ -1,0 +1,49 @@
+{
+  "records": [
+    {
+      "label": "p1024-1-gpu",
+      "prompt": 1024,
+      "route": "gpu",
+      "dense_prefill": "gpu",
+      "dense_decode": "gpu",
+      "gpu_attention": "both",
+      "cpu_classifier": false,
+      "teacher_forced_identical_decode_inputs": true,
+      "prefill_logit_relative_rmse": 0.0007862517043196279,
+      "max_logit_error": 0.007378101348876953,
+      "unchanged_limit": 0.001,
+      "all_predictions_match": true,
+      "quality_passed": true,
+      "ttft_ms": 23701.545,
+      "effective_prefill_tps": 43.203934595824876,
+      "decode_tps": 8.682500000000001,
+      "measured_runs": 2,
+      "ttft_range": [
+        23696.311,
+        23706.779
+      ],
+      "decode_range": [
+        8.628,
+        8.737
+      ],
+      "request_ms": 27272.022327,
+      "output_tps": 1.173363662449014,
+      "request_range": [
+        27244.361296,
+        27299.683358
+      ],
+      "handoff_ms": 0.06460350000000001
+    }
+  ],
+  "cooldown_target_c": 55,
+  "golden_directory": "references55-fanheld",
+  "clocks_held": true,
+  "clocks_restored": true,
+  "samples": 582,
+  "temperature_range_c": [
+    54.538,
+    64.692
+  ],
+  "binary_sha256": "f8b4f9ebf81f28efdca38b3389f80cf96347b2728f655e6d577f70fdfbe9ec9b",
+  "interpretation": "Phase-placement experiment. Non-linear host operations stay CPU. Failed quality rows are diagnostic timings, not qualified inference speed claims."
+}

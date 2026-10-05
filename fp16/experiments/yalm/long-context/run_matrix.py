@@ -5,7 +5,7 @@ import numpy as np
 root=Path(__file__).resolve().parent;roofline=root.parents[2];matched=roofline.parent
 parser=argparse.ArgumentParser();parser.add_argument('--output',default='matrix');parser.add_argument('--routes',nargs='*')
 parser.add_argument('--prompts',nargs='+',type=int,default=[128,256]);parser.add_argument('--new-tokens',type=int,default=32)
-parser.add_argument('--runs',type=int,default=2);parser.add_argument('--profile',action='store_true');parser.add_argument('--cool-c',type=int,default=50);parser.add_argument('--reference',action='store_true');parser.add_argument('--context',type=int,default=4128);parser.add_argument('--golden-directory',default='references');args=parser.parse_args()
+parser.add_argument('--runs',type=int,default=2);parser.add_argument('--profile',action='store_true');parser.add_argument('--cool-c',type=int,default=50);parser.add_argument('--reference',action='store_true');parser.add_argument('--context',type=int,default=4128);parser.add_argument('--golden-directory',default='references');parser.add_argument('--cpu-khz',type=int,choices=[1800000,2256000],default=1800000);args=parser.parse_args()
 assert 512<=args.context<=4128
 settings={f'{route}_{phase}':(cpu,gpu,mode) for route,cpu,gpu in [('cpu_npu',96,0),('gpu_npu',0,96),('all',96,96)] for phase,mode in [('pre',1),('dec',2),('both',3)]}
 placements={r:('npu','npu',None,False) for r in ['npu',*settings]}
@@ -13,7 +13,7 @@ placements.update(cpu=('cpu','cpu',None,False),gpu=('gpu','gpu','both',False))
 order=args.routes or ['cpu','gpu','npu','cpu_npu_dec','gpu_npu_dec','all_dec']
 if args.reference:assert order==['npu']
 assert all(r in placements for r in order)
-assert args.golden_directory!='references55', 'One-time fan-setting attempt rejected; no further hardware process started.'
+assert args.golden_directory not in ['references55','references55-fanheld'], 'Rejected thermal-protocol attempt; no further hardware process started.'
 out=root/args.output;out.mkdir(exist_ok=False)
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 binary=root/'runq-routes';shutil.copy2(binary,out/'runq-routes')
@@ -37,7 +37,7 @@ def monitor():
   while not stop.is_set():
    log.write(json.dumps({'time':time.time(),'phase':phase,**{k:int(Path(p).read_text()) for k,p in fields.items()}})+'\n');log.flush();stop.wait(.25)
 try:
- clocks('clocks.py','lock');cpu_locked=True;shutil.copy2(matched/'clock-state.json',out/'clock-state-before.json')
+ clocks('roofline/yalm/long_clocks.py' if args.cpu_khz==1800000 else 'clocks.py','lock');cpu_locked=True;shutil.copy2(matched/'clock-state.json',out/'clock-state-before.json')
  clocks('roofline/gpu/gpu_clocks.py','lock');gpu_locked=True;shutil.copy2(roofline/'gpu/gpu-clock-state.json',out/'gpu-clock-state-before.json')
  thread=threading.Thread(target=monitor,daemon=True);thread.start()
  for prompt in args.prompts:
@@ -73,7 +73,7 @@ try:
     teacher=out/f'{phase}.teacher.tokens';teacher.write_text(' '.join(map(str,golden))+'\n');jobenv['TEACHER_IDS']=str(teacher)
    logits=out/f'{phase}.f32';command=['taskset','-c','4-7',str(out/'runq-routes'),str(matched/'Qwen3-0.6B.fp16'),str(copied),str(args.new_tokens),str(args.runs),str(logits)]
    selected_keys=[*fields,'OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','GOMP_SPINCOUNT','NPU_CORES','NPU_DOMAIN_ID','NPU_FUSED','NPU_ATTENTION','NPU_SPLIT_DOWN','NPU_STREAM_FFN','NPU_CLS_TILE','WARMUP_RUNS','DENSE_PREFILL','DENSE_DECODE','GPU_ATTENTION','CPU_CLASSIFIER','TEACHER_IDS','LINEAR_PROFILE','GPU_PROFILE','NPU_PROFILE','ROUTE_PROFILE','FFN_CPU_CHANNELS','FFN_GPU_CHANNELS','FFN_MODE','FFN_PROFILE','LD_LIBRARY_PATH','COOL_REQUEST_C','BENCH_CONTEXT']
-   (out/f'{phase}.config.json').write_text(json.dumps({'command':command,'environment':{k:jobenv.get(k) for k in selected_keys},'route':route,'golden_directory':args.output if args.reference else args.golden_directory,'binary_sha256':sha(out/'runq-routes')},indent=2)+'\n')
+   (out/f'{phase}.config.json').write_text(json.dumps({'command':command,'environment':{k:jobenv.get(k) for k in selected_keys},'route':route,'cpu_target_khz':args.cpu_khz,'golden_directory':args.output if args.reference else args.golden_directory,'binary_sha256':sha(out/'runq-routes')},indent=2)+'\n')
    print('Running',phase,flush=True)
    with (out/f'{phase}.jsonl').open('w') as log:completed=subprocess.run(command,env=jobenv,stdout=log,stderr=subprocess.STDOUT)
    assert completed.returncode==0,(phase,'runtime failure',completed.returncode)
@@ -102,13 +102,13 @@ try:
 finally:
  if thread:stop.set();thread.join()
  if gpu_locked:clocks('roofline/gpu/gpu_clocks.py','restore');shutil.copy2(roofline/'gpu/gpu-clock-state-restored.json',out/'gpu-clock-state-restored.json')
- if cpu_locked:clocks('clocks.py','restore');shutil.copy2(matched/'results/clock-state-restored.json',out/'clock-state-restored.json')
+ if cpu_locked:clocks('roofline/yalm/long_clocks.py' if args.cpu_khz==1800000 else 'clocks.py','restore');shutil.copy2(matched/'results/clock-state-restored.json',out/'clock-state-restored.json')
 samples=[json.loads(s) for s in (out/'clock-samples.jsonl').read_text().splitlines()]
-targets={'cpu4_khz':2256000,'cpu6_khz':2256000,'npu_hz':1000000000,'gpu_hz':1000000000,'ddr_hz':2112000000}
+targets={'cpu4_khz':args.cpu_khz,'cpu6_khz':args.cpu_khz,'npu_hz':1000000000,'gpu_hz':1000000000,'ddr_hz':2112000000}
 held=all(r[k]==v for r in samples for k,v in targets.items())
 restored=all((out/f'{stem}-state-before.json').read_bytes()==(out/f'{stem}-state-restored.json').read_bytes() for stem in ['clock','gpu-clock'])
 assert restored
-(out/'summary.json').write_text(json.dumps({'records':records,'cooldown_target_c':args.cool_c,'golden_directory':args.output if args.reference else args.golden_directory,'clocks_held':held,'clocks_restored':restored,'samples':len(samples),
+(out/'summary.json').write_text(json.dumps({'records':records,'cpu_target_khz':args.cpu_khz,'cooldown_target_c':args.cool_c,'golden_directory':args.output if args.reference else args.golden_directory,'clocks_held':held,'clocks_restored':restored,'samples':len(samples),
  'temperature_range_c':[min(r['temperature_millidegrees'] for r in samples)/1000,max(r['temperature_millidegrees'] for r in samples)/1000],
  'binary_sha256':sha(out/'runq-routes'),'interpretation':'Phase-placement experiment. Non-linear host operations stay CPU. Failed quality rows are diagnostic timings, not qualified inference speed claims.'},indent=2)+'\n')
 assert held and restored, 'Clock target failure; retained summary and raw diagnostics, with original clocks restored.'

@@ -4,7 +4,7 @@ import argparse,hashlib,json,math,statistics
 import numpy as np
 import concurrent_audit
 root=Path(__file__).resolve().parent
-p=argparse.ArgumentParser();p.add_argument('directories',nargs='+');p.add_argument('--output',required=True);p.add_argument('--cool-c',type=int,default=51);args=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('directories',nargs='+');p.add_argument('--output',required=True);p.add_argument('--cool-c',type=int,default=51);p.add_argument('--cpu-khz',type=int,choices=[1800000,2256000],default=2256000);args=p.parse_args()
 parent=root/'e2e/long-context';matched=root.parents[1]
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 meta=json.loads((parent/'source-provenance.json').read_text())
@@ -20,7 +20,7 @@ for directory in args.directories:
  for stem in ['clock','gpu-clock']:
   assert (folder/f'{stem}-state-before.json').read_bytes()==(folder/f'{stem}-state-restored.json').read_bytes()
  clocks=[json.loads(s) for s in (folder/'clock-samples.jsonl').read_text().splitlines()]
- targets={'cpu4_khz':2256000,'cpu6_khz':2256000,'npu_hz':1000000000,'gpu_hz':1000000000,'ddr_hz':2112000000}
+ targets={'cpu4_khz':args.cpu_khz,'cpu6_khz':args.cpu_khz,'npu_hz':1000000000,'gpu_hz':1000000000,'ddr_hz':2112000000}
  held=all(c[k]==v for c in clocks for k,v in targets.items())
  clock_audits[directory]={'samples':len(clocks),'targets_held':held,'snapshots_restored':True,
                          'temperature_max_c':max(c['temperature_millidegrees'] for c in clocks)/1000,'fan_pwm_counts':{str(v):sum(c.get('fan_pwm')==v for c in clocks) for v in set(c.get('fan_pwm') for c in clocks)}}
@@ -30,6 +30,7 @@ for directory in args.directories:
   row_held=all(c[k]==v for c in row_clocks for k,v in targets.items())
   config=json.loads((folder/(label+'.config.json')).read_text());env=config['environment']
   assert config['binary_sha256']==meta['binary_sha256'] and config['route']==route
+  assert config.get('cpu_target_khz',2256000)==summary.get('cpu_target_khz',2256000)==args.cpu_khz
   assert env['BENCH_CONTEXT']=='4128' and env['WARMUP_RUNS']=='2' and env['OMP_NUM_THREADS']=='4'
   if expected['prompt']>512:assert summary['golden_directory'].endswith('-fanheld')
   assert env['COOL_REQUEST_C']==str(args.cool_c) and env['NPU_CORES']=='3' and env['NPU_DOMAIN_ID']=='1'
@@ -98,7 +99,7 @@ for directory in args.directories:
                   'request_range':[min(r['request_ms'] for r in timed),max(r['request_ms'] for r in timed)],
                   'logit_sha256':sha(folder/(label+'.f32')),'golden_logit_sha256':sha(golden_folder/(golden_label+'.f32')),
                   'raw_log_sha256':sha(folder/(label+'.jsonl')),'prompt_sha256':sha(folder/(label+'.tokens'))})
-out={'cooldown_target_c':args.cool_c,'model_sha256':sha(model),'binary_sha256':meta['binary_sha256'],'selected_binary_unchanged':True,'records':records,'clock_audits':clock_audits,
+out={'cpu_target_khz':args.cpu_khz,'cooldown_target_c':args.cool_c,'model_sha256':sha(model),'binary_sha256':meta['binary_sha256'],'selected_binary_unchanged':True,'records':records,'clock_audits':clock_audits,
      'scope':'Independent audit. Long reference is this checked native NPU path, not an independent HF full-model oracle. Exact FP16 primitive checks and short-prompt parity are separate. Failed rows remain diagnostics at the unchanged0.001 gate.'}
 (root/args.output).write_text(json.dumps(out,indent=2)+'\n')
 print(json.dumps({'jobs':len(records),'quality_failed':[r['label'] for r in records if not r['quality_passed']],
