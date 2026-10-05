@@ -1,0 +1,21 @@
+{
+  "method": "Repeat the existing exact128-token benchmark prompt, taking deterministic prefixes at1024/2048/4096. Synthetic throughput prompts, not natural long-document quality tasks.",
+  "source_sha256": "db74195066510380bdeae6f32d2d0c7d5305a2f35d2223ba2114a04f2c0de1fc",
+  "records": [
+    {
+      "tokens": 1024,
+      "sha256": "68dfc51920a6064d55e953d060bb535b32ba0bd25b9d92193b32633114d70e0c",
+      "file": "prompt1024.tokens"
+    },
+    {
+      "tokens": 2048,
+      "sha256": "07c5922399fdcbd89059116e57782153dd4af528af492a9338b2595237c1e7b0",
+      "file": "prompt2048.tokens"
+    },
+    {
+      "tokens": 4096,
+      "sha256": "1611db95b226442b2cba4a00c59ea1fff141fbdca9d711a062b24ea3c4f9376b",
+      "file": "prompt4096.tokens"
+    }
+  ]
+}

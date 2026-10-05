@@ -1,0 +1,41 @@
+{
+  "records": [
+    {
+      "route": "npu",
+      "all151936_first_logits_bit_identical": true,
+      "prior_file": "e2e/baseline-guarded/all-placements51/p128-3-npu.f32",
+      "logits_sha256": "7cf9ab47ba70a45688a39068d4a32e45d0e18fc40fcef12bdcd68007f3b3c1e0"
+    },
+    {
+      "route": "cpu",
+      "all151936_first_logits_bit_identical": true,
+      "prior_file": "e2e/baseline-guarded/all-placements51/p128-1-cpu.f32",
+      "logits_sha256": "1cf8b833866f5c30f6b9ade66090ec5a623ac39515239e2ff492907347f5a904"
+    },
+    {
+      "route": "gpu",
+      "all151936_first_logits_bit_identical": true,
+      "prior_file": "e2e/baseline-guarded/all-placements51/p128-2-gpu.f32",
+      "logits_sha256": "a72c5270a892bc8fd380b475d0810122cdab257fe42cd8647dee409099667009"
+    },
+    {
+      "route": "cpu_npu_dec",
+      "all151936_first_logits_bit_identical": true,
+      "prior_file": "/home/orangepi/qwen3-bench/matched/roofline/final-quality/prompt128-custom.f32",
+      "logits_sha256": "7cf9ab47ba70a45688a39068d4a32e45d0e18fc40fcef12bdcd68007f3b3c1e0"
+    },
+    {
+      "route": "gpu_npu_dec",
+      "all151936_first_logits_bit_identical": true,
+      "prior_file": "/home/orangepi/qwen3-bench/matched/roofline/final-quality/prompt128-custom.f32",
+      "logits_sha256": "7cf9ab47ba70a45688a39068d4a32e45d0e18fc40fcef12bdcd68007f3b3c1e0"
+    },
+    {
+      "route": "all_dec",
+      "all151936_first_logits_bit_identical": true,
+      "prior_file": "/home/orangepi/qwen3-bench/matched/roofline/final-quality/prompt128-custom.f32",
+      "logits_sha256": "7cf9ab47ba70a45688a39068d4a32e45d0e18fc40fcef12bdcd68007f3b3c1e0"
+    }
+  ],
+  "scope": "All six runtime-capacity4128 routes preserve the existing corresponding128-token first-logit dumps bit for bit. Full predictions and device/clocks are separately audited."
+}

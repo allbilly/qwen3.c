@@ -1,0 +1,148 @@
+{
+  "model_sha256": "c92807935bfbb81f6628e9c2723267da367577a3f2b1bb2530b87bf5e5bba879",
+  "binary_sha256": "f8b4f9ebf81f28efdca38b3389f80cf96347b2728f655e6d577f70fdfbe9ec9b",
+  "selected_binary_unchanged": true,
+  "records": [
+    {
+      "directory": "e2e/long-context/short-regression",
+      "label": "p128-1-npu",
+      "prompt": 128,
+      "route": "npu",
+      "reference": false,
+      "quality_passed": true,
+      "relative_rmse": 0.0,
+      "all_predictions_match": true,
+      "clocks_held": true,
+      "device_counts_checked": true,
+      "prefill_ms": 261.597,
+      "prefill_tps": 489.3022473499314,
+      "decode_tps": 20.9895,
+      "request_ms": 1738.58586,
+      "request_range": [
+        1731.868875,
+        1745.302845
+      ],
+      "raw_log_sha256": "eed4b141de0da6e6c760be7502b7fc29240b7600b673cd2f282216ce22586697",
+      "prompt_sha256": "db74195066510380bdeae6f32d2d0c7d5305a2f35d2223ba2114a04f2c0de1fc"
+    },
+    {
+      "directory": "e2e/long-context/short-regression",
+      "label": "p128-2-cpu",
+      "prompt": 128,
+      "route": "cpu",
+      "reference": false,
+      "quality_passed": true,
+      "relative_rmse": 0.0005941984589584264,
+      "all_predictions_match": true,
+      "clocks_held": true,
+      "device_counts_checked": true,
+      "prefill_ms": 2048.733,
+      "prefill_tps": 62.47763861859988,
+      "decode_tps": 18.6715,
+      "request_ms": 3709.0227655,
+      "request_range": [
+        3708.371921,
+        3709.67361
+      ],
+      "raw_log_sha256": "2abd1ec104ce9129e299dd0a1c18e84d38798cc2a1da6578ce54d6e55ca0bff1",
+      "prompt_sha256": "db74195066510380bdeae6f32d2d0c7d5305a2f35d2223ba2114a04f2c0de1fc"
+    },
+    {
+      "directory": "e2e/long-context/short-regression",
+      "label": "p128-3-gpu",
+      "prompt": 128,
+      "route": "gpu",
+      "reference": false,
+      "quality_passed": true,
+      "relative_rmse": 0.0006107661541584376,
+      "all_predictions_match": true,
+      "clocks_held": true,
+      "device_counts_checked": true,
+      "prefill_ms": 2439.237,
+      "prefill_tps": 52.47542571714023,
+      "decode_tps": 12.835,
+      "request_ms": 4854.590425,
+      "request_range": [
+        4852.6096,
+        4856.57125
+      ],
+      "raw_log_sha256": "42686808d7f3431cde2ed2d6e4066adc6fd4b2de4b20f912482005786ebdf791",
+      "prompt_sha256": "db74195066510380bdeae6f32d2d0c7d5305a2f35d2223ba2114a04f2c0de1fc"
+    },
+    {
+      "directory": "e2e/long-context/short-regression",
+      "label": "p128-4-cpu_npu_dec",
+      "prompt": 128,
+      "route": "cpu_npu_dec",
+      "reference": false,
+      "quality_passed": true,
+      "relative_rmse": 0.0,
+      "all_predictions_match": true,
+      "clocks_held": true,
+      "device_counts_checked": true,
+      "prefill_ms": 269.58050000000003,
+      "prefill_tps": 474.81179091217643,
+      "decode_tps": 21.1415,
+      "request_ms": 1735.947118,
+      "request_range": [
+        1731.5907,
+        1740.303536
+      ],
+      "raw_log_sha256": "38641234486bcf08f90b458394f58046e1a45bcc7f0c9d6e57dc61453c14d5cf",
+      "prompt_sha256": "db74195066510380bdeae6f32d2d0c7d5305a2f35d2223ba2114a04f2c0de1fc"
+    },
+    {
+      "directory": "e2e/long-context/short-regression",
+      "label": "p128-5-gpu_npu_dec",
+      "prompt": 128,
+      "route": "gpu_npu_dec",
+      "reference": false,
+      "quality_passed": true,
+      "relative_rmse": 0.0,
+      "all_predictions_match": true,
+      "clocks_held": true,
+      "device_counts_checked": true,
+      "prefill_ms": 276.6595,
+      "prefill_tps": 462.66258704291744,
+      "decode_tps": 20.368499999999997,
+      "request_ms": 1798.677172,
+      "request_range": [
+        1797.663353,
+        1799.690991
+      ],
+      "raw_log_sha256": "54dd9b79de5cbb4104f6c90268077af1e682dc2943b2ee7ea3fc16bc38f470d6",
+      "prompt_sha256": "db74195066510380bdeae6f32d2d0c7d5305a2f35d2223ba2114a04f2c0de1fc"
+    },
+    {
+      "directory": "e2e/long-context/short-regression",
+      "label": "p128-6-all_dec",
+      "prompt": 128,
+      "route": "all_dec",
+      "reference": false,
+      "quality_passed": true,
+      "relative_rmse": 0.0,
+      "all_predictions_match": true,
+      "clocks_held": true,
+      "device_counts_checked": true,
+      "prefill_ms": 272.803,
+      "prefill_tps": 469.2030512860929,
+      "decode_tps": 20.686,
+      "request_ms": 1771.6034570000002,
+      "request_range": [
+        1750.007902,
+        1793.199012
+      ],
+      "raw_log_sha256": "b3c0fdc575a2aa7a2126629db7dbe3b762f505b9667a4dc758f2501a758876fb",
+      "prompt_sha256": "db74195066510380bdeae6f32d2d0c7d5305a2f35d2223ba2114a04f2c0de1fc"
+    }
+  ],
+  "clock_audits": {
+    "e2e/long-context/short-regression": {
+      "samples": 2087,
+      "targets_held": true,
+      "snapshots_restored": true,
+      "temperature_max_c": 76.692
+    }
+  },
+  "scope": "Independent audit. Long reference is this checked native NPU path, not an independent HF full-model oracle. Exact FP16 primitive checks and short-prompt parity are separate. Failed rows remain diagnostics at the unchanged0.001 gate."
+}

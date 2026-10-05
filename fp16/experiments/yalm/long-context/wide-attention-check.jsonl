@@ -1,0 +1,9 @@
+{"event":"wide_attention_check","kind":"QK","context":512,"rows":64,"K":128,"N":512,"checked":32768,"relative_rmse":5.62483751127e-08,"max_absolute_error":1.99768692255e-07,"limit":0.00001,"passed":true}
+{"event":"wide_attention_check","kind":"PV","context":512,"rows":64,"K":512,"N":128,"checked":8192,"relative_rmse":6.77829059662e-08,"max_absolute_error":1.0197982192e-06,"limit":0.00001,"passed":true}
+{"event":"wide_attention_check","kind":"QK","context":1024,"rows":64,"K":128,"N":1024,"checked":65536,"relative_rmse":5.62282901958e-08,"max_absolute_error":1.99768692255e-07,"limit":0.00001,"passed":true}
+{"event":"wide_attention_check","kind":"PV","context":1024,"rows":64,"K":1024,"N":128,"checked":8192,"relative_rmse":8.89367796109e-08,"max_absolute_error":3.12365591526e-06,"limit":0.00001,"passed":true}
+{"event":"wide_attention_check","kind":"QK","context":2048,"rows":64,"K":128,"N":2048,"checked":131072,"relative_rmse":5.6211514264e-08,"max_absolute_error":1.99768692255e-07,"limit":0.00001,"passed":true}
+{"event":"wide_attention_check","kind":"PV","context":2048,"rows":32,"K":2048,"N":128,"checked":4096,"relative_rmse":1.2145779358e-07,"max_absolute_error":8.74884426594e-06,"limit":0.00001,"passed":true}
+{"event":"wide_attention_check","kind":"QK","context":4096,"rows":64,"K":128,"N":4096,"checked":262144,"relative_rmse":5.62172092372e-08,"max_absolute_error":1.99768692255e-07,"limit":0.00001,"passed":true}
+{"event":"wide_attention_check","kind":"PV","context":4096,"rows":16,"K":4096,"N":128,"checked":2048,"relative_rmse":2.02905781962e-07,"max_absolute_error":2.12229788303e-05,"limit":0.00001,"passed":true}
+
