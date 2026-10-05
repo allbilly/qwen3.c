@@ -4,7 +4,7 @@ import argparse,hashlib,json,math,statistics
 import numpy as np
 import concurrent_audit
 root=Path(__file__).resolve().parent
-p=argparse.ArgumentParser();p.add_argument('directories',nargs='+');p.add_argument('--output',required=True);args=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('directories',nargs='+');p.add_argument('--output',required=True);p.add_argument('--cool-c',type=int,default=51);args=p.parse_args()
 parent=root/'e2e/long-context';matched=root.parents[1]
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 meta=json.loads((parent/'source-provenance.json').read_text())
@@ -29,7 +29,8 @@ for directory in args.directories:
   config=json.loads((folder/(label+'.config.json')).read_text());env=config['environment']
   assert config['binary_sha256']==meta['binary_sha256'] and config['route']==route
   assert env['BENCH_CONTEXT']=='4128' and env['WARMUP_RUNS']=='2' and env['OMP_NUM_THREADS']=='4'
-  assert env['COOL_REQUEST_C']=='51' and env['NPU_CORES']=='3' and env['NPU_DOMAIN_ID']=='1'
+  if expected['prompt']>512:assert all(c['fan_pwm']==255 for c in clocks)
+  assert env['COOL_REQUEST_C']==str(args.cool_c) and env['NPU_CORES']=='3' and env['NPU_DOMAIN_ID']=='1'
   assert all(env[k] is None for k in ['NPU_PROFILE','GPU_PROFILE','LINEAR_PROFILE','FFN_PROFILE'])
   ids=list(map(int,(folder/(label+'.tokens')).read_text().split()));assert len(ids)==prompt
   rows=[json.loads(s) for s in (folder/(label+'.jsonl')).read_text().splitlines() if s.startswith('{')]
@@ -38,7 +39,7 @@ for directory in args.directories:
   assert len(runs)==len(requests)==4 and [r['run'] for r in runs]==[-1,0,1,2]
   reference=not expected['teacher_forced_identical_decode_inputs']
   if prompt>512:
-   golden_folder=parent/'references';golden_label=f'p{prompt}-1-npu'
+   golden_folder=parent/config.get('golden_directory','references');golden_label=f'p{prompt}-1-npu'
   else:
    golden_folder=matched/'roofline/final-quality';golden_label=f'prompt{prompt}-custom'
   golden_log=golden_folder/(golden_label+'.jsonl' if prompt>512 else golden_label+'.txt')
@@ -55,7 +56,7 @@ for directory in args.directories:
    assert abs(request['decode_ms']-run['decode_ms'])<=.000501
    assert abs(steps*1000/run['decode_ms']-run['decode_tps'])<.000501
    cooldown=next(r for r in rows if r.get('event')=='cooldown' and r['run']==index)
-   assert cooldown['after_millidegrees']<=51000
+   assert cooldown['after_millidegrees']<=args.cool_c*1000
    for phase in ['prefill','decode']:
     actual=next(r for r in rows if r.get('event')=='device_phase' and r['run']==index and r['phase']==phase)
     n=1 if phase=='prefill' else steps
@@ -87,9 +88,11 @@ for directory in args.directories:
   records.append({'directory':directory,'label':label,'prompt':prompt,'route':route,'reference':reference,'quality_passed':quality,
                   'relative_rmse':relative,'all_predictions_match':predictions,'clocks_held':held,'device_counts_checked':True,
                   'prefill_ms':ttft,'prefill_tps':prompt*1000/ttft,'decode_tps':decode,'request_ms':wall,
+                  'prefill_range':[min(r['first_token_ms'] for r in measured),max(r['first_token_ms'] for r in measured)],
+                  'decode_range':[min(r['decode_tps'] for r in measured),max(r['decode_tps'] for r in measured)],
                   'request_range':[min(r['request_ms'] for r in timed),max(r['request_ms'] for r in timed)],
                   'raw_log_sha256':sha(folder/(label+'.jsonl')),'prompt_sha256':sha(folder/(label+'.tokens'))})
-out={'model_sha256':sha(model),'binary_sha256':meta['binary_sha256'],'selected_binary_unchanged':True,'records':records,'clock_audits':clock_audits,
+out={'cooldown_target_c':args.cool_c,'model_sha256':sha(model),'binary_sha256':meta['binary_sha256'],'selected_binary_unchanged':True,'records':records,'clock_audits':clock_audits,
      'scope':'Independent audit. Long reference is this checked native NPU path, not an independent HF full-model oracle. Exact FP16 primitive checks and short-prompt parity are separate. Failed rows remain diagnostics at the unchanged0.001 gate.'}
 (root/args.output).write_text(json.dumps(out,indent=2)+'\n')
 print(json.dumps({'jobs':len(records),'quality_failed':[r['label'] for r in records if not r['quality_passed']],

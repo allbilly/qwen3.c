@@ -1,0 +1,11 @@
+{"event":"runtime_context","checkpoint_context":512,"capacity":4128,"max_prompt":4096}
+{"event":"routing","dense_prefill":"npu","dense_decode":"npu","cpu_classifier":false,"npu_initialized":true,"gpu_projections_initialized":false,"host_non_linear_ops":"CPU"}
+{"event":"initialization","mode":"npu_fp16","init_ms":2722.288,"weights":"shared_FP16","npu_cores":3}
+{"event":"cooldown","run":-1,"before_millidegrees":56384,"after_millidegrees":50846,"wait_ms":27004.476}
+{"event":"linear_cpu_profile","phase":"prefill","run":-1,"warmup":true,"calls":0,"weight_bytes":0,"wall_ms":0.000000000,"pack_ms":0.000000000,"compute_ms":0.000000000,"prefill_attention_calls":0,"prefill_attention_ms":0.000000000}
+{"event":"device_phase","phase":"prefill","run":-1,"npu_ops":86129,"cpu_ops":0}
+{"event":"request_wall","run":-1,"warmup":true,"prompt_tokens":4096,"output_tokens":32,"request_ms":44019.613548,"prefill_ms":38349.707175,"decode_ms":5669.325964,"handoff_ms":0.580409,"output_tps":0.726949,"weights_resident":true}
+{"event":"linear_cpu_profile","phase":"decode","run":-1,"warmup":true,"calls":0,"weight_bytes":0,"wall_ms":0.000000000,"pack_ms":0.000000000,"compute_ms":0.000000000,"prefill_attention_calls":0,"prefill_attention_ms":0.000000000}
+{"event":"device_phase","phase":"decode","run":-1,"npu_ops":3503,"cpu_ops":0}
+{"event":"run","mode":"npu_fp16","warmup":true,"run":-1,"prefill_tokens":4096,"new_tokens":32,"first_token_ms":38349.707,"decode_steps":31,"decode_ms":5669.326,"decode_tps":5.468,"npu_ops":89632,"cpu_matmul_ops":0,"generated_ids":[4418,279,2701,21085,323,62079,279,1887,6708,13,48696,6629,264,4128,1614,553,14633,1246,1293,432,4990,311,1882,1181,1946,323,1246,6157,432,18644,17420,11211]}
+{"event":"cooldown_abort","run":0,"target_millidegrees":51000,"temperature_millidegrees":51769,"wait_ms":180027.782}

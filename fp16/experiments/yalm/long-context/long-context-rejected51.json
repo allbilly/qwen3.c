@@ -1,0 +1,27 @@
+{
+  "status": "rejected partial attempt; not used in55C tables",
+  "reason": "4K run exited normally with cooldown_abort before second warmup; target51C not reached within180s",
+  "clocks_restored": true,
+  "clocks_held": false,
+  "temperature_range_c": [
+    49.923,
+    84.076
+  ],
+  "raw_log_sha256": {
+    "1024": "768a5f5103435ccb1b480f011b07991fe9f950e63c4cc8e5d2eacc0fbda18b05",
+    "2048": "fcd6315d22e6e709e117c520face4b89d13c30dfefe8643493e25ecd14673a24",
+    "4096": "73183a0c9dcfbcc60c6720690e61e0d4f64f5452553314197cf026d30a5f0d7d"
+  },
+  "completed_measured_requests": {
+    "1024": 2,
+    "2048": 2,
+    "4096": 0
+  },
+  "abort": {
+    "event": "cooldown_abort",
+    "run": 0,
+    "target_millidegrees": 51000,
+    "temperature_millidegrees": 51769,
+    "wait_ms": 180027.782
+  }
+}

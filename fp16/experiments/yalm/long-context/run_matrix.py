@@ -5,7 +5,7 @@ import numpy as np
 root=Path(__file__).resolve().parent;roofline=root.parents[2];matched=roofline.parent
 parser=argparse.ArgumentParser();parser.add_argument('--output',default='matrix');parser.add_argument('--routes',nargs='*')
 parser.add_argument('--prompts',nargs='+',type=int,default=[128,256]);parser.add_argument('--new-tokens',type=int,default=32)
-parser.add_argument('--runs',type=int,default=2);parser.add_argument('--profile',action='store_true');parser.add_argument('--cool-c',type=int,default=50);parser.add_argument('--reference',action='store_true');parser.add_argument('--context',type=int,default=4128);args=parser.parse_args()
+parser.add_argument('--runs',type=int,default=2);parser.add_argument('--profile',action='store_true');parser.add_argument('--cool-c',type=int,default=50);parser.add_argument('--reference',action='store_true');parser.add_argument('--context',type=int,default=4128);parser.add_argument('--golden-directory',default='references');args=parser.parse_args()
 assert 512<=args.context<=4128
 settings={f'{route}_{phase}':(cpu,gpu,mode) for route,cpu,gpu in [('cpu_npu',96,0),('gpu_npu',0,96),('all',96,96)] for phase,mode in [('pre',1),('dec',2),('both',3)]}
 placements={r:('npu','npu',None,False) for r in ['npu',*settings]}
@@ -29,7 +29,7 @@ def clocks(script,action):
  subprocess.run(['docker','run','--rm','--platform=linux/amd64','--entrypoint=/qemu','-v',f'{matched}/tools/qemu-x86_64:/qemu:ro',
   '-v','/sys:/hostsys:rw','-v',f'{matched}:/work','python:3.10-slim-bookworm','/usr/local/bin/python3.10','/usr/local/bin/python3.10','/work/'+script,action],check=True)
 fields={'cpu4_khz':'/sys/devices/system/cpu/cpufreq/policy4/scaling_cur_freq','cpu6_khz':'/sys/devices/system/cpu/cpufreq/policy6/scaling_cur_freq',
- 'npu_hz':'/sys/class/devfreq/fdab0000.npu/cur_freq','gpu_hz':'/sys/class/devfreq/fb000000.gpu/cur_freq','ddr_hz':'/sys/class/devfreq/dmc/cur_freq','temperature_millidegrees':'/sys/class/thermal/thermal_zone0/temp'}
+ 'npu_hz':'/sys/class/devfreq/fdab0000.npu/cur_freq','gpu_hz':'/sys/class/devfreq/fb000000.gpu/cur_freq','ddr_hz':'/sys/class/devfreq/dmc/cur_freq','temperature_millidegrees':'/sys/class/thermal/thermal_zone0/temp','fan_pwm':'/sys/class/hwmon/hwmon8/pwm1'}
 stop=threading.Event();phase='setup';thread=None;cpu_locked=False;gpu_locked=False;records=[]
 def monitor():
  with (out/'clock-samples.jsonl').open('w') as log:
@@ -59,8 +59,8 @@ try:
    phase=f'p{prompt}-{block}-{route}'
    if prompt>512:
     tokens=root/'prompts'/f'prompt{prompt}.tokens';golden_name=f'prompt{prompt}'
-    golden_path=root/'references'/f'p{prompt}-1-npu.jsonl'
-    golden_logits=root/'references'/f'p{prompt}-1-npu.f32'
+    golden_path=root/args.golden_directory/f'p{prompt}-1-npu.jsonl'
+    golden_logits=root/args.golden_directory/f'p{prompt}-1-npu.f32'
    else:
     golden_name={1:'hello',24:'chat24',73:'ragged73',128:'prompt128',256:'prompt256'}[prompt]
     tokens=roofline/'final-quality'/f'{golden_name}.tokens'
@@ -72,7 +72,7 @@ try:
     teacher=out/f'{phase}.teacher.tokens';teacher.write_text(' '.join(map(str,golden))+'\n');jobenv['TEACHER_IDS']=str(teacher)
    logits=out/f'{phase}.f32';command=['taskset','-c','4-7',str(out/'runq-routes'),str(matched/'Qwen3-0.6B.fp16'),str(copied),str(args.new_tokens),str(args.runs),str(logits)]
    selected_keys=[*fields,'OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','GOMP_SPINCOUNT','NPU_CORES','NPU_DOMAIN_ID','NPU_FUSED','NPU_ATTENTION','NPU_SPLIT_DOWN','NPU_STREAM_FFN','NPU_CLS_TILE','WARMUP_RUNS','DENSE_PREFILL','DENSE_DECODE','GPU_ATTENTION','CPU_CLASSIFIER','TEACHER_IDS','LINEAR_PROFILE','GPU_PROFILE','NPU_PROFILE','ROUTE_PROFILE','FFN_CPU_CHANNELS','FFN_GPU_CHANNELS','FFN_MODE','FFN_PROFILE','LD_LIBRARY_PATH','COOL_REQUEST_C','BENCH_CONTEXT']
-   (out/f'{phase}.config.json').write_text(json.dumps({'command':command,'environment':{k:jobenv.get(k) for k in selected_keys},'route':route,'binary_sha256':sha(out/'runq-routes')},indent=2)+'\n')
+   (out/f'{phase}.config.json').write_text(json.dumps({'command':command,'environment':{k:jobenv.get(k) for k in selected_keys},'route':route,'golden_directory':args.output if args.reference else args.golden_directory,'binary_sha256':sha(out/'runq-routes')},indent=2)+'\n')
    print('Running',phase,flush=True)
    with (out/f'{phase}.jsonl').open('w') as log:completed=subprocess.run(command,env=jobenv,stdout=log,stderr=subprocess.STDOUT)
    assert completed.returncode==0,(phase,'runtime failure',completed.returncode)
@@ -107,7 +107,7 @@ targets={'cpu4_khz':2256000,'cpu6_khz':2256000,'npu_hz':1000000000,'gpu_hz':1000
 held=all(r[k]==v for r in samples for k,v in targets.items())
 restored=all((out/f'{stem}-state-before.json').read_bytes()==(out/f'{stem}-state-restored.json').read_bytes() for stem in ['clock','gpu-clock'])
 assert restored
-(out/'summary.json').write_text(json.dumps({'records':records,'clocks_held':held,'clocks_restored':restored,'samples':len(samples),
+(out/'summary.json').write_text(json.dumps({'records':records,'cooldown_target_c':args.cool_c,'golden_directory':args.output if args.reference else args.golden_directory,'clocks_held':held,'clocks_restored':restored,'samples':len(samples),
  'temperature_range_c':[min(r['temperature_millidegrees'] for r in samples)/1000,max(r['temperature_millidegrees'] for r in samples)/1000],
  'binary_sha256':sha(out/'runq-routes'),'interpretation':'Phase-placement experiment. Non-linear host operations stay CPU. Failed quality rows are diagnostic timings, not qualified inference speed claims.'},indent=2)+'\n')
 assert held and restored, 'Clock target failure; retained summary and raw diagnostics, with original clocks restored.'

@@ -4,9 +4,15 @@ Scope: isolated e2e/long-context sources and long-context preparation/check/run/
 
 INTENT: the benchmark runner and attention scratch are limited to 512 tokens; the user requests 1024/2048/4096-token prompts with CPU/OpenCL/NPU combinations; fp16/README.md specifies pinned shared FP16 weights, measured phase/request spans and numerical checks.
 
-- [ ] Add checked runtime context override, dynamic host/GPU scratch and bounded NPU attention query blocks; keep original submission metadata and the four-data-bank guard.
-- [ ] Compile source snapshots and check large NPU QK/PV primitives against identical FP16 operands; verify short-prompt regression logits and actual device execution.
+- [x] Add checked runtime context override, dynamic host/GPU scratch and bounded NPU attention query blocks; keep original submission metadata and the four-data-bank guard.
+- [x] Compile source snapshots and check large NPU QK/PV primitives against identical FP16 operands; verify short-prompt regression logits and actual device execution.
 - [ ] Prepare immutable exact-length prefix prompts and long NPU golden logits/IDs; preserve source/model/binary/input hashes.
-- [ ] Run six placements × three prompt lengths serially: CPU only, Mali OpenCL, NPU, CPU+NPU FFN decode, GPU+NPU FFN decode, all three FFN decode. Same precision, four host threads, clocks, two complete warmups, two measurements, 32 outputs and common <=51C starts.
+- [ ] Run six placements × three prompt lengths serially: CPU only, Mali OpenCL, NPU, CPU+NPU FFN decode, GPU+NPU FFN decode, all three FFN decode. Same precision, four host threads, clocks, two complete warmups, two measurements, 32 outputs and common <=55C starts.
 - [ ] Independently audit every prediction/logit, phase counts, request timers, sampled clocks and restoration. Retain failed quality or clock jobs as diagnostics.
 - [ ] Generate tables with best-observed asterisks, export small evidence/source, render charts and locally WIP commit each completed milestone. No push requested.
+
+Milestone7cedff6: all514048 primitive outputs pass; all six128-token cases pass quality/device/clocks and first logits are bit-identical to previous routes. Exported source reproduces exactf8b4f9eb binary;31 evidence files are lossless. Long controller started, with18 total benchmark rows.
+
+The first51C attempt completed1K/2K but aborted normally before the second4K warmup: after180s cooling it remained51.769C. All clocks were restored. Keep the entire attempt as rejected diagnostics. Rerun all18 rows freshly at a common55C start limit; all other clock, numerical and request-count gates stay unchanged.
+
+Raw51C logs also show five GPU300MHz samples at4K, with a peak84.076C. Board fan PWM was observed at0. Set the existing fan PWM to255 for all fresh55C controllers, record it in every sampled clock row and restore the original value in the outer finally block. Do not disable thermal protection or accept clock drops as fair winners.

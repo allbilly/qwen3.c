@@ -25,7 +25,12 @@ routes](long-context/long-context-short-parity.json). The [independent short
 audit](long-context/long-context-short-audit.json) retains all phase/request
 measurements and checks actual execution; all four requests per route pass.
 
-Long measurements are pending at this milestone. The sweep will measure
+Long measurements are pending at this milestone. The first 51°C attempt
+completed 1K/2K requests but aborted normally before the second 4K warmup
+when bounded cooling failed. Its raw evidence is retained under
+`evidence/long-context-rejected51`; the GPU also briefly throttled. The fresh
+sweep uses a common 55°C start limit and fan PWM255 for all placements,
+with the original fan setting restored afterward. The sweep will measure
 CPU-only, Mali OpenCL, NPU and CPU+NPU/GPU+NPU/CPU+GPU+NPU FFN decode splits
 at 1024/2048/4096 input tokens. Mixed rows retain NPU prefill. All use the same
 weights, runtime context, clocks, four host threads, 32 outputs, two complete
