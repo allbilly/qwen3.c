@@ -7,6 +7,22 @@ NPU_SRCS = npu_matmul.c
 NPU_INCLUDES = -I../include
 NPU_LIBS = -ldrm
 
+# Native Asahi Linux M1 backend. Uses the ~/ane KMD ABI without libdrm or RKNN.
+ANE_FLAGS ?= -O3 -fopenmp -march=native
+ANE_SRCS = ane/ane_matmul.c
+ANE_HEADERS = ane/ane_matmul.h ane/linear_template.h npu_matmul.h qwen3.h
+.PHONY: ane cpu ane-test
+ane: runq-ane
+runq-ane: runq.c $(ANE_SRCS) $(ANE_HEADERS)
+	$(CC) $(ANE_FLAGS) -D_FILE_OFFSET_BITS=64 -DQWEN3_USE_ANE -I. runq.c $(ANE_SRCS) -lm -o $@
+cpu: runq-cpu
+runq-cpu: runq.c npu_matmul.c npu_matmul.h qwen3.h
+	$(CC) $(ANE_FLAGS) -D_FILE_OFFSET_BITS=64 -DQWEN3_DISABLE_NPU runq.c npu_matmul.c -lm -o $@
+ane-test: tests/ane_matmul_test
+	python3 tools/benchmark_queue.py -- ./tests/ane_matmul_test
+tests/ane_matmul_test: tests/ane_matmul_test.c $(ANE_SRCS) $(ANE_HEADERS)
+	$(CC) $(ANE_FLAGS) -D_FILE_OFFSET_BITS=64 -DQWEN3_USE_ANE -I. $< $(ANE_SRCS) -lm -o $@
+
 # Direct-register FP16 engine for RK3588 and the matched Qwen3-0.6B checkpoint.
 FP16_NPU_INCLUDE ?= ../npu/include
 FP16_SRCS = fp16/run.c fp16/fp16_backend.c
@@ -77,3 +93,4 @@ clean:
 	rm -f runq
 	rm -f runq-fp16
 	rm -f runq-fp16-routes
+	rm -f runq-ane runq-cpu runq-ane-bench tests/ane_matmul_test

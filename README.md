@@ -41,6 +41,45 @@ make openmp
 
 ## Step 2: download and convert a model
 
+### Apple M1 ANE on Asahi Linux
+
+The native C ANE backend uses the driver ABI and verified linear primitives
+from `~/ane`. It supports **base M1 (T8103)** with the `ane` driver exposed at
+`/dev/accel/accel*`. Install the driver following `~/ane/kmod/README.md`.
+Other Apple chips require their own verified register streams.
+
+```bash
+make ane cpu
+OMP_NUM_THREADS=4 ANE=1 ./runq-ane Qwen3-0.6B.bin -c 512 -i 'Explain gravity.' -n 32 -t 0
+```
+
+The existing version-1 Q8 checkpoints work unchanged. Model projections use
+resident FP16 weights on ANE; attention, normalization, sampling, and the Q8
+vocabulary head run on CPU. FP16 activations can produce different logits from
+the integer CPU path. `ANE=0 ./runq-ane ...` and `./runq-cpu ...` select CPU.
+An explicitly requested ANE backend fails if the device or plans cannot be
+prepared. `QWEN3_MATMUL_VERBOSE=1` enables per-operation diagnostics.
+
+For a local Hugging Face safetensors snapshot, a small exporter avoids loading
+a full PyTorch model into memory:
+
+```bash
+python -m pip install numpy jinja2
+python ane/export_checkpoint.py /path/to/Qwen3-0.6B Qwen3-0.6B.bin --context 512
+```
+
+Run correctness checks and benchmarks through the shared queue:
+
+```bash
+make ane-test
+python3 tools/benchmark_queue.py -- env OMP_NUM_THREADS=4 ANE=1 ./runq-ane Qwen3-0.6B.bin -c 512 -i 'Explain gravity.' -n 32 -t 0
+```
+
+The queue waits on `~/ane.lock` and `~/gpu.lock`, then checks for live
+benchmark processes and processes holding ANE devices. Use the same wrapper
+in other Codex sessions. Performance measurements should keep model, prompt,
+thread count, CPU affinity, warmups, and generated-token count fixed.
+
 Install any needed Python dependencies for the HuggingFace export utility:
 
 ```aiignore
