@@ -12,6 +12,25 @@ Device labels describe auxiliary **FFN gate/up slices**. QKV, output, down and v
 
 [Independent forty-job audit](concurrent-request40-audit.json) · [written execution plan](concurrent-request-plan.json) · [architecture, precision and branch costs](CONCURRENT.md)
 
+## CPU-only and Mali OpenCL baselines
+
+These baseline rows come from the earlier independently audited placement sweep, with the same pinned FP16 checkpoint, input IDs, clocks, <=51°C start limit, 32 outputs and two warmups/two measurements. They are a separate measurement session from the concurrent FFN sweep and from the four-measurement ABBA check. Keep those sessions distinct when interpreting small differences. No new hardware run was performed for this table update.
+
+CPU-only executes projections and attention on CPU, with no NPU/GPU execution. The GPU route executes projections and attention using custom Mali OpenCL kernels; norms, RoPE, embedding, SwiGLU, residuals and sampling remain on CPU. The NPU route uses native NPU matrices with CPU host work and decode attention.
+
+| Input tokens | Projection / attention placement | Prefill ms | Prefill tokens/s | Decode tokens/s | Request ms |
+|---|---|---:|---:|---:|---:|
+| 128 | CPU only | 2016.056 | 63.49 | 18.613 | 3681.672 |
+| 128 | Mali OpenCL + CPU host | 2437.915 | 52.50 | 13.171 | 4791.720 |
+| 128 | NPU matrices + CPU host | 241.270 | 530.52 | 20.795 | 1732.328 |
+| 256 | CPU only | 4755.320 | 53.83 | 17.896 | 6487.559 |
+| 256 | Mali OpenCL + CPU host | 4965.540 | 51.56 | 12.048 | 7538.773 |
+| 256 | NPU matrices + CPU host | 522.849 | 489.63 | 20.166 | 2060.198 |
+
+The [complete placement tables](REQUESTS.md) include all nine CPU/GPU/NPU prefill-to-decode projection pairs, including CPU→GPU, GPU→CPU, GPU→NPU and NPU→GPU, plus the explicit three-device placement. The concurrent tables below include CPU+NPU, GPU+NPU and CPU+GPU+NPU FFN slices independently during prefill, decode and both phases. Phase routing and concurrent channel partitioning are different experiments.
+
+[Baseline numerical/device/clock audit](request-matrix51-audit.json) · [placement definitions](PHASES.md)
+
 ## Original full-prompt split
 
 ![Original full-prompt split](concurrent-original-requests.png)

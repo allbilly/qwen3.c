@@ -87,3 +87,9 @@ independent request time and rendered charts. Raw calibrated traces reproduce
 84/112 overlapping CPU/GPU/NPU intervals in each diagnostic request. No split
 establishes a reliable overall gain. The [task coverage audit](COMPLETION.md)
 links each requested measurement to evidence and states remaining limitations.
+
+The concurrent report also includes CPU-only, Mali OpenCL and NPU baseline
+rows from the earlier matched placement sweep, with their separate measurement
+session stated. GPU+NPU and CPU+GPU+NPU slices are present in its prefill,
+decode and both-phase tables. The GPU implementation uses custom Mali OpenCL
+kernels with CPU host operations.

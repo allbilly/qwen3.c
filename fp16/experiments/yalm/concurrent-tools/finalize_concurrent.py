@@ -89,6 +89,22 @@ lines = ['# Concurrent FFN: phase and complete-request results', '',
     'The forty-row sweep screens placements. The original layout ran before the native layout; this order is not a counterbalanced layout comparison. Every long-prompt row passes its quality/device/clock audits. Prefill and both-phase split rows remain **diagnostics** because the separate 24/73-token checks fail the unchanged first-logit gate (six failures per layout). Passing predictions at 128/256 tokens does not resolve those failures.', '',
     'Device labels describe auxiliary **FFN gate/up slices**. QKV, output, down and vocabulary projections stay on NPU; other transformer work stays on CPU. These are not whole-model GPU or NPU-resident graph claims.', '',
     '[Independent forty-job audit](concurrent-request40-audit.json) · [written execution plan](concurrent-request-plan.json) · [architecture, precision and branch costs](CONCURRENT.md)', '']
+baseline_audit = read('request-matrix51-audit.json')
+assert baseline_audit['shared_fp16_model_sha256'] == audit['shared_fp16_model_sha256']
+baseline_rows = [r for r in baseline_audit['records'] if r['route'] in ['cpu','gpu','npu']]
+assert len(baseline_rows)==6 and all(r['quality_passed'] and r['all_predictions_match'] for r in baseline_rows)
+lines += ['## CPU-only and Mali OpenCL baselines', '',
+    'These baseline rows come from the earlier independently audited placement sweep, with the same pinned FP16 checkpoint, input IDs, clocks, <=51°C start limit, 32 outputs and two warmups/two measurements. They are a separate measurement session from the concurrent FFN sweep and from the four-measurement ABBA check. Keep those sessions distinct when interpreting small differences. No new hardware run was performed for this table update.', '',
+    'CPU-only executes projections and attention on CPU, with no NPU/GPU execution. The GPU route executes projections and attention using custom Mali OpenCL kernels; norms, RoPE, embedding, SwiGLU, residuals and sampling remain on CPU. The NPU route uses native NPU matrices with CPU host work and decode attention.', '',
+    '| Input tokens | Projection / attention placement | Prefill ms | Prefill tokens/s | Decode tokens/s | Request ms |',
+    '|---|---|---:|---:|---:|---:|']
+for prompt in [128,256]:
+    for route,label in [('cpu','CPU only'),('gpu','Mali OpenCL + CPU host'),('npu','NPU matrices + CPU host')]:
+        r=next(r for r in baseline_rows if r['prompt']==prompt and r['route']==route)
+        lines.append(f"| {prompt} | {label} | {r['ttft_ms']:.3f} | {r['effective_prefill_tps']:.2f} | {r['decode_tps']:.3f} | {r['request_ms']:.3f} |")
+lines += ['',
+    'The [complete placement tables](REQUESTS.md) include all nine CPU/GPU/NPU prefill-to-decode projection pairs, including CPU→GPU, GPU→CPU, GPU→NPU and NPU→GPU, plus the explicit three-device placement. The concurrent tables below include CPU+NPU, GPU+NPU and CPU+GPU+NPU FFN slices independently during prefill, decode and both phases. Phase routing and concurrent channel partitioning are different experiments.', '',
+    '[Baseline numerical/device/clock audit](request-matrix51-audit.json) · [placement definitions](PHASES.md)', '']
 order=['npu','cpu_npu_pre','gpu_npu_pre','all_pre','cpu_npu_dec','gpu_npu_dec','all_dec','cpu_npu_both','gpu_npu_both','all_both']
 labels={'npu':'Selected NPU path','cpu_npu_pre':'CPU+NPU prefill*','gpu_npu_pre':'GPU+NPU prefill*','all_pre':'CPU+GPU+NPU prefill*','cpu_npu_dec':'CPU+NPU decode','gpu_npu_dec':'GPU+NPU decode','all_dec':'CPU+GPU+NPU decode','cpu_npu_both':'CPU+NPU both*','gpu_npu_both':'GPU+NPU both*','all_both':'CPU+GPU+NPU both*'}
 for variant, title, stem in [('concurrent-ffn','Original full-prompt split','concurrent-original-requests'),('concurrent-native','Native packing with 64-row blocks','concurrent-native-requests')]:
