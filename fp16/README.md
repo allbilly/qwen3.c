@@ -20,6 +20,15 @@ ranges; fused GPU decode attention remains slower than CPU. These candidates
 have not been promoted into the selected runner. Request and iteration charts
 are rendered as PNG/JPG/SVG.
 
+The [1K/2K/4K benchmark](experiments/yalm/LONG-CONTEXT.md) reports 12 of 18
+measured placements, with CPU-only, Mali OpenCL, NPU and mixed-device rows.
+It includes prefill time and tokens/s, decode tokens/s and independent request
+time, plus PNG/JPG/SVG charts. The bare Orange Pi 5 reached about 86°C and
+stopped on its cooling guard during CPU 2K; six rows remain unmeasured.
+CPU 1K clock drops and the CPU 2K warmup logit failure remain diagnostics.
+All started controllers restored their settings. A fresh cooled session is
+needed to finish this comparison under the same protocol.
+
 The engine uses persistent direct-register NPU tasks, three-core matrix
 projections, batched prefill, fused Q/K/V and gate/up projections, prompt
 attention on the NPU, and activation packing directly between feed-forward

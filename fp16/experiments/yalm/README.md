@@ -93,3 +93,11 @@ rows from the earlier matched placement sweep, with their separate measurement
 session stated. GPU+NPU and CPU+GPU+NPU slices are present in its prefill,
 decode and both-phase tables. The GPU implementation uses custom Mali OpenCL
 kernels with CPU host operations.
+
+The [1K/2K/4K table and charts](LONG-CONTEXT.md) use the isolated runtime
+context extension and the same pinned FP16 weights. Twelve of eighteen rows
+were measured; eleven pass both quality and strict sampled-clock checks.
+The bare-board sweep stopped on its cooling guard during CPU 2K. Its single
+warmup also fails the unchanged logit gate; no warmup timing enters the table.
+Missing rows are explicit, all started controllers restored their settings,
+and future measurements after fitting cooling must use a fresh session.

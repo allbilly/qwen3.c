@@ -6,6 +6,7 @@ p = argparse.ArgumentParser()
 p.add_argument('--workspace', type=Path, required=True)
 p.add_argument('--plan', required=True)
 p.add_argument('--output', type=Path, required=True)
+p.add_argument('--partial', action='store_true', help='Audit started controllers and explicitly list jobs that never started')
 args = p.parse_args()
 root = args.workspace
 plan = json.loads((root / args.plan).read_text())
@@ -32,8 +33,12 @@ paths = {
     'ddr': Path('/sys/class/devfreq/dmc'),
 }
 snapshots = []
+not_started = []
 for job in plan['jobs']:
     directory = root / job['directory']
+    if not directory.exists():
+        not_started.append(job['directory'])
+        continue
     for kind in ['clock', 'gpu-clock']:
         assert (directory / (kind + '-state-before.json')).read_bytes() == (directory / (kind + '-state-restored.json')).read_bytes()
     saved = json.loads((directory / 'clock-state-restored.json').read_text())
@@ -43,13 +48,17 @@ for job in plan['jobs']:
     assert {key: (Path('/sys/class/devfreq/fb000000.gpu') / key).read_text().strip()
             for key in gpu} == gpu
     snapshots.append({'directory': job['directory'], 'clock_and_gpu_snapshots_restored': True,
-                      'live_governors_and_limits_match': True})
+                      'live_governors_and_limits_match': True,
+                      'summary_present': (directory / 'summary.json').is_file()})
+assert snapshots, 'No started controllers to audit'
+assert args.partial or not not_started, 'Incomplete sweep; use --partial to report its scope explicitly'
 model = Path('/sys/firmware/devicetree/base/model').read_bytes().rstrip(b'\0').decode()
 out = {'board_model': model, 'user_reported_no_heatsink': True,
        'fan_before': json.loads(before.read_text()), 'fan_command_restored': True,
        'fan_control_summary': control_summary,
        'fan_control_log_sha256': hashlib.sha256(control_log.read_bytes()).hexdigest(),
        'clock_restoration': snapshots,
+       'partial_sweep': bool(not_started), 'not_started': not_started,
        'scope': 'PWM feedback commands and immediate restoration are audited. They do not establish physical fan presence or cooling effectiveness. The automatic kernel notifier remains active and can change PWM after restoration. All live clock governors/limits match original snapshots after the serial sweep.'}
 args.output.write_text(json.dumps(out, indent=2) + '\n')
-print('All controller clock snapshots and live limits match; fan command restoration verified')
+print(f'{len(snapshots)} started controllers restored; {len(not_started)} never started; live limits and fan command restoration verified')

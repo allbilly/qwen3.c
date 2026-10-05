@@ -1,0 +1,12 @@
+[
+  "e2e/long-context/references55-cpu1800-fanheld",
+  "e2e/long-context/p1024-cpu-screen55-cpu1800-fanheld",
+  "e2e/long-context/p1024-gpu-screen55-cpu1800-fanheld",
+  "e2e/long-context/p1024-cpu_npu_dec-screen55-cpu1800-fanheld",
+  "e2e/long-context/p1024-gpu_npu_dec-screen55-cpu1800-fanheld",
+  "e2e/long-context/p1024-all_dec-screen55-cpu1800-fanheld",
+  "e2e/long-context/p2048-all_dec-screen55-cpu1800-fanheld",
+  "e2e/long-context/p2048-gpu_npu_dec-screen55-cpu1800-fanheld",
+  "e2e/long-context/p2048-cpu_npu_dec-screen55-cpu1800-fanheld",
+  "e2e/long-context/p2048-gpu-screen55-cpu1800-fanheld"
+]

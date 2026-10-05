@@ -1,0 +1,5 @@
+{
+  "governor": "simple_ondemand",
+  "min_freq": "300000000",
+  "max_freq": "1000000000"
+}

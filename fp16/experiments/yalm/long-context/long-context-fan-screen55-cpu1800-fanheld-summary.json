@@ -1,0 +1,9 @@
+{
+  "iterations": 309531,
+  "reassertions": 5191,
+  "max_poll_gap_ms": 61.163744001532905,
+  "setpoint": 255,
+  "period_ms": 10,
+  "original_pwm_restored": true,
+  "kernel_thermal_notifier": "left active; every observed override promptly reasserted"
+}

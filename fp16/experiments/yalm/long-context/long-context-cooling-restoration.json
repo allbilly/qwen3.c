@@ -1,0 +1,96 @@
+{
+  "board_model": "Orange Pi 5",
+  "user_reported_no_heatsink": true,
+  "fan_before": {
+    "path": "/hostsys/class/hwmon/hwmon8/pwm1",
+    "pwm1": "0"
+  },
+  "fan_command_restored": true,
+  "fan_control_summary": {
+    "iterations": 309531,
+    "reassertions": 5191,
+    "max_poll_gap_ms": 61.163744001532905,
+    "setpoint": 255,
+    "period_ms": 10,
+    "original_pwm_restored": true,
+    "kernel_thermal_notifier": "left active; every observed override promptly reasserted"
+  },
+  "fan_control_log_sha256": "06b02d6c47700bc78502deec893d16d8c34cac9639ead74464acc17478804ce3",
+  "clock_restoration": [
+    {
+      "directory": "e2e/long-context/references55-cpu1800-fanheld",
+      "clock_and_gpu_snapshots_restored": true,
+      "live_governors_and_limits_match": true,
+      "summary_present": true
+    },
+    {
+      "directory": "e2e/long-context/p1024-cpu-screen55-cpu1800-fanheld",
+      "clock_and_gpu_snapshots_restored": true,
+      "live_governors_and_limits_match": true,
+      "summary_present": true
+    },
+    {
+      "directory": "e2e/long-context/p1024-gpu-screen55-cpu1800-fanheld",
+      "clock_and_gpu_snapshots_restored": true,
+      "live_governors_and_limits_match": true,
+      "summary_present": true
+    },
+    {
+      "directory": "e2e/long-context/p1024-cpu_npu_dec-screen55-cpu1800-fanheld",
+      "clock_and_gpu_snapshots_restored": true,
+      "live_governors_and_limits_match": true,
+      "summary_present": true
+    },
+    {
+      "directory": "e2e/long-context/p1024-gpu_npu_dec-screen55-cpu1800-fanheld",
+      "clock_and_gpu_snapshots_restored": true,
+      "live_governors_and_limits_match": true,
+      "summary_present": true
+    },
+    {
+      "directory": "e2e/long-context/p1024-all_dec-screen55-cpu1800-fanheld",
+      "clock_and_gpu_snapshots_restored": true,
+      "live_governors_and_limits_match": true,
+      "summary_present": true
+    },
+    {
+      "directory": "e2e/long-context/p2048-all_dec-screen55-cpu1800-fanheld",
+      "clock_and_gpu_snapshots_restored": true,
+      "live_governors_and_limits_match": true,
+      "summary_present": true
+    },
+    {
+      "directory": "e2e/long-context/p2048-gpu_npu_dec-screen55-cpu1800-fanheld",
+      "clock_and_gpu_snapshots_restored": true,
+      "live_governors_and_limits_match": true,
+      "summary_present": true
+    },
+    {
+      "directory": "e2e/long-context/p2048-cpu_npu_dec-screen55-cpu1800-fanheld",
+      "clock_and_gpu_snapshots_restored": true,
+      "live_governors_and_limits_match": true,
+      "summary_present": true
+    },
+    {
+      "directory": "e2e/long-context/p2048-gpu-screen55-cpu1800-fanheld",
+      "clock_and_gpu_snapshots_restored": true,
+      "live_governors_and_limits_match": true,
+      "summary_present": true
+    },
+    {
+      "directory": "e2e/long-context/p2048-cpu-screen55-cpu1800-fanheld",
+      "clock_and_gpu_snapshots_restored": true,
+      "live_governors_and_limits_match": true,
+      "summary_present": false
+    }
+  ],
+  "partial_sweep": true,
+  "not_started": [
+    "e2e/long-context/p4096-cpu-screen55-cpu1800-fanheld",
+    "e2e/long-context/p4096-gpu-screen55-cpu1800-fanheld",
+    "e2e/long-context/p4096-cpu_npu_dec-screen55-cpu1800-fanheld",
+    "e2e/long-context/p4096-gpu_npu_dec-screen55-cpu1800-fanheld",
+    "e2e/long-context/p4096-all_dec-screen55-cpu1800-fanheld"
+  ],
+  "scope": "PWM feedback commands and immediate restoration are audited. They do not establish physical fan presence or cooling effectiveness. The automatic kernel notifier remains active and can change PWM after restoration. All live clock governors/limits match original snapshots after the serial sweep."
+}
