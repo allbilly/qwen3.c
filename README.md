@@ -82,6 +82,41 @@ benchmark processes and processes holding ANE devices. Use the same wrapper
 in other Codex sessions. Performance measurements should keep model, prompt,
 thread count, CPU affinity, warmups, and generated-token count fixed.
 
+Build and run the paired full-model benchmark (requires NumPy):
+
+```bash
+make runq-ane-bench
+python3 tools/paired_ane.py Qwen3-0.6B.bin --output /tmp/ane-results.json
+python3 tests/test_benchmark_queue.py -v
+```
+
+The paired runner queues itself, alternates CPU/ANE trials, uses four threads
+on CPUs 4–7, and compares every vocabulary logit on fixed decode inputs.
+Prompt token IDs, checkpoint SHA-256, individual trials, timing ranges, and
+accuracy checks are saved in its JSON output.
+
+On this base M1 with Qwen3-0.6B Q8, five paired trials gave these median prompt
+times after one full warmup per process:
+
+| Prompt tokens | CPU prefill | ANE/CPU prefill | Speedup |
+| --- | --- | --- | --- |
+| 5 | 65.1 ms | 65.4 ms (CPU) | 1.00× |
+| 16 | 202.1 ms | 102.7 ms | 1.97× |
+| 32 | 397.8 ms | 184.8 ms | 2.15× |
+| 65 | 843.5 ms | 355.2 ms | 2.37× |
+
+Hybrid decode measured about 56–57 tokens/s. With 16 output tokens, prompt
+plus decode was 1.26–1.80× faster for the 16–65-token prompts. Initialization
+is excluded: resident weight preparation took about 0.5–0.6 seconds, versus
+0.15–0.23 seconds for CPU loading. CPU can be faster for a single short request.
+These are shared-desktop measurements; the raw ranges include occasional
+background-load outliers. See [the full results](ane/benchmarks/m1-qwen3-0.6b.json).
+
+Minimum CPU/ANE logit cosine similarity was 0.997055, with 63 of 64 matching
+top-1 choices on identical decode inputs. The 32-token prompt's first choice
+changed near a tie. `ANE_DECODE=1` measured about 25 tokens/s; see
+[the ANE decode comparison](ane/benchmarks/m1-qwen3-0.6b-ane-decode.json).
+
 ## Step 2: download and convert a model
 
 Install any needed Python dependencies for the HuggingFace export utility:

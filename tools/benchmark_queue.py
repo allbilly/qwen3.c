@@ -22,8 +22,23 @@ def competing_jobs():
             name = Path(os.fsdecode(argv[0])).name
             # Inspect executables and arguments, never shell command bodies.
             names = [name]
-            if name.startswith('python') and len(argv) > 1:
-                names.append(Path(os.fsdecode(argv[1])).name)
+            if name.startswith('python'):
+                i = 1
+                while i < len(argv) and argv[i]:
+                    arg = os.fsdecode(argv[i])
+                    if arg == '-c':
+                        break  # Never interpret inline source as a file name.
+                    if arg in ('-W', '-X'):
+                        i += 2
+                        continue
+                    if arg == '-m':
+                        if i + 1 < len(argv):
+                            names.append(os.fsdecode(argv[i + 1]))
+                        break
+                    if not arg.startswith('-'):
+                        names.append(Path(arg).name)
+                        break
+                    i += 1
             if 'benchmark_queue.py' in names:
                 continue
             if any(n.startswith(('runq', 'bench_', 'benchmark_')) or

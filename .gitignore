@@ -9,5 +9,7 @@ __pycache__/*
 /runq-ane-bench
 /tests/ane_matmul_test
 /ane/__pycache__/
+/tools/__pycache__/
+/tests/__pycache__/
 /.venv/
 /fp16/experiments/yalm/__pycache__/
