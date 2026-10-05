@@ -1,0 +1,544 @@
+{
+  "cpu_target_khz": 1800000,
+  "cooldown_target_c": 55,
+  "rejected_attempt": "e2e/long-context/references (51C cooldown timeout after first4K warmup; no4K measured row)",
+  "binary_sha256": "f8b4f9ebf81f28efdca38b3389f80cf96347b2728f655e6d577f70fdfbe9ec9b",
+  "jobs": [
+    {
+      "directory": "e2e/long-context/references55-cpu1800-fanheld",
+      "reference": true,
+      "routes": [
+        "npu"
+      ],
+      "prompts": [
+        1024,
+        2048,
+        4096
+      ],
+      "command": [
+        "taskset",
+        "-c",
+        "0-3",
+        "python3",
+        "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/long-context/run_matrix.py",
+        "--output",
+        "references55-cpu1800-fanheld",
+        "--routes",
+        "npu",
+        "--prompts",
+        "1024",
+        "2048",
+        "4096",
+        "--runs",
+        "2",
+        "--cool-c",
+        "55",
+        "--context",
+        "4128",
+        "--golden-directory",
+        "references55-cpu1800-fanheld",
+        "--cpu-khz",
+        "1800000",
+        "--reference"
+      ]
+    },
+    {
+      "directory": "e2e/long-context/p1024-cpu-screen55-cpu1800-fanheld",
+      "reference": false,
+      "routes": [
+        "cpu"
+      ],
+      "prompts": [
+        1024
+      ],
+      "command": [
+        "taskset",
+        "-c",
+        "0-3",
+        "python3",
+        "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/long-context/run_matrix.py",
+        "--output",
+        "p1024-cpu-screen55-cpu1800-fanheld",
+        "--routes",
+        "cpu",
+        "--prompts",
+        "1024",
+        "--runs",
+        "2",
+        "--cool-c",
+        "55",
+        "--context",
+        "4128",
+        "--golden-directory",
+        "references55-cpu1800-fanheld",
+        "--cpu-khz",
+        "1800000"
+      ]
+    },
+    {
+      "directory": "e2e/long-context/p1024-gpu-screen55-cpu1800-fanheld",
+      "reference": false,
+      "routes": [
+        "gpu"
+      ],
+      "prompts": [
+        1024
+      ],
+      "command": [
+        "taskset",
+        "-c",
+        "0-3",
+        "python3",
+        "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/long-context/run_matrix.py",
+        "--output",
+        "p1024-gpu-screen55-cpu1800-fanheld",
+        "--routes",
+        "gpu",
+        "--prompts",
+        "1024",
+        "--runs",
+        "2",
+        "--cool-c",
+        "55",
+        "--context",
+        "4128",
+        "--golden-directory",
+        "references55-cpu1800-fanheld",
+        "--cpu-khz",
+        "1800000"
+      ]
+    },
+    {
+      "directory": "e2e/long-context/p1024-cpu_npu_dec-screen55-cpu1800-fanheld",
+      "reference": false,
+      "routes": [
+        "cpu_npu_dec"
+      ],
+      "prompts": [
+        1024
+      ],
+      "command": [
+        "taskset",
+        "-c",
+        "0-3",
+        "python3",
+        "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/long-context/run_matrix.py",
+        "--output",
+        "p1024-cpu_npu_dec-screen55-cpu1800-fanheld",
+        "--routes",
+        "cpu_npu_dec",
+        "--prompts",
+        "1024",
+        "--runs",
+        "2",
+        "--cool-c",
+        "55",
+        "--context",
+        "4128",
+        "--golden-directory",
+        "references55-cpu1800-fanheld",
+        "--cpu-khz",
+        "1800000"
+      ]
+    },
+    {
+      "directory": "e2e/long-context/p1024-gpu_npu_dec-screen55-cpu1800-fanheld",
+      "reference": false,
+      "routes": [
+        "gpu_npu_dec"
+      ],
+      "prompts": [
+        1024
+      ],
+      "command": [
+        "taskset",
+        "-c",
+        "0-3",
+        "python3",
+        "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/long-context/run_matrix.py",
+        "--output",
+        "p1024-gpu_npu_dec-screen55-cpu1800-fanheld",
+        "--routes",
+        "gpu_npu_dec",
+        "--prompts",
+        "1024",
+        "--runs",
+        "2",
+        "--cool-c",
+        "55",
+        "--context",
+        "4128",
+        "--golden-directory",
+        "references55-cpu1800-fanheld",
+        "--cpu-khz",
+        "1800000"
+      ]
+    },
+    {
+      "directory": "e2e/long-context/p1024-all_dec-screen55-cpu1800-fanheld",
+      "reference": false,
+      "routes": [
+        "all_dec"
+      ],
+      "prompts": [
+        1024
+      ],
+      "command": [
+        "taskset",
+        "-c",
+        "0-3",
+        "python3",
+        "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/long-context/run_matrix.py",
+        "--output",
+        "p1024-all_dec-screen55-cpu1800-fanheld",
+        "--routes",
+        "all_dec",
+        "--prompts",
+        "1024",
+        "--runs",
+        "2",
+        "--cool-c",
+        "55",
+        "--context",
+        "4128",
+        "--golden-directory",
+        "references55-cpu1800-fanheld",
+        "--cpu-khz",
+        "1800000"
+      ]
+    },
+    {
+      "directory": "e2e/long-context/p2048-all_dec-screen55-cpu1800-fanheld",
+      "reference": false,
+      "routes": [
+        "all_dec"
+      ],
+      "prompts": [
+        2048
+      ],
+      "command": [
+        "taskset",
+        "-c",
+        "0-3",
+        "python3",
+        "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/long-context/run_matrix.py",
+        "--output",
+        "p2048-all_dec-screen55-cpu1800-fanheld",
+        "--routes",
+        "all_dec",
+        "--prompts",
+        "2048",
+        "--runs",
+        "2",
+        "--cool-c",
+        "55",
+        "--context",
+        "4128",
+        "--golden-directory",
+        "references55-cpu1800-fanheld",
+        "--cpu-khz",
+        "1800000"
+      ]
+    },
+    {
+      "directory": "e2e/long-context/p2048-gpu_npu_dec-screen55-cpu1800-fanheld",
+      "reference": false,
+      "routes": [
+        "gpu_npu_dec"
+      ],
+      "prompts": [
+        2048
+      ],
+      "command": [
+        "taskset",
+        "-c",
+        "0-3",
+        "python3",
+        "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/long-context/run_matrix.py",
+        "--output",
+        "p2048-gpu_npu_dec-screen55-cpu1800-fanheld",
+        "--routes",
+        "gpu_npu_dec",
+        "--prompts",
+        "2048",
+        "--runs",
+        "2",
+        "--cool-c",
+        "55",
+        "--context",
+        "4128",
+        "--golden-directory",
+        "references55-cpu1800-fanheld",
+        "--cpu-khz",
+        "1800000"
+      ]
+    },
+    {
+      "directory": "e2e/long-context/p2048-cpu_npu_dec-screen55-cpu1800-fanheld",
+      "reference": false,
+      "routes": [
+        "cpu_npu_dec"
+      ],
+      "prompts": [
+        2048
+      ],
+      "command": [
+        "taskset",
+        "-c",
+        "0-3",
+        "python3",
+        "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/long-context/run_matrix.py",
+        "--output",
+        "p2048-cpu_npu_dec-screen55-cpu1800-fanheld",
+        "--routes",
+        "cpu_npu_dec",
+        "--prompts",
+        "2048",
+        "--runs",
+        "2",
+        "--cool-c",
+        "55",
+        "--context",
+        "4128",
+        "--golden-directory",
+        "references55-cpu1800-fanheld",
+        "--cpu-khz",
+        "1800000"
+      ]
+    },
+    {
+      "directory": "e2e/long-context/p2048-gpu-screen55-cpu1800-fanheld",
+      "reference": false,
+      "routes": [
+        "gpu"
+      ],
+      "prompts": [
+        2048
+      ],
+      "command": [
+        "taskset",
+        "-c",
+        "0-3",
+        "python3",
+        "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/long-context/run_matrix.py",
+        "--output",
+        "p2048-gpu-screen55-cpu1800-fanheld",
+        "--routes",
+        "gpu",
+        "--prompts",
+        "2048",
+        "--runs",
+        "2",
+        "--cool-c",
+        "55",
+        "--context",
+        "4128",
+        "--golden-directory",
+        "references55-cpu1800-fanheld",
+        "--cpu-khz",
+        "1800000"
+      ]
+    },
+    {
+      "directory": "e2e/long-context/p2048-cpu-screen55-cpu1800-fanheld",
+      "reference": false,
+      "routes": [
+        "cpu"
+      ],
+      "prompts": [
+        2048
+      ],
+      "command": [
+        "taskset",
+        "-c",
+        "0-3",
+        "python3",
+        "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/long-context/run_matrix.py",
+        "--output",
+        "p2048-cpu-screen55-cpu1800-fanheld",
+        "--routes",
+        "cpu",
+        "--prompts",
+        "2048",
+        "--runs",
+        "2",
+        "--cool-c",
+        "55",
+        "--context",
+        "4128",
+        "--golden-directory",
+        "references55-cpu1800-fanheld",
+        "--cpu-khz",
+        "1800000"
+      ]
+    },
+    {
+      "directory": "e2e/long-context/p4096-cpu-screen55-cpu1800-fanheld",
+      "reference": false,
+      "routes": [
+        "cpu"
+      ],
+      "prompts": [
+        4096
+      ],
+      "command": [
+        "taskset",
+        "-c",
+        "0-3",
+        "python3",
+        "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/long-context/run_matrix.py",
+        "--output",
+        "p4096-cpu-screen55-cpu1800-fanheld",
+        "--routes",
+        "cpu",
+        "--prompts",
+        "4096",
+        "--runs",
+        "2",
+        "--cool-c",
+        "55",
+        "--context",
+        "4128",
+        "--golden-directory",
+        "references55-cpu1800-fanheld",
+        "--cpu-khz",
+        "1800000"
+      ]
+    },
+    {
+      "directory": "e2e/long-context/p4096-gpu-screen55-cpu1800-fanheld",
+      "reference": false,
+      "routes": [
+        "gpu"
+      ],
+      "prompts": [
+        4096
+      ],
+      "command": [
+        "taskset",
+        "-c",
+        "0-3",
+        "python3",
+        "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/long-context/run_matrix.py",
+        "--output",
+        "p4096-gpu-screen55-cpu1800-fanheld",
+        "--routes",
+        "gpu",
+        "--prompts",
+        "4096",
+        "--runs",
+        "2",
+        "--cool-c",
+        "55",
+        "--context",
+        "4128",
+        "--golden-directory",
+        "references55-cpu1800-fanheld",
+        "--cpu-khz",
+        "1800000"
+      ]
+    },
+    {
+      "directory": "e2e/long-context/p4096-cpu_npu_dec-screen55-cpu1800-fanheld",
+      "reference": false,
+      "routes": [
+        "cpu_npu_dec"
+      ],
+      "prompts": [
+        4096
+      ],
+      "command": [
+        "taskset",
+        "-c",
+        "0-3",
+        "python3",
+        "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/long-context/run_matrix.py",
+        "--output",
+        "p4096-cpu_npu_dec-screen55-cpu1800-fanheld",
+        "--routes",
+        "cpu_npu_dec",
+        "--prompts",
+        "4096",
+        "--runs",
+        "2",
+        "--cool-c",
+        "55",
+        "--context",
+        "4128",
+        "--golden-directory",
+        "references55-cpu1800-fanheld",
+        "--cpu-khz",
+        "1800000"
+      ]
+    },
+    {
+      "directory": "e2e/long-context/p4096-gpu_npu_dec-screen55-cpu1800-fanheld",
+      "reference": false,
+      "routes": [
+        "gpu_npu_dec"
+      ],
+      "prompts": [
+        4096
+      ],
+      "command": [
+        "taskset",
+        "-c",
+        "0-3",
+        "python3",
+        "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/long-context/run_matrix.py",
+        "--output",
+        "p4096-gpu_npu_dec-screen55-cpu1800-fanheld",
+        "--routes",
+        "gpu_npu_dec",
+        "--prompts",
+        "4096",
+        "--runs",
+        "2",
+        "--cool-c",
+        "55",
+        "--context",
+        "4128",
+        "--golden-directory",
+        "references55-cpu1800-fanheld",
+        "--cpu-khz",
+        "1800000"
+      ]
+    },
+    {
+      "directory": "e2e/long-context/p4096-all_dec-screen55-cpu1800-fanheld",
+      "reference": false,
+      "routes": [
+        "all_dec"
+      ],
+      "prompts": [
+        4096
+      ],
+      "command": [
+        "taskset",
+        "-c",
+        "0-3",
+        "python3",
+        "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/long-context/run_matrix.py",
+        "--output",
+        "p4096-all_dec-screen55-cpu1800-fanheld",
+        "--routes",
+        "all_dec",
+        "--prompts",
+        "4096",
+        "--runs",
+        "2",
+        "--cool-c",
+        "55",
+        "--context",
+        "4128",
+        "--golden-directory",
+        "references55-cpu1800-fanheld",
+        "--cpu-khz",
+        "1800000"
+      ]
+    }
+  ],
+  "fan_policy": "setpoint255 reasserted by common10ms feedback loop; kernel thermal protections and notifier remain active",
+  "protocol": "Pinned shared FP16 model bytes; runtime capacity4128; synthetic exact1024/2048/4096-token nested prefixes; 32 outputs/31 decode steps; same four threads, fixed CPU1.800/NPU1/GPU1/DDR2.112GHz, common<=55C start, fanPWM255 feedback setpoint, two warmups/two measurements, independently timed resident-model request; teacher IDs from the checked extended NPU path, every actual prediction retained. References supply NPU benchmark rows. Six placements per prompt. Clock failures remain diagnostics, no gates weakened.",
+  "scope": "Screening, not counterbalanced statistical evidence. Long NPU references are not independent HF full-model oracles."
+}

@@ -66,3 +66,7 @@ INTENT: the benchmark runner and attention scratch are limited to 512 tokens; th
 AUTH: user said "wip commit per milestone".
 
 The subsequent CPU1K row at2.256GHz thermally dropped to2.208GHz (NPU800MHz and Mali300MHz also observed), so it is retained as a failed-clock diagnostic. The GPU1K row passed clocks but stays in that separate attempt. All final18 rows are being rerun at common CPU1.800GHz and NPU/GPU/DDR1.000/1.000/2.112GHz, with all other conditions and gates retained. Original clock/fan settings were restored after each rejected attempt.
+
+## Current bare-board1.8GHz milestone
+
+All six1K placements and NPU2K/4K have completed. Their [harness summary](long-context/long-context-cpu1800-partial-summary.json) records prefillms/tokens/s, decode tokens/s and independent request spans; the independent full audit is pending until hardware stops. CPU1K fails the strict all-clock check because idle accelerator clocks drop near86C, while CPU clocks remain1.8GHz. Other1K rows pass the harness gates. The three mixed FFN decode rows have overlapping ranges with NPU-only; no reliable speedup is established. The user reports no heatsink; actual device-tree model is OrangePi5/RK3588S. Recommended a fitted heatsink+5Vfan, with [52PiEP-0167](https://wiki.52pi.com/index.php?title=EP-0167) as a documented compatible example. Physical fan presence/cooling effectiveness is not inferred from software PWM commands. The2K/4K placements are still running, and a preference question about continuing versus installing cooling is pending.

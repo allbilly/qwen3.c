@@ -10,6 +10,7 @@ p.add_argument('--audit', type=Path, required=True)
 p.add_argument('--out', type=Path, required=True)
 args = p.parse_args()
 audit = json.loads(args.audit.read_text())
+assert audit['cpu_target_khz'] == 1800000 and audit['cooldown_target_c'] == 55
 routes = ['cpu', 'gpu', 'npu', 'cpu_npu_dec', 'gpu_npu_dec', 'all_dec']
 names = dict(zip(routes, ['CPU only', 'GPU OpenCL', 'NPU', 'CPU+NPU', 'GPU+NPU', 'CPU+GPU+NPU']))
 prompts = [1024, 2048, 4096]
@@ -49,6 +50,7 @@ lines += [
     '![Long-context phase and request comparison](long-context-comparison.png)', '',
     '[PNG](long-context-comparison.png) · [JPG](long-context-comparison.jpg) · [SVG](long-context-comparison.svg)', '',
     '## Protocol and correctness', '',
+    'The device tree identifies Orange Pi5 / RK3588S, and the user reports no heatsink installed. These are current bare-board measurements. PWM commands do not establish physical fan presence or cooling effectiveness. A future cooler installation needs a separate benchmark session.', '',
     'All rows use the same pinned Qwen3-0.6B revision `c1899de289a04d12100db370d81485cdf75e47ca` and shared FP16 container `c92807935bfbb81f6628e9c2723267da367577a3f2b1bb2530b87bf5e5bba879`. There is no quantization difference. The original 512-token container header is unchanged; the isolated runner expands runtime KV/scratch capacity to4128. The model configuration permits40960 positions with RoPE base1e6. The selected executable `100716de...` remains unchanged.', '',
     f"Each request starts at <={audit['cooldown_target_c']}°C. CPU/NPU/Mali/DDR targets are1.800/1.000/1.000/2.112GHz, with four inference threads onCPU4–7. Clocks are sampled every250ms and original governors/limits restored. Fan PWM255 is a common feedback setpoint, reasserted when the kernel temperature notifier changes it, with10ms polling onCPU0–3. Raw PWM samples, all reassertions and maximum polling gap are retained. Kernel thermal protection remains active, and the original fan setting is restored afterward.", '',
     'Two complete warmups precede two measured requests per row. Each request has32 output tokens and31 decode steps. Prefill tokens/s is input tokens divided by the measured span through the first classifier/argmax. Decode tokens/s is31 divided by the decode span. Request time is independently measured from prefill start through the last argmax. Activation packing, memory movement, DMA synchronization, host work, queue waits and handoffs are included. Loading, tokenization, ID-file reading, cooldown and warmups are excluded.', '',

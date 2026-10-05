@@ -1,0 +1,50 @@
+{
+  "records": [
+    {
+      "label": "p1024-1-cpu_npu_dec",
+      "prompt": 1024,
+      "route": "cpu_npu_dec",
+      "dense_prefill": "npu",
+      "dense_decode": "npu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "teacher_forced_identical_decode_inputs": true,
+      "prefill_logit_relative_rmse": 0.0,
+      "max_logit_error": 0.0,
+      "unchanged_limit": 0.001,
+      "all_predictions_match": true,
+      "quality_passed": true,
+      "ttft_ms": 4229.699500000001,
+      "effective_prefill_tps": 242.0975769082413,
+      "decode_tps": 13.2375,
+      "measured_runs": 2,
+      "ttft_range": [
+        4189.175,
+        4270.224
+      ],
+      "decode_range": [
+        12.983,
+        13.492
+      ],
+      "request_ms": 6572.4323970000005,
+      "output_tps": 4.868821475380479,
+      "request_range": [
+        6486.914221,
+        6657.950573
+      ],
+      "handoff_ms": 0.0555615
+    }
+  ],
+  "cpu_target_khz": 1800000,
+  "cooldown_target_c": 55,
+  "golden_directory": "references55-cpu1800-fanheld",
+  "clocks_held": true,
+  "clocks_restored": true,
+  "samples": 668,
+  "temperature_range_c": [
+    54.538,
+    67.461
+  ],
+  "binary_sha256": "f8b4f9ebf81f28efdca38b3389f80cf96347b2728f655e6d577f70fdfbe9ec9b",
+  "interpretation": "Phase-placement experiment. Non-linear host operations stay CPU. Failed quality rows are diagnostic timings, not qualified inference speed claims."
+}
