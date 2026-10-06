@@ -7,11 +7,7 @@ parser=argparse.ArgumentParser();parser.add_argument('--output',default='matrix'
 parser.add_argument('--prompts',nargs='+',type=int,default=[128,256]);parser.add_argument('--new-tokens',type=int,default=32)
 parser.add_argument('--runs',type=int,default=2);parser.add_argument('--profile',action='store_true');parser.add_argument('--cool-c',type=int,default=50);parser.add_argument('--reference',action='store_true');parser.add_argument('--context',type=int,default=4128);parser.add_argument('--golden-directory',default='references');parser.add_argument('--cpu-khz',type=int,choices=[1800000,2256000],default=1800000)
 parser.add_argument('--allow-clock-drops',action='store_true',help='Keep actual clocks in evidence without stopping on target misses')
-parser.add_argument('--workspace',type=Path,help='Read frozen model/source assets from this comparison workspace')
-parser.add_argument('--output-directory',type=Path,help='Write results to an explicit new directory')
-parser.add_argument('--sample-only-clocks',action='store_true',help='Observe existing limits without changing clock settings')
 args=parser.parse_args()
-if args.workspace:root=args.workspace.resolve();roofline=root.parents[2];matched=roofline.parent
 assert args.cool_c>=0 and (args.cool_c>0 or args.allow_clock_drops), 'Disabling cooldown requires explicit --allow-clock-drops'
 assert 512<=args.context<=4128
 settings={f'{route}_{phase}':(cpu,gpu,mode) for route,cpu,gpu in [('cpu_npu',96,0),('gpu_npu',0,96),('all',96,96)] for phase,mode in [('pre',1),('dec',2),('both',3)]}
@@ -21,11 +17,10 @@ order=args.routes or ['cpu','gpu','npu','cpu_npu_dec','gpu_npu_dec','all_dec']
 if args.reference:assert order==['npu']
 assert all(r in placements for r in order)
 assert args.golden_directory not in ['references55','references55-fanheld'], 'Rejected thermal-protocol attempt; no further hardware process started.'
-out=args.output_directory.resolve() if args.output_directory else root/args.output;out.mkdir(exist_ok=False)
-assert not args.sample_only_clocks or (args.allow_clock_drops and order==['cpu']), 'Sample-only mode is restricted to explicit CPU runs'
+out=root/args.output;out.mkdir(exist_ok=False)
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 binary=root/'runq-routes';shutil.copy2(binary,out/'runq-routes')
-for name in ['run_matrix.py','source-provenance.json']:shutil.copy2(Path(__file__) if name=='run_matrix.py' else root/name,out/name)
+for name in ['run_matrix.py','source-provenance.json']:shutil.copy2(root/name,out/name)
 for stem in ['cpu','gpu']:
  checks=[json.loads(s) for s in (root/f'{stem}-linear-check.jsonl').read_text().splitlines() if s.startswith('{') and 'linear_check' in s]
  assert len(checks)==6 and all(r['passed'] for r in checks)
@@ -42,22 +37,13 @@ def clocks(script,action):
 fields={'cpu4_khz':'/sys/devices/system/cpu/cpufreq/policy4/scaling_cur_freq','cpu6_khz':'/sys/devices/system/cpu/cpufreq/policy6/scaling_cur_freq',
  'npu_hz':'/sys/class/devfreq/fdab0000.npu/cur_freq','gpu_hz':'/sys/class/devfreq/fb000000.gpu/cur_freq','ddr_hz':'/sys/class/devfreq/dmc/cur_freq','temperature_millidegrees':'/sys/class/thermal/thermal_zone0/temp','fan_pwm':'/sys/class/hwmon/hwmon8/pwm1'}
 stop=threading.Event();phase='setup';thread=None;cpu_locked=False;gpu_locked=False;records=[]
-def clock_snapshot():
- paths={'cpu4':Path('/sys/devices/system/cpu/cpufreq/policy4'),'cpu6':Path('/sys/devices/system/cpu/cpufreq/policy6'),'npu':Path('/sys/class/devfreq/fdab0000.npu'),'ddr':Path('/sys/class/devfreq/dmc')}
- return {key:{field:(path/field).read_text().strip() for field in (['scaling_governor','scaling_min_freq','scaling_max_freq'] if key.startswith('cpu') else ['governor','min_freq','max_freq'])} for key,path in paths.items()}
-def gpu_snapshot():
- return {field:(Path('/sys/class/devfreq/fb000000.gpu')/field).read_text().strip() for field in ['governor','min_freq','max_freq']}
 def monitor():
  with (out/'clock-samples.jsonl').open('w') as log:
   while not stop.is_set():
    log.write(json.dumps({'time':time.time(),'phase':phase,**{k:int(Path(p).read_text()) for k,p in fields.items()}})+'\n');log.flush();stop.wait(.25)
 try:
- if args.sample_only_clocks:
-  (out/'clock-state-before.json').write_text(json.dumps(clock_snapshot(),indent=2)+'\n')
-  (out/'gpu-clock-state-before.json').write_text(json.dumps(gpu_snapshot(),indent=2)+'\n')
- else:
-  clocks('roofline/yalm/long_clocks.py' if args.cpu_khz==1800000 else 'clocks.py','lock');cpu_locked=True;shutil.copy2(matched/'clock-state.json',out/'clock-state-before.json')
-  clocks('roofline/gpu/gpu_clocks.py','lock');gpu_locked=True;shutil.copy2(roofline/'gpu/gpu-clock-state.json',out/'gpu-clock-state-before.json')
+ clocks('roofline/yalm/long_clocks.py' if args.cpu_khz==1800000 else 'clocks.py','lock');cpu_locked=True;shutil.copy2(matched/'clock-state.json',out/'clock-state-before.json')
+ clocks('roofline/gpu/gpu_clocks.py','lock');gpu_locked=True;shutil.copy2(roofline/'gpu/gpu-clock-state.json',out/'gpu-clock-state-before.json')
  thread=threading.Thread(target=monitor,daemon=True);thread.start()
  for prompt in args.prompts:
   route_order=order if args.reference or prompt==args.prompts[0] else list(reversed(order))
@@ -92,7 +78,7 @@ try:
     teacher=out/f'{phase}.teacher.tokens';teacher.write_text(' '.join(map(str,golden))+'\n');jobenv['TEACHER_IDS']=str(teacher)
    logits=out/f'{phase}.f32';command=['taskset','-c','4-7',str(out/'runq-routes'),str(matched/'Qwen3-0.6B.fp16'),str(copied),str(args.new_tokens),str(args.runs),str(logits)]
    selected_keys=[*fields,'OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','GOMP_SPINCOUNT','NPU_CORES','NPU_DOMAIN_ID','NPU_FUSED','NPU_ATTENTION','NPU_SPLIT_DOWN','NPU_STREAM_FFN','NPU_CLS_TILE','WARMUP_RUNS','DENSE_PREFILL','DENSE_DECODE','GPU_ATTENTION','CPU_CLASSIFIER','TEACHER_IDS','LINEAR_PROFILE','GPU_PROFILE','NPU_PROFILE','ROUTE_PROFILE','FFN_CPU_CHANNELS','FFN_GPU_CHANNELS','FFN_MODE','FFN_PROFILE','LD_LIBRARY_PATH','COOL_REQUEST_C','BENCH_CONTEXT']
-   (out/f'{phase}.config.json').write_text(json.dumps({'command':command,'environment':{k:jobenv.get(k) for k in selected_keys},'route':route,'cpu_target_khz':args.cpu_khz,'golden_directory':args.output if args.reference else args.golden_directory,'binary_sha256':sha(out/'runq-routes'),'allow_clock_drops':args.allow_clock_drops,'cooldown_enforced':args.cool_c>0,'clock_control':'sample_only' if args.sample_only_clocks else 'locked'},indent=2)+'\n')
+   (out/f'{phase}.config.json').write_text(json.dumps({'command':command,'environment':{k:jobenv.get(k) for k in selected_keys},'route':route,'cpu_target_khz':args.cpu_khz,'golden_directory':args.output if args.reference else args.golden_directory,'binary_sha256':sha(out/'runq-routes'),'allow_clock_drops':args.allow_clock_drops,'cooldown_enforced':args.cool_c>0},indent=2)+'\n')
    print('Running',phase,flush=True)
    with (out/f'{phase}.jsonl').open('w') as log:completed=subprocess.run(command,env=jobenv,stdout=log,stderr=subprocess.STDOUT)
    assert completed.returncode==0,(phase,'runtime failure',completed.returncode)
@@ -122,16 +108,13 @@ finally:
  if thread:stop.set();thread.join()
  if gpu_locked:clocks('roofline/gpu/gpu_clocks.py','restore');shutil.copy2(roofline/'gpu/gpu-clock-state-restored.json',out/'gpu-clock-state-restored.json')
  if cpu_locked:clocks('roofline/yalm/long_clocks.py' if args.cpu_khz==1800000 else 'clocks.py','restore');shutil.copy2(matched/'results/clock-state-restored.json',out/'clock-state-restored.json')
- if args.sample_only_clocks:
-  (out/'clock-state-after.json').write_text(json.dumps(clock_snapshot(),indent=2)+'\n')
-  (out/'gpu-clock-state-after.json').write_text(json.dumps(gpu_snapshot(),indent=2)+'\n')
 samples=[json.loads(s) for s in (out/'clock-samples.jsonl').read_text().splitlines()]
 targets={'cpu4_khz':args.cpu_khz,'cpu6_khz':args.cpu_khz,'npu_hz':1000000000,'gpu_hz':1000000000,'ddr_hz':2112000000}
 held=all(r[k]==v for r in samples for k,v in targets.items())
-unchanged=all((out/f'{stem}-state-before.json').read_bytes()==(out/f'{stem}-state-{"after" if args.sample_only_clocks else "restored"}.json').read_bytes() for stem in ['clock','gpu-clock'])
-assert unchanged or args.sample_only_clocks
-(out/'summary.json').write_text(json.dumps({'records':records,'cpu_target_khz':args.cpu_khz,'cooldown_target_c':args.cool_c,'allow_clock_drops':args.allow_clock_drops,'cooldown_enforced':args.cool_c>0,'golden_directory':args.output if args.reference else args.golden_directory,'clocks_held':held,'clocks_restored':not args.sample_only_clocks,'clock_limits_unchanged':unchanged,'clock_control':'sample_only' if args.sample_only_clocks else 'locked','samples':len(samples),
+restored=all((out/f'{stem}-state-before.json').read_bytes()==(out/f'{stem}-state-restored.json').read_bytes() for stem in ['clock','gpu-clock'])
+assert restored
+(out/'summary.json').write_text(json.dumps({'records':records,'cpu_target_khz':args.cpu_khz,'cooldown_target_c':args.cool_c,'allow_clock_drops':args.allow_clock_drops,'cooldown_enforced':args.cool_c>0,'golden_directory':args.output if args.reference else args.golden_directory,'clocks_held':held,'clocks_restored':restored,'samples':len(samples),
  'temperature_range_c':[min(r['temperature_millidegrees'] for r in samples)/1000,max(r['temperature_millidegrees'] for r in samples)/1000],
  'binary_sha256':sha(out/'runq-routes'),'interpretation':'Phase-placement experiment. Non-linear host operations stay CPU. Failed quality rows are diagnostic timings, not qualified inference speed claims.'},indent=2)+'\n')
 assert held or args.allow_clock_drops, 'Clock target failure; retained summary and raw diagnostics, with original clocks restored.'
-print('Finished; actual clocks recorded; clock control:', 'sample only' if args.sample_only_clocks else 'restored', '; limits unchanged:',unchanged,'; targets held:',held,flush=True)
+print('Finished; actual clocks recorded, original settings restored; targets held:',held,flush=True)

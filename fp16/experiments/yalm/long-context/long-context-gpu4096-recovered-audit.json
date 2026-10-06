@@ -1,0 +1,66 @@
+{
+  "directory": "e2e/long-context/p4096-gpu-continue-throttle-cpu1800-fanheld",
+  "label": "p4096-1-gpu",
+  "prompt": 4096,
+  "route": "gpu",
+  "reference": false,
+  "quality_passed": true,
+  "relative_rmse": 0.000889396491880333,
+  "all_predictions_match": true,
+  "clocks_held": true,
+  "row_clock_samples": 3442,
+  "row_clock_drops": 0,
+  "row_temperature_range_c": [
+    41.615,
+    80.384
+  ],
+  "clock_frequency_ranges": {
+    "cpu4_khz": [
+      1800000,
+      1800000
+    ],
+    "cpu6_khz": [
+      1800000,
+      1800000
+    ],
+    "npu_hz": [
+      1000000000,
+      1000000000
+    ],
+    "gpu_hz": [
+      1000000000,
+      1000000000
+    ],
+    "ddr_hz": [
+      2112000000,
+      2112000000
+    ]
+  },
+  "cooldown_target_c": 0,
+  "cooldown_enforced": false,
+  "allow_clock_drops": true,
+  "device_counts_checked": true,
+  "prefill_ms": 204740.55599999998,
+  "prefill_tps": 20.00580676356081,
+  "decode_tps": 2.8215,
+  "request_ms": 215726.83567549998,
+  "prefill_range": [
+    204618.522,
+    204862.59
+  ],
+  "decode_range": [
+    2.807,
+    2.836
+  ],
+  "request_range": [
+    215661.853299,
+    215791.818052
+  ],
+  "logit_sha256": "1b914bfa32d4b108f9e3e882704cbd2756967f5d477966776c8d37022db3a28f",
+  "golden_logit_sha256": "e67a3fc59cb6af16c93cf3af9e72a5b1de316d631ae6e7cc69b1aa2df7eace0b",
+  "raw_log_sha256": "0e5964f6455d6a9226b9cf78058bdd78d19f597062ed9d5098dcb2c0bd88302b",
+  "prompt_sha256": "1611db95b226442b2cba4a00c59ea1fff141fbdca9d711a062b24ea3c4f9376b",
+  "binary_sha256": "f8b4f9ebf81f28efdca38b3389f80cf96347b2728f655e6d577f70fdfbe9ec9b",
+  "clock_restoration_verified": false,
+  "scope": "Four raw requests completed. Parent summary and restoration records are absent. This audit verifies observed request metrics and quality, not normal controller exit or restoration. No summary or restoration artifact is fabricated."
+}

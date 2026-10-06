@@ -129,9 +129,9 @@ samples=[json.loads(s) for s in (out/'clock-samples.jsonl').read_text().splitlin
 targets={'cpu4_khz':args.cpu_khz,'cpu6_khz':args.cpu_khz,'npu_hz':1000000000,'gpu_hz':1000000000,'ddr_hz':2112000000}
 held=all(r[k]==v for r in samples for k,v in targets.items())
 unchanged=all((out/f'{stem}-state-before.json').read_bytes()==(out/f'{stem}-state-{"after" if args.sample_only_clocks else "restored"}.json').read_bytes() for stem in ['clock','gpu-clock'])
-assert unchanged or args.sample_only_clocks
+assert unchanged
 (out/'summary.json').write_text(json.dumps({'records':records,'cpu_target_khz':args.cpu_khz,'cooldown_target_c':args.cool_c,'allow_clock_drops':args.allow_clock_drops,'cooldown_enforced':args.cool_c>0,'golden_directory':args.output if args.reference else args.golden_directory,'clocks_held':held,'clocks_restored':not args.sample_only_clocks,'clock_limits_unchanged':unchanged,'clock_control':'sample_only' if args.sample_only_clocks else 'locked','samples':len(samples),
  'temperature_range_c':[min(r['temperature_millidegrees'] for r in samples)/1000,max(r['temperature_millidegrees'] for r in samples)/1000],
  'binary_sha256':sha(out/'runq-routes'),'interpretation':'Phase-placement experiment. Non-linear host operations stay CPU. Failed quality rows are diagnostic timings, not qualified inference speed claims.'},indent=2)+'\n')
 assert held or args.allow_clock_drops, 'Clock target failure; retained summary and raw diagnostics, with original clocks restored.'
-print('Finished; actual clocks recorded; clock control:', 'sample only' if args.sample_only_clocks else 'restored', '; limits unchanged:',unchanged,'; targets held:',held,flush=True)
+print('Finished; actual clocks recorded; clock control:', 'sample only, limits unchanged' if args.sample_only_clocks else 'restored', '; targets held:',held,flush=True)

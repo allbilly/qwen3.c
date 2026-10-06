@@ -1,0 +1,974 @@
+{
+  "cpu_target_khz": 1800000,
+  "cooldown_target_c": 55,
+  "model_sha256": "c92807935bfbb81f6628e9c2723267da367577a3f2b1bb2530b87bf5e5bba879",
+  "binary_sha256": "f8b4f9ebf81f28efdca38b3389f80cf96347b2728f655e6d577f70fdfbe9ec9b",
+  "selected_binary_unchanged": true,
+  "records": [
+    {
+      "directory": "e2e/long-context/references55-cpu1800-fanheld",
+      "label": "p1024-1-npu",
+      "prompt": 1024,
+      "route": "npu",
+      "reference": true,
+      "quality_passed": true,
+      "clock_control": "locked",
+      "clock_restoration_verified": true,
+      "clock_limits_unchanged": true,
+      "cooldown_target_c": 55,
+      "cooldown_enforced": true,
+      "allow_clock_drops": false,
+      "relative_rmse": 0.0,
+      "all_predictions_match": true,
+      "clocks_held": true,
+      "controller_clocks_held": true,
+      "row_clock_samples": 127,
+      "row_clock_drops": 0,
+      "row_temperature_range_c": [
+        44.384,
+        61.0
+      ],
+      "clock_frequency_ranges": {
+        "cpu4_khz": [
+          1800000,
+          1800000
+        ],
+        "cpu6_khz": [
+          1800000,
+          1800000
+        ],
+        "npu_hz": [
+          1000000000,
+          1000000000
+        ],
+        "gpu_hz": [
+          1000000000,
+          1000000000
+        ],
+        "ddr_hz": [
+          2112000000,
+          2112000000
+        ]
+      },
+      "device_counts_checked": true,
+      "cpu_phase_profiles": {},
+      "prefill_ms": 4246.4835,
+      "prefill_tps": 241.14069912199116,
+      "decode_tps": 13.186,
+      "request_ms": 6597.712647,
+      "prefill_range": [
+        4222.575,
+        4270.392
+      ],
+      "decode_range": [
+        13.043,
+        13.329
+      ],
+      "request_range": [
+        6596.129996,
+        6599.295298
+      ],
+      "logit_sha256": "5d863cf8f2d474621cfec9b6b65a7cb1c86fe3d5411ec8ae68bd87e9470edf17",
+      "golden_logit_sha256": "5d863cf8f2d474621cfec9b6b65a7cb1c86fe3d5411ec8ae68bd87e9470edf17",
+      "raw_log_sha256": "5db91427be1cba5c0c40fdcb9cf85a35dd6a7c773b810c35b065decc3ef687cf",
+      "prompt_sha256": "68dfc51920a6064d55e953d060bb535b32ba0bd25b9d92193b32633114d70e0c"
+    },
+    {
+      "directory": "e2e/long-context/references55-cpu1800-fanheld",
+      "label": "p2048-1-npu",
+      "prompt": 2048,
+      "route": "npu",
+      "reference": true,
+      "quality_passed": true,
+      "clock_control": "locked",
+      "clock_restoration_verified": true,
+      "clock_limits_unchanged": true,
+      "cooldown_target_c": 55,
+      "cooldown_enforced": true,
+      "allow_clock_drops": false,
+      "relative_rmse": 0.0,
+      "all_predictions_match": true,
+      "clocks_held": true,
+      "controller_clocks_held": true,
+      "row_clock_samples": 309,
+      "row_clock_drops": 0,
+      "row_temperature_range_c": [
+        54.538,
+        67.461
+      ],
+      "clock_frequency_ranges": {
+        "cpu4_khz": [
+          1800000,
+          1800000
+        ],
+        "cpu6_khz": [
+          1800000,
+          1800000
+        ],
+        "npu_hz": [
+          1000000000,
+          1000000000
+        ],
+        "gpu_hz": [
+          1000000000,
+          1000000000
+        ],
+        "ddr_hz": [
+          2112000000,
+          2112000000
+        ]
+      },
+      "device_counts_checked": true,
+      "cpu_phase_profiles": {},
+      "prefill_ms": 12501.281500000001,
+      "prefill_tps": 163.82320484503927,
+      "decode_tps": 9.35,
+      "request_ms": 15816.939255000001,
+      "prefill_range": [
+        12292.58,
+        12709.983
+      ],
+      "decode_range": [
+        9.293,
+        9.407
+      ],
+      "request_range": [
+        15628.563108,
+        16005.315402
+      ],
+      "logit_sha256": "64c66a3f4777e8fd4f9a85faddec3614fcc3b8eec3a5deae13bd168c1371b082",
+      "golden_logit_sha256": "64c66a3f4777e8fd4f9a85faddec3614fcc3b8eec3a5deae13bd168c1371b082",
+      "raw_log_sha256": "2a553c43c663dc1bc3610f63c6834b30874a26052d7829bffe8b92fd6e01eeef",
+      "prompt_sha256": "07c5922399fdcbd89059116e57782153dd4af528af492a9338b2595237c1e7b0"
+    },
+    {
+      "directory": "e2e/long-context/references55-cpu1800-fanheld",
+      "label": "p4096-1-npu",
+      "prompt": 4096,
+      "route": "npu",
+      "reference": true,
+      "quality_passed": true,
+      "clock_control": "locked",
+      "clock_restoration_verified": true,
+      "clock_limits_unchanged": true,
+      "cooldown_target_c": 55,
+      "cooldown_enforced": true,
+      "allow_clock_drops": false,
+      "relative_rmse": 0.0,
+      "all_predictions_match": true,
+      "clocks_held": true,
+      "controller_clocks_held": true,
+      "row_clock_samples": 1025,
+      "row_clock_drops": 0,
+      "row_temperature_range_c": [
+        54.538,
+        78.538
+      ],
+      "clock_frequency_ranges": {
+        "cpu4_khz": [
+          1800000,
+          1800000
+        ],
+        "cpu6_khz": [
+          1800000,
+          1800000
+        ],
+        "npu_hz": [
+          1000000000,
+          1000000000
+        ],
+        "gpu_hz": [
+          1000000000,
+          1000000000
+        ],
+        "ddr_hz": [
+          2112000000,
+          2112000000
+        ]
+      },
+      "device_counts_checked": true,
+      "cpu_phase_profiles": {},
+      "prefill_ms": 45443.882,
+      "prefill_tps": 90.13314487525516,
+      "decode_tps": 5.275,
+      "request_ms": 51320.793835000004,
+      "prefill_range": [
+        45378.277,
+        45509.487
+      ],
+      "decode_range": [
+        5.269,
+        5.281
+      ],
+      "request_range": [
+        51248.645147,
+        51392.942523
+      ],
+      "logit_sha256": "e67a3fc59cb6af16c93cf3af9e72a5b1de316d631ae6e7cc69b1aa2df7eace0b",
+      "golden_logit_sha256": "e67a3fc59cb6af16c93cf3af9e72a5b1de316d631ae6e7cc69b1aa2df7eace0b",
+      "raw_log_sha256": "0a4cab5817f5e031fb463e842d663b8501cc5d7c7ebc4e4764e3b4875fbcfaff",
+      "prompt_sha256": "1611db95b226442b2cba4a00c59ea1fff141fbdca9d711a062b24ea3c4f9376b"
+    },
+    {
+      "directory": "e2e/long-context/p1024-cpu-screen55-cpu1800-fanheld",
+      "label": "p1024-1-cpu",
+      "prompt": 1024,
+      "route": "cpu",
+      "reference": false,
+      "quality_passed": true,
+      "clock_control": "locked",
+      "clock_restoration_verified": true,
+      "clock_limits_unchanged": true,
+      "cooldown_target_c": 55,
+      "cooldown_enforced": true,
+      "allow_clock_drops": false,
+      "relative_rmse": 0.0009690493530615345,
+      "all_predictions_match": true,
+      "clocks_held": false,
+      "controller_clocks_held": false,
+      "row_clock_samples": 2223,
+      "row_clock_drops": 29,
+      "row_temperature_range_c": [
+        54.538,
+        85.888
+      ],
+      "clock_frequency_ranges": {
+        "cpu4_khz": [
+          1800000,
+          1800000
+        ],
+        "cpu6_khz": [
+          1800000,
+          1800000
+        ],
+        "npu_hz": [
+          800000000,
+          1000000000
+        ],
+        "gpu_hz": [
+          300000000,
+          1000000000
+        ],
+        "ddr_hz": [
+          2112000000,
+          2112000000
+        ]
+      },
+      "device_counts_checked": true,
+      "cpu_phase_profiles": {
+        "prefill": {
+          "wall_ms": 10424.0503220785,
+          "pack_ms": 162.9124694765,
+          "compute_ms": 10261.050349086501,
+          "prefill_attention_ms": 52863.6604979985
+        },
+        "decode": {
+          "wall_ms": 1643.516814619,
+          "pack_ms": 6.027511291,
+          "compute_ms": 1636.3911969765,
+          "prefill_attention_ms": 0.0
+        }
+      },
+      "prefill_ms": 63750.995,
+      "prefill_tps": 16.06249439714627,
+      "decode_tps": 12.429,
+      "request_ms": 66245.4232095,
+      "prefill_range": [
+        63698.372,
+        63803.618
+      ],
+      "decode_range": [
+        12.308,
+        12.55
+      ],
+      "request_range": [
+        66168.474694,
+        66322.371725
+      ],
+      "logit_sha256": "c22a3034b3c218e254ea294fe9ec860f9e28eaacc516bbda60ff055962c888e1",
+      "golden_logit_sha256": "5d863cf8f2d474621cfec9b6b65a7cb1c86fe3d5411ec8ae68bd87e9470edf17",
+      "raw_log_sha256": "3246db7599207548d9dead16ab49a7ed3663168cc490d606125f1e5446538884",
+      "prompt_sha256": "68dfc51920a6064d55e953d060bb535b32ba0bd25b9d92193b32633114d70e0c"
+    },
+    {
+      "directory": "e2e/long-context/p1024-gpu-screen55-cpu1800-fanheld",
+      "label": "p1024-1-gpu",
+      "prompt": 1024,
+      "route": "gpu",
+      "reference": false,
+      "quality_passed": true,
+      "clock_control": "locked",
+      "clock_restoration_verified": true,
+      "clock_limits_unchanged": true,
+      "cooldown_target_c": 55,
+      "cooldown_enforced": true,
+      "allow_clock_drops": false,
+      "relative_rmse": 0.0007862517043196279,
+      "all_predictions_match": true,
+      "clocks_held": true,
+      "controller_clocks_held": true,
+      "row_clock_samples": 1603,
+      "row_clock_drops": 0,
+      "row_temperature_range_c": [
+        54.538,
+        69.307
+      ],
+      "clock_frequency_ranges": {
+        "cpu4_khz": [
+          1800000,
+          1800000
+        ],
+        "cpu6_khz": [
+          1800000,
+          1800000
+        ],
+        "npu_hz": [
+          1000000000,
+          1000000000
+        ],
+        "gpu_hz": [
+          1000000000,
+          1000000000
+        ],
+        "ddr_hz": [
+          2112000000,
+          2112000000
+        ]
+      },
+      "device_counts_checked": true,
+      "cpu_phase_profiles": {},
+      "prefill_ms": 23820.434999999998,
+      "prefill_tps": 42.98829975187272,
+      "decode_tps": 7.3515,
+      "request_ms": 28037.457306,
+      "prefill_range": [
+        23814.192,
+        23826.678
+      ],
+      "decode_range": [
+        7.348,
+        7.355
+      ],
+      "request_range": [
+        28029.321228,
+        28045.593384
+      ],
+      "logit_sha256": "6212fc0f242a57fb1d45a38f7f93362b8f5b9340e643a8f0a138667dd00a124d",
+      "golden_logit_sha256": "5d863cf8f2d474621cfec9b6b65a7cb1c86fe3d5411ec8ae68bd87e9470edf17",
+      "raw_log_sha256": "31626790f0a832ec8ba4a01851411fc9281577e79ea2ac6c2f404104e8ce6818",
+      "prompt_sha256": "68dfc51920a6064d55e953d060bb535b32ba0bd25b9d92193b32633114d70e0c"
+    },
+    {
+      "directory": "e2e/long-context/p1024-cpu_npu_dec-screen55-cpu1800-fanheld",
+      "label": "p1024-1-cpu_npu_dec",
+      "prompt": 1024,
+      "route": "cpu_npu_dec",
+      "reference": false,
+      "quality_passed": true,
+      "clock_control": "locked",
+      "clock_restoration_verified": true,
+      "clock_limits_unchanged": true,
+      "cooldown_target_c": 55,
+      "cooldown_enforced": true,
+      "allow_clock_drops": false,
+      "relative_rmse": 0.0,
+      "all_predictions_match": true,
+      "clocks_held": true,
+      "controller_clocks_held": true,
+      "row_clock_samples": 668,
+      "row_clock_drops": 0,
+      "row_temperature_range_c": [
+        54.538,
+        67.461
+      ],
+      "clock_frequency_ranges": {
+        "cpu4_khz": [
+          1800000,
+          1800000
+        ],
+        "cpu6_khz": [
+          1800000,
+          1800000
+        ],
+        "npu_hz": [
+          1000000000,
+          1000000000
+        ],
+        "gpu_hz": [
+          1000000000,
+          1000000000
+        ],
+        "ddr_hz": [
+          2112000000,
+          2112000000
+        ]
+      },
+      "device_counts_checked": true,
+      "cpu_phase_profiles": {},
+      "prefill_ms": 4229.699500000001,
+      "prefill_tps": 242.0975769082413,
+      "decode_tps": 13.2375,
+      "request_ms": 6572.4323970000005,
+      "prefill_range": [
+        4189.175,
+        4270.224
+      ],
+      "decode_range": [
+        12.983,
+        13.492
+      ],
+      "request_range": [
+        6486.914221,
+        6657.950573
+      ],
+      "logit_sha256": "5d863cf8f2d474621cfec9b6b65a7cb1c86fe3d5411ec8ae68bd87e9470edf17",
+      "golden_logit_sha256": "5d863cf8f2d474621cfec9b6b65a7cb1c86fe3d5411ec8ae68bd87e9470edf17",
+      "raw_log_sha256": "8c871159e41b73bf5e747060faaa324e53b0432694e4da0c33ab5e606a070ee2",
+      "prompt_sha256": "68dfc51920a6064d55e953d060bb535b32ba0bd25b9d92193b32633114d70e0c"
+    },
+    {
+      "directory": "e2e/long-context/p1024-gpu_npu_dec-screen55-cpu1800-fanheld",
+      "label": "p1024-1-gpu_npu_dec",
+      "prompt": 1024,
+      "route": "gpu_npu_dec",
+      "reference": false,
+      "quality_passed": true,
+      "clock_control": "locked",
+      "clock_restoration_verified": true,
+      "clock_limits_unchanged": true,
+      "cooldown_target_c": 55,
+      "cooldown_enforced": true,
+      "allow_clock_drops": false,
+      "relative_rmse": 0.0,
+      "all_predictions_match": true,
+      "clocks_held": true,
+      "controller_clocks_held": true,
+      "row_clock_samples": 537,
+      "row_clock_drops": 0,
+      "row_temperature_range_c": [
+        54.538,
+        68.384
+      ],
+      "clock_frequency_ranges": {
+        "cpu4_khz": [
+          1800000,
+          1800000
+        ],
+        "cpu6_khz": [
+          1800000,
+          1800000
+        ],
+        "npu_hz": [
+          1000000000,
+          1000000000
+        ],
+        "gpu_hz": [
+          1000000000,
+          1000000000
+        ],
+        "ddr_hz": [
+          2112000000,
+          2112000000
+        ]
+      },
+      "device_counts_checked": true,
+      "cpu_phase_profiles": {},
+      "prefill_ms": 4256.275,
+      "prefill_tps": 240.5859583790991,
+      "decode_tps": 13.2015,
+      "request_ms": 6604.639766,
+      "prefill_range": [
+        4231.611,
+        4280.939
+      ],
+      "decode_range": [
+        13.113,
+        13.29
+      ],
+      "request_range": [
+        6564.290833,
+        6644.988699
+      ],
+      "logit_sha256": "5d863cf8f2d474621cfec9b6b65a7cb1c86fe3d5411ec8ae68bd87e9470edf17",
+      "golden_logit_sha256": "5d863cf8f2d474621cfec9b6b65a7cb1c86fe3d5411ec8ae68bd87e9470edf17",
+      "raw_log_sha256": "e161fb10b1f0f7c6b0fd640fb86676f3fb8543bd7ed9d1cfd05360715b944bbc",
+      "prompt_sha256": "68dfc51920a6064d55e953d060bb535b32ba0bd25b9d92193b32633114d70e0c"
+    },
+    {
+      "directory": "e2e/long-context/p1024-all_dec-screen55-cpu1800-fanheld",
+      "label": "p1024-1-all_dec",
+      "prompt": 1024,
+      "route": "all_dec",
+      "reference": false,
+      "quality_passed": true,
+      "clock_control": "locked",
+      "clock_restoration_verified": true,
+      "clock_limits_unchanged": true,
+      "cooldown_target_c": 55,
+      "cooldown_enforced": true,
+      "allow_clock_drops": false,
+      "relative_rmse": 0.0,
+      "all_predictions_match": true,
+      "clocks_held": true,
+      "controller_clocks_held": true,
+      "row_clock_samples": 506,
+      "row_clock_drops": 0,
+      "row_temperature_range_c": [
+        54.538,
+        68.384
+      ],
+      "clock_frequency_ranges": {
+        "cpu4_khz": [
+          1800000,
+          1800000
+        ],
+        "cpu6_khz": [
+          1800000,
+          1800000
+        ],
+        "npu_hz": [
+          1000000000,
+          1000000000
+        ],
+        "gpu_hz": [
+          1000000000,
+          1000000000
+        ],
+        "ddr_hz": [
+          2112000000,
+          2112000000
+        ]
+      },
+      "device_counts_checked": true,
+      "cpu_phase_profiles": {},
+      "prefill_ms": 4225.211,
+      "prefill_tps": 242.3547605078184,
+      "decode_tps": 13.0505,
+      "request_ms": 6600.7636585,
+      "prefill_range": [
+        4187.703,
+        4262.719
+      ],
+      "decode_range": [
+        12.961,
+        13.14
+      ],
+      "request_range": [
+        6547.000075,
+        6654.527242
+      ],
+      "logit_sha256": "5d863cf8f2d474621cfec9b6b65a7cb1c86fe3d5411ec8ae68bd87e9470edf17",
+      "golden_logit_sha256": "5d863cf8f2d474621cfec9b6b65a7cb1c86fe3d5411ec8ae68bd87e9470edf17",
+      "raw_log_sha256": "b664196d5de2fdaa1fc5d8332017c90d9ebab6d3cb2ab86d51baaad1067e2f24",
+      "prompt_sha256": "68dfc51920a6064d55e953d060bb535b32ba0bd25b9d92193b32633114d70e0c"
+    },
+    {
+      "directory": "e2e/long-context/p2048-all_dec-screen55-cpu1800-fanheld",
+      "label": "p2048-1-all_dec",
+      "prompt": 2048,
+      "route": "all_dec",
+      "reference": false,
+      "quality_passed": true,
+      "clock_control": "locked",
+      "clock_restoration_verified": true,
+      "clock_limits_unchanged": true,
+      "cooldown_target_c": 55,
+      "cooldown_enforced": true,
+      "allow_clock_drops": false,
+      "relative_rmse": 0.0,
+      "all_predictions_match": true,
+      "clocks_held": true,
+      "controller_clocks_held": true,
+      "row_clock_samples": 879,
+      "row_clock_drops": 0,
+      "row_temperature_range_c": [
+        54.538,
+        73.923
+      ],
+      "clock_frequency_ranges": {
+        "cpu4_khz": [
+          1800000,
+          1800000
+        ],
+        "cpu6_khz": [
+          1800000,
+          1800000
+        ],
+        "npu_hz": [
+          1000000000,
+          1000000000
+        ],
+        "gpu_hz": [
+          1000000000,
+          1000000000
+        ],
+        "ddr_hz": [
+          2112000000,
+          2112000000
+        ]
+      },
+      "device_counts_checked": true,
+      "cpu_phase_profiles": {},
+      "prefill_ms": 12082.9355,
+      "prefill_tps": 169.49523565693121,
+      "decode_tps": 9.261500000000002,
+      "request_ms": 15430.264901499999,
+      "prefill_range": [
+        11936.147,
+        12229.724
+      ],
+      "decode_range": [
+        9.252,
+        9.271
+      ],
+      "request_range": [
+        15280.034967,
+        15580.494836
+      ],
+      "logit_sha256": "64c66a3f4777e8fd4f9a85faddec3614fcc3b8eec3a5deae13bd168c1371b082",
+      "golden_logit_sha256": "64c66a3f4777e8fd4f9a85faddec3614fcc3b8eec3a5deae13bd168c1371b082",
+      "raw_log_sha256": "f813388fc0f30a527190a17f411dd1e7a45e4586270db12406d2a3dec1008dd7",
+      "prompt_sha256": "07c5922399fdcbd89059116e57782153dd4af528af492a9338b2595237c1e7b0"
+    },
+    {
+      "directory": "e2e/long-context/p2048-gpu_npu_dec-screen55-cpu1800-fanheld",
+      "label": "p2048-1-gpu_npu_dec",
+      "prompt": 2048,
+      "route": "gpu_npu_dec",
+      "reference": false,
+      "quality_passed": true,
+      "clock_control": "locked",
+      "clock_restoration_verified": true,
+      "clock_limits_unchanged": true,
+      "cooldown_target_c": 55,
+      "cooldown_enforced": true,
+      "allow_clock_drops": false,
+      "relative_rmse": 0.0,
+      "all_predictions_match": true,
+      "clocks_held": true,
+      "controller_clocks_held": true,
+      "row_clock_samples": 966,
+      "row_clock_drops": 0,
+      "row_temperature_range_c": [
+        54.538,
+        74.846
+      ],
+      "clock_frequency_ranges": {
+        "cpu4_khz": [
+          1800000,
+          1800000
+        ],
+        "cpu6_khz": [
+          1800000,
+          1800000
+        ],
+        "npu_hz": [
+          1000000000,
+          1000000000
+        ],
+        "gpu_hz": [
+          1000000000,
+          1000000000
+        ],
+        "ddr_hz": [
+          2112000000,
+          2112000000
+        ]
+      },
+      "device_counts_checked": true,
+      "cpu_phase_profiles": {},
+      "prefill_ms": 12139.493999999999,
+      "prefill_tps": 168.70554901217466,
+      "decode_tps": 9.209499999999998,
+      "request_ms": 15505.905346,
+      "prefill_range": [
+        12071.907,
+        12207.081
+      ],
+      "decode_range": [
+        9.129,
+        9.29
+      ],
+      "request_range": [
+        15409.019784,
+        15602.790908
+      ],
+      "logit_sha256": "64c66a3f4777e8fd4f9a85faddec3614fcc3b8eec3a5deae13bd168c1371b082",
+      "golden_logit_sha256": "64c66a3f4777e8fd4f9a85faddec3614fcc3b8eec3a5deae13bd168c1371b082",
+      "raw_log_sha256": "acaf016502c76d4c79f2f2394010346f7d0a075d0970ce8c7c22894b5f6d0167",
+      "prompt_sha256": "07c5922399fdcbd89059116e57782153dd4af528af492a9338b2595237c1e7b0"
+    },
+    {
+      "directory": "e2e/long-context/p2048-cpu_npu_dec-screen55-cpu1800-fanheld",
+      "label": "p2048-1-cpu_npu_dec",
+      "prompt": 2048,
+      "route": "cpu_npu_dec",
+      "reference": false,
+      "quality_passed": true,
+      "clock_control": "locked",
+      "clock_restoration_verified": true,
+      "clock_limits_unchanged": true,
+      "cooldown_target_c": 55,
+      "cooldown_enforced": true,
+      "allow_clock_drops": false,
+      "relative_rmse": 0.0,
+      "all_predictions_match": true,
+      "clocks_held": true,
+      "controller_clocks_held": true,
+      "row_clock_samples": 966,
+      "row_clock_drops": 0,
+      "row_temperature_range_c": [
+        54.538,
+        73.923
+      ],
+      "clock_frequency_ranges": {
+        "cpu4_khz": [
+          1800000,
+          1800000
+        ],
+        "cpu6_khz": [
+          1800000,
+          1800000
+        ],
+        "npu_hz": [
+          1000000000,
+          1000000000
+        ],
+        "gpu_hz": [
+          1000000000,
+          1000000000
+        ],
+        "ddr_hz": [
+          2112000000,
+          2112000000
+        ]
+      },
+      "device_counts_checked": true,
+      "cpu_phase_profiles": {},
+      "prefill_ms": 12096.944,
+      "prefill_tps": 169.29895682744336,
+      "decode_tps": 9.224499999999999,
+      "request_ms": 15457.5842075,
+      "prefill_range": [
+        12063.078,
+        12130.81
+      ],
+      "decode_range": [
+        9.197,
+        9.252
+      ],
+      "request_range": [
+        15433.843424,
+        15481.324991
+      ],
+      "logit_sha256": "64c66a3f4777e8fd4f9a85faddec3614fcc3b8eec3a5deae13bd168c1371b082",
+      "golden_logit_sha256": "64c66a3f4777e8fd4f9a85faddec3614fcc3b8eec3a5deae13bd168c1371b082",
+      "raw_log_sha256": "e9562bba0100c708b68813ec294dc74e04a09e48e3e9e6c8c5abcdeec9c3954d",
+      "prompt_sha256": "07c5922399fdcbd89059116e57782153dd4af528af492a9338b2595237c1e7b0"
+    },
+    {
+      "directory": "e2e/long-context/p2048-gpu-screen55-cpu1800-fanheld",
+      "label": "p2048-1-gpu",
+      "prompt": 2048,
+      "route": "gpu",
+      "reference": false,
+      "quality_passed": true,
+      "clock_control": "locked",
+      "clock_restoration_verified": true,
+      "clock_limits_unchanged": true,
+      "cooldown_target_c": 55,
+      "cooldown_enforced": true,
+      "allow_clock_drops": false,
+      "relative_rmse": 0.00098512171340214,
+      "all_predictions_match": true,
+      "clocks_held": true,
+      "controller_clocks_held": true,
+      "row_clock_samples": 2313,
+      "row_clock_drops": 0,
+      "row_temperature_range_c": [
+        54.538,
+        73.923
+      ],
+      "clock_frequency_ranges": {
+        "cpu4_khz": [
+          1800000,
+          1800000
+        ],
+        "cpu6_khz": [
+          1800000,
+          1800000
+        ],
+        "npu_hz": [
+          1000000000,
+          1000000000
+        ],
+        "gpu_hz": [
+          1000000000,
+          1000000000
+        ],
+        "ddr_hz": [
+          2112000000,
+          2112000000
+        ]
+      },
+      "device_counts_checked": true,
+      "cpu_phase_profiles": {},
+      "prefill_ms": 62036.7685,
+      "prefill_tps": 33.01268021399277,
+      "decode_tps": 5.217499999999999,
+      "request_ms": 67978.288608,
+      "prefill_range": [
+        62031.626,
+        62041.911
+      ],
+      "decode_range": [
+        5.204,
+        5.231
+      ],
+      "request_range": [
+        67968.300363,
+        67988.276853
+      ],
+      "logit_sha256": "d9f5858621624d0d836a964705bb111ae2402e9e8ca2ff105e0435c93799bab2",
+      "golden_logit_sha256": "64c66a3f4777e8fd4f9a85faddec3614fcc3b8eec3a5deae13bd168c1371b082",
+      "raw_log_sha256": "a679219146565f0652ec7add9a24505f798164ed667642abb6774ef7108a1d9f",
+      "prompt_sha256": "07c5922399fdcbd89059116e57782153dd4af528af492a9338b2595237c1e7b0"
+    }
+  ],
+  "clock_audits": {
+    "e2e/long-context/references55-cpu1800-fanheld": {
+      "samples": 1461,
+      "targets_held": true,
+      "snapshots_restored": true,
+      "clock_limits_unchanged": true,
+      "temperature_max_c": 78.538,
+      "fan_pwm_counts": {
+        "0": 1,
+        "100": 7,
+        "200": 4,
+        "50": 1,
+        "150": 15,
+        "255": 1433
+      }
+    },
+    "e2e/long-context/p1024-cpu-screen55-cpu1800-fanheld": {
+      "samples": 2223,
+      "targets_held": false,
+      "snapshots_restored": true,
+      "clock_limits_unchanged": true,
+      "temperature_max_c": 85.888,
+      "fan_pwm_counts": {
+        "100": 4,
+        "150": 5,
+        "255": 2214
+      }
+    },
+    "e2e/long-context/p1024-gpu-screen55-cpu1800-fanheld": {
+      "samples": 1603,
+      "targets_held": true,
+      "snapshots_restored": true,
+      "clock_limits_unchanged": true,
+      "temperature_max_c": 69.307,
+      "fan_pwm_counts": {
+        "200": 8,
+        "100": 8,
+        "150": 7,
+        "255": 1580
+      }
+    },
+    "e2e/long-context/p1024-cpu_npu_dec-screen55-cpu1800-fanheld": {
+      "samples": 668,
+      "targets_held": true,
+      "snapshots_restored": true,
+      "clock_limits_unchanged": true,
+      "temperature_max_c": 67.461,
+      "fan_pwm_counts": {
+        "200": 2,
+        "100": 2,
+        "150": 6,
+        "255": 658
+      }
+    },
+    "e2e/long-context/p1024-gpu_npu_dec-screen55-cpu1800-fanheld": {
+      "samples": 537,
+      "targets_held": true,
+      "snapshots_restored": true,
+      "clock_limits_unchanged": true,
+      "temperature_max_c": 68.384,
+      "fan_pwm_counts": {
+        "200": 2,
+        "100": 1,
+        "150": 4,
+        "255": 530
+      }
+    },
+    "e2e/long-context/p1024-all_dec-screen55-cpu1800-fanheld": {
+      "samples": 506,
+      "targets_held": true,
+      "snapshots_restored": true,
+      "clock_limits_unchanged": true,
+      "temperature_max_c": 68.384,
+      "fan_pwm_counts": {
+        "200": 1,
+        "100": 1,
+        "150": 2,
+        "255": 502
+      }
+    },
+    "e2e/long-context/p2048-all_dec-screen55-cpu1800-fanheld": {
+      "samples": 879,
+      "targets_held": true,
+      "snapshots_restored": true,
+      "clock_limits_unchanged": true,
+      "temperature_max_c": 73.923,
+      "fan_pwm_counts": {
+        "100": 2,
+        "200": 2,
+        "50": 1,
+        "150": 3,
+        "255": 871
+      }
+    },
+    "e2e/long-context/p2048-gpu_npu_dec-screen55-cpu1800-fanheld": {
+      "samples": 966,
+      "targets_held": true,
+      "snapshots_restored": true,
+      "clock_limits_unchanged": true,
+      "temperature_max_c": 74.846,
+      "fan_pwm_counts": {
+        "200": 4,
+        "100": 4,
+        "150": 2,
+        "255": 956
+      }
+    },
+    "e2e/long-context/p2048-cpu_npu_dec-screen55-cpu1800-fanheld": {
+      "samples": 966,
+      "targets_held": true,
+      "snapshots_restored": true,
+      "clock_limits_unchanged": true,
+      "temperature_max_c": 73.923,
+      "fan_pwm_counts": {
+        "200": 2,
+        "100": 2,
+        "150": 5,
+        "255": 957
+      }
+    },
+    "e2e/long-context/p2048-gpu-screen55-cpu1800-fanheld": {
+      "samples": 2313,
+      "targets_held": true,
+      "snapshots_restored": true,
+      "clock_limits_unchanged": true,
+      "temperature_max_c": 73.923,
+      "fan_pwm_counts": {
+        "100": 6,
+        "200": 8,
+        "50": 1,
+        "150": 5,
+        "255": 2293
+      }
+    }
+  },
+  "scope": "Independent audit. Long reference is this checked native NPU path, not an independent HF full-model oracle. Exact FP16 primitive checks and short-prompt parity are separate. Failed rows remain diagnostics at the unchanged0.001 gate."
+}

@@ -1,0 +1,54 @@
+{
+  "records": [
+    {
+      "label": "p4096-1-cpu",
+      "prompt": 4096,
+      "route": "cpu",
+      "dense_prefill": "cpu",
+      "dense_decode": "cpu",
+      "gpu_attention": null,
+      "cpu_classifier": false,
+      "teacher_forced_identical_decode_inputs": true,
+      "prefill_logit_relative_rmse": 0.001009178565721269,
+      "max_logit_error": 0.013041496276855469,
+      "unchanged_limit": 0.001,
+      "all_predictions_match": true,
+      "quality_passed": false,
+      "ttft_ms": 1176149.513,
+      "effective_prefill_tps": 3.4825504365957256,
+      "decode_tps": 3.0170000000000003,
+      "measured_runs": 2,
+      "ttft_range": [
+        1174682.872,
+        1177616.154
+      ],
+      "decode_range": [
+        2.963,
+        3.071
+      ],
+      "request_ms": 1186426.3957415,
+      "output_tps": 0.026971753254023352,
+      "request_range": [
+        1185143.5474,
+        1187709.244083
+      ],
+      "handoff_ms": 0.032229
+    }
+  ],
+  "cpu_target_khz": 1800000,
+  "cooldown_target_c": 0,
+  "allow_clock_drops": true,
+  "cooldown_enforced": false,
+  "golden_directory": "references55-cpu1800-fanheld",
+  "clocks_held": false,
+  "clocks_restored": false,
+  "clock_limits_unchanged": true,
+  "clock_control": "sample_only",
+  "samples": 19341,
+  "temperature_range_c": [
+    77.615,
+    85.0
+  ],
+  "binary_sha256": "f8b4f9ebf81f28efdca38b3389f80cf96347b2728f655e6d577f70fdfbe9ec9b",
+  "interpretation": "Phase-placement experiment. Non-linear host operations stay CPU. Failed quality rows are diagnostic timings, not qualified inference speed claims."
+}

@@ -1,0 +1,73 @@
+{
+  "jobs": [
+    {
+      "prompt": 2048,
+      "directory": "/tmp/qwen3-long-context-cpu-sample-only-20261006/p2048-cpu",
+      "command": [
+        "taskset",
+        "-c",
+        "0-3",
+        "python3",
+        "/home/orangepi/qwen3.c/fp16/experiments/yalm/long-context/run_matrix.py",
+        "--workspace",
+        "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/long-context",
+        "--output-directory",
+        "/tmp/qwen3-long-context-cpu-sample-only-20261006/p2048-cpu",
+        "--output",
+        "p2048-cpu",
+        "--routes",
+        "cpu",
+        "--prompts",
+        "2048",
+        "--runs",
+        "2",
+        "--cool-c",
+        "0",
+        "--context",
+        "4128",
+        "--golden-directory",
+        "references55-cpu1800-fanheld",
+        "--cpu-khz",
+        "1800000",
+        "--allow-clock-drops",
+        "--sample-only-clocks"
+      ]
+    },
+    {
+      "prompt": 4096,
+      "directory": "/tmp/qwen3-long-context-cpu-sample-only-20261006/p4096-cpu",
+      "command": [
+        "taskset",
+        "-c",
+        "0-3",
+        "python3",
+        "/home/orangepi/qwen3.c/fp16/experiments/yalm/long-context/run_matrix.py",
+        "--workspace",
+        "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/long-context",
+        "--output-directory",
+        "/tmp/qwen3-long-context-cpu-sample-only-20261006/p4096-cpu",
+        "--output",
+        "p4096-cpu",
+        "--routes",
+        "cpu",
+        "--prompts",
+        "4096",
+        "--runs",
+        "2",
+        "--cool-c",
+        "0",
+        "--context",
+        "4128",
+        "--golden-directory",
+        "references55-cpu1800-fanheld",
+        "--cpu-khz",
+        "1800000",
+        "--allow-clock-drops",
+        "--sample-only-clocks"
+      ]
+    }
+  ],
+  "clock_control": "sample_only",
+  "cooldown_enforced": false,
+  "scope": "CPU-only continuation in a sandbox without GPU/NPU nodes. Uses existing live clock limits without changing sysfs, fan or Docker settings. The earlier interrupted continuation restoration remains unverified. Same frozen executable, model, inputs, four threads, two warmups/two measurements and 32 outputs."
+}

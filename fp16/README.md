@@ -20,16 +20,22 @@ ranges; fused GPU decode attention remains slower than CPU. These candidates
 have not been promoted into the selected runner. Request and iteration charts
 are rendered as PNG/JPG/SVG.
 
-The [1K/2K/4K benchmark](experiments/yalm/LONG-CONTEXT.md) reports 12 of 18
+The [1K/2K/4K benchmark](experiments/yalm/LONG-CONTEXT.md) reports 15 of 18
 measured placements, with CPU-only, Mali OpenCL, NPU and mixed-device rows.
 It includes prefill time and tokens/s, decode tokens/s and independent request
-time, plus PNG/JPG/SVG charts. The bare Orange Pi 5 reached about 86°C and
-stopped on its cooling guard during CPU 2K; six rows remain unmeasured.
-CPU 1K clock drops and the CPU 2K warmup logit failure remain diagnostics.
-All started controllers restored their settings. The user permits continuing
-with documented clock drops, so the missing rows resume without forced
-cooldown, with unchanged numerical checks and recorded clocks/temperatures.
-Their starting conditions are labeled separately from the original session.
+time, plus PNG/JPG/SVG charts and CPU phase profiles. At the user's direction,
+the bare-board continuation ran without forced cooldown and retained actual
+clock drops. CPU 2K/4K completed two warmups and two measurements each; all
+generated IDs match, but both fail the unchanged 0.001 logit comparison gate.
+GPU 4K was recovered from four complete raw requests and passes that gate.
+The three mixed-device 4K rows remain unmeasured because the current managed
+session exposes no DRM/Mali nodes. Starting conditions are labeled separately.
+The original 12-row session restored its settings; the interrupted GPU 4K
+continuation has no verified restoration, and earlier CPU/NPU/DDR limits and
+the fan command remain locked. Later CPU jobs only sample existing settings.
+[Offline checks](experiments/yalm/long-context/long-context-postrun-verification.json)
+verify 261 lossless exports, matching inputs, request/device counts, numerical
+results, source/model/binary hashes and report artifacts.
 
 The engine uses persistent direct-register NPU tasks, three-core matrix
 projections, batched prefill, fused Q/K/V and gate/up projections, prompt

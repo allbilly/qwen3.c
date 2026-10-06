@@ -1,0 +1,71 @@
+{
+  "workspace_directory": "/tmp/qwen3-long-context-cpu-sample-only-20261006/p2048-cpu",
+  "files": {
+    "clock-samples.jsonl": {
+      "original_sha256": "b41bfe5c79cc8d40632e6d21e2c018e5599ffca8f6a4de3f4398bf5ab390c0ec",
+      "export": "clock-samples.jsonl.gz",
+      "export_sha256": "dca88c2068ce6cc6936139e448b143ba2dd4fc19995bebb19bb311a9fa45a009"
+    },
+    "clock-state-after.json": {
+      "original_sha256": "f4e856294eacd247e98f16b0e498db5495568c0a9b56bc1887405ef3c2c63a67",
+      "export": "clock-state-after.json",
+      "export_sha256": "f4e856294eacd247e98f16b0e498db5495568c0a9b56bc1887405ef3c2c63a67"
+    },
+    "clock-state-before.json": {
+      "original_sha256": "f4e856294eacd247e98f16b0e498db5495568c0a9b56bc1887405ef3c2c63a67",
+      "export": "clock-state-before.json",
+      "export_sha256": "f4e856294eacd247e98f16b0e498db5495568c0a9b56bc1887405ef3c2c63a67"
+    },
+    "gpu-clock-state-after.json": {
+      "original_sha256": "173bf1112031cdfa91fd19df773ccbda2dd4fb75837e6024a6dd82e3b772e182",
+      "export": "gpu-clock-state-after.json",
+      "export_sha256": "173bf1112031cdfa91fd19df773ccbda2dd4fb75837e6024a6dd82e3b772e182"
+    },
+    "gpu-clock-state-before.json": {
+      "original_sha256": "173bf1112031cdfa91fd19df773ccbda2dd4fb75837e6024a6dd82e3b772e182",
+      "export": "gpu-clock-state-before.json",
+      "export_sha256": "173bf1112031cdfa91fd19df773ccbda2dd4fb75837e6024a6dd82e3b772e182"
+    },
+    "p2048-1-cpu.config.json": {
+      "original_sha256": "9b1c349b956a56325e6d14ef6f9f9a1a818c8e1c722d4f54c60354684321f5c8",
+      "export": "p2048-1-cpu.config.json",
+      "export_sha256": "9b1c349b956a56325e6d14ef6f9f9a1a818c8e1c722d4f54c60354684321f5c8"
+    },
+    "p2048-1-cpu.f32": {
+      "original_sha256": "80453679f802c1b4cbd11abc08bdf0b3ee85a94f4d1c3cf40a254d465f985a1c",
+      "export": "p2048-1-cpu.f32.gz",
+      "export_sha256": "9759fe8e25203360758350d354242eafe8503e151def904c047dea68cd56942e"
+    },
+    "p2048-1-cpu.jsonl": {
+      "original_sha256": "66eed0c18bd735021d759a0bc7b2aab2ad80217da734343ee9fcc17ad8411469",
+      "export": "p2048-1-cpu.jsonl",
+      "export_sha256": "66eed0c18bd735021d759a0bc7b2aab2ad80217da734343ee9fcc17ad8411469"
+    },
+    "p2048-1-cpu.teacher.tokens": {
+      "original_sha256": "23389877041a02050b2967cedf1df5b39e82196e3b9c8f361cf96fef7fb2999e",
+      "export": "p2048-1-cpu.teacher.tokens",
+      "export_sha256": "23389877041a02050b2967cedf1df5b39e82196e3b9c8f361cf96fef7fb2999e"
+    },
+    "p2048-1-cpu.tokens": {
+      "original_sha256": "07c5922399fdcbd89059116e57782153dd4af528af492a9338b2595237c1e7b0",
+      "export": "p2048-1-cpu.tokens",
+      "export_sha256": "07c5922399fdcbd89059116e57782153dd4af528af492a9338b2595237c1e7b0"
+    },
+    "run_matrix.py": {
+      "original_sha256": "8256d82500d4dfa06d929034f3a46a7afc745e569284807ffec792cfe2fbe13b",
+      "export": "run_matrix.py",
+      "export_sha256": "8256d82500d4dfa06d929034f3a46a7afc745e569284807ffec792cfe2fbe13b"
+    },
+    "source-provenance.json": {
+      "original_sha256": "7140f48959ad361bb4434b6243ce378caf4da62fb34be5c756375edba01ba3d9",
+      "export": "source-provenance.json",
+      "export_sha256": "7140f48959ad361bb4434b6243ce378caf4da62fb34be5c756375edba01ba3d9"
+    },
+    "summary.json": {
+      "original_sha256": "05d2f3ef00821b17cd28aca7e953e932c6b049479fc89c6a242c69e3771f8752",
+      "export": "summary.json",
+      "export_sha256": "05d2f3ef00821b17cd28aca7e953e932c6b049479fc89c6a242c69e3771f8752"
+    }
+  },
+  "external_artifacts": "Compiled binary remains in workspace_directory; the shared FP16 model location is recorded in run configs. Full per-vocabulary first logits are exported losslessly as .f32.gz. Source/binary/input hashes and any captured Python harness are retained here."
+}

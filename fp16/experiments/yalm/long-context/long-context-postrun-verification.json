@@ -1,0 +1,27 @@
+{
+  "measured_rows": 15,
+  "measured_requests": 30,
+  "completed_requests_with_warmups": 60,
+  "quality_passes": 13,
+  "quality_failures": [
+    {
+      "prompt": 2048,
+      "route": "cpu",
+      "relative_rmse": 0.0011133907476657428
+    },
+    {
+      "prompt": 4096,
+      "route": "cpu",
+      "relative_rmse": 0.001009178565721269
+    }
+  ],
+  "same_prompt_hash_per_length": true,
+  "export_directories_checked": 20,
+  "lossless_export_files_checked": 261,
+  "incomplete_full_render_rejected": true,
+  "report_links_and_hashes_verified": true,
+  "python_syntax_checked": true,
+  "diff_check_passed": true,
+  "original_model_and_21_compiled_sources_unchanged": true,
+  "scope": "Offline checks after all timed CPU requests completed; missing mixed-device 4K runs remain unmeasured."
+}

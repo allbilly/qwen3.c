@@ -1,0 +1,219 @@
+{
+  "cpu_target_khz": 1800000,
+  "cooldown_target_c": 0,
+  "allow_clock_drops": true,
+  "cooldown_enforced": false,
+  "binary_sha256": "f8b4f9ebf81f28efdca38b3389f80cf96347b2728f655e6d577f70fdfbe9ec9b",
+  "previous_audit_sha256": "e4f2bb570db17ceadc125fa61a86426edf1f24b672ec1069bf261143fc88d8dd",
+  "jobs": [
+    {
+      "directory": "e2e/long-context/p4096-gpu-continue-throttle-cpu1800-fanheld",
+      "reference": false,
+      "routes": [
+        "gpu"
+      ],
+      "prompts": [
+        4096
+      ],
+      "command": [
+        "taskset",
+        "-c",
+        "0-3",
+        "python3",
+        "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/long-context/run_matrix.py",
+        "--output",
+        "p4096-gpu-continue-throttle-cpu1800-fanheld",
+        "--routes",
+        "gpu",
+        "--prompts",
+        "4096",
+        "--runs",
+        "2",
+        "--cool-c",
+        "0",
+        "--context",
+        "4128",
+        "--golden-directory",
+        "references55-cpu1800-fanheld",
+        "--cpu-khz",
+        "1800000",
+        "--allow-clock-drops"
+      ]
+    },
+    {
+      "directory": "e2e/long-context/p4096-cpu_npu_dec-continue-throttle-cpu1800-fanheld",
+      "reference": false,
+      "routes": [
+        "cpu_npu_dec"
+      ],
+      "prompts": [
+        4096
+      ],
+      "command": [
+        "taskset",
+        "-c",
+        "0-3",
+        "python3",
+        "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/long-context/run_matrix.py",
+        "--output",
+        "p4096-cpu_npu_dec-continue-throttle-cpu1800-fanheld",
+        "--routes",
+        "cpu_npu_dec",
+        "--prompts",
+        "4096",
+        "--runs",
+        "2",
+        "--cool-c",
+        "0",
+        "--context",
+        "4128",
+        "--golden-directory",
+        "references55-cpu1800-fanheld",
+        "--cpu-khz",
+        "1800000",
+        "--allow-clock-drops"
+      ]
+    },
+    {
+      "directory": "e2e/long-context/p4096-gpu_npu_dec-continue-throttle-cpu1800-fanheld",
+      "reference": false,
+      "routes": [
+        "gpu_npu_dec"
+      ],
+      "prompts": [
+        4096
+      ],
+      "command": [
+        "taskset",
+        "-c",
+        "0-3",
+        "python3",
+        "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/long-context/run_matrix.py",
+        "--output",
+        "p4096-gpu_npu_dec-continue-throttle-cpu1800-fanheld",
+        "--routes",
+        "gpu_npu_dec",
+        "--prompts",
+        "4096",
+        "--runs",
+        "2",
+        "--cool-c",
+        "0",
+        "--context",
+        "4128",
+        "--golden-directory",
+        "references55-cpu1800-fanheld",
+        "--cpu-khz",
+        "1800000",
+        "--allow-clock-drops"
+      ]
+    },
+    {
+      "directory": "e2e/long-context/p4096-all_dec-continue-throttle-cpu1800-fanheld",
+      "reference": false,
+      "routes": [
+        "all_dec"
+      ],
+      "prompts": [
+        4096
+      ],
+      "command": [
+        "taskset",
+        "-c",
+        "0-3",
+        "python3",
+        "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/long-context/run_matrix.py",
+        "--output",
+        "p4096-all_dec-continue-throttle-cpu1800-fanheld",
+        "--routes",
+        "all_dec",
+        "--prompts",
+        "4096",
+        "--runs",
+        "2",
+        "--cool-c",
+        "0",
+        "--context",
+        "4128",
+        "--golden-directory",
+        "references55-cpu1800-fanheld",
+        "--cpu-khz",
+        "1800000",
+        "--allow-clock-drops"
+      ]
+    },
+    {
+      "directory": "e2e/long-context/p2048-cpu-continue-throttle-cpu1800-fanheld",
+      "reference": false,
+      "routes": [
+        "cpu"
+      ],
+      "prompts": [
+        2048
+      ],
+      "command": [
+        "taskset",
+        "-c",
+        "0-3",
+        "python3",
+        "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/long-context/run_matrix.py",
+        "--output",
+        "p2048-cpu-continue-throttle-cpu1800-fanheld",
+        "--routes",
+        "cpu",
+        "--prompts",
+        "2048",
+        "--runs",
+        "2",
+        "--cool-c",
+        "0",
+        "--context",
+        "4128",
+        "--golden-directory",
+        "references55-cpu1800-fanheld",
+        "--cpu-khz",
+        "1800000",
+        "--allow-clock-drops"
+      ]
+    },
+    {
+      "directory": "e2e/long-context/p4096-cpu-continue-throttle-cpu1800-fanheld",
+      "reference": false,
+      "routes": [
+        "cpu"
+      ],
+      "prompts": [
+        4096
+      ],
+      "command": [
+        "taskset",
+        "-c",
+        "0-3",
+        "python3",
+        "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/long-context/run_matrix.py",
+        "--output",
+        "p4096-cpu-continue-throttle-cpu1800-fanheld",
+        "--routes",
+        "cpu",
+        "--prompts",
+        "4096",
+        "--runs",
+        "2",
+        "--cool-c",
+        "0",
+        "--context",
+        "4128",
+        "--golden-directory",
+        "references55-cpu1800-fanheld",
+        "--cpu-khz",
+        "1800000",
+        "--allow-clock-drops"
+      ]
+    }
+  ],
+  "fan_suffix": "continue-throttle-cpu1800-fanheld",
+  "golden_directory": "references55-cpu1800-fanheld",
+  "protocol": "Same model, compiled runner, target clocks, four host threads, two warmups/two measurements and 32 outputs. Software cooldown disabled by removing COOL_REQUEST_C. Kernel thermal protection remains active. Every actual clock sample and quality failure is retained; original clocks/fan command restore normally.",
+  "scope": "Continuation of six missing rows. Starting-temperature conditions differ from the original <=55C session. These are observed bare-board timings, not a fixed-clock causal speedup experiment.",
+  "authorization": "even clock drop u just mention it in doc and continue run it is ok ?"
+}

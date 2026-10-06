@@ -1,0 +1,22 @@
+{
+  "cpu4": {
+    "scaling_governor": "performance",
+    "scaling_min_freq": "1800000",
+    "scaling_max_freq": "1800000"
+  },
+  "cpu6": {
+    "scaling_governor": "performance",
+    "scaling_min_freq": "1800000",
+    "scaling_max_freq": "1800000"
+  },
+  "npu": {
+    "governor": "performance",
+    "min_freq": "1000000000",
+    "max_freq": "1000000000"
+  },
+  "ddr": {
+    "governor": "performance",
+    "min_freq": "2112000000",
+    "max_freq": "2112000000"
+  }
+}

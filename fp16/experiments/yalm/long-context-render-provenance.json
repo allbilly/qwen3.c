@@ -1,23 +1,16 @@
 {
-  "audit_sha256": "e4f2bb570db17ceadc125fa61a86426edf1f24b672ec1069bf261143fc88d8dd",
-  "render_source_sha256": "f7e494bfb227c92f7371d6772e5119a89c050b26c5d7633f4edf61ddf6669cd2",
+  "audit_sha256": "8c5abc983b8f1bc2520bcd3fe69afd90b90da1f615555e24b4cc27c501322937",
+  "render_source_sha256": "f97c457f69c8422b48ccddd64fbda7144cf788cb2e98522bbdd43083aa27f564",
   "model_sha256": "c92807935bfbb81f6628e9c2723267da367577a3f2b1bb2530b87bf5e5bba879",
   "binary_sha256": "f8b4f9ebf81f28efdca38b3389f80cf96347b2728f655e6d577f70fdfbe9ec9b",
   "partial": true,
-  "thermal_observations": false,
-  "measured_rows": 12,
+  "thermal_observations": true,
+  "restricted_recovery": true,
+  "measured_rows": 15,
   "missing_placements": [
-    {
-      "prompt": 2048,
-      "route": "cpu"
-    },
     {
       "prompt": 4096,
       "route": "all_dec"
-    },
-    {
-      "prompt": 4096,
-      "route": "cpu"
     },
     {
       "prompt": 4096,
@@ -25,15 +18,12 @@
     },
     {
       "prompt": 4096,
-      "route": "gpu"
-    },
-    {
-      "prompt": 4096,
       "route": "gpu_npu_dec"
     }
   ],
   "asterisk_prompt_lengths": [
-    1024
+    1024,
+    2048
   ],
   "python": "3.10.12",
   "packages": {
@@ -42,10 +32,10 @@
     "pillow": "12.3.0"
   },
   "outputs": {
-    "LONG-CONTEXT.md": "bae38d2b3175d400d67d7be48ba9714f1f11ce9c944891c8ca6d5e71bb467136",
-    "long-context-comparison.png": "5ae15cc716a5be5dc261c5058b8f82c8951df3406c1c300283aab447478c9f76",
-    "long-context-comparison.jpg": "a446c5446d8d425756bc2ce42432b7d2f750bb2949a422353cbd9029795a6e62",
-    "long-context-comparison.svg": "33a2b9b5830722080ac26a4d8f34bdc9ab0bbf98651ff0df42d4a00c2515798b"
+    "LONG-CONTEXT.md": "5bdb03ce448edbb15dfa93b45e85dcfacaa3f0c541600d97c7b83ff79ca86f1b",
+    "long-context-comparison.png": "f850da7b88865e73448488287bcc31f185e5396511468575a8c71e3801f8b30e",
+    "long-context-comparison.jpg": "5f0662fde0cfb2cada1e5fe481ff27744fa181b9aeccbd2454a79b9cbab5e437",
+    "long-context-comparison.svg": "6bc3a885fc8e639ddfe52959c0407e84cd7cb3482d76e0c5889da415ac04d36a"
   },
   "scope": "Observed medians only; missing measurements remain gaps. Stars require all six placements measured at that prompt length."
 }

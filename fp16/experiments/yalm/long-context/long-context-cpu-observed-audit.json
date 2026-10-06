@@ -1,0 +1,196 @@
+{
+  "cpu_target_khz": 1800000,
+  "cooldown_target_c": 0,
+  "model_sha256": "c92807935bfbb81f6628e9c2723267da367577a3f2b1bb2530b87bf5e5bba879",
+  "binary_sha256": "f8b4f9ebf81f28efdca38b3389f80cf96347b2728f655e6d577f70fdfbe9ec9b",
+  "selected_binary_unchanged": true,
+  "records": [
+    {
+      "directory": "/tmp/qwen3-long-context-cpu-sample-only-20261006/p2048-cpu",
+      "label": "p2048-1-cpu",
+      "prompt": 2048,
+      "route": "cpu",
+      "reference": false,
+      "quality_passed": false,
+      "clock_control": "sample_only",
+      "clock_restoration_verified": false,
+      "clock_limits_unchanged": true,
+      "cooldown_target_c": 0,
+      "cooldown_enforced": false,
+      "allow_clock_drops": true,
+      "relative_rmse": 0.0011133907476657428,
+      "all_predictions_match": true,
+      "clocks_held": false,
+      "controller_clocks_held": false,
+      "row_clock_samples": 4736,
+      "row_clock_drops": 4736,
+      "row_temperature_range_c": [
+        49.923,
+        85.888
+      ],
+      "clock_frequency_ranges": {
+        "cpu4_khz": [
+          408000,
+          1800000
+        ],
+        "cpu6_khz": [
+          408000,
+          1800000
+        ],
+        "npu_hz": [
+          800000000,
+          1000000000
+        ],
+        "gpu_hz": [
+          300000000,
+          300000000
+        ],
+        "ddr_hz": [
+          2112000000,
+          2112000000
+        ]
+      },
+      "device_counts_checked": true,
+      "cpu_phase_profiles": {
+        "prefill": {
+          "wall_ms": 26109.960335955002,
+          "pack_ms": 377.75330101,
+          "compute_ms": 25732.1217294805,
+          "prefill_attention_ms": 287851.125282986
+        },
+        "decode": {
+          "wall_ms": 4241.0122662779995,
+          "pack_ms": 9.389835775000002,
+          "compute_ms": 4230.338831149,
+          "prefill_attention_ms": 0.0
+        }
+      },
+      "prefill_ms": 314929.4175,
+      "prefill_tps": 6.50304444804684,
+      "decode_tps": 3.706,
+      "request_ms": 323395.670166,
+      "prefill_range": [
+        291213.869,
+        338644.966
+      ],
+      "decode_range": [
+        3.301,
+        4.111
+      ],
+      "request_range": [
+        300605.717953,
+        346185.622379
+      ],
+      "logit_sha256": "80453679f802c1b4cbd11abc08bdf0b3ee85a94f4d1c3cf40a254d465f985a1c",
+      "golden_logit_sha256": "64c66a3f4777e8fd4f9a85faddec3614fcc3b8eec3a5deae13bd168c1371b082",
+      "raw_log_sha256": "66eed0c18bd735021d759a0bc7b2aab2ad80217da734343ee9fcc17ad8411469",
+      "prompt_sha256": "07c5922399fdcbd89059116e57782153dd4af528af492a9338b2595237c1e7b0"
+    },
+    {
+      "directory": "/tmp/qwen3-long-context-cpu-sample-only-20261006/p4096-cpu",
+      "label": "p4096-1-cpu",
+      "prompt": 4096,
+      "route": "cpu",
+      "reference": false,
+      "quality_passed": false,
+      "clock_control": "sample_only",
+      "clock_restoration_verified": false,
+      "clock_limits_unchanged": true,
+      "cooldown_target_c": 0,
+      "cooldown_enforced": false,
+      "allow_clock_drops": true,
+      "relative_rmse": 0.001009178565721269,
+      "all_predictions_match": true,
+      "clocks_held": false,
+      "controller_clocks_held": false,
+      "row_clock_samples": 19341,
+      "row_clock_drops": 19341,
+      "row_temperature_range_c": [
+        77.615,
+        85.0
+      ],
+      "clock_frequency_ranges": {
+        "cpu4_khz": [
+          408000,
+          1800000
+        ],
+        "cpu6_khz": [
+          408000,
+          1800000
+        ],
+        "npu_hz": [
+          1000000000,
+          1000000000
+        ],
+        "gpu_hz": [
+          300000000,
+          300000000
+        ],
+        "ddr_hz": [
+          2112000000,
+          2112000000
+        ]
+      },
+      "device_counts_checked": true,
+      "cpu_phase_profiles": {
+        "prefill": {
+          "wall_ms": 47154.413032501994,
+          "pack_ms": 692.3516290265,
+          "compute_ms": 46461.9615184895,
+          "prefill_attention_ms": 1126976.467333473
+        },
+        "decode": {
+          "wall_ms": 3186.7928126605,
+          "pack_ms": 8.193243667499999,
+          "compute_ms": 3177.3862737540003,
+          "prefill_attention_ms": 0.0
+        }
+      },
+      "prefill_ms": 1176149.513,
+      "prefill_tps": 3.4825504365957256,
+      "decode_tps": 3.0170000000000003,
+      "request_ms": 1186426.3957415,
+      "prefill_range": [
+        1174682.872,
+        1177616.154
+      ],
+      "decode_range": [
+        2.963,
+        3.071
+      ],
+      "request_range": [
+        1185143.5474,
+        1187709.244083
+      ],
+      "logit_sha256": "d869ce233e870f613a42f3439595d50d9a800de8b9a14fc2ef060701e0b14ba1",
+      "golden_logit_sha256": "e67a3fc59cb6af16c93cf3af9e72a5b1de316d631ae6e7cc69b1aa2df7eace0b",
+      "raw_log_sha256": "140f6401510f38971ab5d2cca631effc7300fe8f235d4d53ec48d0ffbddf6bee",
+      "prompt_sha256": "1611db95b226442b2cba4a00c59ea1fff141fbdca9d711a062b24ea3c4f9376b"
+    }
+  ],
+  "clock_audits": {
+    "/tmp/qwen3-long-context-cpu-sample-only-20261006/p2048-cpu": {
+      "samples": 4737,
+      "targets_held": false,
+      "snapshots_restored": false,
+      "clock_limits_unchanged": true,
+      "temperature_max_c": 85.888,
+      "fan_pwm_counts": {
+        "100": 1,
+        "150": 1,
+        "255": 4735
+      }
+    },
+    "/tmp/qwen3-long-context-cpu-sample-only-20261006/p4096-cpu": {
+      "samples": 19341,
+      "targets_held": false,
+      "snapshots_restored": false,
+      "clock_limits_unchanged": true,
+      "temperature_max_c": 85.0,
+      "fan_pwm_counts": {
+        "255": 19341
+      }
+    }
+  },
+  "scope": "Independent audit. Long reference is this checked native NPU path, not an independent HF full-model oracle. Exact FP16 primitive checks and short-prompt parity are separate. Failed rows remain diagnostics at the unchanged0.001 gate."
+}

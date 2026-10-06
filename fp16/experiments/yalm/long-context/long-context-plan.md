@@ -26,8 +26,16 @@ The full-speed-feedback CPU1K row thermally dropped from2.256GHz to2.208GHz; idl
 User reports no heatsink installed and asks whether to buy one. Device-tree model is Orange Pi5, compatible rockchip,rk3588s-orangepi-5 (not previously assumed5Plus). Recommended an original-Orange-Pi5 heatsink+5V fan, citing manufacturer52PiEP-0167. Continue the common1.8GHz sweep as the current bare-board baseline; clocks still must hold. Software PWM commands do not establish physical fan presence/cooling effectiveness. Any future cooler installation requires a separate fresh benchmark session. No physical hardware change is happening now.
 
 
-## Current stopping condition
+## Original stopping condition (historical)
 
 The common CPU 1.8GHz session stopped normally on the programmed 55°C cooldown guard during CPU 2K, before its second warmup. It finished 12/18 measured rows; 11/12 pass both numerical and sampled-clock gates. CPU 1K has idle-accelerator clock drops. CPU 2K has zero measured requests and its single warmup fails the 0.001 first-logit gate (relative RMSE 0.00111339). Five non-NPU 4K jobs never started. All 11 started controllers and live governors/limits restored, along with the original fan command. No native process remains active.
 
-The six-placement × three-length execution checkbox stays incomplete. Current source/evidence/reporting milestone is complete as a partial result. After fitting a heatsink with a fan, use a fresh namespace, rerun new references and all placements under one common protocol, investigate CPU 2K logit error and preserve this bare-board session separately. No user pause or goal completion is inferred.
+The six-placement × three-length execution checkbox stays incomplete. That source/evidence/reporting milestone was complete as a partial result. No user pause or goal completion was inferred.
+
+## Continuation after the user allowed clock drops
+
+The user explicitly permitted continuing with documented clock drops. This supersedes the earlier strict clock/cooldown launch policy. Original results remain immutable. GPU4K contains four complete raw requests and passes numerical/device/timer checks, but its interrupted parent produced no summary or restoration artifacts. The current managed session does not expose board DRM/Mali nodes, so three mixed-device4K rows remain unmeasured.
+
+CPU2K and CPU4K then completed the full two-warmup/two-measurement protocol with the same frozen runner/model and passive clock sampling. Both match every generated ID but fail the unchanged first-logit gate (relative RMSE 0.0011133907476657428 and 0.001009178565721269). Clock drops are recorded. The CPU continuation wrote no sysfs/fan settings and its before/after governor/limit snapshots stayed equal; this does not restore the earlier interrupted settings.
+
+The report now contains 15/18 measured rows, 13 numerical passes, explicit missing slots, CPU phase profiles and PNG/JPG/SVG charts. Asterisks mark eligible observed values only for the complete1K/2K groups. Independently rechecked all completed requests, matching input IDs, frozen hashes and 261 lossless exported files; full rendering without --partial correctly rejects incomplete data. The remaining execution checkbox stays open until the mixed4K runs can access board devices. A future cooled comparison needs a fresh common protocol.

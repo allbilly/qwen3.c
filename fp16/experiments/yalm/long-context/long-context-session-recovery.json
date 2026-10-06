@@ -1,0 +1,86 @@
+{
+  "observed_at_unix": 1791256051.095142,
+  "old_exec_session_unavailable": 32092,
+  "gpu4096_raw_requests_complete": 4,
+  "gpu4096_parent_summary_present": false,
+  "clock_saved_before": {
+    "cpu4": {
+      "scaling_governor": "ondemand",
+      "scaling_min_freq": "408000",
+      "scaling_max_freq": "2256000"
+    },
+    "cpu6": {
+      "scaling_governor": "ondemand",
+      "scaling_min_freq": "408000",
+      "scaling_max_freq": "2256000"
+    },
+    "npu": {
+      "governor": "rknpu_ondemand",
+      "min_freq": "300000000",
+      "max_freq": "1000000000"
+    },
+    "ddr": {
+      "governor": "dmc_ondemand",
+      "min_freq": "528000000",
+      "max_freq": "2112000000"
+    }
+  },
+  "clock_live": {
+    "cpu4": {
+      "scaling_governor": "performance",
+      "scaling_min_freq": "1800000",
+      "scaling_max_freq": "1800000"
+    },
+    "cpu6": {
+      "scaling_governor": "performance",
+      "scaling_min_freq": "1800000",
+      "scaling_max_freq": "1800000"
+    },
+    "npu": {
+      "governor": "performance",
+      "min_freq": "1000000000",
+      "max_freq": "1000000000"
+    },
+    "ddr": {
+      "governor": "performance",
+      "min_freq": "2112000000",
+      "max_freq": "2112000000"
+    }
+  },
+  "clock_live_matches_saved": false,
+  "gpu_saved_before": {
+    "governor": "simple_ondemand",
+    "min_freq": "300000000",
+    "max_freq": "1000000000"
+  },
+  "gpu_live": {
+    "governor": "simple_ondemand",
+    "min_freq": "300000000",
+    "max_freq": "1000000000"
+  },
+  "gpu_live_matches_saved": true,
+  "fan_saved_before": {
+    "path": "/hostsys/class/hwmon/hwmon8/pwm1",
+    "pwm1": "0"
+  },
+  "fan_live_pwm": 255,
+  "visible_device_nodes": {
+    "/dev/dri/card1": false,
+    "/dev/dri/renderD129": false,
+    "/dev/mali0": false
+  },
+  "known_npu_check": {
+    "command": "python3 /home/orangepi/rk3588/examples/simple_add.py",
+    "exit_code": 1,
+    "failure": "FileNotFoundError: /dev/dri/card1"
+  },
+  "frozen_runner_probe": {
+    "warmups": 1,
+    "new_tokens": 2,
+    "exit_code": 1,
+    "reached_runtime_context": true,
+    "npu_execution_observed": false
+  },
+  "current_permission_profile": "managed; writable qwen3.c and /tmp; .git read-only; device nodes not exposed",
+  "scope": "The previous CPU/NPU/DDR settings and fan command are not restored. GPU governor/limits match saved values. No restoration operation is fabricated or attempted through a sandbox bypass. CPU continuation observes existing limits without changing them."
+}

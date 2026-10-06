@@ -1,0 +1,56 @@
+{
+  "workspace_directory": "/home/orangepi/qwen3-bench/matched/roofline/yalm/e2e/long-context/p4096-gpu-continue-throttle-cpu1800-fanheld",
+  "files": {
+    "clock-samples.jsonl": {
+      "original_sha256": "a3ded176dd298440ed41c7bc3bed1eb908bbf7b946db9b8337c8466321410abf",
+      "export": "clock-samples.jsonl.gz",
+      "export_sha256": "96921a963ff15c65849e637a57893b237ca95a6ff3c685a91bbdd0661b0e4acf"
+    },
+    "clock-state-before.json": {
+      "original_sha256": "41926b8ee4e0b41ac8c7a20c218e884de60c6d0a6c928849bec7b00b278bfce6",
+      "export": "clock-state-before.json",
+      "export_sha256": "41926b8ee4e0b41ac8c7a20c218e884de60c6d0a6c928849bec7b00b278bfce6"
+    },
+    "gpu-clock-state-before.json": {
+      "original_sha256": "173bf1112031cdfa91fd19df773ccbda2dd4fb75837e6024a6dd82e3b772e182",
+      "export": "gpu-clock-state-before.json",
+      "export_sha256": "173bf1112031cdfa91fd19df773ccbda2dd4fb75837e6024a6dd82e3b772e182"
+    },
+    "p4096-1-gpu.config.json": {
+      "original_sha256": "7675afb9e586c26c9e10b26d75e540da84bf76e58061e433dab41c663523214c",
+      "export": "p4096-1-gpu.config.json",
+      "export_sha256": "7675afb9e586c26c9e10b26d75e540da84bf76e58061e433dab41c663523214c"
+    },
+    "p4096-1-gpu.f32": {
+      "original_sha256": "1b914bfa32d4b108f9e3e882704cbd2756967f5d477966776c8d37022db3a28f",
+      "export": "p4096-1-gpu.f32.gz",
+      "export_sha256": "4d9d4d02ae7865a7e1ad7e925d5351e4b0a9f89d439064b043d7b51f2eb38ef7"
+    },
+    "p4096-1-gpu.jsonl": {
+      "original_sha256": "0e5964f6455d6a9226b9cf78058bdd78d19f597062ed9d5098dcb2c0bd88302b",
+      "export": "p4096-1-gpu.jsonl",
+      "export_sha256": "0e5964f6455d6a9226b9cf78058bdd78d19f597062ed9d5098dcb2c0bd88302b"
+    },
+    "p4096-1-gpu.teacher.tokens": {
+      "original_sha256": "23389877041a02050b2967cedf1df5b39e82196e3b9c8f361cf96fef7fb2999e",
+      "export": "p4096-1-gpu.teacher.tokens",
+      "export_sha256": "23389877041a02050b2967cedf1df5b39e82196e3b9c8f361cf96fef7fb2999e"
+    },
+    "p4096-1-gpu.tokens": {
+      "original_sha256": "1611db95b226442b2cba4a00c59ea1fff141fbdca9d711a062b24ea3c4f9376b",
+      "export": "p4096-1-gpu.tokens",
+      "export_sha256": "1611db95b226442b2cba4a00c59ea1fff141fbdca9d711a062b24ea3c4f9376b"
+    },
+    "run_matrix.py": {
+      "original_sha256": "d587dbff8bf6f95ad4d31fd25b664856ad3f05249315cc7cb177a5b8cfc1708b",
+      "export": "run_matrix.py",
+      "export_sha256": "d587dbff8bf6f95ad4d31fd25b664856ad3f05249315cc7cb177a5b8cfc1708b"
+    },
+    "source-provenance.json": {
+      "original_sha256": "7140f48959ad361bb4434b6243ce378caf4da62fb34be5c756375edba01ba3d9",
+      "export": "source-provenance.json",
+      "export_sha256": "7140f48959ad361bb4434b6243ce378caf4da62fb34be5c756375edba01ba3d9"
+    }
+  },
+  "external_artifacts": "Compiled binary remains in workspace_directory; the shared FP16 model location is recorded in run configs. Full per-vocabulary first logits are exported losslessly as .f32.gz. Source/binary/input hashes and any captured Python harness are retained here."
+}
