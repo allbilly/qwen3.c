@@ -15,11 +15,16 @@
 #endif
 #include "qwen3.h"
 #include "npu_matmul.h"
+#if defined(__ARM_FEATURE_DOTPROD)
+#include <arm_neon.h>
+#endif
 
 // ----------------------------------------------------------------------------
 // Globals
 int GS = 0; // group size global for quantization of the weights
 static NpuMatmulContext g_npu;
+static int g_matmul_verbose;
+static int g_skip_classifier;
 
 // Maximum input prompt buffer size
 #define PROMPT_BUFFER_SIZE 32768
@@ -91,7 +96,7 @@ void quantize(QuantizedTensor *qx, float *x, int n) {
 
         // calculate and write the quantized values
         for (int i = 0; i < GS; i++) {
-            float quant_value = x[group * GS + i] / scale; // scale
+            float quant_value = scale ? x[group * GS + i] / scale : 0;
             int8_t quantized = (int8_t) round(quant_value); // round and clamp
             qx->q[group * GS + i] = quantized;
         }
@@ -251,7 +256,16 @@ void matmul(float *xout, QuantizedTensor *x, QuantizedTensor *w, int n, int d) {
         // do the matmul in groups of GS
         for (int j = 0; j <= n - GS; j += GS) {
             int32_t ival = 0;
+#if defined(__ARM_FEATURE_DOTPROD)
+            int32x4_t acc = vdupq_n_s32(0);
+            int k = 0;
+            for (; k + 16 <= GS; k += 16)
+                acc = vdotq_s32(acc, vld1q_s8(x->q + j + k), vld1q_s8(w->q + in + j + k));
+            ival = vaddvq_s32(acc);
+            for (; k < GS; k++)
+#else
             for (int k = 0; k < GS; k++)
+#endif
                 ival += x->q[j + k] * w->q[in + j + k];
 
             val += ((float) ival) * w->s[(in + j) / GS] * x->s[j / GS];
@@ -268,6 +282,14 @@ float *forward(Transformer *transformer, int token, int pos) {
     int kv_dim = p->n_kv_heads * p->head_dim;
     int kv_mul = p->n_heads / p->n_kv_heads; // integer multiplier of the kv sharing in multiquery
     int all_heads_dim = p->n_heads * p->head_dim;
+
+    // Every layer and head uses the same RoPE angles for this position.
+    float rope_cos[p->head_dim/2], rope_sin[p->head_dim/2];
+    for (int j = 0; j < p->head_dim/2; j++) {
+        float angle = pos * powf(1e6, -(float)j / (p->head_dim/2));
+        rope_cos[j] = cosf(angle);
+        rope_sin[j] = sinf(angle);
+    }
 
     // copy the token embedding into s->x
     memcpy(s->x, w->token_embedding_table + token * p->dim, p->dim * sizeof(float));
@@ -290,17 +312,17 @@ float *forward(Transformer *transformer, int token, int pos) {
         if (!(used_wq && used_wk && used_wv)) {
             quantize(&s->xq, s->xb, p->dim);
             if (!used_wq) {
-                fprintf(stderr, "matmul cpu M=1 K=%d N=%d\n", p->dim, all_heads_dim);
+                if (g_matmul_verbose) fprintf(stderr, "matmul cpu M=1 K=%d N=%d\n", p->dim, all_heads_dim);
                 matmul(s->q, &s->xq, w->wq + l, p->dim, all_heads_dim);
                 g_npu.cpu_ops++;
             }
             if (!used_wk) {
-                fprintf(stderr, "matmul cpu M=1 K=%d N=%d\n", p->dim, kv_dim);
+                if (g_matmul_verbose) fprintf(stderr, "matmul cpu M=1 K=%d N=%d\n", p->dim, kv_dim);
                 matmul(s->k, &s->xq, w->wk + l, p->dim, kv_dim);
                 g_npu.cpu_ops++;
             }
             if (!used_wv) {
-                fprintf(stderr, "matmul cpu M=1 K=%d N=%d\n", p->dim, kv_dim);
+                if (g_matmul_verbose) fprintf(stderr, "matmul cpu M=1 K=%d N=%d\n", p->dim, kv_dim);
                 matmul(s->v, &s->xq, w->wv + l, p->dim, kv_dim);
                 g_npu.cpu_ops++;
             }
@@ -312,8 +334,7 @@ float *forward(Transformer *transformer, int token, int pos) {
 
             rmsnorm(q, q, w->q_norm_weights + l * p->head_dim, p->head_dim);
             for (int j = 0; j < p->head_dim/2; j++) {
-                float freq = powf(1e6, -(float)j / (p->head_dim/2));
-                float cos_freq = cosf(pos * freq), sin_freq = sinf(pos * freq);
+                float cos_freq = rope_cos[j], sin_freq = rope_sin[j];
 
                 float x = q[j]; // real part
                 float y = q[j + p->head_dim/2]; // imag part
@@ -329,8 +350,7 @@ float *forward(Transformer *transformer, int token, int pos) {
 
             rmsnorm(k, k, w->k_norm_weights + l * p->head_dim, p->head_dim);
             for (int j = 0; j < p->head_dim/2; j++) {
-                float freq = powf(1e6, -(float)j / (p->head_dim/2));
-                float cos_freq = cosf(pos * freq), sin_freq = sinf(pos * freq);
+                float cos_freq = rope_cos[j], sin_freq = rope_sin[j];
 
                 float x = k[j];
                 float y = k[j + p->head_dim/2];
@@ -379,7 +399,7 @@ float *forward(Transformer *transformer, int token, int pos) {
         int used_wo = npu_matmul_run(&g_npu, NPU_MATMUL_WO, l, s->xb, s->xb);
         if (!used_wo) {
             quantize(&s->xq, s->xb, all_heads_dim);
-            fprintf(stderr, "matmul cpu M=1 K=%d N=%d\n", all_heads_dim, p->dim);
+            if (g_matmul_verbose) fprintf(stderr, "matmul cpu M=1 K=%d N=%d\n", all_heads_dim, p->dim);
             matmul(s->xb, &s->xq, w->wo + l, all_heads_dim, p->dim);
             g_npu.cpu_ops++;
         }
@@ -398,12 +418,12 @@ float *forward(Transformer *transformer, int token, int pos) {
         if (!(used_w1 && used_w3)) {
             quantize(&s->xq, s->xb, p->dim);
             if (!used_w1) {
-                fprintf(stderr, "matmul cpu M=1 K=%d N=%d\n", p->dim, p->hidden_dim);
+                if (g_matmul_verbose) fprintf(stderr, "matmul cpu M=1 K=%d N=%d\n", p->dim, p->hidden_dim);
                 matmul(s->hb, &s->xq, w->w1 + l, p->dim, p->hidden_dim);
                 g_npu.cpu_ops++;
             }
             if (!used_w3) {
-                fprintf(stderr, "matmul cpu M=1 K=%d N=%d\n", p->dim, p->hidden_dim);
+                if (g_matmul_verbose) fprintf(stderr, "matmul cpu M=1 K=%d N=%d\n", p->dim, p->hidden_dim);
                 matmul(s->hb2, &s->xq, w->w3 + l, p->dim, p->hidden_dim);
                 g_npu.cpu_ops++;
             }
@@ -418,7 +438,7 @@ float *forward(Transformer *transformer, int token, int pos) {
         int used_w2 = npu_matmul_run(&g_npu, NPU_MATMUL_W2, l, s->hb, s->xb);
         if (!used_w2) {
             quantize(&s->hq, s->hb, p->hidden_dim);
-            fprintf(stderr, "matmul cpu M=1 K=%d N=%d\n", p->hidden_dim, p->dim);
+            if (g_matmul_verbose) fprintf(stderr, "matmul cpu M=1 K=%d N=%d\n", p->hidden_dim, p->dim);
             matmul(s->xb, &s->hq, w->w2 + l, p->hidden_dim, p->dim);
             g_npu.cpu_ops++;
         }
@@ -431,15 +451,46 @@ float *forward(Transformer *transformer, int token, int pos) {
     // final rmsnorm
     rmsnorm(s->x, s->x, w->rms_final_weight, p->dim);
 
+    if (g_skip_classifier) return s->logits;
+
     // classifier into logits
     int used_wcls = npu_matmul_run(&g_npu, NPU_MATMUL_WCLS, 0, s->x, s->logits);
     if (!used_wcls) {
         quantize(&s->xq, s->x, p->dim);
-        fprintf(stderr, "matmul cpu M=1 K=%d N=%d\n", p->dim, p->vocab_size);
+        if (g_matmul_verbose) fprintf(stderr, "matmul cpu M=1 K=%d N=%d\n", p->dim, p->vocab_size);
         matmul(s->logits, &s->xq, w->wcls, p->dim, p->vocab_size);
         g_npu.cpu_ops++;
     }
     return s->logits;
+}
+
+static float *forward_serial_prompt(Transformer *t, const int *ids, int count, int start) {
+    if (count<1 || start<0 || count>t->config.seq_len-start) {
+        fprintf(stderr,"Prompt exceeds the context window.\n"); exit(1);
+    }
+    float *logits=NULL;
+    for (int row=0;row<count;row++) {
+        if (ids[row]<0 || ids[row]>=t->config.vocab_size) {
+            fprintf(stderr,"Invalid prompt token.\n"); exit(1);
+        }
+        g_skip_classifier=row!=count-1;
+        logits=forward(t,ids[row],start+row);
+    }
+    g_skip_classifier=0;
+    return logits;
+}
+
+#if defined(QWEN3_USE_ANE)
+#include "ane/prefill.h"
+#endif
+
+static float *forward_prompt(Transformer *t, const int *ids, int count, int start) {
+#if defined(QWEN3_USE_ANE)
+    if (g_npu.enabled && count>1 && (count>=16 || ane_decode_enabled(&g_npu)) &&
+        !getenv("ANE_SERIAL_PREFILL"))
+        return forward_ane_prompt(t,ids,count,start);
+#endif
+    return forward_serial_prompt(t,ids,count,start);
 }
 
 // ----------------------------------------------------------------------------
@@ -792,7 +843,12 @@ void generate(Transformer *transformer, Tokenizer *tokenizer, Sampler *sampler, 
 
     while (pos < transformer->config.seq_len) {
         // forward the transformer to get logits for the next token
-        float *logits = forward(transformer, token, pos);
+        float *logits;
+        if (pos==0 && num_prompt_tokens>1) {
+            logits=forward_prompt(transformer,prompt_tokens,num_prompt_tokens,0);
+            pos=num_prompt_tokens-1;
+            token=prompt_tokens[pos];
+        } else logits=forward(transformer,token,pos);
 
         // advance the state state machine
         if (pos < num_prompt_tokens - 1) {
@@ -896,6 +952,12 @@ void chat(Transformer *transformer, Tokenizer *tokenizer, Sampler *sampler, char
             user_turn = 0;
         }
 
+        float *logits=NULL;
+        if (pos==0 && num_prompt_tokens>1) {
+            logits=forward_prompt(transformer,prompt_tokens,num_prompt_tokens,0);
+            pos=num_prompt_tokens-1;
+        }
+
         // determine the token to pass into the transformer next
         if (pos < num_prompt_tokens) {
             // if we are still processing the input prompt, force the next prompt token
@@ -906,7 +968,8 @@ void chat(Transformer *transformer, Tokenizer *tokenizer, Sampler *sampler, char
         }
 
         // forward the transformer to get logits for the next token
-        float *logits = forward(transformer, token, pos++);
+        if (!logits) logits=forward(transformer,token,pos);
+        pos++;
         next = sample(sampler, logits);
 
         // assistant is responding
@@ -943,7 +1006,12 @@ void error_usage() {
     fprintf(stderr, "  -y <string> system prompt in chat mode, default is none\n");
     fprintf(stderr, "  -r <int>    reasoning mode, 0 (default) = no thinking, 1 = thinking\n");
     fprintf(stderr, "  -n <int>    max output tokens (0 = unlimited)\n");
+#if defined(QWEN3_USE_ANE)
+    fprintf(stderr, "  env ANE=1 enables M1 ANE batched prefill with CPU Q8 decode\n");
+    fprintf(stderr, "  env ANE_DECODE=1 also offloads decode projections to ANE\n");
+#else
     fprintf(stderr, "  env NPU=1 enables NPU matmul for supported shapes\n");
+#endif
     exit(EXIT_FAILURE);
 }
 
@@ -988,7 +1056,17 @@ int main(int argc, char *argv[]) {
     // build the Transformer via the model .bin file
     Transformer transformer;
     build_transformer(&transformer, checkpoint_path, ctx_length);
-    npu_matmul_init(&g_npu, &transformer.config, &transformer.weights);
+    g_matmul_verbose = getenv("QWEN3_MATMUL_VERBOSE") != NULL;
+    int accelerator_ready = npu_matmul_init(&g_npu, &transformer.config, &transformer.weights);
+#if defined(QWEN3_USE_ANE)
+    const char *requested_ane = getenv("ANE") ? getenv("ANE") : getenv("NPU");
+    if (requested_ane && strcmp(requested_ane, "0") && !accelerator_ready) {
+        free_transformer(&transformer);
+        return EXIT_FAILURE;
+    }
+#else
+    (void)accelerator_ready;
+#endif
     npu_matmul_reset_stats(&g_npu);
 
     // build the Tokenizer via the tokenizer .bin file

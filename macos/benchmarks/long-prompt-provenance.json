@@ -1,0 +1,17 @@
+{
+  "construction": "Repeat long-prompt-source.txt with a newline between copies, encode using the pinned Qwen3 tokenizer without added special tokens, and take prefixes of exactly 512, 1024 and 2048 token IDs.",
+  "synthetic_scaling_workload": true,
+  "source_text_file": "macos/benchmarks/long-prompt-source.txt",
+  "source_text_sha256": "d2f42325ca430d9f3311254ea73ba107eea6bd4993a561b6d0bb73fe4704d054",
+  "tokenizer_repository": "Qwen/Qwen3-0.6B",
+  "tokenizer_revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+  "tokenizer_sha256": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+  "tokenizers_version": "0.19.1",
+  "merge_json_pairs_normalized_to_strings": true,
+  "known_short_prompt_ids_verified": true,
+  "source_text_tokens": 784,
+  "prompt_file": "macos/benchmarks/long-prompts.json",
+  "prompt_file_sha256": "a2891cca9d05beac1fbed70b9efbf21873473def6db73ea3109dcc49dfe2cbfb",
+  "logical_context": 2080,
+  "new_tokens": 16
+}

@@ -14,7 +14,14 @@ typedef enum {
     NPU_MATMUL_WCLS
 } NpuMatmulKind;
 
-#ifdef QWEN3_DISABLE_NPU
+#if defined(QWEN3_USE_ANE)
+typedef struct {
+    int enabled;
+    unsigned long long npu_ops;
+    unsigned long long cpu_ops;
+    void *impl;
+} NpuMatmulContext;
+#elif defined(QWEN3_DISABLE_NPU)
 typedef struct {
     int enabled;
     unsigned long long npu_ops;

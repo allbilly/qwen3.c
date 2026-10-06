@@ -1,0 +1,560 @@
+{
+  "format": "qwen3-coreml-review-audits-v1",
+  "status": "PASS",
+  "scope": "Strict manifest, placement, numerical and timing verification of the short sweep and the completed long sweep. One new GPU hardware worker completed the missing trial; other measurements are retained. Partial-sweep audits remain as historical evidence. Native queue regression evidence records the current source snapshot separately from measurement provenance. Warmup qualification regression evidence and repeat saved-result audits record the latest source snapshot; historical measurement provenance is preserved.",
+  "source_sha256": {
+    "macos/__init__.py": "6bc2aed4c883c0d0748b18e19494d1dec1a6d82f74d33d726ff19c39940674fe",
+    "macos/audit.py": "a9fa60cb2cfaa24d45e09d0ff1df7ada17b06cd58ff917456e70b2f38e23bffc",
+    "macos/benchmark.py": "01a4bd373fc625950603ad4a2c6087dd3dc93306643521063fbc5f3098132e76",
+    "macos/common.py": "3b5e6d90b389c3312f6f00b0abf827149fbd580e689fc4f1e032e6b669a05ece",
+    "macos/compute_plan.swift": "de80bb68ac56e5040ff0a610b0d25c84c8cc3c38518d2a95e17d4a212dbac21b",
+    "macos/export.py": "149ba748efe9c7597acf7633c357191009e895e7547152f92606b0c30d53ba34",
+    "macos/model.py": "a23c7dc170fcce76df510408ee4ecaa5c0fef9e294c91ea474b9da15b2f71bc4",
+    "tools/benchmark_queue.py": "7e6e4ab4f6207453caa0bcf20f529d4c4acb12dd8bd0f51ea3266b304c9ea726"
+  },
+  "published_results": [
+    {
+      "published_file": "macos/benchmarks/m1-qwen3-0.6b.json",
+      "published_file_sha256": "f5075d57f759d4c328e8f71b8a3f474549dccf21c9c09539d01f2c08623c1ecf",
+      "audits": [
+        {
+          "modes": [
+            "gpu",
+            "ane"
+          ],
+          "raw_directory": "macos/local-results/qwen3-0.6b-m1-001",
+          "audit_file": "macos/local-results/qwen3-0.6b-m1-001/audit-review-fixed-001.json",
+          "audit_sha256": "3aaeee5232aada945ac74a4edc9eb73553f6df4c0c447a330f48608833ccb5d8",
+          "result": {
+            "status": "PASS",
+            "report_sha256": "960fbc23f4a314d200ebef2ef53dc5978428c304711eaa6fa478eeb1cb4464d5",
+            "auditor_sha256": "a9fa60cb2cfaa24d45e09d0ff1df7ada17b06cd58ff917456e70b2f38e23bffc",
+            "checked_logit_vectors": 384,
+            "checked_timed_tokens": 384,
+            "workers": 6,
+            "medians_recomputed": true
+          }
+        }
+      ]
+    },
+    {
+      "published_file": "macos/benchmarks/m1-qwen3-0.6b-long.json",
+      "published_file_sha256": "edf177f20ed4f3c4e5c41c232fd567808f0df3ba328000812c94edfb9e64e3b0",
+      "audits": [
+        {
+          "modes": [
+            "gpu",
+            "ane"
+          ],
+          "raw_directory": "macos/local-results/qwen3-0.6b-m1-long-qualified-001",
+          "audit_file": "macos/local-results/qwen3-0.6b-m1-long-qualified-001/audit.json",
+          "audit_sha256": "c72ed91892d681503d87bf3abbbdae75a7180461b3f7a7f2f2594c00be655e5c",
+          "result": {
+            "status": "PASS",
+            "report_sha256": "6afb1422b6cb51702da44b46d0d29963bb3f0af4088914cd3c356eeeab2e08db",
+            "auditor_sha256": "a9fa60cb2cfaa24d45e09d0ff1df7ada17b06cd58ff917456e70b2f38e23bffc",
+            "checked_logit_vectors": 288,
+            "checked_timed_tokens": 288,
+            "workers": 6,
+            "medians_recomputed": true
+          }
+        }
+      ]
+    }
+  ],
+  "checked_logit_vectors": 672,
+  "checked_timed_tokens": 672,
+  "workers": 12,
+  "permission_recheck": {
+    "status": "PASS",
+    "time_utc": "2026-10-06T03:40:32.290808+00:00",
+    "process_inspection": "Available without sandbox restrictions.",
+    "native_queue_integration": {
+      "status": "PASS",
+      "tests": 4,
+      "test_source_sha256": "906269a0ce4bf6459140fe933977fe3192be0da6410becc2e57486f61ec541d8",
+      "command": "/Users/yeren/more-ane-transformers/.venv/bin/python tests/test_benchmark_queue.py -v",
+      "lock_scope": "Private temporary locks for tests; production hardware locks unchanged."
+    },
+    "hardware_queue_status": "PASS",
+    "coreml_gpu_retry_status": "PASS",
+    "gpu_retry_directory": "macos/local-results/qwen3-0.6b-m1-long-gpu-retry-006",
+    "previous_permission_record_sha256": "d88e0381c76490e9dd27fd69c4b059345bcea7b7d656a2d484a1ec49be251d89",
+    "free_disk_bytes_before_worker": 5310189568,
+    "free_disk_bytes_after_worker": 5988052992,
+    "source_download_cleanup": {
+      "removed_file": "macos/local-models/hf-snapshot/model.safetensors",
+      "size_bytes": 1503300328,
+      "sha256": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b",
+      "repository": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "reason": "Regenerable source download no longer used by the benchmark; compiler failed because disk space was exhausted."
+    },
+    "compiled_cache_cleanup": {
+      "status": "DONE",
+      "time_utc": "2026-10-06T03:28:26.022698+00:00",
+      "reason": "Regenerable compiled temporary Qwen3 copies verified against retained model weights; no open file handles.",
+      "free_bytes_before": 1999527936,
+      "directories": [
+        {
+          "directory": "/var/folders/5f/v9ypwk1x2hdf4cl70mks7cz40000gn/T/block-00-04.mlmodelc",
+          "matching_model_weight": "block-00-04.mlpackage/Data/com.apple.CoreML/weights/weight.bin",
+          "weight_sha256": "e1225385e6095a9ae6375286180e0be7d510a6dcf1c18ad2d10f8644d4f38b57",
+          "size_bytes": 126187745,
+          "files": {
+            "model.mil": "30234090941f034375d0394a88bcd007c4af2684674038abe727a4bf8c2056eb",
+            "coremldata.bin": "f02057cb7f15f497008e92fbd42b7b220e9b4c64188fd71ca753b0b15267e67c",
+            "weights/weight.bin": "e1225385e6095a9ae6375286180e0be7d510a6dcf1c18ad2d10f8644d4f38b57",
+            "analytics/coremldata.bin": "6fc1c083fbe61941928225016fa12e1b3980e02e2f5aad897c91089a3edb5c74"
+          }
+        },
+        {
+          "directory": "/var/folders/5f/v9ypwk1x2hdf4cl70mks7cz40000gn/T/block-00-04_9C11BC58-1D81-436C-9427-57B7A11832EB.mlmodelc",
+          "matching_model_weight": "block-00-04.mlpackage/Data/com.apple.CoreML/weights/weight.bin",
+          "weight_sha256": "e1225385e6095a9ae6375286180e0be7d510a6dcf1c18ad2d10f8644d4f38b57",
+          "size_bytes": 126187745,
+          "files": {
+            "model.mil": "30234090941f034375d0394a88bcd007c4af2684674038abe727a4bf8c2056eb",
+            "coremldata.bin": "c90027a2c7d8adc852ce802640e07063ccb3f404b1b32acd718950261ab7ef4b",
+            "weights/weight.bin": "e1225385e6095a9ae6375286180e0be7d510a6dcf1c18ad2d10f8644d4f38b57",
+            "analytics/coremldata.bin": "6fc1c083fbe61941928225016fa12e1b3980e02e2f5aad897c91089a3edb5c74"
+          }
+        },
+        {
+          "directory": "/var/folders/5f/v9ypwk1x2hdf4cl70mks7cz40000gn/T/block-04-08.mlmodelc",
+          "matching_model_weight": "block-04-08.mlpackage/Data/com.apple.CoreML/weights/weight.bin",
+          "weight_sha256": "ee589d6709eb8cae7810849520a15c52b03cbecc102adfa230bb4e1c5517a07c",
+          "size_bytes": 126187745,
+          "files": {
+            "model.mil": "30234090941f034375d0394a88bcd007c4af2684674038abe727a4bf8c2056eb",
+            "coremldata.bin": "154304fcf2b4d5ad3fbe48756f56bdbfcf409f38c5f933c9f5c7de32445783db",
+            "weights/weight.bin": "ee589d6709eb8cae7810849520a15c52b03cbecc102adfa230bb4e1c5517a07c",
+            "analytics/coremldata.bin": "6fc1c083fbe61941928225016fa12e1b3980e02e2f5aad897c91089a3edb5c74"
+          }
+        },
+        {
+          "directory": "/var/folders/5f/v9ypwk1x2hdf4cl70mks7cz40000gn/T/block-04-08_2F59D41E-2416-488D-A8EA-31B906D4425C.mlmodelc",
+          "matching_model_weight": "block-04-08.mlpackage/Data/com.apple.CoreML/weights/weight.bin",
+          "weight_sha256": "ee589d6709eb8cae7810849520a15c52b03cbecc102adfa230bb4e1c5517a07c",
+          "size_bytes": 126187745,
+          "files": {
+            "model.mil": "30234090941f034375d0394a88bcd007c4af2684674038abe727a4bf8c2056eb",
+            "coremldata.bin": "4ff9c1ab8243f6fd9770783374e101e8d14e27ad4544af7cbd83452c7909184f",
+            "weights/weight.bin": "ee589d6709eb8cae7810849520a15c52b03cbecc102adfa230bb4e1c5517a07c",
+            "analytics/coremldata.bin": "6fc1c083fbe61941928225016fa12e1b3980e02e2f5aad897c91089a3edb5c74"
+          }
+        },
+        {
+          "directory": "/var/folders/5f/v9ypwk1x2hdf4cl70mks7cz40000gn/T/block-08-12.mlmodelc",
+          "matching_model_weight": "block-08-12.mlpackage/Data/com.apple.CoreML/weights/weight.bin",
+          "weight_sha256": "ffcbf4595dc82d909a82bce4e30d0f455591511053c9ea6c1505ded16ecb02c9",
+          "size_bytes": 126187745,
+          "files": {
+            "model.mil": "30234090941f034375d0394a88bcd007c4af2684674038abe727a4bf8c2056eb",
+            "coremldata.bin": "33b4e2192cde510fb5e31e1f95c3ca59bb832a50b379a8e9a692a7c459d34046",
+            "weights/weight.bin": "ffcbf4595dc82d909a82bce4e30d0f455591511053c9ea6c1505ded16ecb02c9",
+            "analytics/coremldata.bin": "6fc1c083fbe61941928225016fa12e1b3980e02e2f5aad897c91089a3edb5c74"
+          }
+        },
+        {
+          "directory": "/var/folders/5f/v9ypwk1x2hdf4cl70mks7cz40000gn/T/block-08-12_77044BC7-B71E-4287-AF55-D14592875C64.mlmodelc",
+          "matching_model_weight": "block-08-12.mlpackage/Data/com.apple.CoreML/weights/weight.bin",
+          "weight_sha256": "ffcbf4595dc82d909a82bce4e30d0f455591511053c9ea6c1505ded16ecb02c9",
+          "size_bytes": 126187745,
+          "files": {
+            "model.mil": "30234090941f034375d0394a88bcd007c4af2684674038abe727a4bf8c2056eb",
+            "coremldata.bin": "c62d08f4ba4853a864d3e7ec6975dd39616953cefd15bdadf61fb81a92abc615",
+            "weights/weight.bin": "ffcbf4595dc82d909a82bce4e30d0f455591511053c9ea6c1505ded16ecb02c9",
+            "analytics/coremldata.bin": "6fc1c083fbe61941928225016fa12e1b3980e02e2f5aad897c91089a3edb5c74"
+          }
+        },
+        {
+          "directory": "/var/folders/5f/v9ypwk1x2hdf4cl70mks7cz40000gn/T/block-12-16.mlmodelc",
+          "matching_model_weight": "block-12-16.mlpackage/Data/com.apple.CoreML/weights/weight.bin",
+          "weight_sha256": "dd3ca2292cf2bbe7fdcccb21de21ca51edc9aaf2e1b88f6ce7bfbc336b891f24",
+          "size_bytes": 126187745,
+          "files": {
+            "model.mil": "30234090941f034375d0394a88bcd007c4af2684674038abe727a4bf8c2056eb",
+            "coremldata.bin": "e7df9da91a49607101e3fb073986800ad0e25ad64bbc6c7bbae1ae5049534016",
+            "weights/weight.bin": "dd3ca2292cf2bbe7fdcccb21de21ca51edc9aaf2e1b88f6ce7bfbc336b891f24",
+            "analytics/coremldata.bin": "6fc1c083fbe61941928225016fa12e1b3980e02e2f5aad897c91089a3edb5c74"
+          }
+        },
+        {
+          "directory": "/var/folders/5f/v9ypwk1x2hdf4cl70mks7cz40000gn/T/block-16-20.mlmodelc",
+          "matching_model_weight": "block-16-20.mlpackage/Data/com.apple.CoreML/weights/weight.bin",
+          "weight_sha256": "92f714998bee9f3acf4cba1cb00ab2294aa69e20894730d7989db748169f8145",
+          "size_bytes": 126187745,
+          "files": {
+            "model.mil": "30234090941f034375d0394a88bcd007c4af2684674038abe727a4bf8c2056eb",
+            "coremldata.bin": "c654d323b1fb633766617acfee7a98b4852bd10ca6f583745e2fbda668fc91a9",
+            "weights/weight.bin": "92f714998bee9f3acf4cba1cb00ab2294aa69e20894730d7989db748169f8145",
+            "analytics/coremldata.bin": "6fc1c083fbe61941928225016fa12e1b3980e02e2f5aad897c91089a3edb5c74"
+          }
+        },
+        {
+          "directory": "/var/folders/5f/v9ypwk1x2hdf4cl70mks7cz40000gn/T/block-20-24.mlmodelc",
+          "matching_model_weight": "block-20-24.mlpackage/Data/com.apple.CoreML/weights/weight.bin",
+          "weight_sha256": "17bf8df07809305e120691ed8ba7b953d9c30d4d3ba4f984e608fc5a8825b6d1",
+          "size_bytes": 126187745,
+          "files": {
+            "model.mil": "30234090941f034375d0394a88bcd007c4af2684674038abe727a4bf8c2056eb",
+            "coremldata.bin": "c62d08f4ba4853a864d3e7ec6975dd39616953cefd15bdadf61fb81a92abc615",
+            "weights/weight.bin": "17bf8df07809305e120691ed8ba7b953d9c30d4d3ba4f984e608fc5a8825b6d1",
+            "analytics/coremldata.bin": "6fc1c083fbe61941928225016fa12e1b3980e02e2f5aad897c91089a3edb5c74"
+          }
+        },
+        {
+          "directory": "/var/folders/5f/v9ypwk1x2hdf4cl70mks7cz40000gn/T/block-24-28.mlmodelc",
+          "matching_model_weight": "block-24-28.mlpackage/Data/com.apple.CoreML/weights/weight.bin",
+          "weight_sha256": "77290fa18656a7d4eab0f90f96bb2c655f2ccbe03ddc52b07ce04e0b5d53b157",
+          "size_bytes": 126187745,
+          "files": {
+            "model.mil": "30234090941f034375d0394a88bcd007c4af2684674038abe727a4bf8c2056eb",
+            "coremldata.bin": "e7df9da91a49607101e3fb073986800ad0e25ad64bbc6c7bbae1ae5049534016",
+            "weights/weight.bin": "77290fa18656a7d4eab0f90f96bb2c655f2ccbe03ddc52b07ce04e0b5d53b157",
+            "analytics/coremldata.bin": "6fc1c083fbe61941928225016fa12e1b3980e02e2f5aad897c91089a3edb5c74"
+          }
+        }
+      ],
+      "free_bytes_after": 2000592896,
+      "removed_bytes": 1261877450
+    }
+  },
+  "historical_partial_verification": {
+    "published_file": "macos/benchmarks/m1-qwen3-0.6b-long-partial.json",
+    "published_file_sha256": "b8fe19fd7a5958f266d227bb49bc86c00a533d87869c89fe9cdac9d3be839aef",
+    "audits": [
+      {
+        "modes": [
+          "gpu"
+        ],
+        "raw_directory": "macos/local-results/qwen3-0.6b-m1-long-audited-001/gpu",
+        "audit_file": "macos/local-results/qwen3-0.6b-m1-long-audited-001/gpu/audit-review-fixed-001.json",
+        "audit_sha256": "bc657735065f0b6fc001f8895d42e6aec11d19eb156f4a7e46b56c394197dc6a",
+        "result": {
+          "status": "PASS",
+          "report_sha256": "e2733bc885d158d534c75509e6ea3a3c071fa367f190a1bb0b2242bfa32ece4f",
+          "auditor_sha256": "a9fa60cb2cfaa24d45e09d0ff1df7ada17b06cd58ff917456e70b2f38e23bffc",
+          "checked_logit_vectors": 96,
+          "checked_timed_tokens": 96,
+          "workers": 2,
+          "medians_recomputed": true
+        }
+      },
+      {
+        "modes": [
+          "ane"
+        ],
+        "raw_directory": "macos/local-results/qwen3-0.6b-m1-long-audited-001/ane",
+        "audit_file": "macos/local-results/qwen3-0.6b-m1-long-audited-001/ane/audit-review-fixed-001.json",
+        "audit_sha256": "fb5506646aeabfa1b8e5239e353f0e660f51bce1748380123d065171f3e5deb3",
+        "result": {
+          "status": "PASS",
+          "report_sha256": "638f3d86d846da913a5dd293428f6924833b3be920ef98c54d02563858764313",
+          "auditor_sha256": "a9fa60cb2cfaa24d45e09d0ff1df7ada17b06cd58ff917456e70b2f38e23bffc",
+          "checked_logit_vectors": 144,
+          "checked_timed_tokens": 144,
+          "workers": 3,
+          "medians_recomputed": true
+        }
+      }
+    ]
+  },
+  "historical_permission_recheck": {
+    "status": "BLOCKED",
+    "time_utc": "2026-10-06T03:31:02.638326+00:00",
+    "process_inspection": "Available without sandbox restrictions.",
+    "native_queue_integration": {
+      "status": "PASS",
+      "tests": 4,
+      "test_source_sha256": "906269a0ce4bf6459140fe933977fe3192be0da6410becc2e57486f61ec541d8",
+      "command": "/Users/yeren/more-ane-transformers/.venv/bin/python tests/test_benchmark_queue.py -v",
+      "lock_scope": "Private temporary locks for tests; production hardware locks unchanged."
+    },
+    "hardware_queue_status": "PASS",
+    "coreml_gpu_retry_status": "ERROR",
+    "blocker": "Disk capacity: LLVM compilation failed before validation or timing.",
+    "gpu_retry_directory": "macos/local-results/qwen3-0.6b-m1-long-gpu-retry-005",
+    "previous_permission_record_sha256": "1044eb967cc114e15cceb5f7801052486d01d1aba23244cbcaca96d297657b64",
+    "long_publication_before_recheck_sha256": "e1ba64c4738a38002e8b5d25d176ff2c3cf7f2a4ff8e70cd27a12e14d60143e0",
+    "free_disk_bytes_observed": 1711050752,
+    "source_download_cleanup": {
+      "removed_file": "macos/local-models/hf-snapshot/model.safetensors",
+      "size_bytes": 1503300328,
+      "sha256": "f47f71177f32bcd101b7573ec9171e6a57f4f4d31148d38e382306f42996874b",
+      "repository": "Qwen/Qwen3-0.6B",
+      "revision": "c1899de289a04d12100db370d81485cdf75e47ca",
+      "reason": "Regenerable source download no longer used by the benchmark; compiler failed because disk space was exhausted."
+    },
+    "compiled_cache_cleanup": {
+      "status": "DONE",
+      "time_utc": "2026-10-06T03:28:26.022698+00:00",
+      "reason": "Regenerable compiled temporary Qwen3 copies verified against retained model weights; no open file handles.",
+      "free_bytes_before": 1999527936,
+      "directories": [
+        {
+          "directory": "/var/folders/5f/v9ypwk1x2hdf4cl70mks7cz40000gn/T/block-00-04.mlmodelc",
+          "matching_model_weight": "block-00-04.mlpackage/Data/com.apple.CoreML/weights/weight.bin",
+          "weight_sha256": "e1225385e6095a9ae6375286180e0be7d510a6dcf1c18ad2d10f8644d4f38b57",
+          "size_bytes": 126187745,
+          "files": {
+            "model.mil": "30234090941f034375d0394a88bcd007c4af2684674038abe727a4bf8c2056eb",
+            "coremldata.bin": "f02057cb7f15f497008e92fbd42b7b220e9b4c64188fd71ca753b0b15267e67c",
+            "weights/weight.bin": "e1225385e6095a9ae6375286180e0be7d510a6dcf1c18ad2d10f8644d4f38b57",
+            "analytics/coremldata.bin": "6fc1c083fbe61941928225016fa12e1b3980e02e2f5aad897c91089a3edb5c74"
+          }
+        },
+        {
+          "directory": "/var/folders/5f/v9ypwk1x2hdf4cl70mks7cz40000gn/T/block-00-04_9C11BC58-1D81-436C-9427-57B7A11832EB.mlmodelc",
+          "matching_model_weight": "block-00-04.mlpackage/Data/com.apple.CoreML/weights/weight.bin",
+          "weight_sha256": "e1225385e6095a9ae6375286180e0be7d510a6dcf1c18ad2d10f8644d4f38b57",
+          "size_bytes": 126187745,
+          "files": {
+            "model.mil": "30234090941f034375d0394a88bcd007c4af2684674038abe727a4bf8c2056eb",
+            "coremldata.bin": "c90027a2c7d8adc852ce802640e07063ccb3f404b1b32acd718950261ab7ef4b",
+            "weights/weight.bin": "e1225385e6095a9ae6375286180e0be7d510a6dcf1c18ad2d10f8644d4f38b57",
+            "analytics/coremldata.bin": "6fc1c083fbe61941928225016fa12e1b3980e02e2f5aad897c91089a3edb5c74"
+          }
+        },
+        {
+          "directory": "/var/folders/5f/v9ypwk1x2hdf4cl70mks7cz40000gn/T/block-04-08.mlmodelc",
+          "matching_model_weight": "block-04-08.mlpackage/Data/com.apple.CoreML/weights/weight.bin",
+          "weight_sha256": "ee589d6709eb8cae7810849520a15c52b03cbecc102adfa230bb4e1c5517a07c",
+          "size_bytes": 126187745,
+          "files": {
+            "model.mil": "30234090941f034375d0394a88bcd007c4af2684674038abe727a4bf8c2056eb",
+            "coremldata.bin": "154304fcf2b4d5ad3fbe48756f56bdbfcf409f38c5f933c9f5c7de32445783db",
+            "weights/weight.bin": "ee589d6709eb8cae7810849520a15c52b03cbecc102adfa230bb4e1c5517a07c",
+            "analytics/coremldata.bin": "6fc1c083fbe61941928225016fa12e1b3980e02e2f5aad897c91089a3edb5c74"
+          }
+        },
+        {
+          "directory": "/var/folders/5f/v9ypwk1x2hdf4cl70mks7cz40000gn/T/block-04-08_2F59D41E-2416-488D-A8EA-31B906D4425C.mlmodelc",
+          "matching_model_weight": "block-04-08.mlpackage/Data/com.apple.CoreML/weights/weight.bin",
+          "weight_sha256": "ee589d6709eb8cae7810849520a15c52b03cbecc102adfa230bb4e1c5517a07c",
+          "size_bytes": 126187745,
+          "files": {
+            "model.mil": "30234090941f034375d0394a88bcd007c4af2684674038abe727a4bf8c2056eb",
+            "coremldata.bin": "4ff9c1ab8243f6fd9770783374e101e8d14e27ad4544af7cbd83452c7909184f",
+            "weights/weight.bin": "ee589d6709eb8cae7810849520a15c52b03cbecc102adfa230bb4e1c5517a07c",
+            "analytics/coremldata.bin": "6fc1c083fbe61941928225016fa12e1b3980e02e2f5aad897c91089a3edb5c74"
+          }
+        },
+        {
+          "directory": "/var/folders/5f/v9ypwk1x2hdf4cl70mks7cz40000gn/T/block-08-12.mlmodelc",
+          "matching_model_weight": "block-08-12.mlpackage/Data/com.apple.CoreML/weights/weight.bin",
+          "weight_sha256": "ffcbf4595dc82d909a82bce4e30d0f455591511053c9ea6c1505ded16ecb02c9",
+          "size_bytes": 126187745,
+          "files": {
+            "model.mil": "30234090941f034375d0394a88bcd007c4af2684674038abe727a4bf8c2056eb",
+            "coremldata.bin": "33b4e2192cde510fb5e31e1f95c3ca59bb832a50b379a8e9a692a7c459d34046",
+            "weights/weight.bin": "ffcbf4595dc82d909a82bce4e30d0f455591511053c9ea6c1505ded16ecb02c9",
+            "analytics/coremldata.bin": "6fc1c083fbe61941928225016fa12e1b3980e02e2f5aad897c91089a3edb5c74"
+          }
+        },
+        {
+          "directory": "/var/folders/5f/v9ypwk1x2hdf4cl70mks7cz40000gn/T/block-08-12_77044BC7-B71E-4287-AF55-D14592875C64.mlmodelc",
+          "matching_model_weight": "block-08-12.mlpackage/Data/com.apple.CoreML/weights/weight.bin",
+          "weight_sha256": "ffcbf4595dc82d909a82bce4e30d0f455591511053c9ea6c1505ded16ecb02c9",
+          "size_bytes": 126187745,
+          "files": {
+            "model.mil": "30234090941f034375d0394a88bcd007c4af2684674038abe727a4bf8c2056eb",
+            "coremldata.bin": "c62d08f4ba4853a864d3e7ec6975dd39616953cefd15bdadf61fb81a92abc615",
+            "weights/weight.bin": "ffcbf4595dc82d909a82bce4e30d0f455591511053c9ea6c1505ded16ecb02c9",
+            "analytics/coremldata.bin": "6fc1c083fbe61941928225016fa12e1b3980e02e2f5aad897c91089a3edb5c74"
+          }
+        },
+        {
+          "directory": "/var/folders/5f/v9ypwk1x2hdf4cl70mks7cz40000gn/T/block-12-16.mlmodelc",
+          "matching_model_weight": "block-12-16.mlpackage/Data/com.apple.CoreML/weights/weight.bin",
+          "weight_sha256": "dd3ca2292cf2bbe7fdcccb21de21ca51edc9aaf2e1b88f6ce7bfbc336b891f24",
+          "size_bytes": 126187745,
+          "files": {
+            "model.mil": "30234090941f034375d0394a88bcd007c4af2684674038abe727a4bf8c2056eb",
+            "coremldata.bin": "e7df9da91a49607101e3fb073986800ad0e25ad64bbc6c7bbae1ae5049534016",
+            "weights/weight.bin": "dd3ca2292cf2bbe7fdcccb21de21ca51edc9aaf2e1b88f6ce7bfbc336b891f24",
+            "analytics/coremldata.bin": "6fc1c083fbe61941928225016fa12e1b3980e02e2f5aad897c91089a3edb5c74"
+          }
+        },
+        {
+          "directory": "/var/folders/5f/v9ypwk1x2hdf4cl70mks7cz40000gn/T/block-16-20.mlmodelc",
+          "matching_model_weight": "block-16-20.mlpackage/Data/com.apple.CoreML/weights/weight.bin",
+          "weight_sha256": "92f714998bee9f3acf4cba1cb00ab2294aa69e20894730d7989db748169f8145",
+          "size_bytes": 126187745,
+          "files": {
+            "model.mil": "30234090941f034375d0394a88bcd007c4af2684674038abe727a4bf8c2056eb",
+            "coremldata.bin": "c654d323b1fb633766617acfee7a98b4852bd10ca6f583745e2fbda668fc91a9",
+            "weights/weight.bin": "92f714998bee9f3acf4cba1cb00ab2294aa69e20894730d7989db748169f8145",
+            "analytics/coremldata.bin": "6fc1c083fbe61941928225016fa12e1b3980e02e2f5aad897c91089a3edb5c74"
+          }
+        },
+        {
+          "directory": "/var/folders/5f/v9ypwk1x2hdf4cl70mks7cz40000gn/T/block-20-24.mlmodelc",
+          "matching_model_weight": "block-20-24.mlpackage/Data/com.apple.CoreML/weights/weight.bin",
+          "weight_sha256": "17bf8df07809305e120691ed8ba7b953d9c30d4d3ba4f984e608fc5a8825b6d1",
+          "size_bytes": 126187745,
+          "files": {
+            "model.mil": "30234090941f034375d0394a88bcd007c4af2684674038abe727a4bf8c2056eb",
+            "coremldata.bin": "c62d08f4ba4853a864d3e7ec6975dd39616953cefd15bdadf61fb81a92abc615",
+            "weights/weight.bin": "17bf8df07809305e120691ed8ba7b953d9c30d4d3ba4f984e608fc5a8825b6d1",
+            "analytics/coremldata.bin": "6fc1c083fbe61941928225016fa12e1b3980e02e2f5aad897c91089a3edb5c74"
+          }
+        },
+        {
+          "directory": "/var/folders/5f/v9ypwk1x2hdf4cl70mks7cz40000gn/T/block-24-28.mlmodelc",
+          "matching_model_weight": "block-24-28.mlpackage/Data/com.apple.CoreML/weights/weight.bin",
+          "weight_sha256": "77290fa18656a7d4eab0f90f96bb2c655f2ccbe03ddc52b07ce04e0b5d53b157",
+          "size_bytes": 126187745,
+          "files": {
+            "model.mil": "30234090941f034375d0394a88bcd007c4af2684674038abe727a4bf8c2056eb",
+            "coremldata.bin": "e7df9da91a49607101e3fb073986800ad0e25ad64bbc6c7bbae1ae5049534016",
+            "weights/weight.bin": "77290fa18656a7d4eab0f90f96bb2c655f2ccbe03ddc52b07ce04e0b5d53b157",
+            "analytics/coremldata.bin": "6fc1c083fbe61941928225016fa12e1b3980e02e2f5aad897c91089a3edb5c74"
+          }
+        }
+      ],
+      "free_bytes_after": 2000592896,
+      "removed_bytes": 1261877450
+    },
+    "execution_source_scope": "Exact original source snapshot; working Engine AST matches. No new measured hardware trial completed."
+  },
+  "historical_review_source_sha256": {
+    "macos/__init__.py": "6bc2aed4c883c0d0748b18e19494d1dec1a6d82f74d33d726ff19c39940674fe",
+    "macos/audit.py": "a9fa60cb2cfaa24d45e09d0ff1df7ada17b06cd58ff917456e70b2f38e23bffc",
+    "macos/benchmark.py": "53894f2e18675ebed24651a67f43dd7e559aa73aa9b3a23f6534a06475509984",
+    "macos/common.py": "3b5e6d90b389c3312f6f00b0abf827149fbd580e689fc4f1e032e6b669a05ece",
+    "macos/compute_plan.swift": "de80bb68ac56e5040ff0a610b0d25c84c8cc3c38518d2a95e17d4a212dbac21b",
+    "macos/export.py": "149ba748efe9c7597acf7633c357191009e895e7547152f92606b0c30d53ba34",
+    "macos/model.py": "a23c7dc170fcce76df510408ee4ecaa5c0fef9e294c91ea474b9da15b2f71bc4",
+    "tools/benchmark_queue.py": "3e84a8511d654045afc028dfa149ad0fe5a51d9e661bfa68540992965d8647e5"
+  },
+  "queue_review_fix": {
+    "status": "PASS",
+    "time_utc": "2026-10-06T04:30:01.199336+00:00",
+    "source_sha256": {
+      "macos/__init__.py": "6bc2aed4c883c0d0748b18e19494d1dec1a6d82f74d33d726ff19c39940674fe",
+      "macos/audit.py": "a9fa60cb2cfaa24d45e09d0ff1df7ada17b06cd58ff917456e70b2f38e23bffc",
+      "macos/benchmark.py": "53894f2e18675ebed24651a67f43dd7e559aa73aa9b3a23f6534a06475509984",
+      "macos/common.py": "3b5e6d90b389c3312f6f00b0abf827149fbd580e689fc4f1e032e6b669a05ece",
+      "macos/compute_plan.swift": "de80bb68ac56e5040ff0a610b0d25c84c8cc3c38518d2a95e17d4a212dbac21b",
+      "macos/export.py": "149ba748efe9c7597acf7633c357191009e895e7547152f92606b0c30d53ba34",
+      "macos/model.py": "a23c7dc170fcce76df510408ee4ecaa5c0fef9e294c91ea474b9da15b2f71bc4",
+      "tools/benchmark_queue.py": "7e6e4ab4f6207453caa0bcf20f529d4c4acb12dd8bd0f51ea3266b304c9ea726"
+    },
+    "test_source_sha256": {
+      "tests/test_benchmark_queue.py": "c10542d098a1aefac924ecc4ac601f24613451f3ca890ea664b9e4b822250458",
+      "tests/test_macos_failures.py": "4bad10e59761097b7a48d0ede87ca3221a1302d4945e68cd4c085162de930d7a",
+      "tests/test_macos_audit.py": "a10cbe1acb0f7c218b967516021a5a85292d54c5ce0ea580ab4e51a523dfb317",
+      "tests/test_macos_benchmark.py": "4d0b7fc37d0dc4be6e36bbb151fa423c14bcae0e8f3753d3f699c2c051f708b2"
+    },
+    "tests": 34,
+    "runs": [
+      {
+        "status": "PASS",
+        "command": "/Users/yeren/more-ane-transformers/.venv/bin/python tests/test_benchmark_queue.py -v",
+        "tests": 8,
+        "log": "macos/local-results/queue-fix-tests-001.log",
+        "log_sha256": "f14a08cb54335606a626a77a4860bf95cdce95f3c99c7ffa69965a74edb2a32d",
+        "log_text": "test_child_exit_code_is_preserved (__main__.QueueTests.test_child_exit_code_is_preserved) ... ok\ntest_macos_coordinators_are_ignored_but_workers_are_detected (__main__.QueueTests.test_macos_coordinators_are_ignored_but_workers_are_detected) ... ok\ntest_native_argv_preserves_empty_arguments_and_excludes_environment (__main__.QueueTests.test_native_argv_preserves_empty_arguments_and_excludes_environment) ... ok\ntest_python_unbuffered_live_job_is_detected_and_waited_for (__main__.QueueTests.test_python_unbuffered_live_job_is_detected_and_waited_for) ... ok\ntest_quotes_and_spaced_script_paths_are_detected_and_waited_for (__main__.QueueTests.test_quotes_and_spaced_script_paths_are_detected_and_waited_for) ... ok\ntest_truncated_native_argv_is_rejected (__main__.QueueTests.test_truncated_native_argv_is_rejected) ... ok\ntest_two_queued_jobs_do_not_overlap_or_deadlock (__main__.QueueTests.test_two_queued_jobs_do_not_overlap_or_deadlock) ... ok\ntest_unbuffered_benchmark_module_is_detected_on_macos (__main__.QueueTests.test_unbuffered_benchmark_module_is_detected_on_macos) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 8.127s\n\nOK\n"
+      },
+      {
+        "status": "PASS",
+        "command": "/Users/yeren/more-ane-transformers/.venv/bin/python -m unittest discover -s tests -p 'test_macos*.py' -v",
+        "tests": 26,
+        "log": "macos/local-results/macos-queue-fix-tests-002.log",
+        "log_sha256": "01f4c1a8cbafa5bc8af6f4de89014ea3dc2e658516fe45c8bce54cdd7c90788d",
+        "log_text": "test_changed_embedded_manifest_with_old_hash_cannot_pass (test_macos_audit.AuditTests.test_changed_embedded_manifest_with_old_hash_cannot_pass) ... ok\ntest_changed_logits_with_matching_argmax_fail_the_gate (test_macos_audit.AuditTests.test_changed_logits_with_matching_argmax_fail_the_gate) ... ok\ntest_claimed_prefill_width_must_match_the_hashed_manifest (test_macos_audit.AuditTests.test_claimed_prefill_width_must_match_the_hashed_manifest) ... ok\ntest_duplicate_receipt_cannot_pass (test_macos_audit.AuditTests.test_duplicate_receipt_cannot_pass) ... ok\ntest_miscounted_decode_total_cannot_pass (test_macos_audit.AuditTests.test_miscounted_decode_total_cannot_pass) ... ok\ntest_missing_accelerator_placement_cannot_pass (test_macos_audit.AuditTests.test_missing_accelerator_placement_cannot_pass) ... ok\ntest_missing_summary_cannot_pass (test_macos_audit.AuditTests.test_missing_summary_cannot_pass) ... ok\ntest_refreshed_hash_does_not_hide_reference_source_swap (test_macos_audit.AuditTests.test_refreshed_hash_does_not_hide_reference_source_swap) ... ok\ntest_valid_selected_devices_are_audited (test_macos_audit.AuditTests.test_valid_selected_devices_are_audited) ... ok\ntest_wrong_prefill_throughput_cannot_pass (test_macos_audit.AuditTests.test_wrong_prefill_throughput_cannot_pass) ... ok\ntest_layout_recovers_every_projection_and_tied_head (test_macos_benchmark.Contracts.test_layout_recovers_every_projection_and_tied_head) ... ok\ntest_prefill_padding_and_cache_overwrite_equal_single_token_reference (test_macos_benchmark.Contracts.test_prefill_padding_and_cache_overwrite_equal_single_token_reference) ... ok\ntest_prompt_context_counts_only_subsequent_decode_steps (test_macos_benchmark.Contracts.test_prompt_context_counts_only_subsequent_decode_steps) ... ok\ntest_quality_gate_sees_logit_drift_even_if_argmax_matches (test_macos_benchmark.Contracts.test_quality_gate_sees_logit_drift_even_if_argmax_matches) ... ok\ntest_first_lock_open_failure_finalizes_error (test_macos_failures.QueueFailures.test_first_lock_open_failure_finalizes_error) ... ok\ntest_flock_failure_closes_both_open_files (test_macos_failures.QueueFailures.test_flock_failure_closes_both_open_files) ... ok\ntest_process_survey_failure_finalizes_error_and_releases_locks (test_macos_failures.QueueFailures.test_process_survey_failure_finalizes_error_and_releases_locks) ... ok\ntest_receipt_write_failure_still_releases_locks (test_macos_failures.QueueFailures.test_receipt_write_failure_still_releases_locks) ... ok\ntest_second_lock_open_failure_closes_first_lock (test_macos_failures.QueueFailures.test_second_lock_open_failure_closes_first_lock) ... ok\ntest_successful_coordinator_still_collects_all_workers (test_macos_failures.QueueFailures.test_successful_coordinator_still_collects_all_workers) ... ok\ntest_two_coordinators_waiting_on_shared_locks_complete_without_overlap (test_macos_failures.QueueFailures.test_two_coordinators_waiting_on_shared_locks_complete_without_overlap) ... ok\ntest_initialization_failure_records_partial_plans_and_error (test_macos_failures.WorkerFailures.test_initialization_failure_records_partial_plans_and_error) ... ok\ntest_numeric_failure_remains_unqualified_at_completion (test_macos_failures.WorkerFailures.test_numeric_failure_remains_unqualified_at_completion) ... ok\ntest_prediction_failure_retains_completed_prompt_and_logits (test_macos_failures.WorkerFailures.test_prediction_failure_retains_completed_prompt_and_logits) ... ok\ntest_reference_failure_retains_completed_prompt (test_macos_failures.WorkerFailures.test_reference_failure_retains_completed_prompt) ... ok\ntest_worker_is_running_until_every_prompt_completes (test_macos_failures.WorkerFailures.test_worker_is_running_until_every_prompt_completes) ... ok\n\n----------------------------------------------------------------------\nRan 26 tests in 1.651s\n\nOK\n"
+      }
+    ],
+    "verified_behavior": [
+      "Concurrent coordinators finish without overlapping work using real locks and the native process scanner.",
+      "Queued macos.benchmark coordinators are ignored; active workers are detected.",
+      "Native arguments preserve quotes, spaces, empty values and Unicode; environment values are excluded.",
+      "Uncooperative jobs with spaced script paths and quoted arguments are detected and waited for."
+    ],
+    "historical_queue_test_source": "\"\"\"Exercise the real queue with isolated locks and short-lived processes.\"\"\"\nimport importlib.util\nimport json\nfrom pathlib import Path\nimport subprocess\nimport sys\nimport tempfile\nimport time\nimport unittest\n\nROOT = Path(__file__).resolve().parents[1]\nQUEUE = ROOT / 'tools/benchmark_queue.py'\nspec = importlib.util.spec_from_file_location('queue_module', QUEUE)\nqueue_module = importlib.util.module_from_spec(spec)\nspec.loader.exec_module(queue_module)\n\n\nclass QueueTests(unittest.TestCase):\n    def setUp(self):\n        self.directory = tempfile.TemporaryDirectory()\n        self.root = Path(self.directory.name)\n        self.processes = []\n\n    def tearDown(self):\n        for process in self.processes:\n            if process.poll() is None:\n                process.terminate()\n            process.communicate(timeout=10)\n        self.directory.cleanup()\n\n    def launch(self, command, cwd=None):\n        if len(command) > 1 and command[1] == str(QUEUE):\n            # Use the real CLI/flock/process survey while keeping test locks\n            # independent of long hardware runs in other sessions. HOME stays\n            # unchanged; only this queue subprocess's Path.home is redirected.\n            launcher = (\n                'import pathlib, runpy, sys\\n'\n                'lock_root = pathlib.Path(sys.argv[1])\\n'\n                'pathlib.Path.home = classmethod(lambda cls: lock_root)\\n'\n                'queue_path = sys.argv[2]\\n'\n                'sys.argv = sys.argv[2:]\\n'\n                'runpy.run_path(queue_path, run_name=\"__main__\")\\n')\n            command = [command[0], '-c', launcher, str(self.root), *command[1:]]\n        process = subprocess.Popen(command, cwd=cwd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)\n        self.processes.append(process)\n        return process\n\n    def probe(self, name, duration):\n        path = self.root / name\n        path.write_text(\n            'import json, pathlib, sys, time\\n'\n            'output=pathlib.Path(sys.argv[1])\\n'\n            'start=time.monotonic()\\n'\n            'output.with_suffix(\".started\").write_text(str(start))\\n'\n            f'time.sleep({duration})\\n'\n            'output.write_text(json.dumps([start,time.monotonic()]))\\n')\n        return path\n\n    def wait_started(self, output):\n        deadline = time.monotonic() + 60\n        while not output.with_suffix('.started').exists():\n            if time.monotonic() > deadline:\n                self.fail('queued process did not start within 60 seconds')\n            time.sleep(0.02)\n\n    def test_two_queued_jobs_do_not_overlap_or_deadlock(self):\n        script = self.probe('queue_probe.py', 0.5)\n        outputs = [self.root / f'{i}.json' for i in range(2)]\n        first = self.launch([sys.executable, str(QUEUE), '--', sys.executable, str(script), str(outputs[0])])\n        self.wait_started(outputs[0])\n        second = self.launch([sys.executable, str(QUEUE), '--', sys.executable, str(script), str(outputs[1])])\n        for process in (first, second):\n            _, stderr = process.communicate(timeout=60)\n            self.assertEqual(process.returncode, 0, stderr)\n        intervals = [json.loads(path.read_text()) for path in outputs]\n        self.assertGreaterEqual(intervals[1][0], intervals[0][1])\n\n    def test_python_unbuffered_live_job_is_detected_and_waited_for(self):\n        script = self.probe('bench_queue_probe.py', 0.5)\n        external_output = self.root / 'external.json'\n        external = self.launch([sys.executable, '-u', str(script), str(external_output)])\n        self.wait_started(external_output)\n        self.assertIn(external.pid, [pid for pid, _ in queue_module.competing_jobs()])\n        output = self.root / 'queued.json'\n        queued = self.launch([sys.executable, str(QUEUE), '--', sys.executable,\n                              str(self.probe('queue_probe.py', 0)), str(output)])\n        _, stderr = queued.communicate(timeout=60)\n        external.communicate(timeout=10)\n        self.assertEqual(queued.returncode, 0, stderr)\n        self.assertIn('Queued behind live jobs', stderr)\n        self.assertGreaterEqual(json.loads(output.read_text())[0], json.loads(external_output.read_text())[1])\n\n    def test_child_exit_code_is_preserved(self):\n        process = self.launch([sys.executable, str(QUEUE), '--', sys.executable, '-c', 'raise SystemExit(7)'])\n        process.communicate(timeout=60)\n        self.assertEqual(process.returncode, 7)\n\n    @unittest.skipUnless(sys.platform == 'darwin', 'Core ML benchmark modules run on macOS')\n    def test_unbuffered_benchmark_module_is_detected_on_macos(self):\n        self.probe('benchmark.py', 0.5)\n        external_output = self.root/'external-module.json'\n        external = self.launch([sys.executable, '-u', '-m', 'benchmark', str(external_output)], cwd=self.root)\n        self.wait_started(external_output)\n        self.assertIn(external.pid, [pid for pid, _ in queue_module.competing_jobs()])\n        external.communicate(timeout=10)\n\n\nif __name__ == '__main__':\n    unittest.main()\n",
+    "historical_queue_test_source_sha256": "906269a0ce4bf6459140fe933977fe3192be0da6410becc2e57486f61ec541d8",
+    "previous_review_record_sha256": "8c6651517fe013ed8e114def56bb18c9eef4f45b43e3a9114fc27ccf32987563",
+    "execution_equivalence": "Model Engine AST, model.py and compute_plan.swift match the retained measurement snapshot. Queue fixes are outside model timers."
+  },
+  "warmup_review_fix": {
+    "status": "PASS",
+    "time_utc": "2026-10-06T05:11:36.829076+00:00",
+    "source_sha256": {
+      "macos/__init__.py": "6bc2aed4c883c0d0748b18e19494d1dec1a6d82f74d33d726ff19c39940674fe",
+      "macos/audit.py": "a9fa60cb2cfaa24d45e09d0ff1df7ada17b06cd58ff917456e70b2f38e23bffc",
+      "macos/benchmark.py": "01a4bd373fc625950603ad4a2c6087dd3dc93306643521063fbc5f3098132e76",
+      "macos/common.py": "3b5e6d90b389c3312f6f00b0abf827149fbd580e689fc4f1e032e6b669a05ece",
+      "macos/compute_plan.swift": "de80bb68ac56e5040ff0a610b0d25c84c8cc3c38518d2a95e17d4a212dbac21b",
+      "macos/export.py": "149ba748efe9c7597acf7633c357191009e895e7547152f92606b0c30d53ba34",
+      "macos/model.py": "a23c7dc170fcce76df510408ee4ecaa5c0fef9e294c91ea474b9da15b2f71bc4",
+      "tools/benchmark_queue.py": "7e6e4ab4f6207453caa0bcf20f529d4c4acb12dd8bd0f51ea3266b304c9ea726"
+    },
+    "test_source_sha256": {
+      "tests/test_macos_audit.py": "0d2be7fecbe8dff5b49d8d02559bf041af85589763b549364ddfaae4ea43f99c",
+      "tests/test_macos_benchmark.py": "4d0b7fc37d0dc4be6e36bbb151fa423c14bcae0e8f3753d3f699c2c051f708b2",
+      "tests/test_macos_failures.py": "8d0ff110b46fa8e30dcf11e5fe8d33511c756758bc039d0e391f6b7b8646fa88",
+      "tests/test_benchmark_queue.py": "c10542d098a1aefac924ecc4ac601f24613451f3ca890ea664b9e4b822250458"
+    },
+    "tests": 36,
+    "runs": [
+      {
+        "command": "/Users/yeren/more-ane-transformers/.venv/bin/python -m unittest discover -s tests -p 'test_macos*.py' -v",
+        "returncode": 0,
+        "tests": 28,
+        "log": "macos/local-results/macos-warmup-fix-tests-001.log",
+        "log_sha256": "e9d2efb3ddbc271e4eff19c24563b1b597a6c01f6899d88c3d21ebbb0194e483",
+        "output": "test_changed_embedded_manifest_with_old_hash_cannot_pass (test_macos_audit.AuditTests.test_changed_embedded_manifest_with_old_hash_cannot_pass) ... ok\ntest_changed_logits_with_matching_argmax_fail_the_gate (test_macos_audit.AuditTests.test_changed_logits_with_matching_argmax_fail_the_gate) ... ok\ntest_claimed_prefill_width_must_match_the_hashed_manifest (test_macos_audit.AuditTests.test_claimed_prefill_width_must_match_the_hashed_manifest) ... ok\ntest_duplicate_receipt_cannot_pass (test_macos_audit.AuditTests.test_duplicate_receipt_cannot_pass) ... ok\ntest_miscounted_decode_total_cannot_pass (test_macos_audit.AuditTests.test_miscounted_decode_total_cannot_pass) ... ok\ntest_missing_accelerator_placement_cannot_pass (test_macos_audit.AuditTests.test_missing_accelerator_placement_cannot_pass) ... ok\ntest_missing_summary_cannot_pass (test_macos_audit.AuditTests.test_missing_summary_cannot_pass) ... ok\ntest_refreshed_hash_does_not_hide_reference_source_swap (test_macos_audit.AuditTests.test_refreshed_hash_does_not_hide_reference_source_swap) ... ok\ntest_valid_selected_devices_are_audited (test_macos_audit.AuditTests.test_valid_selected_devices_are_audited) ... ok\ntest_wrong_prefill_throughput_cannot_pass (test_macos_audit.AuditTests.test_wrong_prefill_throughput_cannot_pass) ... ok\ntest_wrong_warmup_tokens_cannot_pass (test_macos_audit.AuditTests.test_wrong_warmup_tokens_cannot_pass) ... ok\ntest_layout_recovers_every_projection_and_tied_head (test_macos_benchmark.Contracts.test_layout_recovers_every_projection_and_tied_head) ... ok\ntest_prefill_padding_and_cache_overwrite_equal_single_token_reference (test_macos_benchmark.Contracts.test_prefill_padding_and_cache_overwrite_equal_single_token_reference) ... ok\ntest_prompt_context_counts_only_subsequent_decode_steps (test_macos_benchmark.Contracts.test_prompt_context_counts_only_subsequent_decode_steps) ... ok\ntest_quality_gate_sees_logit_drift_even_if_argmax_matches (test_macos_benchmark.Contracts.test_quality_gate_sees_logit_drift_even_if_argmax_matches) ... ok\ntest_first_lock_open_failure_finalizes_error (test_macos_failures.QueueFailures.test_first_lock_open_failure_finalizes_error) ... ok\ntest_flock_failure_closes_both_open_files (test_macos_failures.QueueFailures.test_flock_failure_closes_both_open_files) ... ok\ntest_process_survey_failure_finalizes_error_and_releases_locks (test_macos_failures.QueueFailures.test_process_survey_failure_finalizes_error_and_releases_locks) ... ok\ntest_receipt_write_failure_still_releases_locks (test_macos_failures.QueueFailures.test_receipt_write_failure_still_releases_locks) ... ok\ntest_second_lock_open_failure_closes_first_lock (test_macos_failures.QueueFailures.test_second_lock_open_failure_closes_first_lock) ... ok\ntest_successful_coordinator_still_collects_all_workers (test_macos_failures.QueueFailures.test_successful_coordinator_still_collects_all_workers) ... ok\ntest_two_coordinators_waiting_on_shared_locks_complete_without_overlap (test_macos_failures.QueueFailures.test_two_coordinators_waiting_on_shared_locks_complete_without_overlap) ... ok\ntest_either_warmup_mismatch_fails_gpu_and_ane_qualification (test_macos_failures.WorkerFailures.test_either_warmup_mismatch_fails_gpu_and_ane_qualification) ... ok\ntest_initialization_failure_records_partial_plans_and_error (test_macos_failures.WorkerFailures.test_initialization_failure_records_partial_plans_and_error) ... ok\ntest_numeric_failure_remains_unqualified_at_completion (test_macos_failures.WorkerFailures.test_numeric_failure_remains_unqualified_at_completion) ... ok\ntest_prediction_failure_retains_completed_prompt_and_logits (test_macos_failures.WorkerFailures.test_prediction_failure_retains_completed_prompt_and_logits) ... ok\ntest_reference_failure_retains_completed_prompt (test_macos_failures.WorkerFailures.test_reference_failure_retains_completed_prompt) ... ok\ntest_worker_is_running_until_every_prompt_completes (test_macos_failures.WorkerFailures.test_worker_is_running_until_every_prompt_completes) ... ok\n\n----------------------------------------------------------------------\nRan 28 tests in 2.107s\n\nOK\n"
+      },
+      {
+        "command": "/Users/yeren/more-ane-transformers/.venv/bin/python tests/test_benchmark_queue.py -v",
+        "returncode": 0,
+        "tests": 8,
+        "log": "macos/local-results/queue-warmup-fix-tests-001.log",
+        "log_sha256": "e9636493f4679fc96790c6a1fc6a549b4f5815eb396690af3d0fdb88e291926a",
+        "output": "test_child_exit_code_is_preserved (__main__.QueueTests.test_child_exit_code_is_preserved) ... ok\ntest_macos_coordinators_are_ignored_but_workers_are_detected (__main__.QueueTests.test_macos_coordinators_are_ignored_but_workers_are_detected) ... ok\ntest_native_argv_preserves_empty_arguments_and_excludes_environment (__main__.QueueTests.test_native_argv_preserves_empty_arguments_and_excludes_environment) ... ok\ntest_python_unbuffered_live_job_is_detected_and_waited_for (__main__.QueueTests.test_python_unbuffered_live_job_is_detected_and_waited_for) ... ok\ntest_quotes_and_spaced_script_paths_are_detected_and_waited_for (__main__.QueueTests.test_quotes_and_spaced_script_paths_are_detected_and_waited_for) ... ok\ntest_truncated_native_argv_is_rejected (__main__.QueueTests.test_truncated_native_argv_is_rejected) ... ok\ntest_two_queued_jobs_do_not_overlap_or_deadlock (__main__.QueueTests.test_two_queued_jobs_do_not_overlap_or_deadlock) ... ok\ntest_unbuffered_benchmark_module_is_detected_on_macos (__main__.QueueTests.test_unbuffered_benchmark_module_is_detected_on_macos) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 8.099s\n\nOK\n"
+      }
+    ],
+    "verified_behavior": "Either warmup producing different reference tokens fails prompt and worker qualification for GPU and ANE, even when validation and timed predictions pass. Both warmups, timed measurements, completed prompts and finish timestamps remain in receipts. Auditor rejects mismatched warmup token receipts.",
+    "reproduction_before_fix": {
+      "benchmark_sha256": "53894f2e18675ebed24651a67f43dd7e559aa73aa9b3a23f6534a06475509984",
+      "failures": 4,
+      "log": "macos/local-results/warmup-review-regression-before-fix-001.log",
+      "log_sha256": "ff96c12100747e8250bea458a80be21c05fc6b36c27ff94c4b231dedfb688338",
+      "output": "test_either_warmup_mismatch_fails_gpu_and_ane_qualification (test_macos_failures.WorkerFailures.test_either_warmup_mismatch_fails_gpu_and_ane_qualification) ... \n  test_either_warmup_mismatch_fails_gpu_and_ane_qualification (test_macos_failures.WorkerFailures.test_either_warmup_mismatch_fails_gpu_and_ane_qualification) (mode='gpu', warmup_call=2) ... FAIL\n  test_either_warmup_mismatch_fails_gpu_and_ane_qualification (test_macos_failures.WorkerFailures.test_either_warmup_mismatch_fails_gpu_and_ane_qualification) (mode='gpu', warmup_call=3) ... FAIL\n  test_either_warmup_mismatch_fails_gpu_and_ane_qualification (test_macos_failures.WorkerFailures.test_either_warmup_mismatch_fails_gpu_and_ane_qualification) (mode='ane', warmup_call=2) ... FAIL\n  test_either_warmup_mismatch_fails_gpu_and_ane_qualification (test_macos_failures.WorkerFailures.test_either_warmup_mismatch_fails_gpu_and_ane_qualification) (mode='ane', warmup_call=3) ... FAIL\n\n======================================================================\nFAIL: test_either_warmup_mismatch_fails_gpu_and_ane_qualification (test_macos_failures.WorkerFailures.test_either_warmup_mismatch_fails_gpu_and_ane_qualification) (mode='gpu', warmup_call=2)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/yeren/Desktop/qwen3.c/tests/test_macos_failures.py\", line 152, in test_either_warmup_mismatch_fails_gpu_and_ane_qualification\n    self.assertEqual(receipt['status'], 'FAIL')\nAssertionError: 'PASS' != 'FAIL'\n- PASS\n+ FAIL\n\n\n======================================================================\nFAIL: test_either_warmup_mismatch_fails_gpu_and_ane_qualification (test_macos_failures.WorkerFailures.test_either_warmup_mismatch_fails_gpu_and_ane_qualification) (mode='gpu', warmup_call=3)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/yeren/Desktop/qwen3.c/tests/test_macos_failures.py\", line 152, in test_either_warmup_mismatch_fails_gpu_and_ane_qualification\n    self.assertEqual(receipt['status'], 'FAIL')\nAssertionError: 'PASS' != 'FAIL'\n- PASS\n+ FAIL\n\n\n======================================================================\nFAIL: test_either_warmup_mismatch_fails_gpu_and_ane_qualification (test_macos_failures.WorkerFailures.test_either_warmup_mismatch_fails_gpu_and_ane_qualification) (mode='ane', warmup_call=2)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/yeren/Desktop/qwen3.c/tests/test_macos_failures.py\", line 152, in test_either_warmup_mismatch_fails_gpu_and_ane_qualification\n    self.assertEqual(receipt['status'], 'FAIL')\nAssertionError: 'PASS' != 'FAIL'\n- PASS\n+ FAIL\n\n\n======================================================================\nFAIL: test_either_warmup_mismatch_fails_gpu_and_ane_qualification (test_macos_failures.WorkerFailures.test_either_warmup_mismatch_fails_gpu_and_ane_qualification) (mode='ane', warmup_call=3)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"/Users/yeren/Desktop/qwen3.c/tests/test_macos_failures.py\", line 152, in test_either_warmup_mismatch_fails_gpu_and_ane_qualification\n    self.assertEqual(receipt['status'], 'FAIL')\nAssertionError: 'PASS' != 'FAIL'\n- PASS\n+ FAIL\n\n\n----------------------------------------------------------------------\nRan 1 test in 0.047s\n\nFAILED (failures=4)\n"
+    },
+    "previous_review_record_sha256": "0da635de79182d8701f72ab81f889e4bebf23caba7cc1fbbb4e131d1d0ced5de",
+    "previous_review_source_sha256": {
+      "macos/__init__.py": "6bc2aed4c883c0d0748b18e19494d1dec1a6d82f74d33d726ff19c39940674fe",
+      "macos/audit.py": "a9fa60cb2cfaa24d45e09d0ff1df7ada17b06cd58ff917456e70b2f38e23bffc",
+      "macos/benchmark.py": "53894f2e18675ebed24651a67f43dd7e559aa73aa9b3a23f6534a06475509984",
+      "macos/common.py": "3b5e6d90b389c3312f6f00b0abf827149fbd580e689fc4f1e032e6b669a05ece",
+      "macos/compute_plan.swift": "de80bb68ac56e5040ff0a610b0d25c84c8cc3c38518d2a95e17d4a212dbac21b",
+      "macos/export.py": "149ba748efe9c7597acf7633c357191009e895e7547152f92606b0c30d53ba34",
+      "macos/model.py": "a23c7dc170fcce76df510408ee4ecaa5c0fef9e294c91ea474b9da15b2f71bc4",
+      "tools/benchmark_queue.py": "7e6e4ab4f6207453caa0bcf20f529d4c4acb12dd8bd0f51ea3266b304c9ea726"
+    },
+    "saved_result_audits": {
+      "qwen3-0.6b-m1-001": {
+        "status": "PASS",
+        "report_sha256": "960fbc23f4a314d200ebef2ef53dc5978428c304711eaa6fa478eeb1cb4464d5",
+        "auditor_sha256": "a9fa60cb2cfaa24d45e09d0ff1df7ada17b06cd58ff917456e70b2f38e23bffc",
+        "checked_logit_vectors": 384,
+        "checked_timed_tokens": 384,
+        "workers": 6,
+        "medians_recomputed": true
+      },
+      "qwen3-0.6b-m1-long-qualified-001": {
+        "status": "PASS",
+        "report_sha256": "6afb1422b6cb51702da44b46d0d29963bb3f0af4088914cd3c356eeeab2e08db",
+        "auditor_sha256": "a9fa60cb2cfaa24d45e09d0ff1df7ada17b06cd58ff917456e70b2f38e23bffc",
+        "checked_logit_vectors": 288,
+        "checked_timed_tokens": 288,
+        "workers": 6,
+        "medians_recomputed": true
+      }
+    },
+    "execution_equivalence": "Engine AST matches the pre-fix runner and original long-sweep source snapshot. Only prompt qualification changed; model execution and timing code are unchanged. No new hardware measurements were needed or collected."
+  }
+}

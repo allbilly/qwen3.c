@@ -1,0 +1,373 @@
+{
+  "date_utc": "2026-10-05T09:00:56.089773+00:00",
+  "host": {
+    "system": "Linux-7.1.13+-aarch64-with-glibc2.43",
+    "cpus": "4-7",
+    "threads": 4
+  },
+  "model": {
+    "checkpoint": "qwen3-0.6b-q8.bin",
+    "sha256": "7a67926eb5be74ab87e4dc29db81f3077d98f686df6a65591eeb333ccfa9ca6e",
+    "header": [
+      1634362161,
+      1,
+      1024,
+      3072,
+      28,
+      16,
+      8,
+      151936,
+      512,
+      128,
+      1,
+      64
+    ]
+  },
+  "protocol": {
+    "trials": 3,
+    "warmups_per_process": 1,
+    "new_tokens": 16,
+    "order": "CPU/ANE alternates per trial",
+    "decode_inputs": "fixed CPU-generated tokens",
+    "initialization_included": false,
+    "ane_decode": true,
+    "locks": [
+      "~/ane.lock",
+      "~/gpu.lock"
+    ],
+    "min_logit_cosine": 0.995
+  },
+  "prompts": [
+    {
+      "name": "medium_32",
+      "ids": [
+        840,
+        20772,
+        304,
+        14396,
+        4128,
+        3170,
+        279,
+        12884,
+        7952,
+        6303,
+        2337,
+        279,
+        1899,
+        323,
+        10577,
+        18575,
+        476,
+        2518,
+        2163,
+        42984,
+        13,
+        29734,
+        279,
+        3476,
+        315,
+        39020,
+        11,
+        3720,
+        34615,
+        11,
+        323,
+        279
+      ],
+      "accuracy": {
+        "min_cosine": 0.9989199436804813,
+        "cosine_per_step": [
+          0.9996839227463215,
+          0.9996479270981047,
+          0.9995966060786711,
+          0.9997463331807305,
+          0.9997333685068914,
+          0.9995613284941963,
+          0.9996469013141518,
+          0.9992620431186373,
+          0.9989199436804813,
+          0.9994279418704448,
+          0.9995988633765439,
+          0.9997441585762527,
+          0.9997706327614763,
+          0.9997165929396519,
+          0.9996108601048689,
+          0.9996153967004134
+        ],
+        "max_abs_error": 0.6039544343948364,
+        "top1_matches": 15,
+        "steps": 16,
+        "teacher_ids": [
+          1894,
+          315,
+          279,
+          12884,
+          13,
+          7281,
+          11,
+          10339,
+          3170,
+          279,
+          12884,
+          374,
+          6303,
+          323,
+          3170,
+          432
+        ]
+      },
+      "summary": {
+        "cpu": {
+          "prefill_ms": {
+            "median": 402.022,
+            "min": 398.746,
+            "max": 659.605
+          },
+          "decode_tps": {
+            "median": 59.51,
+            "min": 49.984,
+            "max": 60.201
+          },
+          "completion_ms": {
+            "median": 651.189,
+            "min": 650.806,
+            "max": 959.7
+          },
+          "init_ms": {
+            "median": 218.56,
+            "min": 188.131,
+            "max": 219.946
+          }
+        },
+        "ane": {
+          "prefill_ms": {
+            "median": 176.45,
+            "min": 169.168,
+            "max": 221.256
+          },
+          "decode_tps": {
+            "median": 24.416,
+            "min": 24.287,
+            "max": 24.89
+          },
+          "completion_ms": {
+            "median": 783.51,
+            "min": 779.098,
+            "max": 838.861
+          },
+          "init_ms": {
+            "median": 554.756,
+            "min": 508.56,
+            "max": 616.659
+          }
+        },
+        "prefill_speedup": 2.2783904788892038,
+        "completion_speedup": 0.8311176628249799
+      },
+      "samples": {
+        "cpu": [
+          {
+            "event": "run",
+            "backend": "cpu",
+            "warmup": false,
+            "run": 1,
+            "prompt_tokens": 32,
+            "new_tokens": 16,
+            "prefill_ms": 402.022,
+            "decode_ms": 249.167,
+            "decode_tps": 60.201,
+            "ane_ops": 0,
+            "cpu_ops": 9228,
+            "ids": [
+              1894,
+              315,
+              279,
+              12884,
+              13,
+              7281,
+              11,
+              10339,
+              3170,
+              279,
+              12884,
+              374,
+              6303,
+              323,
+              3170,
+              432
+            ],
+            "init_ms": 188.131,
+            "completion_ms": 651.189
+          },
+          {
+            "event": "run",
+            "backend": "cpu",
+            "warmup": false,
+            "run": 1,
+            "prompt_tokens": 32,
+            "new_tokens": 16,
+            "prefill_ms": 398.746,
+            "decode_ms": 252.06,
+            "decode_tps": 59.51,
+            "ane_ops": 0,
+            "cpu_ops": 9228,
+            "ids": [
+              1894,
+              315,
+              279,
+              12884,
+              13,
+              7281,
+              11,
+              10339,
+              3170,
+              279,
+              12884,
+              374,
+              6303,
+              323,
+              3170,
+              432
+            ],
+            "init_ms": 219.946,
+            "completion_ms": 650.806
+          },
+          {
+            "event": "run",
+            "backend": "cpu",
+            "warmup": false,
+            "run": 1,
+            "prompt_tokens": 32,
+            "new_tokens": 16,
+            "prefill_ms": 659.605,
+            "decode_ms": 300.095,
+            "decode_tps": 49.984,
+            "ane_ops": 0,
+            "cpu_ops": 9228,
+            "ids": [
+              1894,
+              315,
+              279,
+              12884,
+              13,
+              7281,
+              11,
+              10339,
+              3170,
+              279,
+              12884,
+              374,
+              6303,
+              323,
+              3170,
+              432
+            ],
+            "init_ms": 218.56,
+            "completion_ms": 959.7
+          }
+        ],
+        "ane": [
+          {
+            "event": "run",
+            "backend": "ane",
+            "warmup": false,
+            "run": 1,
+            "prompt_tokens": 32,
+            "new_tokens": 16,
+            "prefill_ms": 169.168,
+            "decode_ms": 614.342,
+            "decode_tps": 24.416,
+            "ane_ops": 3136,
+            "cpu_ops": 16,
+            "ids": [
+              9237,
+              315,
+              279,
+              12884,
+              13,
+              7281,
+              11,
+              10339,
+              3170,
+              279,
+              12884,
+              374,
+              6303,
+              323,
+              3170,
+              432
+            ],
+            "init_ms": 554.756,
+            "completion_ms": 783.51
+          },
+          {
+            "event": "run",
+            "backend": "ane",
+            "warmup": false,
+            "run": 1,
+            "prompt_tokens": 32,
+            "new_tokens": 16,
+            "prefill_ms": 221.256,
+            "decode_ms": 617.605,
+            "decode_tps": 24.287,
+            "ane_ops": 3136,
+            "cpu_ops": 16,
+            "ids": [
+              9237,
+              315,
+              279,
+              12884,
+              13,
+              7281,
+              11,
+              10339,
+              3170,
+              279,
+              12884,
+              374,
+              6303,
+              323,
+              3170,
+              432
+            ],
+            "init_ms": 616.659,
+            "completion_ms": 838.861
+          },
+          {
+            "event": "run",
+            "backend": "ane",
+            "warmup": false,
+            "run": 1,
+            "prompt_tokens": 32,
+            "new_tokens": 16,
+            "prefill_ms": 176.45,
+            "decode_ms": 602.648,
+            "decode_tps": 24.89,
+            "ane_ops": 3136,
+            "cpu_ops": 16,
+            "ids": [
+              9237,
+              315,
+              279,
+              12884,
+              13,
+              7281,
+              11,
+              10339,
+              3170,
+              279,
+              12884,
+              374,
+              6303,
+              323,
+              3170,
+              432
+            ],
+            "init_ms": 508.56,
+            "completion_ms": 779.098
+          }
+        ]
+      }
+    }
+  ]
+}

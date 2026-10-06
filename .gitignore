@@ -4,5 +4,17 @@ __pycache__/*
 /runq-fp16
 /fp16/__pycache__/
 /runq-fp16-routes
+/runq-ane
+/runq-cpu
+/runq-ane-bench
+/tests/ane_matmul_test
+/ane/__pycache__/
+/tools/__pycache__/
+/tests/__pycache__/
+/.venv/
 /fp16/experiments/yalm/__pycache__/
+/macos/__pycache__/
+/macos/.venv/
+/macos/local-models/
+/macos/local-results/
 **/__pycache__/
