@@ -162,7 +162,44 @@ are retained. The original receipts are in
 that project's GPT-2 feature is still uncommitted. Clocks were not fixed and
 background CPU activity was present. Untuned tinygrad improved longer-prompt
 prefill in these runs; BEAM=2 regressed with this build's default estimate
-setting. A matched Qwen3 GPU benchmark is still needed for a Qwen3 comparison.
+setting. A matched Qwen3 GPU benchmark on Asahi is still needed for that OS;
+the macOS Core ML measurements below use different arithmetic.
+
+## macOS Qwen3 ANE and GPU benchmarks
+
+The [macOS benchmark harness](macos/README.md) compares Core ML CPU+ANE
+and CPU+GPU configurations using the same Qwen3 checkpoint and graph,
+with an optional CPU control.
+It records separate prefill/decode timings, full-logit checks, preferred-device
+placement, raw trials and source/model hashes. Embeddings and the vocabulary
+head run on CPU for all configurations. This is a separate macOS runtime from
+the native Asahi C backend above.
+
+On this M1, three rounds of Qwen3-0.6B passed 384 full-logit comparisons and
+384 timed token checks. For a 32-token prompt, median prefill was 250.00
+tokens/s with GPU and 205.06 with ANE; decode was 8.29 and 6.92 tokens/s
+respectively.
+Decode pads one real token to 32 rows, and both configurations include CPU
+work. The optional Core ML CPU control failed the numerical gate and is
+retained as an unqualified diagnostic.
+See [the full protocol and table](macos/README.md#measured-qwen3-06b-run-on-m1)
+and [saved results with the independent audit](macos/benchmarks/m1-qwen3-0.6b.json).
+
+The [512/1024/2048-token sweep](macos/README.md#longer-prompts-512-1024-and-2048-tokens)
+uses a separate 2080-context conversion and 16 output tokens per request.
+Three GPU trials and three ANE trials passed 288 full-logit comparisons and
+288 timed token checks. All rates below are medians in **tokens/s**:
+
+| Prompt tokens | CPU+GPU prefill | CPU+ANE prefill | CPU+GPU decode | CPU+ANE decode |
+| ---: | ---: | ---: | ---: | ---: |
+| 512 | 62.78 | 40.26 | 2.42 | 1.33 |
+| 1024 | 71.89 | 43.54 | 2.52 | 1.29 |
+| 2048 | 74.72 | 22.74 | 3.03 | 0.75 |
+
+The [saved long-prompt results](macos/benchmarks/m1-qwen3-0.6b-long.json) retain
+all measurements, initialization failures and the successful GPU retry. The
+retry completed after disk space was freed, using the exact
+source snapshot from the original sweep. No measured sample was discarded.
 
 ## Step 2: download and convert a model
 

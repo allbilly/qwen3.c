@@ -13,3 +13,7 @@ __pycache__/*
 /tests/__pycache__/
 /.venv/
 /fp16/experiments/yalm/__pycache__/
+/macos/__pycache__/
+/macos/.venv/
+/macos/local-models/
+/macos/local-results/
