@@ -1,8 +1,11 @@
 """Exercise the real queue with isolated locks and short-lived processes."""
 import importlib.util
+import fcntl
 import json
+import os
 from pathlib import Path
 import subprocess
+import signal
 import struct
 import sys
 import tempfile
@@ -45,6 +48,56 @@ class QueueTests(unittest.TestCase):
         process = subprocess.Popen(command, cwd=cwd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
         self.processes.append(process)
         return process
+
+    def test_sigterm_drains_nested_benchmark_before_releasing_locks(self):
+        worker = self.root/'worker.py'
+        worker.write_text('''import os, pathlib, signal, sys, time
+root=pathlib.Path.cwd()
+def stop(number, frame):
+    (root/'stopping').touch()
+    while not (root/'release').exists(): time.sleep(0.01)
+    sys.exit(0)
+signal.signal(signal.SIGTERM,stop)
+(root/'worker.pid').write_text(str(os.getpid()))
+while True: time.sleep(1)
+''')
+        coordinator = self.root/'coordinator.py'
+        coordinator.write_text('import sys\nsys.path.insert(0,'+repr(str(ROOT))+')\n'
+            'from tools.benchmark_queue import run_owned\n'
+            'run_owned([sys.executable,'+repr(str(worker))+'])\n')
+        queued = self.launch([sys.executable,str(QUEUE),'--',sys.executable,str(coordinator)],cwd=self.root)
+
+        def wait_for(name):
+            deadline=time.monotonic()+10
+            while not (self.root/name).exists():
+                self.assertIsNone(queued.poll())
+                self.assertLess(time.monotonic(),deadline)
+                time.sleep(0.01)
+
+        try:
+            wait_for('worker.pid')
+            queued.terminate()
+            wait_for('stopping')
+            queued.terminate()
+            (self.root/'release').touch()
+            queued.communicate(timeout=15)
+            self.assertNotEqual(queued.returncode,0)
+            with self.assertRaises(ProcessLookupError):os.kill(int((self.root/'worker.pid').read_text()),0)
+            for name in ['ane.lock','gpu.lock']:
+                with (self.root/name).open('a+') as lock:fcntl.flock(lock,fcntl.LOCK_EX|fcntl.LOCK_NB)
+        finally:
+            (self.root/'release').touch()
+            if (self.root/'worker.pid').exists():
+                pid=int((self.root/'worker.pid').read_text())
+                try:
+                    if os.getpgid(pid)==pid:os.killpg(pid,signal.SIGKILL)
+                except ProcessLookupError:pass
+
+    def test_timeout_remains_failure_after_successful_child_termination(self):
+        with self.assertRaises(subprocess.TimeoutExpired) as caught:
+            queue_module.run_owned([sys.executable,'-c',
+                'import signal, sys; signal.signal(signal.SIGTERM,lambda *args:sys.exit(0)); signal.pause()'],timeout=1)
+        self.assertEqual(caught.exception.actual_returncode,0)
 
     def probe(self, name, duration):
         path = self.root / name

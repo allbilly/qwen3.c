@@ -7,10 +7,54 @@ import fcntl
 from functools import lru_cache
 import os
 from pathlib import Path
+import signal
 import struct
 import subprocess
 import sys
 import time
+
+
+def run_owned(command, *, timeout=None, grace_seconds=5, **kwargs):
+    previous = {kind:signal.getsignal(kind) for kind in (signal.SIGINT,signal.SIGTERM)}
+    pending = []
+    child = None
+
+    def interrupted(number, frame):
+        for kind in previous:
+            signal.signal(kind,signal.SIG_IGN)
+        raise InterruptedError('Received '+signal.Signals(number).name)
+
+    try:
+        for kind in previous:
+            signal.signal(kind,lambda number, frame:pending.append(number))
+        child = subprocess.Popen(command,start_new_session=True,**kwargs)
+        for kind in previous:
+            signal.signal(kind,interrupted)
+        if pending:
+            interrupted(pending[0],None)
+        return child.wait(timeout=timeout)
+    except BaseException as error:
+        for kind in previous:
+            signal.signal(kind,signal.SIG_IGN)
+        if child is not None:
+            try:
+                os.killpg(child.pid,signal.SIGTERM)
+            except ProcessLookupError:
+                pass
+            try:
+                child.wait(timeout=grace_seconds)
+            except subprocess.TimeoutExpired:
+                pass
+            try:
+                os.killpg(child.pid,signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+            child.wait()
+            error.actual_returncode = child.returncode
+        raise
+    finally:
+        for kind,handler in previous.items():
+            signal.signal(kind,handler)
 
 
 def competing_jobs():
@@ -188,7 +232,7 @@ def main():
         time.sleep(2)
     print('Benchmark locks acquired; no competing benchmark or ANE process.',
           file=sys.stderr, flush=True)
-    return subprocess.call(command)
+    return run_owned(command,grace_seconds=15)
 
 
 if __name__ == '__main__':
