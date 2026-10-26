@@ -3,11 +3,11 @@
   "base_revision": "79f36cc0b9ae5e4b6c306473b4e0dec7f6ea9bdc",
   "production_sources_unchanged": true,
   "source_sha256": {
-    "runq.c": "d64ae87923f2cca25ae72b2c0dbcfae004c7861424f510e0d82af0c29181da7f",
+    "runq.c": "8a2305ff1c7b13d5a50ca016cd30dc0fb5281ed6e2cd74d909f85f2acee2a649",
     "qwen3.h": "8ccdf1fc163ab2a4b7fdf5e20d1a654c76f5b2b91dc5af771a61800df8da8c7e",
     "Makefile": "89919cf431923cea17abc8741eb562a07d286f35a286bb58b6b6e2a15bf4b941",
     "npu_matmul.c": "95b3ac8a29a93a68af78b114f50eb390829dcb366c9d57bf2a217fbec208afd5",
-    "npu_matmul.h": "af7557304559f467744a50341553bc168d0e3285123a879373ddf3a32b06e0c4",
+    "npu_matmul.h": "7f65f77519b4a2f604e1b4113b54b9d8dbcbd81cb537510d8b3880ff7ab0a655",
     "ane/ane_matmul.c": "cb18789aca07dbe4ff00048fc47d82b6ed3db0912aaf81f8234e75ce69d00be8",
     "ane/ane_matmul.h": "5e2306b8eea5435585944165ebd8f8d098561a1f62e67975a3cc3ff043387929",
     "ane/prefill.h": "f6848b122f0e60158fe25fa521aa018573abd816c1e5be765d6de0451dca38b0",
@@ -18,11 +18,7 @@
     "fp16/prefill.h": "bf9ae24c46b0875ffe8c0f00bf2e34a0510f7c52aeb2ae9dcb5ad92ffd692dcb",
     "fp16/attention_backend.h": "176da3185c7f80ffe4578562f052a4f8bb00267a14d0b5003b3483c8e611d680",
     "fp16/vector_math.h": "f7df06593df17d6d3ee6fcc9bae82470413bd372357fbdf4025553039d060bf5",
-    "tinystories/run.c": "98006e1a8583431ef3db53c5a331241d14cae6ed9221974da8133853cea557a1",
-    "tinystories/vortex_matmul.cpp": "30ca071810bf07d12d0fd787a3758fc148041e307f59fc0e6b89c9ea14bf7d20",
-    "ane/linear_template.h": "b7806029cc215b8a70ff3e14d4dd188988a49b24831b4909de82aea6e0e4d680",
-    "tinystories/Makefile": "bdc16ec90123731fd8031a12ef80190d1e5508b772c6163e849a440f42a8e4d8",
-    "tinystories/vendor/provenance.json": "72519ca7d5f74cfb1af982ccd12729f2e2d1f34e2e0e69959a560293eacd7513"
+    "ane/linear_template.h": "b7806029cc215b8a70ff3e14d4dd188988a49b24831b4909de82aea6e0e4d680"
   },
   "models": {
     "status": "BOTH_ORIGINAL_CHECKPOINT_FORMATS_REPRODUCED",
@@ -341,5 +337,64 @@
   },
   "legacy_cpu_cli_exit_code": 0,
   "default_make_original_exit_code": 2,
-  "default_make_portability_fix_pending": true
+  "default_make_portability_fix_pending": true,
+  "historical_vortex_source_sha256": {
+    "runq.c": "d64ae87923f2cca25ae72b2c0dbcfae004c7861424f510e0d82af0c29181da7f",
+    "qwen3.h": "8ccdf1fc163ab2a4b7fdf5e20d1a654c76f5b2b91dc5af771a61800df8da8c7e",
+    "Makefile": "89919cf431923cea17abc8741eb562a07d286f35a286bb58b6b6e2a15bf4b941",
+    "npu_matmul.c": "95b3ac8a29a93a68af78b114f50eb390829dcb366c9d57bf2a217fbec208afd5",
+    "npu_matmul.h": "af7557304559f467744a50341553bc168d0e3285123a879373ddf3a32b06e0c4",
+    "ane/ane_matmul.c": "cb18789aca07dbe4ff00048fc47d82b6ed3db0912aaf81f8234e75ce69d00be8",
+    "ane/ane_matmul.h": "5e2306b8eea5435585944165ebd8f8d098561a1f62e67975a3cc3ff043387929",
+    "ane/prefill.h": "f6848b122f0e60158fe25fa521aa018573abd816c1e5be765d6de0451dca38b0",
+    "ane/bench.c": "1f992216e16708c0329580667357420998024eaad3138286688e36cbf4df4208",
+    "fp16/run.c": "169e05dc2b3f06f5e4f7a7d4915480b06ff2a18a0e0066e96fb266a47f5b1f27",
+    "fp16/fp16_backend.c": "178ed940782e73b89b88ce86ff23aa5c0e19ec8558f93215bd306d643964e6a3",
+    "fp16/fp16_backend.h": "f17ef752e74769c66620f1d75b6a455a2bbe6135303600d36b2873253a41bf08",
+    "fp16/prefill.h": "bf9ae24c46b0875ffe8c0f00bf2e34a0510f7c52aeb2ae9dcb5ad92ffd692dcb",
+    "fp16/attention_backend.h": "176da3185c7f80ffe4578562f052a4f8bb00267a14d0b5003b3483c8e611d680",
+    "fp16/vector_math.h": "f7df06593df17d6d3ee6fcc9bae82470413bd372357fbdf4025553039d060bf5",
+    "tinystories/run.c": "98006e1a8583431ef3db53c5a331241d14cae6ed9221974da8133853cea557a1",
+    "tinystories/vortex_matmul.cpp": "30ca071810bf07d12d0fd787a3758fc148041e307f59fc0e6b89c9ea14bf7d20",
+    "ane/linear_template.h": "b7806029cc215b8a70ff3e14d4dd188988a49b24831b4909de82aea6e0e4d680",
+    "tinystories/Makefile": "bdc16ec90123731fd8031a12ef80190d1e5508b772c6163e849a440f42a8e4d8",
+    "tinystories/vendor/provenance.json": "72519ca7d5f74cfb1af982ccd12729f2e2d1f34e2e0e69959a560293eacd7513"
+  },
+  "qualified_vortex_revision": "79f36cc0b9ae5e4b6c306473b4e0dec7f6ea9bdc",
+  "refactor_base_revision": "02caf9df0f7ab9e0c3ebacbec2aba2a9dd2c3331",
+  "integration_order": [
+    "refactor_shared_Qwen_CPU_RKNPU_ANE_core",
+    "adapt_Vortex_to_new_hardware_API"
+  ],
+  "linked_worktree_required": false,
+  "pre_vortex_core_compatibility": {
+    "status": "PRE_VORTEX_CORE_MATCHES_CAPTURED_QWEN_BASELINE",
+    "cases": {
+      "short_5": {
+        "logits_bitwise_equal": true,
+        "token_ids_equal": true,
+        "logit_values": 2430976
+      },
+      "medium_16": {
+        "logits_bitwise_equal": true,
+        "token_ids_equal": true,
+        "logit_values": 2430976
+      },
+      "medium_32": {
+        "logits_bitwise_equal": true,
+        "token_ids_equal": true,
+        "logit_values": 2430976
+      },
+      "multi_chunk_65": {
+        "logits_bitwise_equal": true,
+        "token_ids_equal": true,
+        "logit_values": 2430976
+      }
+    },
+    "verified_logits": 9723904,
+    "sequence": [
+      "refactor_Qwen_core",
+      "adapt_Vortex_afterwards"
+    ]
+  }
 }

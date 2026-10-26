@@ -6,6 +6,7 @@ __pycache__/*
 /runq-fp16-routes
 /runq-ane
 /runq-cpu
+/build/
 /runq-ane-bench
 /tests/ane_matmul_test
 /ane/__pycache__/

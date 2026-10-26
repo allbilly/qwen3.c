@@ -1,8 +1,19 @@
 # Single-runq refactor
 
-Work is on `refactor/single-runq`, starting at `79f36cc`. The original `main`
-checkout remains intact for the qualified Vortex integration. No production
-source has moved and no transformer implementation has been removed.
+Work is on `refactor/single-runq` directly in the `qwen3.c` checkout.
+There are no linked worktrees. The core refactor starts at `02caf9d`, before
+the Vortex integration. First complete the shared Qwen CPU/RKNPU/ANE core;
+then adapt Vortex to the resulting hardware API.
+
+The tested Vortex integration remains saved at `79f36cc` on `main`, and the
+earlier setup is preserved on `baseline/refactor-setup-20261026`. Its source
+and results remain available in Git. No core-refactor production source has
+moved and no Qwen transformer implementation has been removed.
+
+Captured model files, full logit vectors and binaries are under
+`build/refactor-baseline/`. Historical receipts retain their original paths;
+`build/refactor-baseline/relocation/manifest.json` maps their previous
+checkout location to this one and records checksum verification.
 
 ## Phase gates
 
@@ -20,6 +31,12 @@ regressions before proceeding. Historical reports are preserved evidence;
 they cannot establish current before/after hardware performance.
 RK3588 and Asahi M1 SSH targets are needed to complete the live baseline.
 macOS Core ML measurements do not substitute for the native Asahi ANE path.
+
+After removing the linked worktree and selecting the pre-Vortex core,
+the complete CPU baseline was captured again. All 9,723,904 logit values
+and all generated token IDs are bitwise identical to the earlier capture.
+The compatibility receipt is
+`build/refactor-baseline/relocation/core-compatibility.json`.
 
 ## Baseline captured on October 26, 2026
 
@@ -96,11 +113,12 @@ Retain runtime ANE prefill/decode policy and RKNPU fusion, core, attention,
 streamed-FFN and classifier settings. Preserve the FP16 benchmark's EOS
 selection policy separately from normal inference semantics.
 
-`macos/` is a separate Core ML experiment. `tinystories/` is a Llama/Vortex
-validation frontend. Their frozen reference results must survive the Qwen
-production cleanup; test/experiment entry points are not additional
-production Qwen mains. Do not delete archived routing source snapshots or
-rewrite their recorded hashes during folder reorganization.
+`macos/` is a separate Core ML experiment. The `tinystories/` Llama/Vortex
+frontend belongs to the deferred `79f36cc` integration, outside the core
+refactor branch for now. Preserve its frozen results when adapting Vortex
+later. Test/experiment entry points are not additional production Qwen mains.
+Do not delete archived routing source snapshots or rewrite their recorded
+hashes during folder reorganization.
 
 ## Reproduce the local baseline
 
